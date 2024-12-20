@@ -7,6 +7,11 @@ package projekt1;
 
 import oru.inf.InfDB;
 import oru.inf.InfException;
+<<<<<<< Updated upstream
+=======
+//Test
+//Test9
+>>>>>>> Stashed changes
 /**
  *
  * @author minna
