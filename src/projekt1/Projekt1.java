@@ -7,6 +7,8 @@ package projekt1;
 
 import oru.inf.InfDB;
 import oru.inf.InfException;
+//Test
+//Test2
 /**
  *
  * @author minna
