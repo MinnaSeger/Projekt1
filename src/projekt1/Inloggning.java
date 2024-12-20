@@ -135,6 +135,18 @@ public class Inloggning extends javax.swing.JFrame {
         } catch (InfException ex) {
             System.out.println(ex.getMessage());
         }
+      try {
+    String sqlFraga = "SELECT anstalld.aid from anstalld join handlaggare on anstalld.aid = handlaggare.aid ";
+    System.out.println(sqlFraga);
+    String dbAid = idb.fetchSingle(sqlFraga);
+
+    if (dbAid != null) { // Kontrollera att dbAid inte är null
+        MenyHandlaggare meny = new MenyHandlaggare(idb, dbAid);
+        meny.setVisible(true); // Gör fönstret synligt
+    }    
+} catch (InfException ex) {
+    System.out.println(ex.getMessage());
+}  
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
