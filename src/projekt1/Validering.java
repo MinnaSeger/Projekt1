@@ -68,5 +68,13 @@ public static boolean isValidLosenord(String losenord) {
     String losenordRegex = "^[a-zA-Z0-9]{11}$"; // Exakt 11 tecken: stora/små bokstäver och siffror
     return Pattern.matches(losenordRegex, losenord);
 }
+/**
+ * Kontrollerar om en textruta är tom (dvs. innehåller endast mellanslag eller är helt tom).
+ * @param input Textinmatningen som ska kontrolleras.
+ * @return true om textrutan inte är tom, annars false.
+ */
+public static boolean isNotEmpty(String input) {
+    return input != null && !input.trim().isEmpty();
+}
 }
 
