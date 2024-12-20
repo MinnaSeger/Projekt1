@@ -22,6 +22,7 @@ public class Projekt1 {
         try{
             idb = new InfDB("ngo_2024", "3306", "dbAdmin2024", "dbAdmin2024PW");
             new Inloggning(idb).setVisible(true); 
+            // test
             System.out.println("funkar");
         }
     catch(InfException ex){
