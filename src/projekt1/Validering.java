@@ -58,5 +58,15 @@ public class Validering {
         String numeriskRegex = "^\\d+(\\.\\d+)?$";
         return Pattern.matches(numeriskRegex, nummerInString);
     }
+    /**
+ * Validerar ett lösenord. Det ska vara exakt 11 tecken långt och 
+ * kan bestå av stora bokstäver, små bokstäver eller siffror.
+ * @param losenord Lösenordet som ska valideras.
+ * @return true om lösenordet är giltigt, annars false.
+ */
+public static boolean isValidLosenord(String losenord) {
+    String losenordRegex = "^[a-zA-Z0-9]{11}$"; // Exakt 11 tecken: stora/små bokstäver och siffror
+    return Pattern.matches(losenordRegex, losenord);
+}
 }
 
