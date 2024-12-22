@@ -136,15 +136,21 @@ public class Inloggning extends javax.swing.JFrame {
         } catch (InfException ex) {
             System.out.println(ex.getMessage());
         }
-      try {
-    String sqlFraga = "SELECT anstalld.aid from anstalld join handlaggare on anstalld.aid = handlaggare.aid ";
-    System.out.println(sqlFraga);
-    String dbAid = idb.fetchSingle(sqlFraga);
 
+        //Nedan är metod för att dirigera handläggare till dess meny när de skriver in sina uppgifter. 
+      try {
+    String sqlFraga = "SELECT anstalld.aid from anstalld join handlaggare on anstalld.aid = handlaggare.aid WHERE ePost = '" + ePost + "'" ;
+    System.out.println(sqlFraga);
+   
+    String dbAid = idb.fetchSingle(sqlFraga);
     if (dbAid != null) { // Kontrollera att dbAid inte är null
         MenyHandlaggare meny = new MenyHandlaggare(idb, dbAid);
         meny.setVisible(true); // Gör fönstret synligt
-    }    
+        this.setVisible(false);
+    }  
+    else{
+         lblFelMeddelande.setVisible(true);
+    }
 } catch (InfException ex) {
     System.out.println(ex.getMessage());
 }  
