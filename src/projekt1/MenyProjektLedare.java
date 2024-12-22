@@ -42,6 +42,11 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         btnMinprofil.setText("Min profil");
 
         btnprojekt.setText("Projekt");
+        btnprojekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnprojektActionPerformed(evt);
+            }
+        });
 
         btnAnställda.setText("Anställda");
 
@@ -52,28 +57,30 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnprojekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblmeny, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnHållbarhetsmål, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAnställda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnMinprofil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblvalkommenprojektledare)))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnHållbarhetsmål)
+                    .addComponent(btnAnställda, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(lblvalkommenprojektledare))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(156, 156, 156)
+                            .addComponent(lblmeny))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(121, 121, 121)
+                            .addComponent(btnMinprofil, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnprojekt, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblvalkommenprojektledare, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
                 .addComponent(lblmeny)
-                .addGap(12, 12, 12)
+                .addGap(9, 9, 9)
                 .addComponent(btnMinprofil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnprojekt)
@@ -86,6 +93,10 @@ public class MenyProjektLedare extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnprojektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprojektActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnprojektActionPerformed
 
     /**
      * @param args the command line arguments

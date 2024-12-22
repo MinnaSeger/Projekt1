@@ -53,6 +53,11 @@ public class MenyAdministratör extends javax.swing.JFrame {
         });
 
         btnAvdelningar.setText("Avdelningar");
+        btnAvdelningar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvdelningarActionPerformed(evt);
+            }
+        });
 
         btnLänder.setText("Länder");
 
@@ -66,15 +71,17 @@ public class MenyAdministratör extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(lblVälkommenAdminstratör))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                        .addGap(158, 158, 158)
+                        .addComponent(lblMeny))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHanteraAnställda)
                             .addComponent(btnPartners, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAvdelningar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLänder, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMeny))))
-                .addContainerGap(228, Short.MAX_VALUE))
+                            .addComponent(btnLänder, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,6 +109,10 @@ public class MenyAdministratör extends javax.swing.JFrame {
     private void btnPartnersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartnersActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPartnersActionPerformed
+
+    private void btnAvdelningarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvdelningarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAvdelningarActionPerformed
 
     /**
      * @param args the command line arguments

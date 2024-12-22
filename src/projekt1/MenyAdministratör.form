@@ -30,18 +30,21 @@
                       <Component id="lblVälkommenAdminstratör" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                      <Component id="lblMeny" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="BtnProjekt" min="-2" pref="123" max="-2" attributes="0"/>
                           <Component id="btnHanteraAnställda" min="-2" max="-2" attributes="0"/>
                           <Component id="btnPartners" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           <Component id="btnAvdelningar" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           <Component id="btnLänder" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
-                          <Component id="lblMeny" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="228" max="32767" attributes="0"/>
+              <EmptySpace pref="161" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,6 +103,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Avdelningar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvdelningarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnL&#xe4;nder">
       <Properties>

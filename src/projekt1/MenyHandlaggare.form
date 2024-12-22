@@ -31,13 +31,16 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblMeny" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnHallbarhetsmal" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnMinProfil" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnProjekt" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnAnstallda" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnHallbarhetsmal" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnProjekt" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnMinProfil" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnAnstallda" alignment="0" max="32767" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+                      <Component id="lblMeny" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="152" max="32767" attributes="0"/>
