@@ -124,6 +124,7 @@ public class Inloggning extends javax.swing.JFrame {
         try{
             String sqlFråga = "SELECT losenord FROM anstalld WHERE epost = '" + ePost + "'";
             System.out.println(sqlFråga);
+            
             String dbLosen = idb.fetchSingle(sqlFråga);
             if(lösen.equals(dbLosen)){
                 new Meny(idb, ePost).setVisible(true);
