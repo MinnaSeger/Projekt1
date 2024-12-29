@@ -137,7 +137,7 @@ public class Inloggning extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
 
-        //nNedan är metod för att dirigera handläggare till dess meny när de skriver in sina uppgifter. 
+        //Nedan är metod för att dirigera handläggare till dess meny när de skriver in sina uppgifter. 
       try {
     String sqlFraga = "SELECT anstalld.aid FROM anstalld JOIN handlaggare ON anstalld.aid = handlaggare.aid WHERE ePost = '" + ePost + "'" ;
     System.out.println(sqlFraga);
