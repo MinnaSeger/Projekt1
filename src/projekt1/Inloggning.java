@@ -139,7 +139,7 @@ public class Inloggning extends javax.swing.JFrame {
 
         //Nedan är metod för att dirigera handläggare till dess meny när de skriver in sina uppgifter. 
       try {
-    String sqlFraga = "SELECT anstalld.aid from anstalld join handlaggare on anstalld.aid = handlaggare.aid WHERE ePost = '" + ePost + "'" ;
+    String sqlFraga = "SELECT anstalld.aid FROM anstalld JOIN handlaggare ON anstalld.aid = handlaggare.aid WHERE ePost = '" + ePost + "'" ;
     System.out.println(sqlFraga);
    
     String dbAid = idb.fetchSingle(sqlFraga);
@@ -154,6 +154,23 @@ public class Inloggning extends javax.swing.JFrame {
 } catch (InfException ex) {
     System.out.println(ex.getMessage());
 }  
+      //Meto för att dirigera administratörer till deras meny
+      try {
+          String sqlFraga = "SELECT anstalld.aid FROM anstalld JOIN administrator ON anstalld.aid = administrator.aid WHERE ePost ='" + ePost + "'";
+          System.out.println(sqlFraga);
+          
+          String dbAid = idb.fetchSingle(sqlFraga);
+          if (dbAid != null) { //kontrollera att dbaid inte är null
+          MenyAdministratör meny = new MenyAdministratör (idb, dbAid);
+          meny.setVisible(true); //Gör fönstret synligt
+          this.setVisible(false);
+      }
+          else {
+                  lblFelMeddelande.setVisible(true);
+                  }
+      } catch (InfException ex) {
+          System.out.println(ex.getMessage());
+      }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
