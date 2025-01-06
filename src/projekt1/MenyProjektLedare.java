@@ -1,20 +1,24 @@
+package projekt1;
+
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package projekt1;
 
-/**
- *
- * @author cecil
- */
+
 public class MenyProjektLedare extends javax.swing.JFrame {
-
+    private InfDB idb;
+    private String dbAid;
     /**
      * Creates new form MenyProjektLedare
      */
-    public MenyProjektLedare() {
+    public MenyProjektLedare(InfDB idb, String dbAid) {
+        this.idb = idb;
+        this.dbAid = dbAid;
         initComponents();
+      //  lblInloggad.setText (dbAid);
     }
 
     /**
@@ -128,7 +132,7 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyProjektLedare().setVisible(true);
+                //new MenyProjektLedare().setVisible(true);
             }
         });
     }
