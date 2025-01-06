@@ -171,6 +171,23 @@ public class Inloggning extends javax.swing.JFrame {
       } catch (InfException ex) {
           System.out.println(ex.getMessage());
       }
+      
+      try {
+          String sqlFraga = "SELECT projekt.projektchef FROM projekt JOIN anstalld ON projektchef=aid";
+          System.out.println(sqlFraga);
+          
+                    String dbAid = idb.fetchSingle(sqlFraga);
+          if (dbAid != null) { //kontrollera att dbaid inte är null
+          MenyProjektLedare meny = new MenyProjektLedare (idb, dbAid);
+          meny.setVisible(true); //Gör fönstret synligt
+          this.setVisible(false);
+      }
+          else {
+                  lblFelMeddelande.setVisible(true);
+                  }
+      } catch (InfException ex) {
+          System.out.println(ex.getMessage());
+      }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
