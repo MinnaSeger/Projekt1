@@ -156,7 +156,7 @@ public class Inloggning extends javax.swing.JFrame {
 }  
       //Meto för att dirigera administratörer till deras meny
       try {
-          String sqlFraga = "SELECT anstalld.aid FROM anstalld JOIN administrator ON anstalld.aid = administrator.aid WHERE ePost ='" + ePost + "'";
+          String sqlFraga = "SELECT anstalld.aid FROM anstalld JOIN admin ON anstalld.aid = admin.aid WHERE ePost ='" + ePost + "'";
           System.out.println(sqlFraga);
           
           String dbAid = idb.fetchSingle(sqlFraga);
