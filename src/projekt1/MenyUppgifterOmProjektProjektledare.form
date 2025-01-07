@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblHandlaggareforProjekt" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPartnersForProjekt" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblAndraHandlaggare" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdAndraPartners" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblStatus" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="lblDatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblStatistik" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="tfdAndraStatistik" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField1" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="tfdAndraStatus" min="-2" pref="91" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="lblUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblKostnader" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="tfdAndraKostnader" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblKostnader" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdAndraKostnader" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblStatistik" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdAndraStatistik" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdAndraStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfdAndraPartners" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPartnersForProjekt" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblAndraHandlaggare" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblHandlaggareforProjekt" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblKostnader">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Kostnader"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblStatistik">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Statistik"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDatum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Datum"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblStatus">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Status"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdAndraKostnader">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra Kostnader"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraKostnaderActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdAndraStatistik">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra Statistik"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra Datum"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdAndraStatus">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra Status"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPartnersForProjekt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Partners f&#xf6;r projekt: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdAndraPartners">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg till eller ta bort Partners"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraPartnersActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblHandlaggareforProjekt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Handl&#xe4;ggare f&#xf6;r projekt:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="lblAndraHandlaggare">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg till eller ta bort Handl&#xe4;ggare"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lblAndraHandlaggareActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUppgifterOmProjekt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Uppgifter om projekt"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
