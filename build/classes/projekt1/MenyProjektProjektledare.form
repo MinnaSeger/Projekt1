@@ -114,6 +114,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Uppgifter om projekt"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUppgifterOmProjektActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMinaProjektProjektledare">
       <Properties>
@@ -134,6 +137,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtrera Status"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdFiltreraProjektActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSokStartdatum">
       <Properties>

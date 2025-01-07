@@ -1,4 +1,6 @@
 package projekt1;
+import oru.inf.InfDB;
+import javax.swing.JFrame;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -10,11 +12,16 @@ package projekt1;
  * @author elsa
  */
 public class MenyProfilProjektledare1 extends javax.swing.JFrame {
+    
+    private InfDB idb;
+    private String dbAid;
 
     /**
      * Creates new form MenyProfilHandlaggare
      */
-    public MenyProfilProjektledare1() {
+    public MenyProfilProjektledare1(InfDB idb, String dbAid) {
+        this.idb = idb;
+        this.dbAid = dbAid;
         initComponents();
     }
 
@@ -61,16 +68,36 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         lblMentor.setText("Mentor");
 
         tfdAndraNamn.setText("Ändra Namn");
+        tfdAndraNamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdAndraNamnActionPerformed(evt);
+            }
+        });
 
         tfdAndraEmail.setText("Ändra Email");
+        tfdAndraEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdAndraEmailActionPerformed(evt);
+            }
+        });
 
         lblTelefonnummer.setText("Telefonnummer");
 
         tfdAndraTelefonnummer.setText("Ändra Telefonnummer");
+        tfdAndraTelefonnummer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdAndraTelefonnummerActionPerformed(evt);
+            }
+        });
 
         lblLosenord.setText("Lösenord");
 
         tfdAndraLosenord.setText("Ändra Lösenord");
+        tfdAndraLosenord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdAndraLosenordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +169,22 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tfdAndraNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraNamnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdAndraNamnActionPerformed
+
+    private void tfdAndraEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdAndraEmailActionPerformed
+
+    private void tfdAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraLosenordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdAndraLosenordActionPerformed
+
+    private void tfdAndraTelefonnummerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraTelefonnummerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdAndraTelefonnummerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,7 +216,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyProfilProjektledare1().setVisible(true);
+                //new MenyProfilProjektledare1().setVisible(true);
             }
         });
     }

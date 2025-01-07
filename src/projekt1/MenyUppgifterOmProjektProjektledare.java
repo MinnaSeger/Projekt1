@@ -58,6 +58,11 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
         });
 
         tfdAndraStatistik.setText("Ändra Statistik");
+        tfdAndraStatistik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdAndraStatistikActionPerformed(evt);
+            }
+        });
 
         jTextField1.setText("Ändra Datum");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +72,11 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
         });
 
         tfdAndraStatus.setText("Ändra Status");
+        tfdAndraStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdAndraStatusActionPerformed(evt);
+            }
+        });
 
         lblPartnersForProjekt.setText("Partners för projekt: ");
 
@@ -170,6 +180,14 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
     private void tfdAndraKostnaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraKostnaderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdAndraKostnaderActionPerformed
+
+    private void tfdAndraStatistikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraStatistikActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdAndraStatistikActionPerformed
+
+    private void tfdAndraStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdAndraStatusActionPerformed
 
     /**
      * @param args the command line arguments

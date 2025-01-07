@@ -134,6 +134,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra Statistik"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraStatistikActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">
       <Properties>
@@ -147,6 +150,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra Status"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraStatusActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPartnersForProjekt">
       <Properties>

@@ -45,6 +45,11 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
         lblAnsvarigForProjekt.setText("Ansvarig för projekt");
 
         btnUppgifterOmProjekt.setText("Uppgifter om projekt");
+        btnUppgifterOmProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUppgifterOmProjektActionPerformed(evt);
+            }
+        });
 
         lblMinaProjektProjektledare.setText("Mina tilldelade projekt");
 
@@ -53,6 +58,11 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
         jLabel1.setText("Avdelningensprojekt");
 
         tfdFiltreraProjekt.setText("Filtrera Status");
+        tfdFiltreraProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdFiltreraProjektActionPerformed(evt);
+            }
+        });
 
         lblSokStartdatum.setText("Sök Startdatum");
 
@@ -127,6 +137,14 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUppgifterOmProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppgifterOmProjektActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUppgifterOmProjektActionPerformed
+
+    private void tfdFiltreraProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdFiltreraProjektActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdFiltreraProjektActionPerformed
 
     /**
      * @param args the command line arguments

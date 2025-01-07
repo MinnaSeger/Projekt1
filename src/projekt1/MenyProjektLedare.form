@@ -82,6 +82,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Min profil"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMinprofilActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnprojekt">
       <Properties>
@@ -95,11 +98,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Anst&#xe4;llda"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnst&#xe4;lldaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnH&#xe5;llbarhetsm&#xe5;l">
       <Properties>
         <Property name="text" type="java.lang.String" value="H&#xe5;llbarhetsm&#xe5;l"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnH&#xe5;llbarhetsm&#xe5;lActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
