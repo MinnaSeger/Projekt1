@@ -39,6 +39,8 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
         tfdAndraEmail = new javax.swing.JTextField();
         lblTelefonnummer = new javax.swing.JLabel();
         tfdAndraTelefonnummer = new javax.swing.JTextField();
+        lblLosenord = new javax.swing.JLabel();
+        tfdAndraLosenord = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +68,10 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
 
         tfdAndraTelefonnummer.setText("Ändra Telefonnummer");
 
+        lblLosenord.setText("Lösenord");
+
+        tfdAndraLosenord.setText("Ändra Lösenord");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,16 +90,20 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
                             .addComponent(lblAvdelning)
                             .addComponent(lblMentor)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTelefonnummer)
+                                .addGap(58, 58, 58)
+                                .addComponent(tfdAndraTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblNamn)
-                                    .addComponent(lblEmail))
-                                .addGap(101, 101, 101)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdAndraNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdAndraTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdAndraEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblTelefonnummer))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                                    .addComponent(lblEmail)
+                                    .addComponent(lblLosenord))
+                                .addGap(93, 93, 93)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tfdAndraEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfdAndraNamn, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfdAndraLosenord, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,17 +122,21 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
                     .addComponent(tfdAndraEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLosenord)
+                    .addComponent(tfdAndraLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefonnummer)
                     .addComponent(tfdAndraTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(lblAnstallningsnummer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblAvdelning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAnsvarsomrade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblMentor)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -168,12 +182,14 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
     private javax.swing.JLabel lblAnsvarsomrade;
     private javax.swing.JLabel lblAvdelning;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblLosenord;
     private javax.swing.JLabel lblMentor;
     private javax.swing.JLabel lblMinProfil;
     private javax.swing.JLabel lblMinaUppgifter;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblTelefonnummer;
     private javax.swing.JTextField tfdAndraEmail;
+    private javax.swing.JTextField tfdAndraLosenord;
     private javax.swing.JTextField tfdAndraNamn;
     private javax.swing.JTextField tfdAndraTelefonnummer;
     // End of variables declaration//GEN-END:variables
