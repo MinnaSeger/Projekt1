@@ -27,25 +27,40 @@
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="lblMinaSamarbetspartners" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblMinaSamarbetspartners" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="jSpinner1" min="-2" pref="139" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblAvdelningensprojekt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnFiltreraStatus" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSokStartdatum" min="-2" max="-2" attributes="0"/>
-                          <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblSokStartdatum" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblAvdelningensprojekt" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jSpinner2" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="lblSlutDatum" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="btnFiltreraStatus" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                           <Component id="jLabel1" min="-2" pref="80" max="-2" attributes="0"/>
                           <Component id="lblMinaTilldeladeProjekt" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="94" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -60,16 +75,22 @@
               <Component id="lblMinaTilldeladeProjekt" min="-2" pref="43" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblMinaSamarbetspartners" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace pref="39" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblAvdelningensprojekt" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="btnFiltreraStatus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="lblSokStartdatum" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblSokStartdatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSlutDatum" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSpinner2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -110,6 +131,18 @@
     <Component class="javax.swing.JLabel" name="lblSokStartdatum">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k Startdatum"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSlutDatum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="S&#xf6;k slutdatum"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinner2">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="now" maximum="1893452400000" minimum="1104534000000" stepSize="5" type="date"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
