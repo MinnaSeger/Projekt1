@@ -173,7 +173,7 @@ public class Inloggning extends javax.swing.JFrame {
       }
       
       try {
-          String sqlFraga = "SELECT projekt.projektchef FROM projekt JOIN anstalld ON projektchef=aid";
+          String sqlFraga = "SELECT projekt.projektchef FROM projekt JOIN anstalld ON projektchef=aid WHERE ePost ='" + ePost + "'";
           System.out.println(sqlFraga);
           
                     String dbAid = idb.fetchSingle(sqlFraga);
