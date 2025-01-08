@@ -42,6 +42,11 @@ public class MenyHanteraAnstalldaAdmin extends javax.swing.JFrame {
         jLabel1.setText("Hantera anställda");
 
         jButton1.setText("Lägg till/ta bort anställd");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -49,6 +54,11 @@ public class MenyHanteraAnstalldaAdmin extends javax.swing.JFrame {
         });
 
         jButton2.setText("Återställ lösenord");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -94,6 +104,20 @@ public class MenyHanteraAnstalldaAdmin extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+       MenyLaggTillAnstalldAdmin profilFönster = new MenyLaggTillAnstalldAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+       MenySlumpaLosenordAdmin profilFönster = new MenySlumpaLosenordAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
