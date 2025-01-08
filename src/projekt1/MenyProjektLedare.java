@@ -1,6 +1,4 @@
 package projekt1;
-
-import projekt1.MenyProfilProjektledare1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 /*
@@ -121,16 +119,6 @@ public class MenyProjektLedare extends javax.swing.JFrame {
     private void btnMinprofilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinprofilActionPerformed
         // TODO add your handling code here: 
 
-         // Skapa ett objekt av MenyProfilProjektledare1 och skicka med idb och dbAid
-    MenyProfilProjektledare1 menyProfil = new MenyProfilProjektledare1(idb, dbAid);
-
-    // Gör den nya fönstret synligt
-    menyProfil.setVisible(true);
-
-    // Stäng nuvarande fönster (detta fönster, dvs MenyProjektLedare)
-    this.setVisible(false);
-} 
-
     }//GEN-LAST:event_btnMinprofilActionPerformed
 
     private void btnHållbarhetsmålActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHållbarhetsmålActionPerformed
@@ -185,7 +173,6 @@ public class MenyProjektLedare extends javax.swing.JFrame {
     private javax.swing.JLabel lblvalkommenprojektledare;
     // End of variables declaration//GEN-END:variables
 
-}
 } 
 
 
