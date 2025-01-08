@@ -139,6 +139,7 @@ public class MenyProjektLedare extends javax.swing.JFrame {
     private void btnMinprofilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinprofilMouseClicked
         // TODO add your handling code here:
         btnMinprofil.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnMinprofilMouseClicked
 
     /**
