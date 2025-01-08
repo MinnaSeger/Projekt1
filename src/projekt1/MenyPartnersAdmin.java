@@ -1,6 +1,9 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.util.HashMap;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -17,8 +20,41 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
         public MenyPartnersAdmin(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
-        initComponents();
-        }
+        initComponents();    
+                
+        fyllTextRutor ();
+
+    }
+    
+    private void fyllTextRutor () {
+        try {
+            //Hämta data med SQL fråga
+            
+            String query = "SELECT namn, kontaktperson, kontaktepost, telefon, adress, branch " + 
+            "FROM partner " +
+            "JOIN projekt ON projekt.pid = partner.pid " +
+            "JOIN anstalld ON projektchef = anstalld.aid" + 
+            "WHERE pid = " + dbAid;
+           
+
+            HashMap <String, String> userData = idb.fetchRow(query);
+            
+            if (userData != null) {
+             tfdNamn.setText(userData.get("namn"));
+             tfdKontaktperson.setText(userData.get("kontaktperson"));
+             tfdKontaktEpost.setText(userData.get("kontaktepost"));
+             tfdTelefon.setText(userData.get("telefon"));
+             tfdAdress.setText(userData.get("adress"));
+             tfdBranch.setText(userData.get("branch"));
+                        
+    } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
+
+            } 
+            
+    }  catch (InfException e) { 
+    JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
+    }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,6 +79,7 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
         lblTelefon = new javax.swing.JLabel();
         lblAdress = new javax.swing.JLabel();
         lblBranch = new javax.swing.JLabel();
+        btnSpara = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +116,13 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
 
         lblBranch.setText("Branch:");
 
+        btnSpara.setText("Spara änringar");
+        btnSpara.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSparaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,6 +149,10 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
                     .addComponent(tfdKontaktEpost)
                     .addComponent(tfdNamn))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSpara)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +188,9 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addComponent(btnSpara)
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -149,6 +199,40 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
     private void tfdNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdNamnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdNamnActionPerformed
+
+    private void btnSparaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaMouseClicked
+            //Hämta text från textfältet
+        
+        String nyttNamn = tfdNamn.getText();
+        String nyttKontaktperson = tfdKontaktperson.getText();
+        String nyttKontaktEpost = tfdKontaktEpost.getText();
+        String nyttTelefon = tfdTelefon.getText();
+        String nyttAdress = tfdAdress.getText();
+        String nyttBranch = tfdBranch.getText();
+
+        //Uppdetara ändringar i databasen
+        
+        try {
+            //Byta ändringar
+        String updateQuery = "UPDATE partner SET " +  
+        "namn = '" + nyttNamn + "', " + 
+        "kontaktperson = '" + nyttKontaktperson + "', " +
+        "kontaktepost = '" + nyttKontaktEpost + "', " + 
+        "telefon = '" + nyttTelefon + "', " + 
+        "adress= '" + nyttAdress + "', " + 
+        "branch = '" + nyttBranch + "' " + 
+        "WHERE pid = " + dbAid;
+            System.out.println(updateQuery);
+            // Kör uppdateringen
+            idb.update(updateQuery);
+            
+            //Visa bekräftelse av ändringar
+            JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
+        } catch (Exception e) {
+            //Hantera fel?
+            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
+        }              // TODO add your handling code here:
+    }//GEN-LAST:event_btnSparaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -186,6 +270,7 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSpara;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAdress;
