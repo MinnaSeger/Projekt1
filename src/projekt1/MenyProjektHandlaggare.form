@@ -120,6 +120,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtrera status"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnFiltreraStatusMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSpinner" name="jSpinner1">
       <Properties>
