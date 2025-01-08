@@ -62,6 +62,11 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         });
 
         btnAnställda.setText("Anställda");
+        btnAnställda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAnställdaMouseClicked(evt);
+            }
+        });
         btnAnställda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnställdaActionPerformed(evt);
@@ -143,6 +148,14 @@ public class MenyProjektLedare extends javax.swing.JFrame {
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnMinprofilMouseClicked
+
+    private void btnAnställdaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnställdaMouseClicked
+        // TODO add your handling code here:
+               MenyAnstalldaProjektledare profilFönster = new MenyAnstalldaProjektledare(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+ 
+    }//GEN-LAST:event_btnAnställdaMouseClicked
 
     /**
      * @param args the command line arguments

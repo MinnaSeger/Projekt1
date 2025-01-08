@@ -100,6 +100,7 @@
         <Property name="text" type="java.lang.String" value="Anst&#xe4;llda"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAnst&#xe4;lldaMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnst&#xe4;lldaActionPerformed"/>
       </Events>
     </Component>

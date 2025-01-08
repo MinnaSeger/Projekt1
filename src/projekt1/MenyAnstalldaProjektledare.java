@@ -3,17 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package projekt1;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
  * @author elsa
  */
 public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
+    private InfDB idb;
+    private String dbAid;
 
     /**
      * Creates new form MenyAnstalldaProjektledare
      */
-    public MenyAnstalldaProjektledare() {
+    public MenyAnstalldaProjektledare(InfDB idb, String dbAid) {
+         this.idb = idb;
+        this.dbAid = dbAid;
         initComponents();
     }
 
@@ -124,7 +130,7 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyAnstalldaProjektledare().setVisible(true);
+                //new MenyAnstalldaProjektledare().setVisible(true);
             }
         });
     }
