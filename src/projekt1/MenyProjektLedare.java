@@ -55,6 +55,11 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         });
 
         btnprojekt.setText("Projekt");
+        btnprojekt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnprojektMouseClicked(evt);
+            }
+        });
         btnprojekt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnprojektActionPerformed(evt);
@@ -156,6 +161,13 @@ public class MenyProjektLedare extends javax.swing.JFrame {
        this.setVisible(false);
  
     }//GEN-LAST:event_btnAnställdaMouseClicked
+
+    private void btnprojektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnprojektMouseClicked
+        // TODO add your handling code here:
+                    MenyProjektProjektledare profilFönster = new MenyProjektProjektledare(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnprojektMouseClicked
 
     /**
      * @param args the command line arguments
