@@ -56,6 +56,11 @@ public class MenyHandlaggare extends javax.swing.JFrame {
         btnHallbarhetsmal.setText("Hållbarhetsmål");
 
         btnMinProfil.setText("Min Profil");
+        btnMinProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinProfilActionPerformed(evt);
+            }
+        });
 
         btnAnstallda.setText("Anställda");
 
@@ -104,6 +109,12 @@ public class MenyHandlaggare extends javax.swing.JFrame {
     private void btnProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnProjektActionPerformed
+
+    private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
+        // TODO add your handling code here:
+  
+    
+    }//GEN-LAST:event_btnMinProfilActionPerformed
 
     /**
      * @param args the command line arguments

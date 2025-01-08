@@ -43,6 +43,11 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         lblmeny.setText("Meny");
 
         btnMinprofil.setText("Min profil");
+        btnMinprofil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMinprofilMouseClicked(evt);
+            }
+        });
         btnMinprofil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMinprofilActionPerformed(evt);
@@ -118,7 +123,9 @@ public class MenyProjektLedare extends javax.swing.JFrame {
 
     private void btnMinprofilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinprofilActionPerformed
         // TODO add your handling code here: 
+        
 
+      
     }//GEN-LAST:event_btnMinprofilActionPerformed
 
     private void btnHållbarhetsmålActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHållbarhetsmålActionPerformed
@@ -128,6 +135,11 @@ public class MenyProjektLedare extends javax.swing.JFrame {
     private void btnAnställdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnställdaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAnställdaActionPerformed
+
+    private void btnMinprofilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinprofilMouseClicked
+        // TODO add your handling code here:
+        btnMinprofil.setVisible(true);
+    }//GEN-LAST:event_btnMinprofilMouseClicked
 
     /**
      * @param args the command line arguments
