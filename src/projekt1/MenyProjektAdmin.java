@@ -1,6 +1,9 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.util.HashMap;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -19,7 +22,44 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
-        }
+
+        //fyll Textfälten med data från databasen
+        
+        fyllText ();
+
+    }
+    
+    private void fyllText () {
+        try {
+            //Hämta data med SQL fråga
+            
+            String query = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef " +
+               "FROM projekt " +
+               "JOIN anstalld ON aid = projektchef " +
+               "WHERE pid = " + dbAid;
+            
+            
+           
+            HashMap <String, String> userData = idb.fetchRow(query);
+            
+            if (userData != null) {
+             tfdProjektnamn.setText(userData.get("projektnamn"));
+             tfdBeskrivning.setText(userData.get("beskrivning"));
+             tfdStartdatum.setText(userData.get("startdatum"));
+             tfdSlutdatum.setText(userData.get("slutdatum"));
+             tfdKostnad.setText(userData.get("kostnad"));
+             tfdStatus.setText(userData.get("status"));
+             tfdPrioritet.setText(userData.get("prioritet"));
+             tfdProjektchef.setText(userData.get("projektchef"));
+                        
+    } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
+
+            } 
+            
+    }  catch (InfException e) { 
+    JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
+    }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,6 +163,11 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         lblProjektchef.setText("Projektchef:");
 
         btnSpara.setText("Spara ändring");
+        btnSpara.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSparaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,6 +290,45 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
     private void tfdPrioritetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdPrioritetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdPrioritetActionPerformed
+
+    private void btnSparaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaMouseClicked
+        // TODO add your handling code here:
+        
+            //Hämta text från textfältet
+        
+        String nyttProjektnamn = tfdProjektnamn.getText();
+        String nyttBeskrivning = tfdBeskrivning.getText();
+        String nyttStartdatum = tfdStartdatum.getText();
+        String nyttSlutdatum = tfdSlutdatum.getText();
+        String nyttKostnad = tfdKostnad.getText();
+        String nyttStatus = tfdStatus.getText();
+        String nyttPrioritet = tfdPrioritet.getText();
+        String nyttProjektchef = tfdProjektchef.getText();
+        //Uppdetara ändringar i databasen
+        
+        try {
+            //Byta ändringar
+        String updateQuery = "UPDATE projekt SET " +  
+        "Projektnamn = '" + nyttProjektnamn + "', " + 
+        "beskrivning = '" + nyttBeskrivning + "', " +
+        "Startdatum = '" + nyttStartdatum + "', " + 
+        "Slutdatum = '" + nyttSlutdatum + "', " + 
+        "Kostnad = '" + nyttKostnad + "', " + 
+        "Status = '" + nyttStatus + "', " + 
+        "Prioritet = '" + nyttPrioritet + "', " + 
+        "Projektchef = '" + nyttProjektchef + "' " + 
+        "WHERE pid = " + dbAid;
+            System.out.println(updateQuery);
+            // Kör uppdateringen
+            idb.update(updateQuery);
+            
+            //Visa bekräftelse av ändringar
+            JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
+        } catch (Exception e) {
+            //Hantera fel?
+            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSparaMouseClicked
 
     /**
      * @param args the command line arguments
