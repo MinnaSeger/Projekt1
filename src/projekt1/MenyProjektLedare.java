@@ -79,6 +79,11 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         });
 
         btnHållbarhetsmål.setText("Hållbarhetsmål");
+        btnHållbarhetsmål.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHållbarhetsmålMouseClicked(evt);
+            }
+        });
         btnHållbarhetsmål.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHållbarhetsmålActionPerformed(evt);
@@ -168,6 +173,14 @@ public class MenyProjektLedare extends javax.swing.JFrame {
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnprojektMouseClicked
+
+    private void btnHållbarhetsmålMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHållbarhetsmålMouseClicked
+        // TODO add your handling code here:
+                       MenyHallbarhetsmalProjektledare profilFönster = new MenyHallbarhetsmalProjektledare(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+        
+    }//GEN-LAST:event_btnHållbarhetsmålMouseClicked
 
     /**
      * @param args the command line arguments

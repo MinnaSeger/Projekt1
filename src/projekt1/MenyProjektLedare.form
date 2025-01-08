@@ -110,6 +110,7 @@
         <Property name="text" type="java.lang.String" value="H&#xe5;llbarhetsm&#xe5;l"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnH&#xe5;llbarhetsm&#xe5;lMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnH&#xe5;llbarhetsm&#xe5;lActionPerformed"/>
       </Events>
     </Component>
