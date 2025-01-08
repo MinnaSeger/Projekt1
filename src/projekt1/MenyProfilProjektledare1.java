@@ -37,19 +37,21 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
 
         lblMinProfil = new javax.swing.JLabel();
         lblMinaUppgifter = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
+        lblEpost = new javax.swing.JLabel();
         lblAnstallningsnummer = new javax.swing.JLabel();
-        lblNamn = new javax.swing.JLabel();
+        lblFornamn = new javax.swing.JLabel();
         lblAvdelning = new javax.swing.JLabel();
         lblAnsvarsomrade = new javax.swing.JLabel();
         lblMentor = new javax.swing.JLabel();
-        tfdAndraNamn = new javax.swing.JTextField();
-        tfdAndraEmail = new javax.swing.JTextField();
-        lblTelefonnummer = new javax.swing.JLabel();
-        tfdAndraTelefonnummer = new javax.swing.JTextField();
+        tfdFornamn = new javax.swing.JTextField();
+        tfdEpost = new javax.swing.JTextField();
+        lblTelefon = new javax.swing.JLabel();
+        tfdTelefon = new javax.swing.JTextField();
         lblLosenord = new javax.swing.JLabel();
-        tfdAndraLosenord = new javax.swing.JTextField();
+        tfdLosenord = new javax.swing.JTextField();
         btnSparaAndringar = new javax.swing.JButton();
+        lblEfternamn = new javax.swing.JLabel();
+        tfdEfternamn = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,11 +59,11 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
 
         lblMinaUppgifter.setText("Mina Uppgifter");
 
-        lblEmail.setText("Email");
+        lblEpost.setText("Epost");
 
         lblAnstallningsnummer.setText("Anställningsnummer");
 
-        lblNamn.setText("Namn");
+        lblFornamn.setText("Fornamn");
 
         lblAvdelning.setText("Avdelning");
 
@@ -69,35 +71,35 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
 
         lblMentor.setText("Mentor");
 
-        tfdAndraNamn.setText("Ändra Namn");
-        tfdAndraNamn.addActionListener(new java.awt.event.ActionListener() {
+        tfdFornamn.setText("Förnamn");
+        tfdFornamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAndraNamnActionPerformed(evt);
+                tfdFornamnActionPerformed(evt);
             }
         });
 
-        tfdAndraEmail.setText("Ändra Email");
-        tfdAndraEmail.addActionListener(new java.awt.event.ActionListener() {
+        tfdEpost.setText("Epost");
+        tfdEpost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAndraEmailActionPerformed(evt);
+                tfdEpostActionPerformed(evt);
             }
         });
 
-        lblTelefonnummer.setText("Telefonnummer");
+        lblTelefon.setText("Telefon");
 
-        tfdAndraTelefonnummer.setText("Ändra Telefonnummer");
-        tfdAndraTelefonnummer.addActionListener(new java.awt.event.ActionListener() {
+        tfdTelefon.setText("Telefon");
+        tfdTelefon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAndraTelefonnummerActionPerformed(evt);
+                tfdTelefonActionPerformed(evt);
             }
         });
 
         lblLosenord.setText("Lösenord");
 
-        tfdAndraLosenord.setText("Ändra Lösenord");
-        tfdAndraLosenord.addActionListener(new java.awt.event.ActionListener() {
+        tfdLosenord.setText("Lösenord");
+        tfdLosenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAndraLosenordActionPerformed(evt);
+                tfdLosenordActionPerformed(evt);
             }
         });
 
@@ -107,6 +109,10 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
                 btnSparaAndringarMouseClicked(evt);
             }
         });
+
+        lblEfternamn.setText("Efternamn");
+
+        tfdEfternamn.setText("Efternamn");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,26 +126,35 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMinaUppgifter)
                             .addComponent(lblAnstallningsnummer)
                             .addComponent(lblAnsvarsomrade)
                             .addComponent(lblAvdelning)
                             .addComponent(lblMentor)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTelefonnummer)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfdAndraTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNamn)
-                                    .addComponent(lblEmail)
-                                    .addComponent(lblLosenord))
-                                .addGap(48, 48, 48)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdAndraEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdAndraNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdAndraLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(102, Short.MAX_VALUE))
+                                    .addComponent(lblMinaUppgifter)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblFornamn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tfdFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblEfternamn)
+                                            .addComponent(lblEpost))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfdEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfdEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblLosenord)
+                                            .addComponent(lblTelefon))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfdTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfdLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                .addContainerGap(160, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnSparaAndringar)
@@ -149,26 +164,31 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblMinProfil)
-                .addGap(10, 10, 10)
-                .addComponent(lblMinaUppgifter)
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNamn)
-                    .addComponent(tfdAndraNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail)
-                    .addComponent(tfdAndraEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLosenord)
-                    .addComponent(tfdAndraLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfdAndraTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTelefonnummer))
+                    .addComponent(lblMinProfil)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblMinaUppgifter)
+                        .addGap(1, 1, 1)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFornamn)
+                    .addComponent(tfdFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEfternamn)
+                    .addComponent(tfdEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEpost))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLosenord))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTelefon))
+                .addGap(9, 9, 9)
                 .addComponent(lblAnstallningsnummer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,46 +198,48 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
                 .addComponent(lblMentor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSparaAndringar)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfdAndraNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraNamnActionPerformed
+    private void tfdFornamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdFornamnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAndraNamnActionPerformed
+    }//GEN-LAST:event_tfdFornamnActionPerformed
 
-    private void tfdAndraEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraEmailActionPerformed
+    private void tfdEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdEpostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAndraEmailActionPerformed
+    }//GEN-LAST:event_tfdEpostActionPerformed
 
-    private void tfdAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraLosenordActionPerformed
+    private void tfdLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdLosenordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAndraLosenordActionPerformed
+    }//GEN-LAST:event_tfdLosenordActionPerformed
 
-    private void tfdAndraTelefonnummerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraTelefonnummerActionPerformed
+    private void tfdTelefonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdTelefonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAndraTelefonnummerActionPerformed
+    }//GEN-LAST:event_tfdTelefonActionPerformed
 
     private void btnSparaAndringarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringarMouseClicked
         // TODO add your handling code here:
         
         //Hämta text från textfältet
         
-        String nyttNamn = tfdAndraNamn.getText();
-        String nyttEmail = tfdAndraEmail.getText();
-        String nyttTelefonnummer = tfdAndraTelefonnummer.getText();
-        String nyttLosenord = tfdAndraLosenord.getText();
+        String nyttFornamn = tfdFornamn.getText();
+        String nyttEfternamn = tfdEfternamn.getText();
+        String nyttEpost = tfdEpost.getText();
+        String nyttTelefon = tfdTelefon.getText();
+        String nyttLosenord = tfdLosenord.getText();
         
         //Uppdetara ändringar i databasen
         
         try {
             //Byta ändrngar
             String updateQuery = "UPDATE anstalld SET " +  
-                    "namn = '" + nyttNamn + "', " +  
-                    "email = '" + nyttEmail + "', " + 
-                    "telefonnummer = '" + nyttTelefonnummer + "', " + 
+                    "fornamn = '" + nyttFornamn + "', " + 
+                    "efternamn = '" + nyttEfternamn + "'," +
+                    "epost = '" + nyttEpost + "', " + 
+                    "telefon = '" + nyttTelefon + "', " + 
                     "losenord = '" + nyttLosenord + "' " + 
                     "WHERE aid = " + dbAid;
             System.out.println(updateQuery);
@@ -275,16 +297,18 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
     private javax.swing.JLabel lblAnstallningsnummer;
     private javax.swing.JLabel lblAnsvarsomrade;
     private javax.swing.JLabel lblAvdelning;
-    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEfternamn;
+    private javax.swing.JLabel lblEpost;
+    private javax.swing.JLabel lblFornamn;
     private javax.swing.JLabel lblLosenord;
     private javax.swing.JLabel lblMentor;
     private javax.swing.JLabel lblMinProfil;
     private javax.swing.JLabel lblMinaUppgifter;
-    private javax.swing.JLabel lblNamn;
-    private javax.swing.JLabel lblTelefonnummer;
-    private javax.swing.JTextField tfdAndraEmail;
-    private javax.swing.JTextField tfdAndraLosenord;
-    private javax.swing.JTextField tfdAndraNamn;
-    private javax.swing.JTextField tfdAndraTelefonnummer;
+    private javax.swing.JLabel lblTelefon;
+    private javax.swing.JTextField tfdEfternamn;
+    private javax.swing.JTextField tfdEpost;
+    private javax.swing.JTextField tfdFornamn;
+    private javax.swing.JTextField tfdLosenord;
+    private javax.swing.JTextField tfdTelefon;
     // End of variables declaration//GEN-END:variables
 }
