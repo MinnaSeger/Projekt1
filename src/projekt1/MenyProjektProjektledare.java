@@ -51,6 +51,11 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
         lblAnsvarigForProjekt.setText("Ansvarig för projekt");
 
         btnUppgifterOmProjekt.setText("Uppgifter om projekt");
+        btnUppgifterOmProjekt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUppgifterOmProjektMouseClicked(evt);
+            }
+        });
         btnUppgifterOmProjekt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUppgifterOmProjektActionPerformed(evt);
@@ -131,9 +136,9 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(tfdFiltreraProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSokStartdatum)
-                    .addComponent(lblSokSlutdatum))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSokSlutdatum)
+                    .addComponent(lblSokStartdatum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,6 +156,13 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
     private void tfdFiltreraProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdFiltreraProjektActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdFiltreraProjektActionPerformed
+
+    private void btnUppgifterOmProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUppgifterOmProjektMouseClicked
+        // TODO add your handling code here:
+                           MenyUppgifterOmProjektProjektledare profilFönster = new MenyUppgifterOmProjektProjektledare(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnUppgifterOmProjektMouseClicked
 
     /**
      * @param args the command line arguments
