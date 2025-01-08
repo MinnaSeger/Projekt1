@@ -214,12 +214,13 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         
         try {
             //Byta ändrngar
-            String updateQuery = "UPDATE Anvandare SET " +  
+            String updateQuery = "UPDATE anstalld SET " +  
                     "namn = '" + nyttNamn + "', " +  
                     "email = '" + nyttEmail + "', " + 
                     "telefonnummer = '" + nyttTelefonnummer + "', " + 
                     "losenord = '" + nyttLosenord + "' " + 
-                    "WHERE id = " + dbAid;
+                    "WHERE aid = " + dbAid;
+            System.out.println(updateQuery);
             // Kör uppdateringen
             idb.update(updateQuery);
             
