@@ -227,7 +227,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
         } catch (Exception e) {
             //Hantera fel?
-            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!");
+            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
         }
         
         
