@@ -83,6 +83,7 @@
         <Property name="text" type="java.lang.String" value="Projekt"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnProjektMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProjektActionPerformed"/>
       </Events>
     </Component>
@@ -90,12 +91,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="H&#xe5;llbarhetsm&#xe5;l"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnHallbarhetsmalMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnMinProfil">
       <Properties>
         <Property name="text" type="java.lang.String" value="Min Profil"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnMinProfilMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMinProfilActionPerformed"/>
       </Events>
     </Component>
@@ -103,6 +108,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Anst&#xe4;llda"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAnstalldaMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

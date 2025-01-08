@@ -47,6 +47,11 @@ public class MenyHandlaggare extends javax.swing.JFrame {
         lblMeny.setText("Meny");
 
         btnProjekt.setText("Projekt");
+        btnProjekt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProjektMouseClicked(evt);
+            }
+        });
         btnProjekt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProjektActionPerformed(evt);
@@ -54,8 +59,18 @@ public class MenyHandlaggare extends javax.swing.JFrame {
         });
 
         btnHallbarhetsmal.setText("Hållbarhetsmål");
+        btnHallbarhetsmal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHallbarhetsmalMouseClicked(evt);
+            }
+        });
 
         btnMinProfil.setText("Min Profil");
+        btnMinProfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMinProfilMouseClicked(evt);
+            }
+        });
         btnMinProfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMinProfilActionPerformed(evt);
@@ -63,6 +78,11 @@ public class MenyHandlaggare extends javax.swing.JFrame {
         });
 
         btnAnstallda.setText("Anställda");
+        btnAnstallda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAnstalldaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,6 +135,34 @@ public class MenyHandlaggare extends javax.swing.JFrame {
   
     
     }//GEN-LAST:event_btnMinProfilActionPerformed
+
+    private void btnMinProfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinProfilMouseClicked
+        // TODO add your handling code here:
+        MenyProfilHandlaggare profilFönster = new MenyProfilHandlaggare(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnMinProfilMouseClicked
+
+    private void btnProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProjektMouseClicked
+        // TODO add your handling code here:
+        MenyProjektHandlaggare profilFönster = new MenyProjektHandlaggare(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnProjektMouseClicked
+
+    private void btnHallbarhetsmalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHallbarhetsmalMouseClicked
+        // TODO add your handling code here:
+        MenyHallbarhetsmalHandlaggare profilFönster = new MenyHallbarhetsmalHandlaggare(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnHallbarhetsmalMouseClicked
+
+    private void btnAnstalldaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnstalldaMouseClicked
+        // TODO add your handling code here:
+          MenyAnstalldaHandlaggare profilFönster = new MenyAnstalldaHandlaggare(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnAnstalldaMouseClicked
 
     /**
      * @param args the command line arguments

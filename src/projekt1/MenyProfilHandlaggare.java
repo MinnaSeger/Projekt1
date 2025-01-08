@@ -1,4 +1,6 @@
 package projekt1;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -10,11 +12,15 @@ package projekt1;
  * @author elsa
  */
 public class MenyProfilHandlaggare extends javax.swing.JFrame {
+     private InfDB idb; 
+    private String dbAid;
 
     /**
      * Creates new form MenyProfilHandlaggare
      */
-    public MenyProfilHandlaggare() {
+    public MenyProfilHandlaggare(InfDB idb, String dbAid) {
+        this.idb = idb; 
+        this.dbAid = dbAid;
         initComponents();
     }
 
@@ -172,7 +178,7 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyProfilHandlaggare().setVisible(true);
+                //new MenyProfilHandlaggare().setVisible(true);
             }
         });
     }
