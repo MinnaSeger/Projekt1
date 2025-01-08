@@ -52,6 +52,11 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
         lblAvdelningensprojekt.setText("Avdelningensprojekt");
 
         btnFiltreraStatus.setText("Filtrera status");
+        btnFiltreraStatus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFiltreraStatusMouseClicked(evt);
+            }
+        });
 
         jSpinner1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1104534000000L), new java.util.Date(1893452400000L), java.util.Calendar.DAY_OF_MONTH));
 
@@ -120,6 +125,10 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFiltreraStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltreraStatusMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFiltreraStatusMouseClicked
 
     /**
      * @param args the command line arguments
