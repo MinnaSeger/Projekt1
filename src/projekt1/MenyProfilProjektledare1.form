@@ -33,8 +33,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblAnstallningsnummer" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAnsvarsomrade" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAid" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAnstallningsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAvdelning" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblMentor" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -111,11 +111,11 @@
                   <Component id="tfdTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblAnstallningsnummer" min="-2" max="-2" attributes="0"/>
+              <Component id="lblAid" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAvdelning" min="-2" pref="17" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-              <Component id="lblAnsvarsomrade" min="-2" max="-2" attributes="0"/>
+              <Component id="lblAnstallningsdatum" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
@@ -142,9 +142,9 @@
         <Property name="text" type="java.lang.String" value="Epost"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAnstallningsnummer">
+    <Component class="javax.swing.JLabel" name="lblAid">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Anst&#xe4;llningsnummer"/>
+        <Property name="text" type="java.lang.String" value="Aid"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFornamn">
@@ -157,9 +157,9 @@
         <Property name="text" type="java.lang.String" value="Avdelning"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAnsvarsomrade">
+    <Component class="javax.swing.JLabel" name="lblAnstallningsdatum">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ansvarsomr&#xe5;de"/>
+        <Property name="text" type="java.lang.String" value="Anst&#xe4;llningsdatum"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMentor">

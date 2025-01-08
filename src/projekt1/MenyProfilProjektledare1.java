@@ -30,6 +30,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         //fyll Textfälten med data från databasen
         
         fyllTextFalt ();
+        FylliLabel ();
     }
     
     private void fyllTextFalt () {
@@ -46,7 +47,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
              tfdEpost.setText(userData.get("epost"));
              tfdTelefon.setText(userData.get("telefon"));
              tfdLosenord.setText(userData.get("losenord"));
-             
+                        
 } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
 
             } 
@@ -54,6 +55,28 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
 } catch (InfException e) { 
     JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
                     
+        }
+    }
+    
+    private void FylliLabel () {
+        try{ 
+            //Hämta data till label
+            String query = "SELECT aid, avdelning, anstallningsdatum FROM anstalld where aid = " + dbAid;
+            
+            HashMap <String, String> userData = idb.fetchRow(query);
+            
+            if (userData != null) {
+ 
+             lblAid.setText("Aid:" + userData.get("aid"));
+             lblAvdelning.setText("Avdelning:" + userData.get("avdelning"));
+             lblAnstallningsdatum.setText("Anställningsdatum:" +userData.get("anstallningsdatum"));
+             } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
+
+            } 
+            
+} catch (InfException e) { 
+    JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
+    
         }
     }
 
@@ -69,10 +92,10 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         lblMinProfil = new javax.swing.JLabel();
         lblMinaUppgifter = new javax.swing.JLabel();
         lblEpost = new javax.swing.JLabel();
-        lblAnstallningsnummer = new javax.swing.JLabel();
+        lblAid = new javax.swing.JLabel();
         lblFornamn = new javax.swing.JLabel();
         lblAvdelning = new javax.swing.JLabel();
-        lblAnsvarsomrade = new javax.swing.JLabel();
+        lblAnstallningsdatum = new javax.swing.JLabel();
         lblMentor = new javax.swing.JLabel();
         tfdFornamn = new javax.swing.JTextField();
         tfdEpost = new javax.swing.JTextField();
@@ -92,13 +115,13 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
 
         lblEpost.setText("Epost");
 
-        lblAnstallningsnummer.setText("Anställningsnummer");
+        lblAid.setText("Aid");
 
         lblFornamn.setText("Fornamn");
 
         lblAvdelning.setText("Avdelning");
 
-        lblAnsvarsomrade.setText("Ansvarsområde");
+        lblAnstallningsdatum.setText("Anställningsdatum");
 
         lblMentor.setText("Mentor");
 
@@ -158,8 +181,8 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAnstallningsnummer)
-                            .addComponent(lblAnsvarsomrade)
+                            .addComponent(lblAid)
+                            .addComponent(lblAnstallningsdatum)
                             .addComponent(lblAvdelning)
                             .addComponent(lblMentor)))
                     .addGroup(layout.createSequentialGroup()
@@ -218,11 +241,11 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
                     .addComponent(lblTelefon)
                     .addComponent(tfdTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblAnstallningsnummer)
+                .addComponent(lblAid)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addComponent(lblAnsvarsomrade)
+                .addComponent(lblAnstallningsdatum)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSparaAndringar)
@@ -263,7 +286,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         //Uppdetara ändringar i databasen
         
         try {
-            //Byta ändrngar
+            //Byta ändringar
             String updateQuery = "UPDATE anstalld SET " +  
                     "fornamn = '" + nyttFornamn + "', " + 
                     "efternamn = '" + nyttEfternamn + "'," +
@@ -323,8 +346,8 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSparaAndringar;
-    private javax.swing.JLabel lblAnstallningsnummer;
-    private javax.swing.JLabel lblAnsvarsomrade;
+    private javax.swing.JLabel lblAid;
+    private javax.swing.JLabel lblAnstallningsdatum;
     private javax.swing.JLabel lblAvdelning;
     private javax.swing.JLabel lblEfternamn;
     private javax.swing.JLabel lblEpost;
