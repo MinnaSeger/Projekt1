@@ -162,35 +162,30 @@ public class MenyAdministratör extends javax.swing.JFrame {
         // TODO add your handling code here:
        MenyHanteraAnstalldaAdmin profilFönster = new MenyHanteraAnstalldaAdmin(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnHanteraAnställdaMouseClicked
 
     private void BtnProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnProjektMouseClicked
         // TODO add your handling code here:
        MenyProjektAdmin profilFönster = new MenyProjektAdmin(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_BtnProjektMouseClicked
 
     private void btnPartnersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPartnersMouseClicked
         // TODO add your handling code here:
        MenyPartnersAdmin profilFönster = new MenyPartnersAdmin(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnPartnersMouseClicked
 
     private void btnAvdelningarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAvdelningarMouseClicked
         // TODO add your handling code here:
        MenyAvdelningarAdmin profilFönster = new MenyAvdelningarAdmin(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnAvdelningarMouseClicked
 
     private void btnLänderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLänderMouseClicked
         // TODO add your handling code here:
        MenyLanderAdmin profilFönster = new MenyLanderAdmin(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnLänderMouseClicked
 
     /**
