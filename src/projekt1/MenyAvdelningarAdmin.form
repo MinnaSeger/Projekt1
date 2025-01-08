@@ -76,6 +76,7 @@
         <Property name="text" type="java.lang.String" value="Avdelning f&#xf6;r h&#xe5;llbar energi och klimatf&#xf6;r&#xe4;ndringar"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAvd1MouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvd1ActionPerformed"/>
       </Events>
     </Component>
@@ -83,11 +84,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Avdelning f&#xf6;r samh&#xe4;llsutveckling och utbildning"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAvd2MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAvd3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Avdelning f&#xf6;r teknisk innovation och entrepren&#xf6;rskap"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAvd3MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblValjAvdelning">
       <Properties>

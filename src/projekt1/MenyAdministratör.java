@@ -25,7 +25,7 @@ public class MenyAdministratör extends javax.swing.JFrame {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
-        lblInloggad.setText (dbAid);
+       // lblInloggad.setText (dbAid);
     }
 
     /**
@@ -53,10 +53,25 @@ public class MenyAdministratör extends javax.swing.JFrame {
         lblMeny.setText("Meny");
 
         btnHanteraAnställda.setText("Hantera Anställda");
+        btnHanteraAnställda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHanteraAnställdaMouseClicked(evt);
+            }
+        });
 
         BtnProjekt.setText("Projekt");
+        BtnProjekt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnProjektMouseClicked(evt);
+            }
+        });
 
         btnPartners.setText("Partners");
+        btnPartners.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPartnersMouseClicked(evt);
+            }
+        });
         btnPartners.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPartnersActionPerformed(evt);
@@ -64,6 +79,11 @@ public class MenyAdministratör extends javax.swing.JFrame {
         });
 
         btnAvdelningar.setText("Avdelningar");
+        btnAvdelningar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAvdelningarMouseClicked(evt);
+            }
+        });
         btnAvdelningar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvdelningarActionPerformed(evt);
@@ -71,6 +91,11 @@ public class MenyAdministratör extends javax.swing.JFrame {
         });
 
         btnLänder.setText("Länder");
+        btnLänder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLänderMouseClicked(evt);
+            }
+        });
 
         lblInloggad.setText("Inloggad");
 
@@ -132,6 +157,41 @@ public class MenyAdministratör extends javax.swing.JFrame {
     private void btnAvdelningarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvdelningarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAvdelningarActionPerformed
+
+    private void btnHanteraAnställdaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHanteraAnställdaMouseClicked
+        // TODO add your handling code here:
+       MenyHanteraAnstalldaAdmin profilFönster = new MenyHanteraAnstalldaAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnHanteraAnställdaMouseClicked
+
+    private void BtnProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnProjektMouseClicked
+        // TODO add your handling code here:
+       MenyProjektAdmin profilFönster = new MenyProjektAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_BtnProjektMouseClicked
+
+    private void btnPartnersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPartnersMouseClicked
+        // TODO add your handling code here:
+       MenyPartnersAdmin profilFönster = new MenyPartnersAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnPartnersMouseClicked
+
+    private void btnAvdelningarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAvdelningarMouseClicked
+        // TODO add your handling code here:
+       MenyAvdelningarAdmin profilFönster = new MenyAvdelningarAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnAvdelningarMouseClicked
+
+    private void btnLänderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLänderMouseClicked
+        // TODO add your handling code here:
+       MenyLanderAdmin profilFönster = new MenyLanderAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnLänderMouseClicked
 
     /**
      * @param args the command line arguments

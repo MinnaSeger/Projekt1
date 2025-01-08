@@ -1,22 +1,24 @@
+package projekt1;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package projekt1;
 
 /**
  *
  * @author minna
  */
 public class MenyAvdelningarAdmin extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MenyAvdelningarAdmin
-     */
-    public MenyAvdelningarAdmin() {
+    private InfDB idb;
+    private String dbAid;
+    
+        public MenyAvdelningarAdmin(InfDB idb, String dbAid) {
+        this.idb = idb;
+        this.dbAid = dbAid;
         initComponents();
-    }
-
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,6 +37,11 @@ public class MenyAvdelningarAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnAvd1.setText("Avdelning för hållbar energi och klimatförändringar");
+        btnAvd1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAvd1MouseClicked(evt);
+            }
+        });
         btnAvd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvd1ActionPerformed(evt);
@@ -42,8 +49,18 @@ public class MenyAvdelningarAdmin extends javax.swing.JFrame {
         });
 
         btnAvd2.setText("Avdelning för samhällsutveckling och utbildning");
+        btnAvd2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAvd2MouseClicked(evt);
+            }
+        });
 
         btnAvd3.setText("Avdelning för teknisk innovation och entreprenörskap");
+        btnAvd3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAvd3MouseClicked(evt);
+            }
+        });
 
         lblValjAvdelning.setText("Välj avdelning");
 
@@ -92,6 +109,27 @@ public class MenyAvdelningarAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAvd1ActionPerformed
 
+    private void btnAvd1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAvd1MouseClicked
+        // TODO add your handling code here:
+       MenyAvdelningForHallbarEnergiAdmin profilFönster = new MenyAvdelningForHallbarEnergiAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnAvd1MouseClicked
+
+    private void btnAvd2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAvd2MouseClicked
+        // TODO add your handling code here:
+       MenyAvdelningForSamhallsutvecklingAdmin profilFönster = new MenyAvdelningForSamhallsutvecklingAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnAvd2MouseClicked
+
+    private void btnAvd3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAvd3MouseClicked
+        // TODO add your handling code here:
+       MenyAvdelningForTekniskInnovation profilFönster = new MenyAvdelningForTekniskInnovation(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnAvd3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -122,7 +160,7 @@ public class MenyAvdelningarAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyAvdelningarAdmin().setVisible(true);
+                //new MenyAvdelningarAdmin().setVisible(true);
             }
         });
     }

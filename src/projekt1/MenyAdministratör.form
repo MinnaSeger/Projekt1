@@ -94,17 +94,24 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Hantera Anst&#xe4;llda"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnHanteraAnst&#xe4;lldaMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnProjekt">
       <Properties>
         <Property name="text" type="java.lang.String" value="Projekt"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnProjektMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPartners">
       <Properties>
         <Property name="text" type="java.lang.String" value="Partners"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnPartnersMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPartnersActionPerformed"/>
       </Events>
     </Component>
@@ -113,6 +120,7 @@
         <Property name="text" type="java.lang.String" value="Avdelningar"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAvdelningarMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvdelningarActionPerformed"/>
       </Events>
     </Component>
@@ -120,6 +128,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="L&#xe4;nder"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnL&#xe4;nderMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblInloggad">
       <Properties>

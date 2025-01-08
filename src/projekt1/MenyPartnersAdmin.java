@@ -1,21 +1,24 @@
+package projekt1;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package projekt1;
 
 /**
  *
  * @author minna
  */
 public class MenyPartnersAdmin extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MenyPartnersAdmin
-     */
-    public MenyPartnersAdmin() {
+    private InfDB idb;
+    private String dbAid;
+    
+        public MenyPartnersAdmin(InfDB idb, String dbAid) {
+        this.idb = idb;
+        this.dbAid = dbAid;
         initComponents();
-    }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,7 +116,7 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
                             .addComponent(tfdNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNamn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfdKontaktperson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblKontaktperson))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -177,7 +180,7 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyPartnersAdmin().setVisible(true);
+                //new MenyPartnersAdmin().setVisible(true);
             }
         });
     }

@@ -1,21 +1,25 @@
+package projekt1;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package projekt1;
+
 
 /**
  *
  * @author minna
  */
 public class MenyProjektAdmin extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MenyProjektAdmin
-     */
-    public MenyProjektAdmin() {
+    private InfDB idb;
+    private String dbAid;
+    
+        public MenyProjektAdmin(InfDB idb, String dbAid) {
+        this.idb = idb;
+        this.dbAid = dbAid;
         initComponents();
-    }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -263,7 +267,7 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyProjektAdmin().setVisible(true);
+                //new MenyProjektAdmin().setVisible(true);
             }
         });
     }
