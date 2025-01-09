@@ -36,10 +36,10 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
         lblStatistik = new javax.swing.JLabel();
         lblDatum = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
-        tfdAndraKostnader = new javax.swing.JTextField();
-        tfdAndraStatistik = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        tfdAndraStatus = new javax.swing.JTextField();
+        tfdKostnader = new javax.swing.JTextField();
+        tfdStatistik = new javax.swing.JTextField();
+        tfdDatum = new javax.swing.JTextField();
+        tfdStatus = new javax.swing.JTextField();
         lblPartnersForProjekt = new javax.swing.JLabel();
         tfdAndraPartners = new javax.swing.JTextField();
         lblHandlaggareforProjekt = new javax.swing.JLabel();
@@ -56,31 +56,31 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
 
         lblStatus.setText("Status");
 
-        tfdAndraKostnader.setText("Ändra Kostnader");
-        tfdAndraKostnader.addActionListener(new java.awt.event.ActionListener() {
+        tfdKostnader.setText("Kostnader");
+        tfdKostnader.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAndraKostnaderActionPerformed(evt);
+                tfdKostnaderActionPerformed(evt);
             }
         });
 
-        tfdAndraStatistik.setText("Ändra Statistik");
-        tfdAndraStatistik.addActionListener(new java.awt.event.ActionListener() {
+        tfdStatistik.setText("Statistik");
+        tfdStatistik.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAndraStatistikActionPerformed(evt);
+                tfdStatistikActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("Ändra Datum");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfdDatum.setText("Datum");
+        tfdDatum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfdDatumActionPerformed(evt);
             }
         });
 
-        tfdAndraStatus.setText("Ändra Status");
-        tfdAndraStatus.addActionListener(new java.awt.event.ActionListener() {
+        tfdStatus.setText("Status");
+        tfdStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAndraStatusActionPerformed(evt);
+                tfdStatusActionPerformed(evt);
             }
         });
 
@@ -113,27 +113,27 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDatum)
+                            .addComponent(lblStatistik))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tfdStatistik, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                            .addComponent(tfdDatum)
+                            .addComponent(tfdStatus)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblHandlaggareforProjekt)
                             .addComponent(lblPartnersForProjekt))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAndraHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfdAndraPartners, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDatum)
-                            .addComponent(lblStatistik))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfdAndraStatistik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfdAndraStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblUppgifterOmProjekt)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblKostnader)
                         .addGap(31, 31, 31)
-                        .addComponent(tfdAndraKostnader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tfdKostnader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -144,19 +144,19 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblKostnader)
-                    .addComponent(tfdAndraKostnader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdKostnader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblStatistik, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tfdAndraStatistik, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdStatistik, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDatum)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblStatus)
-                    .addComponent(tfdAndraStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdAndraPartners, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,21 +179,21 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdAndraPartnersActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfdDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdDatumActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tfdDatumActionPerformed
 
-    private void tfdAndraKostnaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraKostnaderActionPerformed
+    private void tfdKostnaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdKostnaderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAndraKostnaderActionPerformed
+    }//GEN-LAST:event_tfdKostnaderActionPerformed
 
-    private void tfdAndraStatistikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraStatistikActionPerformed
+    private void tfdStatistikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdStatistikActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAndraStatistikActionPerformed
+    }//GEN-LAST:event_tfdStatistikActionPerformed
 
-    private void tfdAndraStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraStatusActionPerformed
+    private void tfdStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdStatusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAndraStatusActionPerformed
+    }//GEN-LAST:event_tfdStatusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,7 +231,6 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField lblAndraHandlaggare;
     private javax.swing.JLabel lblDatum;
     private javax.swing.JLabel lblHandlaggareforProjekt;
@@ -240,9 +239,10 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
     private javax.swing.JLabel lblStatistik;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblUppgifterOmProjekt;
-    private javax.swing.JTextField tfdAndraKostnader;
     private javax.swing.JTextField tfdAndraPartners;
-    private javax.swing.JTextField tfdAndraStatistik;
-    private javax.swing.JTextField tfdAndraStatus;
+    private javax.swing.JTextField tfdDatum;
+    private javax.swing.JTextField tfdKostnader;
+    private javax.swing.JTextField tfdStatistik;
+    private javax.swing.JTextField tfdStatus;
     // End of variables declaration//GEN-END:variables
 }
