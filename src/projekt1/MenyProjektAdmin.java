@@ -33,14 +33,14 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         try {
             //Hämta data med SQL fråga
             
-            String query = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef " +
+            String sqlFraga = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef " +
                "FROM projekt " +
                "JOIN anstalld ON aid = projektchef " +
                "WHERE pid = " + dbAid;
             
             
            
-            HashMap <String, String> userData = idb.fetchRow(query);
+            HashMap <String, String> userData = idb.fetchRow(sqlFraga);
             
             if (userData != null) {
              tfdProjektnamn.setText(userData.get("projektnamn"));

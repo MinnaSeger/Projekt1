@@ -13,6 +13,7 @@ import java.util.HashMap;
 public class MenyLanderAdmin extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
+    private boolean landFanns = false; // Flagga för att hålla reda på om landet finns
     
         public MenyLanderAdmin(InfDB idb, String dbAid) {
         this.idb = idb;
@@ -20,14 +21,15 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
         initComponents();
         }
        
-        
+        //Nedan metod används för att kontrollera om ett land finns i databasen 
+        //genom att jämföra landets namn med användarens inmatning
           private void LetaLand (String searchText) {
         try {
             // SQL-fråga för att söka på länder som matchar användarens text
-            String query = "SELECT namn FROM land WHERE namn = '" + searchText + "'"; 
+            String sqlFraga = "SELECT namn FROM land WHERE namn = '" + searchText + "'"; 
             
             // Hämta resultaten från databasen
-            ArrayList<HashMap<String, String>> result = idb.fetchRows(query);
+            ArrayList<HashMap<String, String>> result = idb.fetchRows(sqlFraga);
 
 
         if (result == null || result.isEmpty()) {
@@ -39,17 +41,18 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
     }
     }
           
+     //Nedan metod används för att visa information om ett land, baserat på användarens val i ett textfält.
           
           private void visaLandAlternativ() {
     String selectedCountry = tfdSkrivHar.getText(); // Här får vi texten från användarens inputfält
     
     if (selectedCountry.length() > 0) {
         // Skapa SQL-fråga för att hämta information om det valda landet
-        String query = "SELECT sprak, politisk_struktur, ekonomi FROM land WHERE namn = '" + selectedCountry + "'";
+        String sqlFraga = "SELECT sprak, politisk_struktur, ekonomi FROM land WHERE namn = '" + selectedCountry + "'";
         
         try {
             // Hämta resultatet från databasen
-            HashMap<String, String> result = idb.fetchRow(query);
+            HashMap<String, String> result = idb.fetchRow(sqlFraga);
             
             // Om vi får ett resultat från databasen
             if (result != null) {
@@ -76,10 +79,10 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
         try {
             //Hämta data med SQL fråga
             
-       String query = "SELECT sprak, politisk_struktur, ekonomi FROM land WHERE namn = '" + selectedCountry + "'";
+       String sqlFraga = "SELECT sprak, politisk_struktur, ekonomi FROM land WHERE namn = '" + selectedCountry + "'";
 
    
-HashMap <String, String> userData = idb.fetchRow(query);
+HashMap <String, String> userData = idb.fetchRow(sqlFraga);
             
             if (userData != null) {
              tfdSkriv.setText(userData.get("namn"));
@@ -149,33 +152,30 @@ HashMap <String, String> userData = idb.fetchRow(query);
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(lblSokEfterLand))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(lblValjAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(133, 133, 133)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnOkKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfdSkriv, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfdSkrivHar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(153, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnSparaAndring)
                 .addGap(22, 22, 22))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(133, 133, 133)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblValjAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfdSkriv, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSokEfterLand)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnOkKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfdSkrivHar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,10 +185,10 @@ HashMap <String, String> userData = idb.fetchRow(query);
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfdSkrivHar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnOkKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(btnOkKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblValjAndring)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(lblAndring)
@@ -218,11 +218,11 @@ HashMap <String, String> userData = idb.fetchRow(query);
     }
 
     // Steg 3: Bygg SQL-frågan för att kolla om landet finns
-    String query = "SELECT namn FROM land WHERE namn = '" + searchText + "'";
+    String sqlFraga = "SELECT namn FROM land WHERE namn = '" + searchText + "'";
 
     try {
         // Steg 4: Hämta resultaten från databasen
-        ArrayList<HashMap<String, String>> result = idb.fetchRows(query);
+        ArrayList<HashMap<String, String>> result = idb.fetchRows(sqlFraga);
 
         // Steg 5: Kontrollera om landet finns
         if (result != null && !result.isEmpty()) {
@@ -241,7 +241,13 @@ HashMap <String, String> userData = idb.fetchRow(query);
     }//GEN-LAST:event_btnOkKnappMouseClicked
 
     private void btnSparaAndringMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringMouseClicked
-   // Hämta den valda kolumnen från JComboBox
+  // Kontrollera om landet finns i databasen innan ändringar kan sparas
+    if (!landFanns) {
+        JOptionPane.showMessageDialog(this, "Landet finns inte i databasen. Ingen ändring kan göras.");
+        return; // Avbryt om landet inte finns
+    }
+    
+// Hämta den valda kolumnen från JComboBox
     String selectedOption = (String) jComboBox2.getSelectedItem();
     String nyttVarde = tfdSkriv.getText();
 

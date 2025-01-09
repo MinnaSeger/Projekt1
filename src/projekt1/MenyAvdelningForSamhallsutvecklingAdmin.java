@@ -24,13 +24,13 @@ public class MenyAvdelningForSamhallsutvecklingAdmin extends javax.swing.JFrame 
         try {
             //Hämta data med SQL fråga
             
-       String query = "SELECT namn, beskrivning, avdelning.adress, avdelning.epost, avdelning.telefon " +
+       String sqlFraga = "SELECT namn, beskrivning, avdelning.adress, avdelning.epost, avdelning.telefon " +
                "FROM avdelning " +
                "JOIN anstalld ON avdelning.avdid = anstalld.avdelning " + 
                "WHERE namn = 'Avdelning för Samhällsutveckling och utbildning' ";
 
    
-HashMap <String, String> userData = idb.fetchRow(query);
+HashMap <String, String> userData = idb.fetchRow(sqlFraga);
             
             if (userData != null) {
              tfdNamn.setText(userData.get("namn"));
