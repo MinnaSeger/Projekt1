@@ -45,8 +45,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblAnstallningsnummer" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAnsvarsomrade" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAid" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAnstallningsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblTelefonnummer" min="-2" pref="57" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -118,11 +118,11 @@
                   <Component id="lblTelefonnummer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-              <Component id="lblAnstallningsnummer" min="-2" max="-2" attributes="0"/>
+              <Component id="lblAid" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAvdelning" min="-2" pref="17" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblAnsvarsomrade" min="-2" max="-2" attributes="0"/>
+              <Component id="lblAnstallningsdatum" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblMentor" min="-2" max="-2" attributes="0"/>
@@ -144,9 +144,9 @@
         <Property name="text" type="java.lang.String" value="Mina Uppgifter"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAnstallningsnummer">
+    <Component class="javax.swing.JLabel" name="lblAid">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Anst&#xe4;llningsnummer"/>
+        <Property name="text" type="java.lang.String" value="Aid"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAvdelning">
@@ -154,9 +154,9 @@
         <Property name="text" type="java.lang.String" value="Avdelning"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAnsvarsomrade">
+    <Component class="javax.swing.JLabel" name="lblAnstallningsdatum">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ansvarsomr&#xe5;de"/>
+        <Property name="text" type="java.lang.String" value="Anstallningsdatum"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMentor">
@@ -221,6 +221,10 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Spara &#xc4;ndringar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSparaAndringarMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSparaAndringarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

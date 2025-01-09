@@ -39,6 +39,7 @@ public class MenyHandlaggare extends javax.swing.JFrame {
         btnHallbarhetsmal = new javax.swing.JButton();
         btnMinProfil = new javax.swing.JButton();
         btnAnstallda = new javax.swing.JButton();
+        lblValkommenHandläggare = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +85,8 @@ public class MenyHandlaggare extends javax.swing.JFrame {
             }
         });
 
+        lblValkommenHandläggare.setText("Välkommen Handläggare");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +104,9 @@ public class MenyHandlaggare extends javax.swing.JFrame {
                             .addComponent(btnMinProfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAnstallda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
+                        .addContainerGap()
+                        .addComponent(lblValkommenHandläggare)
+                        .addGap(31, 31, 31)
                         .addComponent(lblMeny)))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
@@ -110,9 +115,15 @@ public class MenyHandlaggare extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblInloggad)
-                .addGap(18, 18, 18)
-                .addComponent(lblMeny)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(lblValkommenHandläggare)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMeny)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(btnMinProfil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProjekt)
@@ -206,5 +217,6 @@ public class MenyHandlaggare extends javax.swing.JFrame {
     private javax.swing.JButton btnProjekt;
     private javax.swing.JLabel lblInloggad;
     private javax.swing.JLabel lblMeny;
+    private javax.swing.JLabel lblValkommenHandläggare;
     // End of variables declaration//GEN-END:variables
 }
