@@ -24,18 +24,23 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
         this.dbAid = dbAid;
         initComponents();
         
-        FyllILabel(); 
+        FyllILabelAnsvarigForProjekt(); 
         
     }
     
-    private void FyllILabel () {
+    private void FyllILabelAnsvarigForProjekt () {
         try{ //Hämta data om anställdas projekt
-            String query = "SELECT projektnamn from projekt WHERE projektchef="+ dbAid;
+            String query = "SELECT projekt.projektnamn, partner.namn AS partner_namn " +
+                       "FROM projekt " +
+                       "LEFT JOIN projekt_partner ON projekt.pid = projekt_partner.pid " +
+                       "LEFT JOIN partner ON projekt_partner.partner_pid = partner.pid " +
+                       "WHERE projekt.projektchef =" + dbAid;
             
             HashMap <String, String> userData = idb.fetchRow(query);
             
             if(userData !=null){
-                lblMinaProjektProjektledare.setText("Mina tilldelade projekt:" + userData.get("projektnamn"));
+                lblAnsvarigForProjekt.setText("Ansvarig för projekt: " + userData.get("projektnamn"));
+                lblMinaSamarbetspartners.setText("Projekpartners: " + userData.get("partner_namn"));
                 
             }
            } catch (InfException e) { 
@@ -55,9 +60,8 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
     private void initComponents() {
 
         lblProjekt = new javax.swing.JLabel();
-        lblAnsvarigForProjekt = new javax.swing.JLabel();
         btnUppgifterOmProjekt = new javax.swing.JButton();
-        lblMinaProjektProjektledare = new javax.swing.JLabel();
+        lblAnsvarigForProjekt = new javax.swing.JLabel();
         lblMinaSamarbetspartners = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         tfdFiltreraProjekt = new javax.swing.JTextField();
@@ -68,9 +72,7 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblProjekt.setText("Projekt");
-
-        lblAnsvarigForProjekt.setText("Ansvarig för projekt");
+        lblProjekt.setText("Mina Projekt");
 
         btnUppgifterOmProjekt.setText("Uppgifter om projekt");
         btnUppgifterOmProjekt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -84,7 +86,7 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
             }
         });
 
-        lblMinaProjektProjektledare.setText("Mina tilldelade projekt");
+        lblAnsvarigForProjekt.setText("Ansvarig för projekt");
 
         lblMinaSamarbetspartners.setText("Mina Samarbetspartners");
 
@@ -110,54 +112,52 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(lblProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnUppgifterOmProjekt)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMinaSamarbetspartners)
-                            .addComponent(lblMinaProjektProjektledare)
-                            .addComponent(lblAnsvarigForProjekt))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(lblSokStartdatum))
+                        .addComponent(lblSokStartdatum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSokSlutdatum, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfdFiltreraProjekt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblSokSlutdatum)
                         .addGap(122, 122, 122))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(lblProjekt)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfdFiltreraProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUppgifterOmProjekt))
+                .addGap(16, 16, 16))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(lblMinaSamarbetspartners)
+                    .addComponent(lblAnsvarigForProjekt))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblProjekt)
-                .addGap(3, 3, 3)
-                .addComponent(lblMinaProjektProjektledare)
-                .addGap(18, 18, 18)
-                .addComponent(lblAnsvarigForProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblMinaSamarbetspartners)
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
+                .addComponent(lblAnsvarigForProjekt)
+                .addGap(7, 7, 7)
                 .addComponent(btnUppgifterOmProjekt)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tfdFiltreraProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(3, 3, 3)
+                .addComponent(lblMinaSamarbetspartners)
+                .addGap(7, 7, 7)
+                .addComponent(tfdFiltreraProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jLabel1)
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSokSlutdatum)
                     .addComponent(lblSokStartdatum))
@@ -227,7 +227,6 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JLabel lblAnsvarigForProjekt;
-    private javax.swing.JLabel lblMinaProjektProjektledare;
     private javax.swing.JLabel lblMinaSamarbetspartners;
     private javax.swing.JLabel lblProjekt;
     private javax.swing.JLabel lblSokSlutdatum;
