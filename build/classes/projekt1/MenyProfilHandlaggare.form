@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JTextField" name="tfdAndraTelefonnummer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra Telefonnummer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraTelefonnummerActionPerformed"/>
+      </Events>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -28,37 +38,49 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Component id="lblMinProfil" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                      <Component id="lblMinaUppgifter" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblMinaUppgifter" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAnstallningsnummer" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAnsvarsomrade" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAvdelning" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblMentor" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblTelefonnummer" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                              <Component id="tfdAndraTelefonnummer" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="lblTelefonnummer" min="-2" pref="57" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="tfdTelefon" min="-2" pref="71" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="lblAvdelning" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblNamn" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLosenord" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEfternamn" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="lblEpost" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblLosenord" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="tfdAndraEmail" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfdAndraNamn" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfdAndraLosenord" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="tfdEpost" min="-2" pref="71" max="-2" attributes="0"/>
+                                      <Component id="tfdLosenord" min="-2" pref="71" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="tfdEfternamn" min="-2" pref="116" max="-2" attributes="0"/>
+                                  <Component id="tfdFornamn" min="-2" pref="116" max="-2" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblMentor" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="156" max="32767" attributes="0"/>
+                              <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="48" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -66,38 +88,47 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblMinProfil" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Component id="lblMinaUppgifter" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblNamn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdAndraNamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMinProfil" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMinaUppgifter" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="tfdEfternamn" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEfternamn" min="-2" pref="12" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdAndraEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEpost" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdEpost" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdAndraLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfdTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblTelefonnummer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdAndraTelefonnummer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Component id="lblAnstallningsnummer" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAvdelning" min="-2" pref="17" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAnsvarsomrade" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="lblMentor" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblMentor" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,19 +144,9 @@
         <Property name="text" type="java.lang.String" value="Mina Uppgifter"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblEmail">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Email"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblAnstallningsnummer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anst&#xe4;llningsnummer"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblNamn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Namn"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAvdelning">
@@ -143,24 +164,22 @@
         <Property name="text" type="java.lang.String" value="Mentor"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdAndraNamn">
+    <Component class="javax.swing.JTextField" name="tfdFornamn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra Namn"/>
+        <Property name="text" type="java.lang.String" value="F&#xf6;rnamn"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdFornamnActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdAndraEmail">
+    <Component class="javax.swing.JTextField" name="tfdEfternamn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra Email"/>
+        <Property name="text" type="java.lang.String" value="Efternamn"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTelefonnummer">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Telefonnummer"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdAndraTelefonnummer">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra Telefonnummer"/>
+        <Property name="text" type="java.lang.String" value="Telefon"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblLosenord">
@@ -168,9 +187,39 @@
         <Property name="text" type="java.lang.String" value="L&#xf6;senord"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdAndraLosenord">
+    <Component class="javax.swing.JLabel" name="lblFornamn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra L&#xf6;senord"/>
+        <Property name="text" type="java.lang.String" value="Fornamn"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEfternamn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Efternamn"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEpost">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Epost"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdEpost">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Epost"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdLosenord">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xf6;senord"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdTelefon">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Telefon"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSparaAndringar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Spara &#xc4;ndringar"/>
       </Properties>
     </Component>
   </SubComponents>
