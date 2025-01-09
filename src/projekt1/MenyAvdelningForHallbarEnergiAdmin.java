@@ -29,8 +29,7 @@ public class MenyAvdelningForHallbarEnergiAdmin extends javax.swing.JFrame {
        String query = "SELECT namn, beskrivning, avdelning.adress, avdelning.epost, avdelning.telefon " +
                "FROM avdelning " +
                "JOIN anstalld ON avdelning.avdid = anstalld.avdelning " + 
-               "WHERE namn = 'Avdelning för Hållbar Energi och Klimatförändringar' " +
-               "AND chef = " + dbAid + ";";
+               "WHERE namn = 'Avdelning för Hållbar Energi och Klimatförändringar' ";
 
    
 HashMap <String, String> userData = idb.fetchRow(query);
