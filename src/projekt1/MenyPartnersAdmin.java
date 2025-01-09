@@ -30,7 +30,7 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
         try {
             //Hämta data med SQL fråga
             
-            String query = "SELECT namn, kontaktperson, kontaktepost, telefon, adress, branch " +
+            String query = "SELECT namn, kontaktperson, kontaktepost, partner.telefon, partner.adress, branch " +
                "FROM partner " +
                "JOIN projekt ON projekt.pid = partner.pid " +
                "JOIN anstalld ON projekt.projektchef = anstalld.aid " +
@@ -217,8 +217,8 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
         String updateQuery = "UPDATE partner SET " +  
         "namn = '" + nyttNamn + "', " + 
         "kontaktperson = '" + nyttKontaktperson + "', " +
-        "kontaktepost = '" + nyttKontaktEpost + "', " + 
-        "telefon = '" + nyttTelefon + "', " + 
+        "kontaktepost = '" + nyttKontaktEpost + "', " +
+        "telefon= '" + nyttTelefon + "', " +
         "adress= '" + nyttAdress + "', " + 
         "branch = '" + nyttBranch + "' " + 
         "WHERE pid = " + dbAid;
