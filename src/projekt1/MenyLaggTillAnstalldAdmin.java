@@ -1,6 +1,10 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.ArrayList;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,12 +18,35 @@ public class MenyLaggTillAnstalldAdmin extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
     
+    
         public MenyLaggTillAnstalldAdmin(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
-        }
+        fyllComboBox();
 
+        }
+                
+        //Kod för att kunna välja anställd i rullista
+private void fyllComboBox() {
+    try {
+        String sqlFraga = "SELECT fornamn, efternamn FROM anstalld "+"order by fornamn";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        if (resultat != null && !resultat.isEmpty()) {
+            jbxAnstalld.removeAllItems();
+            for (HashMap<String, String> rad : resultat) {
+                String fullName = rad.get("fornamn") + " " + rad.get("efternamn");
+                jbxAnstalld.addItem(fullName);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Inga anställda hittades i databasen.");
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av anställda: " + e.getMessage());
+    
+}
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +84,11 @@ public class MenyLaggTillAnstalldAdmin extends javax.swing.JFrame {
         lblTaBortAnstalld.setText("Ta bort anställd:");
 
         jbxAnstalld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jbxAnstalld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbxAnstalldActionPerformed(evt);
+            }
+        });
 
         lblValjAnstalld.setText("Välj anställd i rullistan");
 
@@ -233,7 +265,34 @@ public class MenyLaggTillAnstalldAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        // TODO add your handling code here:
+      try {
+        // Hämta den valda anställdas namn från JComboBox
+        String valdAnstalld = (String) jbxAnstalld.getSelectedItem();
+
+        if (valdAnstalld != null) {
+            // Dela upp det valda namnet i förnamn och efternamn
+            String[] namnDelar = valdAnstalld.split(" ");
+            String fornamn = namnDelar[0];
+            String efternamn = namnDelar.length > 1 ? namnDelar[1] : "";
+
+            // SQL-fråga för att ta bort den valda anställda
+            String sqlTaBort = "DELETE FROM anstalld WHERE fornamn = '" + fornamn + 
+                               "' AND efternamn = '" + efternamn + "'";
+
+            // Utför borttagningen
+            idb.delete(sqlTaBort);
+
+            // Visa bekräftelse
+            JOptionPane.showMessageDialog(this, "Anställd " + valdAnstalld + " togs bort.");
+            // Uppdatera JComboBox
+            fyllComboBox();
+        } else {
+        JOptionPane.showMessageDialog(this, "Vänligen välj en anställd att ta bort.");
+    }
+      } catch (InfException e) {
+    JOptionPane.showMessageDialog(this, "Fel vid borttagning av anställd: " + e.getMessage());
+}
+    // TODO add your handling code here:
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void tfdFornamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdFornamnActionPerformed
@@ -255,6 +314,11 @@ public class MenyLaggTillAnstalldAdmin extends javax.swing.JFrame {
     private void tfdAnstallningsDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAnstallningsDatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdAnstallningsDatActionPerformed
+
+    private void jbxAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbxAnstalldActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbxAnstalldActionPerformed
 
     /**
      * @param args the command line arguments

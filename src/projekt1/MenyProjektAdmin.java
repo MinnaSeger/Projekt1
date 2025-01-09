@@ -4,6 +4,7 @@ import oru.inf.InfException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.HashMap;
+import java.util.ArrayList;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -22,14 +23,14 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
+        fyllComboBox();
+        fyllTextRutor ();
 
-        //fyll Textfälten med data från databasen
         
-        fyllText ();
 
     }
     
-    private void fyllText () {
+    private void fyllTextRutor () {
         try {
             //Hämta data med SQL fråga
             
@@ -59,6 +60,25 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
     }  catch (InfException e) { 
     JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
     }
+    }
+    
+       private void fyllComboBox(){
+        try{
+            String sqlFraga ="SELECT projektnamn FROM projekt";
+            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+            
+            if (resultat !=null) {
+                jbxrullista.removeAllItems();
+                for (HashMap <String, String> rad : resultat) {
+                 jbxrullista.addItem(rad.get("projektnamn"));
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Inga projekt hittades i databasen.");
+
+            }               
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(this, "Fel vid hämtning av projekt.");
+        } 
     }
 
     /**
@@ -268,7 +288,35 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbxrullistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbxrullistaActionPerformed
-        // TODO add your handling code here:
+      String valtProjektNamn = (String) jbxrullista.getSelectedItem();
+    
+    if (valtProjektNamn != null) {
+        try {
+            // SQL-fråga för att hämta data baserat på partnerns namn
+            String sqlFraga = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef " +
+                               "FROM projekt " +
+                               "WHERE projektnamn = '" + valtProjektNamn + "'";
+
+            HashMap<String, String> userData = idb.fetchRow(sqlFraga);
+            
+            if (userData != null) {
+                // Uppdatera textfälten med hämtad data
+                tfdProjektnamn.setText(userData.get("projektnamn"));
+                tfdBeskrivning.setText(userData.get("beskrivning"));
+                tfdStartdatum.setText(userData.get("startdatum"));
+                tfdSlutdatum.setText(userData.get("slutdatum"));
+                tfdKostnad.setText(userData.get("kostnad"));
+                tfdStatus.setText(userData.get("status"));
+                tfdPrioritet.setText(userData.get("prioritet"));
+                tfdProjektchef.setText(userData.get("projektchef"));
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Ingen data hittades för det valda projekter.");
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Fel vid hämtning av data: " + e.getMessage());
+        }
+    } // TODO add your handling code here:
     }//GEN-LAST:event_jbxrullistaActionPerformed
 
     private void tfdProjektnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdProjektnamnActionPerformed
