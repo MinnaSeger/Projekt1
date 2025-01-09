@@ -27,6 +27,7 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
         
         FyllILabelAnsvarigForProjekt(); 
         FyllISamarbetspartners();
+        FylliAvdelningensProjekt();
         
     }
     
@@ -90,6 +91,47 @@ private void FyllISamarbetspartners() {
         JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
     }
 }
+
+private void FylliAvdelningensProjekt() {
+    try {
+        // SQL-fråga för att hämta projektnamn från projekt i avdelningen där den inloggade projektchefen är chef
+        String query = "SELECT projekt.projektnamn "
+                     + "FROM projekt "
+                     + "INNER JOIN avdelning ON projekt.projektchef = avdelning.chef "
+                     + "WHERE avdelning.chef = " + dbAid;
+
+        // Kör frågan och hämta resultaten
+        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(query);
+
+        // Kontrollera om vi fick några projekt från databasen
+        if (projektLista != null && !projektLista.isEmpty()) {
+            // Skapa en sträng för att lagra projektnamn
+            String projektnamnString = "";
+
+            // Loopa igenom varje projekt och lägg till namnet i strängen
+            for (HashMap<String, String> projekt : projektLista) {
+                String projektnamn = projekt.get("projektnamn");
+                if (projektnamn != null) {
+                    projektnamnString += projektnamn + ", ";
+                }
+            }
+
+            // Ta bort sista kommatecknet och mellanslaget
+            if (!projektnamnString.isEmpty()) {
+                projektnamnString = projektnamnString.substring(0, projektnamnString.length() - 2);
+            }
+
+            // Visa projekten i labeln
+            lblAvdelningensProjekt.setText("Avdelningens projekt: " + projektnamnString);
+        } else {
+            // Om inga projekt hittas
+            lblAvdelningensProjekt.setText("Inga projekt hittades för din avdelning.");
+        }
+    } catch (InfException e) {
+        // Om något går fel, visa ett felmeddelande
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av data! " + e.getMessage());
+    }
+}
     
 
     /**
@@ -105,7 +147,7 @@ private void FyllISamarbetspartners() {
         btnUppgifterOmProjekt = new javax.swing.JButton();
         lblAnsvarigForProjekt = new javax.swing.JLabel();
         lblMinaSamarbetspartners = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblAvdelningensProjekt = new javax.swing.JLabel();
         tfdFiltreraProjekt = new javax.swing.JTextField();
         lblSokStartdatum = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
@@ -132,7 +174,7 @@ private void FyllISamarbetspartners() {
 
         lblMinaSamarbetspartners.setText("Mina Samarbetspartners");
 
-        jLabel1.setText("Avdelningensprojekt");
+        lblAvdelningensProjekt.setText("Avdelningensprojekt");
 
         tfdFiltreraProjekt.setText("Filtrera Status");
         tfdFiltreraProjekt.addActionListener(new java.awt.event.ActionListener() {
@@ -172,17 +214,18 @@ private void FyllISamarbetspartners() {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfdFiltreraProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUppgifterOmProjekt))
+                .addComponent(btnUppgifterOmProjekt)
                 .addGap(16, 16, 16))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAvdelningensProjekt)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfdFiltreraProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblMinaSamarbetspartners)
                     .addComponent(lblAnsvarigForProjekt))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,11 +238,11 @@ private void FyllISamarbetspartners() {
                 .addComponent(btnUppgifterOmProjekt)
                 .addGap(3, 3, 3)
                 .addComponent(lblMinaSamarbetspartners)
-                .addGap(7, 7, 7)
-                .addComponent(tfdFiltreraProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(jLabel1)
-                .addGap(80, 80, 80)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAvdelningensProjekt)
+                    .addComponent(tfdFiltreraProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSokSlutdatum)
                     .addComponent(lblSokStartdatum))
@@ -215,6 +258,7 @@ private void FyllISamarbetspartners() {
 
     private void btnUppgifterOmProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppgifterOmProjektActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnUppgifterOmProjektActionPerformed
 
     private void tfdFiltreraProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdFiltreraProjektActionPerformed
@@ -223,7 +267,8 @@ private void FyllISamarbetspartners() {
 
     private void btnUppgifterOmProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUppgifterOmProjektMouseClicked
         // TODO add your handling code here:
-                           MenyUppgifterOmProjektProjektledare profilFönster = new MenyUppgifterOmProjektProjektledare(idb, dbAid);
+        
+       MenyUppgifterOmProjektProjektledare profilFönster = new MenyUppgifterOmProjektProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnUppgifterOmProjektMouseClicked
@@ -265,10 +310,10 @@ private void FyllISamarbetspartners() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnUppgifterOmProjekt;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JLabel lblAnsvarigForProjekt;
+    private javax.swing.JLabel lblAvdelningensProjekt;
     private javax.swing.JLabel lblMinaSamarbetspartners;
     private javax.swing.JLabel lblProjekt;
     private javax.swing.JLabel lblSokSlutdatum;
