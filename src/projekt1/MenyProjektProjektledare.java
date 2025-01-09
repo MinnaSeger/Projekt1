@@ -7,6 +7,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,22 +26,21 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
         initComponents();
         
         FyllILabelAnsvarigForProjekt(); 
+        FyllISamarbetspartners();
         
     }
     
     private void FyllILabelAnsvarigForProjekt () {
         try{ //Hämta data om anställdas projekt
-            String query = "SELECT projekt.projektnamn, partner.namn AS partner_namn " +
-                       "FROM projekt " +
-                       "LEFT JOIN projekt_partner ON projekt.pid = projekt_partner.pid " +
-                       "LEFT JOIN partner ON projekt_partner.partner_pid = partner.pid " +
-                       "WHERE projekt.projektchef =" + dbAid;
-            
+String query = "SELECT projektnamn "
+    + "FROM projekt "
+    + "WHERE projektchef = " + dbAid;
+
             HashMap <String, String> userData = idb.fetchRow(query);
             
             if(userData !=null){
+                
                 lblAnsvarigForProjekt.setText("Ansvarig för projekt: " + userData.get("projektnamn"));
-                lblMinaSamarbetspartners.setText("Projekpartners: " + userData.get("partner_namn"));
                 
             }
            } catch (InfException e) { 
@@ -49,6 +49,48 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
         } 
           
     } 
+    
+private void FyllISamarbetspartners() {
+    try {
+        // SQL-fråga som hämtar alla partners för projektet där projektchefen är den angivna aid
+        String query = "SELECT partner.namn "
+                     + "FROM projekt "
+                     + "INNER JOIN projekt_partner ON projekt.pid = projekt_partner.pid "
+                     + "INNER JOIN partner ON projekt_partner.partner_pid = partner.pid "
+                     + "WHERE projekt.projektchef = " + dbAid;
+
+        // Hämta alla partners
+        ArrayList<HashMap<String, String>> partners = idb.fetchRows(query);
+
+        // Om det finns resultat, sätt texten för labeln
+        if (partners != null && !partners.isEmpty()) {
+            StringBuilder partnerNames = new StringBuilder();
+
+            // Loopa igenom alla partners och bygg upp en sträng med partnernamnen
+            for (HashMap<String, String> partner : partners) {
+                String partnerName = partner.get("namn"); // Använd rätt nyckel för partnernamnet
+                if (partnerName != null) {
+                    partnerNames.append(partnerName).append(", ");
+                }
+            }
+
+            // Ta bort sista kommatecknet om det finns några namn
+            if (partnerNames.length() > 0) {
+                partnerNames.setLength(partnerNames.length() - 2); // Ta bort sista kommatecknet
+            }
+
+            // Sätt texten på labeln för att visa alla partners
+            lblMinaSamarbetspartners.setText("Mina samarbetspartners: " + partnerNames.toString());
+        } else {
+            // Om inga partners hittas, visa ett meddelande
+            lblMinaSamarbetspartners.setText("Inga samarbetspartners hittades.");
+        }
+    } catch (InfException e) {
+        // Fångar eventuella fel och visar ett meddelande
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
+    }
+}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
