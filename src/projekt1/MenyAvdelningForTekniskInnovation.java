@@ -1,6 +1,9 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.util.HashMap;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -13,9 +16,38 @@ public class MenyAvdelningForTekniskInnovation extends javax.swing.JFrame {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
+        
+        fyllTextRutor ();
+        
         }
 
+private void fyllTextRutor () {
+        try {
+            //Hämta data med SQL fråga
+            
+       String query = "SELECT namn, beskrivning, avdelning.adress, avdelning.epost, avdelning.telefon " +
+               "FROM avdelning " +
+               "JOIN anstalld ON avdelning.avdid = anstalld.avdelning " + 
+               "WHERE namn = 'Avdelning för Teknologisk Innovation och Entreprenörskap' ";
 
+   
+HashMap <String, String> userData = idb.fetchRow(query);
+            
+            if (userData != null) {
+             tfdNamn.setText(userData.get("namn"));
+             tfdBeskrivning.setText(userData.get("beskrivning"));
+             tfdAdress.setText(userData.get("adress"));
+             tfdEpost.setText(userData.get("epost"));
+             tfdTelefon.setText(userData.get("telefon"));
+                        
+    } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
+
+            } 
+            
+    }  catch (InfException e) { 
+    JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
+    }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +80,11 @@ public class MenyAvdelningForTekniskInnovation extends javax.swing.JFrame {
         tfdTelefon.setText("Telefon...");
 
         jButton1.setText("OK");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +128,36 @@ public class MenyAvdelningForTekniskInnovation extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        String nyttNamn = tfdNamn.getText();
+        String nyttBeskrivning = tfdBeskrivning.getText();
+        String nyttAdress = tfdAdress.getText();
+        String nyttEpost = tfdEpost.getText();
+        String nyttTelefon = tfdTelefon.getText();
+
+        //Uppdetara ändringar i databasen
+        
+        try {
+            //Byta ändringar
+        String updateQuery = "UPDATE partner SET " +  
+        "namn = '" + nyttNamn + "', " + 
+        "beskrivning = '" + nyttBeskrivning + "', " +
+        "adress = '" + nyttAdress + "', " +
+        "epost= '" + nyttEpost + "', " +
+        "telefon= '" + nyttTelefon + "' " + 
+        "WHERE pid = " + dbAid;
+            System.out.println(updateQuery);
+            // Kör uppdateringen
+            idb.update(updateQuery);
+            
+            //Visa bekräftelse av ändringar
+            JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
+        } catch (Exception e) {
+            //Hantera fel?
+            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
+        }              // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
