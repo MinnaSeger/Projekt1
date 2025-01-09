@@ -28,6 +28,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblStatus" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="lblDatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblStatistik" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="tfdStatistik" alignment="0" pref="75" max="32767" attributes="0"/>
+                          <Component id="tfdDatum" max="32767" attributes="0"/>
+                          <Component id="tfdStatus" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblHandlaggareforProjekt" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPartnersForProjekt" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -37,24 +50,11 @@
                           <Component id="tfdAndraPartners" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblStatus" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="lblDatum" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblStatistik" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfdAndraStatistik" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="tfdAndraStatus" min="-2" pref="91" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
                   <Component id="lblUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblKostnader" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="tfdAndraKostnader" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdKostnader" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="35" max="32767" attributes="0"/>
@@ -69,22 +69,22 @@
               <EmptySpace pref="24" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblKostnader" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdAndraKostnader" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdKostnader" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblStatistik" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdAndraStatistik" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdStatistik" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblDatum" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdDatum" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdAndraStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdStatus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -122,36 +122,36 @@
         <Property name="text" type="java.lang.String" value="Status"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdAndraKostnader">
+    <Component class="javax.swing.JTextField" name="tfdKostnader">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra Kostnader"/>
+        <Property name="text" type="java.lang.String" value="Kostnader"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraKostnaderActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdKostnaderActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdAndraStatistik">
+    <Component class="javax.swing.JTextField" name="tfdStatistik">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra Statistik"/>
+        <Property name="text" type="java.lang.String" value="Statistik"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraStatistikActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdStatistikActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="tfdDatum">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra Datum"/>
+        <Property name="text" type="java.lang.String" value="Datum"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdDatumActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdAndraStatus">
+    <Component class="javax.swing.JTextField" name="tfdStatus">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra Status"/>
+        <Property name="text" type="java.lang.String" value="Status"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraStatusActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdStatusActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPartnersForProjekt">

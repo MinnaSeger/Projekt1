@@ -36,6 +36,8 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
         lblAvdelningenspersonal = new javax.swing.JLabel();
         tfdsokAnstalld = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jLAvdelningenspersonal = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +48,18 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
         tfdsokAnstalld.setText("Sök Anställd");
 
         btnSok.setText("Sök");
+
+        jLAvdelningenspersonal.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jLAvdelningenspersonal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLAvdelningenspersonalMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jLAvdelningenspersonal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,7 +74,9 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addComponent(lblAvdelningenspersonal))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                        .addGap(54, 54, 54)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
                         .addComponent(tfdsokAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSok)))
@@ -74,15 +90,21 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblAvdelningenspersonal)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfdsokAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSok))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfdsokAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSok))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLAvdelningenspersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAvdelningenspersonalMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLAvdelningenspersonalMouseClicked
+//Testar om detta fungerar:)
     /**
      * @param args the command line arguments
      */
@@ -120,6 +142,8 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
+    private javax.swing.JList<String> jLAvdelningenspersonal;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAnstallda;
     private javax.swing.JLabel lblAvdelningenspersonal;
     private javax.swing.JTextField tfdsokAnstalld;
