@@ -25,42 +25,41 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnOkKnapp" min="-2" pref="53" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-                              <Component id="lblSokEfterLand" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-                              <Component id="lblValjAndring" min="-2" pref="112" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tfdSkrivHar2" min="-2" pref="145" max="-2" attributes="0"/>
-                                  <Component id="tfdSkrivHar" min="-2" pref="145" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblAndring" min="-2" pref="56" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-                                  <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                      <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="lblSokEfterLand" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                      <Component id="lblValjAndring" min="-2" pref="112" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblAndring" min="-2" pref="56" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                          <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btnOkKnapp" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tfdSkriv" min="-2" pref="145" max="-2" attributes="0"/>
+                              <Component id="tfdSkrivHar" min="-2" pref="145" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="154" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="153" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="btnSparaAndring" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,16 +70,18 @@
               <Component id="lblSokEfterLand" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="tfdSkrivHar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnOkKnapp" min="-2" pref="13" max="-2" attributes="0"/>
+              <EmptySpace pref="9" max="32767" attributes="0"/>
               <Component id="lblValjAndring" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="43" max="32767" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
               <Component id="lblAndring" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="tfdSkrivHar2" min="-2" max="-2" attributes="0"/>
+              <Component id="tfdSkriv" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="btnOkKnapp" min="-2" max="-2" attributes="0"/>
+              <Component id="btnSparaAndring" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -92,6 +93,7 @@
         <Property name="text" type="java.lang.String" value="OK"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnOkKnappMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOkKnappActionPerformed"/>
       </Events>
     </Component>
@@ -113,11 +115,10 @@
     <Component class="javax.swing.JComboBox" name="jComboBox2">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Spr&#xe5;k"/>
+            <StringItem index="1" value="Politisk struktur"/>
+            <StringItem index="2" value="Ekonomi"/>
           </StringArray>
         </Property>
       </Properties>
@@ -125,7 +126,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdSkrivHar2">
+    <Component class="javax.swing.JTextField" name="tfdSkriv">
       <Properties>
         <Property name="text" type="java.lang.String" value="Skriv h&#xe4;r..."/>
       </Properties>
@@ -134,6 +135,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndring"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSparaAndring">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Spara &#xe4;ndring"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSparaAndringMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

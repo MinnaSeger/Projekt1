@@ -1,6 +1,11 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,6 +19,80 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
         this.dbAid = dbAid;
         initComponents();
         }
+       
+        
+          private void LetaLand (String searchText) {
+        try {
+            // SQL-fråga för att söka på länder som matchar användarens text
+            String query = "SELECT namn FROM land WHERE namn = '" + searchText + "'"; 
+            
+            // Hämta resultaten från databasen
+            ArrayList<HashMap<String, String>> result = idb.fetchRows(query);
+
+
+        if (result == null || result.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Landet finns inte i databasen.");
+            return; // Avsluta om landet inte finns
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av data: " + e.getMessage());
+    }
+    }
+          
+          
+          private void visaLandAlternativ() {
+    String selectedCountry = tfdSkrivHar.getText(); // Här får vi texten från användarens inputfält
+    
+    if (selectedCountry.length() > 0) {
+        // Skapa SQL-fråga för att hämta information om det valda landet
+        String query = "SELECT sprak, politisk_struktur, ekonomi FROM land WHERE namn = '" + selectedCountry + "'";
+        
+        try {
+            // Hämta resultatet från databasen
+            HashMap<String, String> result = idb.fetchRow(query);
+            
+            // Om vi får ett resultat från databasen
+            if (result != null) {
+                // Rensa tidigare alternativ i JComboBox
+                jComboBox2.removeAllItems();
+                
+                // Lägg till varje alternativ i JComboBox
+                jComboBox2.addItem("Språk: " + result.get("sprak"));
+                jComboBox2.addItem("Politisk struktur: " + result.get("politisk_struktur"));
+                jComboBox2.addItem("Ekonomi: " + result.get("ekonomi"));
+            } else {
+                JOptionPane.showMessageDialog(this, "Landet finns inte i databasen.");
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Fel vid hämtning av data: " + e.getMessage());
+        }
+    }
+    }
+
+        
+    //Fyller i ändring av val i rullistan
+        private void fyllTextRutor () {
+        String selectedCountry = tfdSkrivHar.getText(); // Här får vi texten från användarens inputfält
+        try {
+            //Hämta data med SQL fråga
+            
+       String query = "SELECT sprak, politisk_struktur, ekonomi FROM land WHERE namn = '" + selectedCountry + "'";
+
+   
+HashMap <String, String> userData = idb.fetchRow(query);
+            
+            if (userData != null) {
+             tfdSkriv.setText(userData.get("namn"));
+
+                        
+    } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
+
+            } 
+            
+    }  catch (InfException e) { 
+    JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,12 +108,18 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
         tfdSkrivHar = new javax.swing.JTextField();
         lblValjAndring = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
-        tfdSkrivHar2 = new javax.swing.JTextField();
+        tfdSkriv = new javax.swing.JTextField();
         lblAndring = new javax.swing.JLabel();
+        btnSparaAndring = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnOkKnapp.setText("OK");
+        btnOkKnapp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOkKnappMouseClicked(evt);
+            }
+        });
         btnOkKnapp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkKnappActionPerformed(evt);
@@ -47,11 +132,18 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
 
         lblValjAndring.setText("Välj vad du vill ändra");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Språk", "Politisk struktur", "Ekonomi" }));
 
-        tfdSkrivHar2.setText("Skriv här...");
+        tfdSkriv.setText("Skriv här...");
 
         lblAndring.setText("Ändring");
+
+        btnSparaAndring.setText("Spara ändring");
+        btnSparaAndring.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSparaAndringMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,31 +151,31 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnOkKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(120, 120, 120)
-                                .addComponent(lblSokEfterLand))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(116, 116, 116)
-                                .addComponent(lblValjAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdSkrivHar2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdSkrivHar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(lblAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(133, 133, 133)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 154, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(120, 120, 120)
+                        .addComponent(lblSokEfterLand))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(lblValjAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(lblAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(133, 133, 133)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnOkKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfdSkriv, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfdSkrivHar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(153, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSparaAndring)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,16 +184,18 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
                 .addComponent(lblSokEfterLand)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfdSkrivHar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnOkKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(lblValjAndring)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(lblAndring)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfdSkrivHar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfdSkriv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(btnOkKnapp)
+                .addComponent(btnSparaAndring)
                 .addContainerGap())
         );
 
@@ -111,6 +205,76 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
     private void btnOkKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkKnappActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOkKnappActionPerformed
+
+    private void btnOkKnappMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkKnappMouseClicked
+                                       
+    // Steg 1: Hämta texten som användaren har skrivit in
+    String searchText = tfdSkrivHar.getText();
+
+    // Steg 2: Kontrollera att användaren har skrivit något
+    if (searchText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Skriv ett land i textfältet.");
+        return;
+    }
+
+    // Steg 3: Bygg SQL-frågan för att kolla om landet finns
+    String query = "SELECT namn FROM land WHERE namn = '" + searchText + "'";
+
+    try {
+        // Steg 4: Hämta resultaten från databasen
+        ArrayList<HashMap<String, String>> result = idb.fetchRows(query);
+
+        // Steg 5: Kontrollera om landet finns
+        if (result != null && !result.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Landet finns i databasen!");
+            
+            // Fortsätt med att visa andra alternativ eller funktionalitet om landet finns
+            visaLandAlternativ(); // Din metod för att visa landets alternativ
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Landet finns inte i databasen.");
+        }
+
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av data: " + e.getMessage());
+    }
+    }//GEN-LAST:event_btnOkKnappMouseClicked
+
+    private void btnSparaAndringMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringMouseClicked
+   // Hämta den valda kolumnen från JComboBox
+    String selectedOption = (String) jComboBox2.getSelectedItem();
+    String nyttVarde = tfdSkriv.getText();
+
+    // Bestäm vilken kolumn som ska uppdateras
+    String columnToUpdate = "";
+    switch (selectedOption) {
+        case "Språk":
+            columnToUpdate = "sprak";
+            break;
+        case "Politisk struktur":
+            columnToUpdate = "politisk_struktur";
+            break;
+        case "Ekonomi":
+            columnToUpdate = "ekonomi";
+            break;
+        default:
+            JOptionPane.showMessageDialog(this, "Ogiltigt val.");
+            return; // Avsluta om inget val är giltigt
+    }
+
+    // Uppdatera databasen för den valda kolumnen
+    try {
+        String updateQuery = "UPDATE land SET " + columnToUpdate + " = '" + nyttVarde + "' WHERE lid = " + dbAid;
+        System.out.println(updateQuery);
+        idb.update(updateQuery);
+
+        // Bekräftelse
+        JOptionPane.showMessageDialog(this, "Ändringen har sparats!");
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid inmatning av ändringar! " + e.getMessage());
+
+        }     
+    }//GEN-LAST:event_btnSparaAndringMouseClicked
 
     /**
      * @param args the command line arguments
@@ -149,11 +313,12 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOkKnapp;
+    private javax.swing.JButton btnSparaAndring;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel lblAndring;
     private javax.swing.JLabel lblSokEfterLand;
     private javax.swing.JLabel lblValjAndring;
+    private javax.swing.JTextField tfdSkriv;
     private javax.swing.JTextField tfdSkrivHar;
-    private javax.swing.JTextField tfdSkrivHar2;
     // End of variables declaration//GEN-END:variables
 }
