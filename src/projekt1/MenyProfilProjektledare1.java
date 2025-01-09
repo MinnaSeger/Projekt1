@@ -96,7 +96,6 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         lblFornamn = new javax.swing.JLabel();
         lblAvdelning = new javax.swing.JLabel();
         lblAnstallningsdatum = new javax.swing.JLabel();
-        lblMentor = new javax.swing.JLabel();
         tfdFornamn = new javax.swing.JTextField();
         tfdEpost = new javax.swing.JTextField();
         lblTelefon = new javax.swing.JLabel();
@@ -122,8 +121,6 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         lblAvdelning.setText("Avdelning");
 
         lblAnstallningsdatum.setText("Anställningsdatum");
-
-        lblMentor.setText("Mentor");
 
         tfdFornamn.setText("Förnamn");
         tfdFornamn.addActionListener(new java.awt.event.ActionListener() {
@@ -183,8 +180,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAid)
                             .addComponent(lblAnstallningsdatum)
-                            .addComponent(lblAvdelning)
-                            .addComponent(lblMentor)))
+                            .addComponent(lblAvdelning)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -247,9 +243,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(lblAnstallningsdatum)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSparaAndringar)
-                    .addComponent(lblMentor))
+                .addComponent(btnSparaAndringar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -353,7 +347,6 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblFornamn;
     private javax.swing.JLabel lblLosenord;
-    private javax.swing.JLabel lblMentor;
     private javax.swing.JLabel lblMinProfil;
     private javax.swing.JLabel lblMinaUppgifter;
     private javax.swing.JLabel lblTelefon;

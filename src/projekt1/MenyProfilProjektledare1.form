@@ -36,7 +36,6 @@
                           <Component id="lblAid" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAnstallningsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAvdelning" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblMentor" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -117,10 +116,7 @@
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="lblAnstallningsdatum" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblMentor" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -160,11 +156,6 @@
     <Component class="javax.swing.JLabel" name="lblAnstallningsdatum">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anst&#xe4;llningsdatum"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblMentor">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mentor"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdFornamn">
