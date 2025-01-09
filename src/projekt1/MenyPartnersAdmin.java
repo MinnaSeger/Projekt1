@@ -30,11 +30,11 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
         try {
             //Hämta data med SQL fråga
             
-            String query = "SELECT namn, kontaktperson, kontaktepost, telefon, adress, branch " + 
-            "FROM partner " +
-            "JOIN projekt ON projekt.pid = partner.pid " +
-            "JOIN anstalld ON projektchef = anstalld.aid" + 
-            "WHERE pid = " + dbAid;
+            String query = "SELECT namn, kontaktperson, kontaktepost, telefon, adress, branch " +
+               "FROM partner " +
+               "JOIN projekt ON projekt.pid = partner.pid " +
+               "JOIN anstalld ON projekt.projektchef = anstalld.aid " +
+               "WHERE partner.pid = " + dbAid;
            
 
             HashMap <String, String> userData = idb.fetchRow(query);
