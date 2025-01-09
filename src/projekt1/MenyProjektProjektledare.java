@@ -33,11 +33,11 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
     
     private void FyllILabelAnsvarigForProjekt () {
         try{ //Hämta data om anställdas projekt
-String query = "SELECT projektnamn "
+String sqlFraga = "SELECT projektnamn "
     + "FROM projekt "
     + "WHERE projektchef = " + dbAid;
 
-            HashMap <String, String> userData = idb.fetchRow(query);
+            HashMap <String, String> userData = idb.fetchRow(sqlFraga);
             
             if(userData !=null){
                 
@@ -54,14 +54,14 @@ String query = "SELECT projektnamn "
 private void FyllISamarbetspartners() {
     try {
         // SQL-fråga som hämtar alla partners för projektet där projektchefen är den angivna aid
-        String query = "SELECT partner.namn "
+        String sqlFraga = "SELECT partner.namn "
                      + "FROM projekt "
                      + "INNER JOIN projekt_partner ON projekt.pid = projekt_partner.pid "
                      + "INNER JOIN partner ON projekt_partner.partner_pid = partner.pid "
                      + "WHERE projekt.projektchef = " + dbAid;
 
         // Hämta alla partners
-        ArrayList<HashMap<String, String>> partners = idb.fetchRows(query);
+        ArrayList<HashMap<String, String>> partners = idb.fetchRows(sqlFraga);
 
         // Om det finns resultat, sätt texten för labeln
         if (partners != null && !partners.isEmpty()) {
@@ -95,13 +95,13 @@ private void FyllISamarbetspartners() {
 private void FylliAvdelningensProjekt() {
     try {
         // SQL-fråga för att hämta projektnamn från projekt i avdelningen där den inloggade projektchefen är chef
-        String query = "SELECT projekt.projektnamn "
+        String sqlFraga = "SELECT projekt.projektnamn "
                      + "FROM projekt "
                      + "INNER JOIN avdelning ON projekt.projektchef = avdelning.chef "
                      + "WHERE avdelning.chef = " + dbAid;
 
         // Kör frågan och hämta resultaten
-        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(query);
+        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFraga);
 
         // Kontrollera om vi fick några projekt från databasen
         if (projektLista != null && !projektLista.isEmpty()) {

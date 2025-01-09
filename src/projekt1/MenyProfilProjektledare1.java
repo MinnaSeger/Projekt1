@@ -37,9 +37,9 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         try {
             //Hämta data med SQL fråga
             
-            String query = "SELECT fornamn, efternamn, epost, telefon, losenord FROM anstalld where aid =" + dbAid;
+            String sqlFraga = "SELECT fornamn, efternamn, epost, telefon, losenord FROM anstalld where aid =" + dbAid;
             
-            HashMap <String, String> userData = idb.fetchRow(query);
+            HashMap <String, String> userData = idb.fetchRow(sqlFraga);
             
             if (userData != null) {
              tfdFornamn.setText(userData.get("fornamn"));
@@ -61,9 +61,9 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
     private void FylliLabel () {
         try{ 
             //Hämta data till label
-            String query = "SELECT aid, avdelning, anstallningsdatum FROM anstalld where aid = " + dbAid;
+            String sqlFraga = "SELECT aid, avdelning, anstallningsdatum FROM anstalld where aid = " + dbAid;
             
-            HashMap <String, String> userData = idb.fetchRow(query);
+            HashMap <String, String> userData = idb.fetchRow(sqlFraga);
             
             if (userData != null) {
  
@@ -281,16 +281,16 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         
         try {
             //Byta ändringar
-            String updateQuery = "UPDATE anstalld SET " +  
+            String updatesqlFraga = "UPDATE anstalld SET " +  
                     "fornamn = '" + nyttFornamn + "', " + 
                     "efternamn = '" + nyttEfternamn + "'," +
                     "epost = '" + nyttEpost + "', " + 
                     "telefon = '" + nyttTelefon + "', " + 
                     "losenord = '" + nyttLosenord + "' " + 
                     "WHERE aid = " + dbAid;
-            System.out.println(updateQuery);
+            System.out.println(updatesqlFraga);
             // Kör uppdateringen
-            idb.update(updateQuery);
+            idb.update(updatesqlFraga);
             
             //Visa bekräftelse av ändringar
             JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
