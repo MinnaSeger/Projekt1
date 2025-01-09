@@ -26,10 +26,59 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
         this.idb = idb; 
         this.dbAid = dbAid;
         initComponents();
+        
+        
+        fyllTextFalt ();
+        FylliLabel ();
+    
     }
     
-    //fy
+    private void fyllTextFalt () {
+        try{
+            
+       String query = "SELECT fornamn, efternamn, epost, telefon,losenord FROM anstalld where aid =" + dbAid;
+        
+       HashMap<String, String> userData = idb.fetchRow(query);
+       
+       if (userData != null) {
+           tfdFornamn.setText (userData.get("fornamn"));
+           tfdEfternamn.setText(userData.get("efternamn"));
+           tfdEpost.setText (userData.get("epost"));
+           tfdTelefon.setText(userData.get("telefon"));
+           tfdLosenord.setText(userData.get("losenord"));
+           
+} else {JOptionPane.showMessageDialog (this, "Ingen data hittades om dig.");
+       }
+        
+        }catch (InfException e) { 
+    JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
+                    
+       }
+    }
+    
+    private void FylliLabel () {
+        try{ 
+            //Hämta data till label
+            String query = "SELECT aid, avdelning, anstallningsdatum FROM anstalld where aid = " + dbAid;
+            
+            HashMap <String, String> userData = idb.fetchRow(query);
+            
+            if (userData != null) {
+ 
+             lblAid.setText("Aid:" + userData.get("aid"));
+             lblAvdelning.setText("Avdelning:" + userData.get("avdelning"));
+             lblAnstallningsdatum.setText("Anställningsdatum:" +userData.get("anstallningsdatum"));
+             } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
 
+            } 
+            
+} catch (InfException e) { 
+    JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
+    
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,9 +91,9 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
         tfdAndraTelefonnummer = new javax.swing.JTextField();
         lblMinProfil = new javax.swing.JLabel();
         lblMinaUppgifter = new javax.swing.JLabel();
-        lblAnstallningsnummer = new javax.swing.JLabel();
+        lblAid = new javax.swing.JLabel();
         lblAvdelning = new javax.swing.JLabel();
-        lblAnsvarsomrade = new javax.swing.JLabel();
+        lblAnstallningsdatum = new javax.swing.JLabel();
         lblMentor = new javax.swing.JLabel();
         tfdFornamn = new javax.swing.JTextField();
         tfdEfternamn = new javax.swing.JTextField();
@@ -71,11 +120,11 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
 
         lblMinaUppgifter.setText("Mina Uppgifter");
 
-        lblAnstallningsnummer.setText("Anställningsnummer");
+        lblAid.setText("Aid");
 
         lblAvdelning.setText("Avdelning");
 
-        lblAnsvarsomrade.setText("Ansvarsområde");
+        lblAnstallningsdatum.setText("Anstallningsdatum");
 
         lblMentor.setText("Mentor");
 
@@ -105,6 +154,16 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
         tfdTelefon.setText("Telefon");
 
         btnSparaAndringar.setText("Spara Ändringar");
+        btnSparaAndringar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSparaAndringarMouseClicked(evt);
+            }
+        });
+        btnSparaAndringar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSparaAndringarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,8 +180,8 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAnstallningsnummer)
-                            .addComponent(lblAnsvarsomrade)
+                            .addComponent(lblAid)
+                            .addComponent(lblAnstallningsdatum)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
@@ -176,11 +235,11 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
                     .addComponent(tfdTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTelefonnummer))
                 .addGap(9, 9, 9)
-                .addComponent(lblAnstallningsnummer)
+                .addComponent(lblAid)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblAnsvarsomrade)
+                .addComponent(lblAnstallningsdatum)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblMentor)
@@ -199,7 +258,50 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdFornamnActionPerformed
 
+    private void btnSparaAndringarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSparaAndringarActionPerformed
+
+    private void btnSparaAndringarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSparaAndringarMouseClicked
+
     /**
+     * 
+     * 
+     *  
+        //Hämta text från textfältet
+        
+        String nyttFornamn = tfdFornamn.getText();
+        String nyttEfternamn = tfdEfternamn.getText();
+        String nyttEpost = tfdEpost.getText();
+        String nyttTelefon = tfdTelefon.getText();
+        String nyttLosenord = tfdLosenord.getText();
+        
+        //Uppdetara ändringar i databasen
+        
+        try {
+            //Byta ändringar
+            String updateQuery = "UPDATE anstalld SET " +  
+                    "fornamn = '" + nyttFornamn + "', " + 
+                    "efternamn = '" + nyttEfternamn + "'," +
+                    "epost = '" + nyttEpost + "', " + 
+                    "telefon = '" + nyttTelefon + "', " + 
+                    "losenord = '" + nyttLosenord + "' " + 
+                    "WHERE aid = " + dbAid;
+            System.out.println(updateQuery);
+            // Kör uppdateringen
+            idb.update(updateQuery);
+            
+            //Visa bekräftelse av ändringar
+            JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
+        } catch (Exception e) {
+            //Hantera fel?
+            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
+        }
+        
+        
+    }                                              
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -236,8 +338,8 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSparaAndringar;
-    private javax.swing.JLabel lblAnstallningsnummer;
-    private javax.swing.JLabel lblAnsvarsomrade;
+    private javax.swing.JLabel lblAid;
+    private javax.swing.JLabel lblAnstallningsdatum;
     private javax.swing.JLabel lblAvdelning;
     private javax.swing.JLabel lblEfternamn;
     private javax.swing.JLabel lblEpost;
