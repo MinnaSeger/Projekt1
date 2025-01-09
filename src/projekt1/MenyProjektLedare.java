@@ -156,14 +156,12 @@ public class MenyProjektLedare extends javax.swing.JFrame {
 
        MenyProfilProjektledare1 profilFönster = new MenyProfilProjektledare1(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnMinprofilMouseClicked
 
     private void btnAnställdaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnställdaMouseClicked
         // TODO add your handling code here:
                MenyAnstalldaProjektledare profilFönster = new MenyAnstalldaProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
  
     }//GEN-LAST:event_btnAnställdaMouseClicked
 
@@ -171,14 +169,12 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         // TODO add your handling code here:
                     MenyProjektProjektledare profilFönster = new MenyProjektProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnprojektMouseClicked
 
     private void btnHållbarhetsmålMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHållbarhetsmålMouseClicked
         // TODO add your handling code here:
                        MenyHallbarhetsmalProjektledare profilFönster = new MenyHallbarhetsmalProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
         
     }//GEN-LAST:event_btnHållbarhetsmålMouseClicked
 

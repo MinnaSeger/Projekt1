@@ -151,28 +151,24 @@ public class MenyHandlaggare extends javax.swing.JFrame {
         // TODO add your handling code here:
         MenyProfilHandlaggare profilFönster = new MenyProfilHandlaggare(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnMinProfilMouseClicked
 
     private void btnProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProjektMouseClicked
         // TODO add your handling code here:
         MenyProjektHandlaggare profilFönster = new MenyProjektHandlaggare(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnProjektMouseClicked
 
     private void btnHallbarhetsmalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHallbarhetsmalMouseClicked
         // TODO add your handling code here:
         MenyHallbarhetsmalHandlaggare profilFönster = new MenyHallbarhetsmalHandlaggare(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnHallbarhetsmalMouseClicked
 
     private void btnAnstalldaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnstalldaMouseClicked
         // TODO add your handling code here:
           MenyAnstalldaHandlaggare profilFönster = new MenyAnstalldaHandlaggare(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);
     }//GEN-LAST:event_btnAnstalldaMouseClicked
 
     /**
