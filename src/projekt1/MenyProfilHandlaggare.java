@@ -263,15 +263,7 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSparaAndringarActionPerformed
 
     private void btnSparaAndringarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSparaAndringarMouseClicked
-
-    /**
-     * 
-     * 
-     *  
-        //Hämta text från textfältet
-        
+                //Hämta text från textfältet   
         String nyttFornamn = tfdFornamn.getText();
         String nyttEfternamn = tfdEfternamn.getText();
         String nyttEpost = tfdEpost.getText();
@@ -290,7 +282,7 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
                     "losenord = '" + nyttLosenord + "' " + 
                     "WHERE aid = " + dbAid;
             System.out.println(updateQuery);
-            // Kör uppdateringen
+             //Kör uppdateringen
             idb.update(updateQuery);
             
             //Visa bekräftelse av ändringar
@@ -298,10 +290,12 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
         } catch (Exception e) {
             //Hantera fel?
             JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
-        }
-        
-        
-    }                                              
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_btnSparaAndringarMouseClicked
+
+     
+                                                 
+     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
