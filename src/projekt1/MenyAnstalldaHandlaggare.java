@@ -24,7 +24,7 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
 
     private void fyllAnstalldaLista() {
         try {
-            String SQLfraga = "SELECT namn FROM anstallda WHERE avdelning_id = '" + dbAvdelningId + "'";
+            String SQLfraga = "SELECT Fornamn,Efternamn FROM anstallda WHERE avdelning_id = '" + dbAvdelningId + "'";
             ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
 
             DefaultListModel<String> model = new DefaultListModel<>();
@@ -49,7 +49,7 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
                 return;
             }
 
-            String SQLfraga = "SELECT namn FROM anstallda WHERE avdelning_id = '" + dbAvdelningId + 
+            String SQLfraga = "SELECT Fornamn, Efternamn FROM anstallda WHERE avdelning_id = '" + dbAvdelningId + 
                               "' AND namn LIKE '%" + sokText + "%'";
             ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
 

@@ -279,7 +279,7 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         String nyttTelefon = tfdTelnr.getText();
         String nyttEpost = tfdEpost.getText();
         String nyttAdress = tfdAdress.getText();
-        String mentorAid = tfdMentor.getText();
+        String nyttMentor = tfdMentor.getText();
         String nyttAnsvarighetsomrade = tfdAnsvarighetsomr.getText();
            
        try {
@@ -287,14 +287,14 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         String nyttAid = idb.getAutoIncrement("anstalld", "aid");
 
         // Lägg till ny anställd i anstalld-tabellen
-        String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, anstallningsdatum, avdelning, telefon, epost, adress, mentorAid) " +
-                        "VALUES (" + nyttAid + ", '" + nyttFornamn + "', '" + nyttEfternamn + "', '" + nyttAnstallningsdatum + "', '" + nyttAvdelning + "', '" + 
-                        nyttTelefon + "', '" + nyttEpost + "', '" + nyttAdress + "', " + mentorAid + ")";
+        String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, anstallningsdatum, avdelning, telefon, epost, adress, mentor ) " +
+                "VALUES (" + nyttAid + ", '" + nyttFornamn + "', '" + nyttEfternamn + "', '" + nyttAnstallningsdatum + "', '" + nyttAvdelning + "', '" + 
+                nyttTelefon + "', '" + nyttEpost + "', '" + nyttAdress + "', '" + nyttMentor + "')";
         idb.insert(insertAnstalld);
 
+        // Lägg till mentor och ansvarighetsområde i handläggare-tabellen
         String insertHandlaggare = "INSERT INTO handlaggare (aid, ansvarighetsomrade) VALUES (" + nyttAid + ", '" + nyttAnsvarighetsomrade + "')";
         idb.insert(insertHandlaggare);
-
 
         // Bekräftelse
         JOptionPane.showMessageDialog(this, "Ny handläggare har lagts till!");
