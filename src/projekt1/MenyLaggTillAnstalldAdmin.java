@@ -273,11 +273,15 @@ private void fyllComboBox() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-      try {
+                                     
+    try {
         // Hämta den valda anställdas namn från JComboBox
         String valdAnstalld = (String) jbxAnstalld.getSelectedItem();
 
-        if (valdAnstalld != null) {
+        if (valdAnstalld == null || valdAnstalld.isEmpty()) {
+            // Om ingen anställd är vald, visa meddelande
+            JOptionPane.showMessageDialog(this, "Vänligen välj en anställd att ta bort.");
+        } else {
             // Dela upp det valda namnet i förnamn och efternamn
             String[] namnDelar = valdAnstalld.split(" ");
             String fornamn = namnDelar[0];
@@ -292,14 +296,14 @@ private void fyllComboBox() {
 
             // Visa bekräftelse
             JOptionPane.showMessageDialog(this, "Anställd " + valdAnstalld + " togs bort.");
+            
             // Uppdatera JComboBox
             fyllComboBox();
-        } else {
-        JOptionPane.showMessageDialog(this, "Vänligen välj en anställd att ta bort.");
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid borttagning av anställd: " + e.getMessage());
     }
-      } catch (InfException e) {
-    JOptionPane.showMessageDialog(this, "Fel vid borttagning av anställd: " + e.getMessage());
-}
+
     // TODO add your handling code here:
     }//GEN-LAST:event_btnOKActionPerformed
 
