@@ -27,10 +27,6 @@
               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="lblLosenord" min="-2" pref="71" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblEfternamn" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
@@ -46,15 +42,8 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblFornamn" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblLaggTillAnstalld" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                                  <Component id="lblAnstallningsDat" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="tfdAnstallningsDat" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="lblValjAnstalld" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jbxAnstalld" min="-2" pref="154" max="-2" attributes="0"/>
-                                          <Component id="lblTaBortAnstalld" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="tfdAnstallningsDat" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblAnstallningsDat" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
@@ -74,23 +63,31 @@
                                   <Component id="tfdTelnr" min="-2" max="-2" attributes="0"/>
                                   <Component id="tfdAdress" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnOK" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="tfdLosenord" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnOK1" min="-2" pref="71" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnOK" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblLosenord" alignment="0" pref="71" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="tfdAvdelning" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="tfdLosenord" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnOK1" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdBehorighetsniva" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -137,25 +134,23 @@
                   <Component id="tfdAdress" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="lblLosenord" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnOK1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblTaBortAnstalld" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblValjAnstalld" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfdAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdBehorighetsniva" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="lblLosenord" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jbxAnstalld" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfdLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnOK1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Component id="btnOK" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
@@ -166,34 +161,6 @@
     <Component class="javax.swing.JLabel" name="lblLaggTillAnstalld">
       <Properties>
         <Property name="text" type="java.lang.String" value="L&#xe4;gg till anst&#xe4;lld:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblTaBortAnstalld">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ta bort anst&#xe4;lld:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="jbxAnstalld">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbxAnstalldActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblValjAnstalld">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="V&#xe4;lj anst&#xe4;lld i rullistan"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnOK">
@@ -219,7 +186,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfdLosenord">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Skriv l&#xf6;senord h&#xe4;r"/>
+        <Property name="text" type="java.lang.String" value="Ditt slumpade l&#xf6;senord &#xe4;r"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdLosenordActionPerformed"/>
@@ -253,9 +220,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnOK1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="OK"/>
+        <Property name="text" type="java.lang.String" value="Slumpa l&#xf6;senord"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnOK1MouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOK1ActionPerformed"/>
       </Events>
     </Component>
@@ -292,6 +260,29 @@
     <Component class="javax.swing.JLabel" name="lblEfternamn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Efternamn:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Avdelning:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdAvdelning">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Skriv avdelning h&#xe4;r"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAvdelningActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Beh&#xf6;righetsniv&#xe5;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdBehorighetsniva">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Skriv beh&#xf6;righetsniv&#xe5; h&#xe4;r"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -160,7 +160,7 @@ public class MenyAdministratör extends javax.swing.JFrame {
 
     private void btnHanteraAnställdaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHanteraAnställdaMouseClicked
         // TODO add your handling code here:
-       MenyHanteraAnstalldaAdmin profilFönster = new MenyHanteraAnstalldaAdmin(idb, dbAid);
+       MenyHanteraAnstalldAdmin profilFönster = new MenyHanteraAnstalldAdmin(idb, dbAid);
        profilFönster.setVisible(true);
     }//GEN-LAST:event_btnHanteraAnställdaMouseClicked
 

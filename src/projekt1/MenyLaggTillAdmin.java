@@ -1,6 +1,7 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.HashMap;
@@ -14,39 +15,18 @@ import java.util.ArrayList;
  *
  * @author minna
  */
-public class MenyLaggTillAnstalldAdmin extends javax.swing.JFrame {
+public class MenyLaggTillAdmin extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
     
     
-        public MenyLaggTillAnstalldAdmin(InfDB idb, String dbAid) {
+        public MenyLaggTillAdmin(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
-        fyllComboBox();
 
         }
                 
-        //Kod för att kunna välja anställd i rullista
-private void fyllComboBox() {
-    try {
-        String sqlFraga = "SELECT fornamn, efternamn FROM anstalld "+"order by fornamn";
-        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
-
-        if (resultat != null && !resultat.isEmpty()) {
-            jbxAnstalld.removeAllItems();
-            for (HashMap<String, String> rad : resultat) {
-                String fullName = rad.get("fornamn") + " " + rad.get("efternamn");
-                jbxAnstalld.addItem(fullName);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Inga anställda hittades i databasen.");
-        }
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(this, "Fel vid hämtning av anställda: " + e.getMessage());
-    
-}
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,9 +37,6 @@ private void fyllComboBox() {
     private void initComponents() {
 
         lblLaggTillAnstalld = new javax.swing.JLabel();
-        lblTaBortAnstalld = new javax.swing.JLabel();
-        jbxAnstalld = new javax.swing.JComboBox<>();
-        lblValjAnstalld = new javax.swing.JLabel();
         btnOK = new javax.swing.JButton();
         tfdFornamn = new javax.swing.JTextField();
         tfdAdress = new javax.swing.JTextField();
@@ -76,21 +53,14 @@ private void fyllComboBox() {
         lblAnstallningsDat = new javax.swing.JLabel();
         lblLosenord = new javax.swing.JLabel();
         lblEfternamn = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        tfdAvdelning = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        tfdBehorighetsniva = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblLaggTillAnstalld.setText("Lägg till anställd:");
-
-        lblTaBortAnstalld.setText("Ta bort anställd:");
-
-        jbxAnstalld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jbxAnstalld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbxAnstalldActionPerformed(evt);
-            }
-        });
-
-        lblValjAnstalld.setText("Välj anställd i rullistan");
 
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +78,7 @@ private void fyllComboBox() {
 
         tfdAdress.setText("Skriv Adress här");
 
-        tfdLosenord.setText("Skriv lösenord här");
+        tfdLosenord.setText("Ditt slumpade lösenord är");
         tfdLosenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfdLosenordActionPerformed(evt);
@@ -133,7 +103,12 @@ private void fyllComboBox() {
 
         tfdTelnr.setText("Skriv telefonnummer här");
 
-        btnOK1.setText("OK");
+        btnOK1.setText("Slumpa lösenord");
+        btnOK1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOK1MouseClicked(evt);
+            }
+        });
         btnOK1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOK1ActionPerformed(evt);
@@ -154,6 +129,19 @@ private void fyllComboBox() {
 
         lblEfternamn.setText("Efternamn:");
 
+        jLabel1.setText("Avdelning:");
+
+        tfdAvdelning.setText("Skriv avdelning här");
+        tfdAvdelning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdAvdelningActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Behörighetsnivå:");
+
+        tfdBehorighetsniva.setText("Skriv behörighetsnivå här");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,9 +149,6 @@ private void fyllComboBox() {
             .addGroup(layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -177,13 +162,8 @@ private void fyllComboBox() {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblFornamn)
                                     .addComponent(lblLaggTillAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblAnstallningsDat, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(tfdAnstallningsDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblValjAnstalld)
-                                            .addComponent(jbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblTaBortAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(tfdAnstallningsDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAnstallningsDat, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(33, 33, 33)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -197,17 +177,24 @@ private void fyllComboBox() {
                                     .addComponent(tfdEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfdTelnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfdAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 31, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnOK))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfdLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnOK1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(14, 14, 14))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnOK)
+                        .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblLosenord, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
+                            .addComponent(tfdAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnOK1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(tfdBehorighetsniva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,21 +229,20 @@ private void fyllComboBox() {
                     .addComponent(tfdAnstallningsDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblLosenord)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnOK1)
-                            .addComponent(tfdLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTaBortAnstalld)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblValjAnstalld)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdBehorighetsniva, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblLosenord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOK1))
+                .addGap(45, 45, 45)
                 .addComponent(btnOK)
                 .addGap(10, 10, 10))
         );
@@ -265,33 +251,7 @@ private void fyllComboBox() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-      try {
-        // Hämta den valda anställdas namn från JComboBox
-        String valdAnstalld = (String) jbxAnstalld.getSelectedItem();
-
-        if (valdAnstalld != null) {
-            // Dela upp det valda namnet i förnamn och efternamn
-            String[] namnDelar = valdAnstalld.split(" ");
-            String fornamn = namnDelar[0];
-            String efternamn = namnDelar.length > 1 ? namnDelar[1] : "";
-
-            // SQL-fråga för att ta bort den valda anställda
-            String sqlTaBort = "DELETE FROM anstalld WHERE fornamn = '" + fornamn + 
-                               "' AND efternamn = '" + efternamn + "'";
-
-            // Utför borttagningen
-            idb.delete(sqlTaBort);
-
-            // Visa bekräftelse
-            JOptionPane.showMessageDialog(this, "Anställd " + valdAnstalld + " togs bort.");
-            // Uppdatera JComboBox
-            fyllComboBox();
-        } else {
-        JOptionPane.showMessageDialog(this, "Vänligen välj en anställd att ta bort.");
-    }
-      } catch (InfException e) {
-    JOptionPane.showMessageDialog(this, "Fel vid borttagning av anställd: " + e.getMessage());
-}
+                                     
     // TODO add your handling code here:
     }//GEN-LAST:event_btnOKActionPerformed
 
@@ -315,10 +275,61 @@ private void fyllComboBox() {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdAnstallningsDatActionPerformed
 
-    private void jbxAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbxAnstalldActionPerformed
+    private void btnOK1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOK1MouseClicked
+                                         
 
+        int length = 10;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@";
+        StringBuilder password = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            password.append(characters.charAt(index));
+        }
+
+        tfdLosenord.setText(password.toString());
+        
+        String nyttFornamn = tfdFornamn.getText();
+        String nyttEfternamn = tfdEfternamn.getText();
+        String nyttAnstallningsdatum = tfdAnstallningsDat.getText();
+        String nyttAvdelning = tfdAvdelning.getText();
+        String nyttTelefon = tfdTelnr.getText();
+        String nyttEpost = tfdEpost.getText();
+        String nyttAdress = tfdAdress.getText();
+        String nyttBehorighetsniva = tfdBehorighetsniva.getText();
+        
+        try {
+            //Byta ändringar
+        String updateQuery = "UPDATE anstalld SET " +  
+        "fornamn = '" + nyttFornamn + "', " + 
+        "efternamn = '" + nyttEfternamn + "', " +
+        "anstallningsdatum = '" + nyttAnstallningsdatum + "', " + 
+        "avdelning = '" + nyttAvdelning + "', " + 
+        "telefon = '" + nyttTelefon + "', " + 
+        "epost = '" + nyttEpost + "', " + 
+        "adress = '" + nyttAdress + "' " + 
+        "WHERE aid = " + dbAid;
+            System.out.println(updateQuery);
+            // Kör uppdateringen
+            idb.update(updateQuery);
+            
+            String updateAdmin = "UPDATE admin SET " +
+            "behorighetsniva = '" + nyttBehorighetsniva + "' " +
+            "WHERE aid = " + dbAid;
+            
+            //Visa bekräftelse av ändringar
+            JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
+        } catch (Exception e) {
+            //Hantera fel?
+            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
+        }
+         // TODO add your handling code here:
+    }//GEN-LAST:event_btnOK1MouseClicked
+
+    private void tfdAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAvdelningActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbxAnstalldActionPerformed
+    }//GEN-LAST:event_tfdAvdelningActionPerformed
 
     /**
      * @param args the command line arguments
@@ -337,14 +348,15 @@ private void fyllComboBox() {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenyLaggTillAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLaggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenyLaggTillAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLaggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenyLaggTillAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLaggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenyLaggTillAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLaggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -358,7 +370,8 @@ private void fyllComboBox() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
     private javax.swing.JButton btnOK1;
-    private javax.swing.JComboBox<String> jbxAnstalld;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblAnstallningsDat;
     private javax.swing.JLabel lblEfternamn;
@@ -366,11 +379,11 @@ private void fyllComboBox() {
     private javax.swing.JLabel lblFornamn;
     private javax.swing.JLabel lblLaggTillAnstalld;
     private javax.swing.JLabel lblLosenord;
-    private javax.swing.JLabel lblTaBortAnstalld;
     private javax.swing.JLabel lblTelefon;
-    private javax.swing.JLabel lblValjAnstalld;
     private javax.swing.JTextField tfdAdress;
     private javax.swing.JTextField tfdAnstallningsDat;
+    private javax.swing.JTextField tfdAvdelning;
+    private javax.swing.JTextField tfdBehorighetsniva;
     private javax.swing.JTextField tfdEfternamn;
     private javax.swing.JTextField tfdEpost;
     private javax.swing.JTextField tfdFornamn;
