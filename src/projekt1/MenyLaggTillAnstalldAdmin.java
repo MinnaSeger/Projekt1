@@ -1,6 +1,7 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.HashMap;
@@ -134,6 +135,11 @@ private void fyllComboBox() {
         tfdTelnr.setText("Skriv telefonnummer här");
 
         btnOK1.setText("Slumpa lösenord");
+        btnOK1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOK1MouseClicked(evt);
+            }
+        });
         btnOK1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOK1ActionPerformed(evt);
@@ -320,6 +326,23 @@ private void fyllComboBox() {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jbxAnstalldActionPerformed
+
+    private void btnOK1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOK1MouseClicked
+                                         
+
+        int length = 10;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@";
+        StringBuilder password = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            password.append(characters.charAt(index));
+        }
+
+        tfdLosenord.setText(password.toString());
+         // TODO add your handling code here:
+    }//GEN-LAST:event_btnOK1MouseClicked
 
     /**
      * @param args the command line arguments
