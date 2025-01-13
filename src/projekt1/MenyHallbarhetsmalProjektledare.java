@@ -29,8 +29,8 @@ public class MenyHallbarhetsmalProjektledare extends javax.swing.JFrame {
         
                 //lägg till en lyssnare för att hantera val från rullistan
        ComboboxHallbarhetsmal.addActionListener(evt -> {
-        String valtMål = (String) ComboboxHallbarhetsmal.getSelectedItem();//hämta valt namn
-        System.out.println("Användaren valde: " + valtMål);
+        String valtMal = (String) ComboboxHallbarhetsmal.getSelectedItem();//hämta valt namn
+        System.out.println("Användaren valde: " + valtMal);
 });
                }
     
@@ -53,6 +53,23 @@ private void fyllComboBoxHallbarhetsmal() {
                 JOptionPane.showMessageDialog(this, "Fel vid hämtning av hållbarhetsmål.");
         }
     }
+    private void uppdateraMalInfo(String valtMal) {
+        try {
+            // Hämta målnummer och beskrivning från databasen baserat på valt namn
+            String query = "SELECT malnummer, beskrivning FROM hallbarhetsmal WHERE namn = '" + valtMal + "'";
+            HashMap<String, String> resultat = idb.fetchRow(query);
+            
+            if (resultat != null) {
+                lblMalnummer.setText("Målnummer: " + resultat.get("malnummer"));
+                AreaBeskrivning.setText(resultat.get("beskrivning"));
+            } else {
+                lblMalnummer.setText("Målnummer: Ingen data");
+                AreaBeskrivning.setText("Ingen beskrivning tillgänglig.");
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Fel vid hämtning av målinformation: " + e.getMessage());
+        }
+    }
        
 
     /**
@@ -66,12 +83,21 @@ private void fyllComboBoxHallbarhetsmal() {
 
         lblAllaHallbarhetsmal = new javax.swing.JLabel();
         ComboboxHallbarhetsmal = new javax.swing.JComboBox<>();
+        lblMalnummer = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        AreaBeskrivning = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblAllaHallbarhetsmal.setText("Alla hållbarhetsmål:");
 
         ComboboxHallbarhetsmal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblMalnummer.setText("Målnummer");
+
+        AreaBeskrivning.setColumns(20);
+        AreaBeskrivning.setRows(5);
+        jScrollPane1.setViewportView(AreaBeskrivning);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,21 +106,30 @@ private void fyllComboBoxHallbarhetsmal() {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
+                        .addGap(124, 124, 124)
                         .addComponent(lblAllaHallbarhetsmal))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(ComboboxHallbarhetsmal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ComboboxHallbarhetsmal, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59)
+                                .addComponent(lblMalnummer)))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addComponent(lblAllaHallbarhetsmal)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboboxHallbarhetsmal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMalnummer))
                 .addGap(18, 18, 18)
-                .addComponent(ComboboxHallbarhetsmal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,7 +171,10 @@ private void fyllComboBoxHallbarhetsmal() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea AreaBeskrivning;
     private javax.swing.JComboBox<String> ComboboxHallbarhetsmal;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAllaHallbarhetsmal;
+    private javax.swing.JLabel lblMalnummer;
     // End of variables declaration//GEN-END:variables
 }
