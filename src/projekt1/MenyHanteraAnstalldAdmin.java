@@ -37,8 +37,7 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
         btnLaggTillAdm = new javax.swing.JButton();
         lblLaggTill = new javax.swing.JLabel();
         btnLaggTillHand = new javax.swing.JButton();
-        btnTaBortAdm = new javax.swing.JButton();
-        btnTaBortHand = new javax.swing.JButton();
+        btnTaBortAns = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,17 +60,20 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
         lblLaggTill.setText("Lägg till anställd:");
 
         btnLaggTillHand.setText("Lägg till handläggare");
-
-        btnTaBortAdm.setText("Ta bort administatör");
-        btnTaBortAdm.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLaggTillHand.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTaBortAdmMouseClicked(evt);
+                btnLaggTillHandMouseClicked(evt);
             }
         });
 
-        btnTaBortHand.setText("Ta bort handläggare");
+        btnTaBortAns.setText("Ta bort anställd");
+        btnTaBortAns.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTaBortAnsMouseClicked(evt);
+            }
+        });
 
-        jLabel3.setText("Ta bort handläggare:");
+        jLabel3.setText("Ta bort anställd:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,9 +90,8 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
                         .addGap(114, 114, 114)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnLaggTillAdm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTaBortAdm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLaggTillHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTaBortHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnTaBortAns, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLaggTillHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(jLabel3)))
@@ -110,10 +111,8 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(btnTaBortAdm)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnTaBortHand)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(btnTaBortAns)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,17 +124,23 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
 
     private void btnLaggTillAdmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillAdmMouseClicked
         // TODO add your handling code here:
-       MenyLaggTillAdmin profilFönster = new MenyLaggTillAdmin(idb, dbAid);
+       MenyLaggTillAdminAdmin profilFönster = new MenyLaggTillAdminAdmin(idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnLaggTillAdmMouseClicked
 
-    private void btnTaBortAdmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortAdmMouseClicked
+    private void btnTaBortAnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortAnsMouseClicked
         // TODO add your handling code here:
            MenyTaBortAnstalld profilFönster = new MenyTaBortAnstalld(idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
-    }//GEN-LAST:event_btnTaBortAdmMouseClicked
+    }//GEN-LAST:event_btnTaBortAnsMouseClicked
+
+    private void btnLaggTillHandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillHandMouseClicked
+       MenyLaggTillHandlaggareAdmin profilFönster = new MenyLaggTillHandlaggareAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLaggTillHandMouseClicked
 
     /**
      * @param args the command line arguments
@@ -178,8 +183,7 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaggTillAdm;
     private javax.swing.JButton btnLaggTillHand;
-    private javax.swing.JButton btnTaBortAdm;
-    private javax.swing.JButton btnTaBortHand;
+    private javax.swing.JButton btnTaBortAns;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblLaggTill;

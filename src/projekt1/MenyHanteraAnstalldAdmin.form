@@ -36,9 +36,8 @@
                       <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnLaggTillAdm" max="32767" attributes="0"/>
-                          <Component id="btnTaBortAdm" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnTaBortAns" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnLaggTillHand" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnTaBortHand" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -64,10 +63,8 @@
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnTaBortAdm" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnTaBortHand" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <Component id="btnTaBortAns" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,23 +96,21 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="L&#xe4;gg till handl&#xe4;ggare"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnTaBortAdm">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ta bort administat&#xf6;r"/>
-      </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnTaBortAdmMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLaggTillHandMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnTaBortHand">
+    <Component class="javax.swing.JButton" name="btnTaBortAns">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ta bort handl&#xe4;ggare"/>
+        <Property name="text" type="java.lang.String" value="Ta bort anst&#xe4;lld"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnTaBortAnsMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ta bort handl&#xe4;ggare:"/>
+        <Property name="text" type="java.lang.String" value="Ta bort anst&#xe4;lld:"/>
       </Properties>
     </Component>
   </SubComponents>
