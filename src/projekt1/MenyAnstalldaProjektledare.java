@@ -5,6 +5,8 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -36,6 +38,8 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblanstalld = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,11 +55,29 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         });
 
         btnSok.setText("Sök");
+        btnSok.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSokMouseClicked(evt);
+            }
+        });
         btnSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokActionPerformed(evt);
             }
         });
+
+        tblanstalld.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblanstalld);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,29 +86,35 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(lblAnstallda)))
+                        .addGap(161, 161, 161)
+                        .addComponent(lblAnstallda))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
+                        .addGap(17, 17, 17)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnSok)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                        .addGap(145, 145, 145)
+                        .addComponent(btnSok))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
                 .addComponent(lblAnstallda)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSok))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,6 +127,41 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSokActionPerformed
+
+    private void btnSokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSokMouseClicked
+        // TODO add your handling code here:
+        try{ 
+           String sqlFraga = "SELECT anstalld.aid, anstalld.fornamn, anstalld.efternamn, anstalld.avdelning "
++ "FROM anstalld "
++ "JOIN avdelning ON anstalld.avdelning = avdelning.avdid "
++ "WHERE avdelning.chef = " + dbAid;
+           
+         ArrayList <HashMap<String, String>> resultat= idb.fetchRows(sqlFraga);
+         if (resultat!=null){
+             String[]columnNames = {"AID", "Förnamn", "Efternamn", "Avdelning"};
+             Object[] [] data = new Object[resultat.size()][4];
+             for (int i = 0; i< resultat.size(); i++){
+                 HashMap <String, String> rad = resultat.get(i);
+                 data[i] [0]= rad.get("aid");
+                 data[i] [1]= rad.get("fornamn");
+                 data[i] [2]= rad.get("efternamn");
+                 data[i] [3]= rad.get("avdelning");     
+             }
+                         // Uppdatera JTable med data
+            tblanstalld.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+        } else {
+            // Om inga resultat hittas, visa ett meddelande
+            javax.swing.JOptionPane.showMessageDialog(this, "Inga anställda hittades.", "Information", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+    } catch (InfException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av data: " + e.getMessage(), "Fel", javax.swing.JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Ett oväntat fel inträffade: " + e.getMessage(), "Fel", javax.swing.JOptionPane.ERROR_MESSAGE);
+         
+           
+       }
+        
+    }//GEN-LAST:event_btnSokMouseClicked
 
     /**
      * @param args the command line arguments
@@ -131,14 +194,16 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new MenyAnstalldaProjektledare().setVisible(true);
-            }
+}
         });
-    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblAnstallda;
+    private javax.swing.JTable tblanstalld;
     // End of variables declaration//GEN-END:variables
 }
