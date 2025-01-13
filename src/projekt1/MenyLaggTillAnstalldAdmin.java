@@ -108,7 +108,7 @@ private void fyllComboBox() {
 
         tfdAdress.setText("Skriv Adress här");
 
-        tfdLosenord.setText("Skriv lösenord här");
+        tfdLosenord.setText("Ditt slumpade lösenord är");
         tfdLosenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfdLosenordActionPerformed(evt);
@@ -133,7 +133,7 @@ private void fyllComboBox() {
 
         tfdTelnr.setText("Skriv telefonnummer här");
 
-        btnOK1.setText("OK");
+        btnOK1.setText("Slumpa lösenord");
         btnOK1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOK1ActionPerformed(evt);
@@ -205,8 +205,9 @@ private void fyllComboBox() {
                                 .addComponent(btnOK))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(tfdLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnOK1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnOK1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(14, 14, 14))))
         );
         layout.setVerticalGroup(
