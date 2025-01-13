@@ -63,6 +63,11 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
         btnLaggTillHand.setText("Lägg till handläggare");
 
         btnTaBortAdm.setText("Ta bort administatör");
+        btnTaBortAdm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTaBortAdmMouseClicked(evt);
+            }
+        });
 
         btnTaBortHand.setText("Ta bort handläggare");
 
@@ -124,6 +129,13 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnLaggTillAdmMouseClicked
+
+    private void btnTaBortAdmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortAdmMouseClicked
+        // TODO add your handling code here:
+           MenyTaBortAnstalld profilFönster = new MenyTaBortAnstalld(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnTaBortAdmMouseClicked
 
     /**
      * @param args the command line arguments

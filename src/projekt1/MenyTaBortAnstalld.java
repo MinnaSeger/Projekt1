@@ -26,7 +26,7 @@ public class MenyTaBortAnstalld extends javax.swing.JFrame {
     /**
      * Creates new form MenyTaBortAnstalld
      */
-    public MenyTaBortAnstalld() {
+    public MenyTaBortAnstalld(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
@@ -114,35 +114,71 @@ private void fyllComboBox() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
-        try {
+                                           
+    try {
         // Hämta den valda anställdas namn från JComboBox
         String valdAnstalld = (String) jbxAnstalld.getSelectedItem();
 
         if (valdAnstalld == null || valdAnstalld.isEmpty()) {
             // Om ingen anställd är vald, visa meddelande
             JOptionPane.showMessageDialog(this, "Vänligen välj en anställd att ta bort.");
-        } else {
-            // Dela upp det valda namnet i förnamn och efternamn
-            String[] namnDelar = valdAnstalld.split(" ");
-            String fornamn = namnDelar[0];
-            String efternamn = namnDelar.length > 1 ? namnDelar[1] : "";
-
-            // SQL-fråga för att ta bort den valda anställda
-            String sqlTaBort = "DELETE FROM anstalld WHERE fornamn = '" + fornamn + 
-                               "' AND efternamn = '" + efternamn + "'";
-
-            // Utför borttagningen
-            idb.delete(sqlTaBort);
-
-            // Visa bekräftelse
-            JOptionPane.showMessageDialog(this, "Anställd " + valdAnstalld + " togs bort.");
-            
-            // Uppdatera JComboBox
-            fyllComboBox();
+            return;
         }
+
+        // Visa bekräftelsedialog
+        int svar = JOptionPane.showConfirmDialog(
+                this,
+                "Är du säker på att du vill ta bort anställd: " + valdAnstalld + "?",
+                "Bekräfta borttagning",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (svar == JOptionPane.NO_OPTION) {
+            // Om användaren väljer "Nej", avbryt operationen
+            return;
+        }
+
+        // Dela upp det valda namnet i förnamn och efternamn
+        String[] namnDelar = valdAnstalld.split(" ");
+        String fornamn = namnDelar[0];
+        String efternamn = namnDelar.length > 1 ? namnDelar[1] : "";
+
+        // Hämta aid baserat på namn
+        String selectAid = "SELECT aid FROM anstalld WHERE fornamn = '" + fornamn + "' AND efternamn = '" + efternamn + "'";
+        String aid = idb.fetchSingle(selectAid);
+
+        if (aid == null) {
+            JOptionPane.showMessageDialog(this, "Ingen anställd hittades med det namnet.");
+            return;
+        }
+
+        // Kontrollera om anställd är admin
+        String selectAdmin = "SELECT behorighetsniva FROM admin WHERE aid = '" + aid + "'";
+        String behörighetsnivå = idb.fetchSingle(selectAdmin);
+
+        if (behörighetsnivå != null) {
+            // Ta bort från admin och anställd
+            String deleteAdmin = "DELETE FROM admin WHERE aid = '" + aid + "'";
+            idb.delete(deleteAdmin);
+        } else {
+            // Ta bort från handläggare
+            String deleteHandlaggare = "DELETE FROM handlaggare WHERE aid = '" + aid + "'";
+            idb.delete(deleteHandlaggare);
+        }
+
+        // Ta bort från anställd
+        String deleteAnstalld = "DELETE FROM anstalld WHERE aid = '" + aid + "'";
+        idb.delete(deleteAnstalld);
+
+        JOptionPane.showMessageDialog(this, "Anställd " + valdAnstalld + " har tagits bort.");
+        
+        // Uppdatera JComboBox
+        fyllComboBox();
+
     } catch (InfException e) {
         JOptionPane.showMessageDialog(this, "Fel vid borttagning av anställd: " + e.getMessage());
-    }// TODO add your handling code here:
+    }
+
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
     /**
@@ -175,7 +211,7 @@ private void fyllComboBox() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyTaBortAnstalld().setVisible(true);
+                //new MenyTaBortAnstalld().setVisible(true);
             }
         });
     }

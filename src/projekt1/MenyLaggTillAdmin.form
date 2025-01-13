@@ -83,7 +83,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnOK1" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="btnSlumpaLosen" min="-2" pref="135" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdBehorighetsniva" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -148,7 +148,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tfdLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnOK1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSlumpaLosen" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Component id="btnOK" min="-2" max="-2" attributes="0"/>
@@ -168,6 +168,7 @@
         <Property name="text" type="java.lang.String" value="OK"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnOKMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOKActionPerformed"/>
       </Events>
     </Component>
@@ -218,13 +219,13 @@
         <Property name="text" type="java.lang.String" value="Skriv telefonnummer h&#xe4;r"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnOK1">
+    <Component class="javax.swing.JButton" name="btnSlumpaLosen">
       <Properties>
         <Property name="text" type="java.lang.String" value="Slumpa l&#xf6;senord"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnOK1MouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOK1ActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSlumpaLosenMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSlumpaLosenActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFornamn">

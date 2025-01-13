@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class MenyLaggTillAdmin extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
+    private String aid;
     
     
         public MenyLaggTillAdmin(InfDB idb, String dbAid) {
@@ -45,7 +46,7 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
         tfdEpost = new javax.swing.JTextField();
         tfdAnstallningsDat = new javax.swing.JTextField();
         tfdTelnr = new javax.swing.JTextField();
-        btnOK1 = new javax.swing.JButton();
+        btnSlumpaLosen = new javax.swing.JButton();
         lblFornamn = new javax.swing.JLabel();
         lblAdress = new javax.swing.JLabel();
         lblEpost = new javax.swing.JLabel();
@@ -63,6 +64,11 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
         lblLaggTillAnstalld.setText("Lägg till anställd:");
 
         btnOK.setText("OK");
+        btnOK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOKMouseClicked(evt);
+            }
+        });
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
@@ -103,15 +109,15 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
 
         tfdTelnr.setText("Skriv telefonnummer här");
 
-        btnOK1.setText("Slumpa lösenord");
-        btnOK1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSlumpaLosen.setText("Slumpa lösenord");
+        btnSlumpaLosen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnOK1MouseClicked(evt);
+                btnSlumpaLosenMouseClicked(evt);
             }
         });
-        btnOK1.addActionListener(new java.awt.event.ActionListener() {
+        btnSlumpaLosen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOK1ActionPerformed(evt);
+                btnSlumpaLosenActionPerformed(evt);
             }
         });
 
@@ -191,7 +197,7 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
                             .addComponent(tfdLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnOK1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSlumpaLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(tfdBehorighetsniva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -241,7 +247,7 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOK1))
+                    .addComponent(btnSlumpaLosen))
                 .addGap(45, 45, 45)
                 .addComponent(btnOK)
                 .addGap(10, 10, 10))
@@ -263,9 +269,9 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdLosenordActionPerformed
 
-    private void btnOK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOK1ActionPerformed
+    private void btnSlumpaLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSlumpaLosenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnOK1ActionPerformed
+    }//GEN-LAST:event_btnSlumpaLosenActionPerformed
 
     private void tfdEfternamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdEfternamnActionPerformed
         // TODO add your handling code here:
@@ -275,7 +281,7 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdAnstallningsDatActionPerformed
 
-    private void btnOK1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOK1MouseClicked
+    private void btnSlumpaLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSlumpaLosenMouseClicked
                                          
 
         int length = 10;
@@ -290,6 +296,21 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
 
         tfdLosenord.setText(password.toString());
         
+
+         // TODO add your handling code here:
+    }//GEN-LAST:event_btnSlumpaLosenMouseClicked
+
+    private void tfdAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAvdelningActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdAvdelningActionPerformed
+
+    private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKMouseClicked
+        // TODO add your handling code here:
+        try {
+            this.aid = idb.getAutoIncrement("anstalld", "aid");
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
+        }
         String nyttFornamn = tfdFornamn.getText();
         String nyttEfternamn = tfdEfternamn.getText();
         String nyttAnstallningsdatum = tfdAnstallningsDat.getText();
@@ -300,36 +321,26 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
         String nyttBehorighetsniva = tfdBehorighetsniva.getText();
         
         try {
-            //Byta ändringar
-        String updateQuery = "UPDATE anstalld SET " +  
-        "fornamn = '" + nyttFornamn + "', " + 
-        "efternamn = '" + nyttEfternamn + "', " +
-        "anstallningsdatum = '" + nyttAnstallningsdatum + "', " + 
-        "avdelning = '" + nyttAvdelning + "', " + 
-        "telefon = '" + nyttTelefon + "', " + 
-        "epost = '" + nyttEpost + "', " + 
-        "adress = '" + nyttAdress + "' " + 
-        "WHERE aid = " + dbAid;
-            System.out.println(updateQuery);
-            // Kör uppdateringen
-            idb.update(updateQuery);
-            
-            String updateAdmin = "UPDATE admin SET " +
-            "behorighetsniva = '" + nyttBehorighetsniva + "' " +
-            "WHERE aid = " + dbAid;
-            
-            //Visa bekräftelse av ändringar
-            JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
-        } catch (Exception e) {
-            //Hantera fel?
-            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
-        }
-         // TODO add your handling code here:
-    }//GEN-LAST:event_btnOK1MouseClicked
+        // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
+        String nyttAid = idb.getAutoIncrement("anstalld", "aid");
 
-    private void tfdAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAvdelningActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAvdelningActionPerformed
+        // Lägg till ny anställd i anstalld-tabellen
+        String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, adress, epost, telefon, anstallningsdatum, avdelning ) " +
+                "VALUES (" + nyttAid + ", '" + nyttFornamn + "', '" + nyttEfternamn + "', '" + nyttAdress + "', '" + nyttEpost + "', '" + 
+                nyttTelefon + "', '" + nyttAnstallningsdatum + "', '" + nyttAvdelning + "')";
+        
+        idb.insert(insertAnstalld);
+
+        // Lägg till behörighetsnivå i admin-tabellen
+        String insertAdmin = "INSERT INTO admin (aid, behorighetsniva) VALUES (" + nyttAid + ", '" + nyttBehorighetsniva + "')";
+        idb.insert(insertAdmin);
+
+        // Bekräftelse
+        JOptionPane.showMessageDialog(this, "Ny administratör har lagts till!");
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
+    }
+    }//GEN-LAST:event_btnOKMouseClicked
 
     /**
      * @param args the command line arguments
@@ -369,7 +380,7 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
-    private javax.swing.JButton btnOK1;
+    private javax.swing.JButton btnSlumpaLosen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblAdress;
