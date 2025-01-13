@@ -36,6 +36,7 @@ private void fyllComboBox() {
 
         if (resultat != null && !resultat.isEmpty()) {
             jbxAnstalld.removeAllItems();
+            jbxAnstalld.addItem("");
             for (HashMap<String, String> rad : resultat) {
                 String fullName = rad.get("fornamn") + " " + rad.get("efternamn");
                 jbxAnstalld.addItem(fullName);
