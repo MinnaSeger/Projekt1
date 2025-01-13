@@ -130,10 +130,7 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLaggTillAdmMouseClicked
 
     private void btnTaBortAnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortAnsMouseClicked
-        // TODO add your handling code here:
-           MenyTaBortAnstalld profilFönster = new MenyTaBortAnstalld(idb, dbAid);
-       profilFönster.setVisible(true);
-       this.setVisible(false);
+
     }//GEN-LAST:event_btnTaBortAnsMouseClicked
 
     private void btnLaggTillHandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillHandMouseClicked
