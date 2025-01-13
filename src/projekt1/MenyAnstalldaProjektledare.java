@@ -24,6 +24,8 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         this.dbAid = dbAid;
         initComponents();
     }
+    
+    //Test
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,7 +37,7 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
     private void initComponents() {
 
         lblAnstallda = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        infoAnstalld = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -45,7 +47,7 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
 
         lblAnstallda.setText("Anställda");
 
-        jLabel1.setText("Avdelningens Personal:");
+        infoAnstalld.setText("Information om den anställda:");
 
         jTextField1.setText("Sök Anställd");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -74,9 +76,17 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Aid", "Förnamn", "Efternamn", "Avdelning"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblanstalld);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -84,22 +94,23 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnSok)
+                .addGap(92, 92, 92))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(lblAnstallda))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145)
-                        .addComponent(btnSok))
+                        .addGap(22, 22, 22)
+                        .addComponent(infoAnstalld))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +122,7 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSok))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(infoAnstalld)
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -131,7 +142,8 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
     private void btnSokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSokMouseClicked
         // TODO add your handling code here:
         try{ 
-           String sqlFraga = "SELECT anstalld.aid, anstalld.fornamn, anstalld.efternamn, anstalld.avdelning "
+           
+            String sqlFraga = "SELECT anstalld.aid, anstalld.fornamn, anstalld.efternamn, anstalld.avdelning "
 + "FROM anstalld "
 + "JOIN avdelning ON anstalld.avdelning = avdelning.avdid "
 + "WHERE avdelning.chef = " + dbAid;
@@ -200,7 +212,7 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel infoAnstalld;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblAnstallda;
