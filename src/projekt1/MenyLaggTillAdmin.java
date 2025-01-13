@@ -290,7 +290,40 @@ public class MenyLaggTillAdmin extends javax.swing.JFrame {
 
         tfdLosenord.setText(password.toString());
         
+        String nyttFornamn = tfdFornamn.getText();
+        String nyttEfternamn = tfdEfternamn.getText();
+        String nyttAnstallningsdatum = tfdAnstallningsDat.getText();
+        String nyttAvdelning = tfdAvdelning.getText();
+        String nyttTelefon = tfdTelnr.getText();
+        String nyttEpost = tfdEpost.getText();
+        String nyttAdress = tfdAdress.getText();
+        String nyttBehorighetsniva = tfdBehorighetsniva.getText();
         
+        try {
+            //Byta ändringar
+        String updateQuery = "UPDATE anstalld SET " +  
+        "fornamn = '" + nyttFornamn + "', " + 
+        "efternamn = '" + nyttEfternamn + "', " +
+        "anstallningsdatum = '" + nyttAnstallningsdatum + "', " + 
+        "avdelning = '" + nyttAvdelning + "', " + 
+        "telefon = '" + nyttTelefon + "', " + 
+        "epost = '" + nyttEpost + "', " + 
+        "adress = '" + nyttAdress + "' " + 
+        "WHERE aid = " + dbAid;
+            System.out.println(updateQuery);
+            // Kör uppdateringen
+            idb.update(updateQuery);
+            
+            String updateAdmin = "UPDATE admin SET " +
+            "behorighetsniva = '" + nyttBehorighetsniva + "' " +
+            "WHERE aid = " + dbAid;
+            
+            //Visa bekräftelse av ändringar
+            JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
+        } catch (Exception e) {
+            //Hantera fel?
+            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
+        }
          // TODO add your handling code here:
     }//GEN-LAST:event_btnOK1MouseClicked
 
