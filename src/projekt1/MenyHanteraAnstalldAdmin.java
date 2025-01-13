@@ -10,11 +10,11 @@ import oru.inf.InfException;
 
 
 
-public class MenyHanteraAnstalldaAdmin extends javax.swing.JFrame {
+public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
     
-        public MenyHanteraAnstalldaAdmin(InfDB idb, String dbAid) {
+        public MenyHanteraAnstalldAdmin(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
@@ -120,7 +120,7 @@ public class MenyHanteraAnstalldaAdmin extends javax.swing.JFrame {
 
     private void btnLaggTillAdmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillAdmMouseClicked
         // TODO add your handling code here:
-       MenyLaggTillAnstalldAdmin profilFönster = new MenyLaggTillAnstalldAdmin(idb, dbAid);
+       MenyLaggTillAdmin profilFönster = new MenyLaggTillAdmin(idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnLaggTillAdmMouseClicked
@@ -142,14 +142,17 @@ public class MenyHanteraAnstalldaAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenyHanteraAnstalldaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyHanteraAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenyHanteraAnstalldaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyHanteraAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenyHanteraAnstalldaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyHanteraAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenyHanteraAnstalldaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyHanteraAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

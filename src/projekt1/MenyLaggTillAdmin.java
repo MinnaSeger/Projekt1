@@ -15,12 +15,12 @@ import java.util.ArrayList;
  *
  * @author minna
  */
-public class MenyLaggTillAnstalldAdmin extends javax.swing.JFrame {
+public class MenyLaggTillAdmin extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
     
     
-        public MenyLaggTillAnstalldAdmin(InfDB idb, String dbAid) {
+        public MenyLaggTillAdmin(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
@@ -366,14 +366,15 @@ private void fyllComboBox() {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenyLaggTillAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLaggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenyLaggTillAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLaggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenyLaggTillAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLaggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenyLaggTillAnstalldAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLaggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
