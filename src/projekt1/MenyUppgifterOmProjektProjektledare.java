@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author elsa
  */
 public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
-      private InfDB idb;
+    private InfDB idb;
     private String dbAid;
 
     /**
@@ -168,6 +168,11 @@ public void fyllProjektetsTabell (){
         btnAndraProjektetsHandlaggare.setText("Ändra projektets Handläggare");
 
         btnAndraProjektetsPartners.setText("Ändra projektets Partners");
+        btnAndraProjektetsPartners.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAndraProjektetsPartnersMouseClicked(evt);
+            }
+        });
 
         jButton1.setText("Ändra projektets data");
 
@@ -269,7 +274,7 @@ public void fyllProjektetsTabell (){
                         .addGap(283, 283, 283)
                         .addComponent(lblandraUppgifterOmProjekt))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(429, 429, 429)
+                        .addGap(337, 337, 337)
                         .addComponent(lblProjektetspartners)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -281,7 +286,7 @@ public void fyllProjektetsTabell (){
                             .addComponent(btnAndraProjektetsPartners, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAndraProjektetsHandlaggare, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(139, 139, 139)
+                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -353,9 +358,18 @@ public void fyllProjektetsTabell (){
     private void btnStatistikochKostnadProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStatistikochKostnadProjektMouseClicked
         // TODO add your handling code here:
          MenySatistikProjektProjektledare profilFönster = new MenySatistikProjektProjektledare (idb, dbAid);
+         profilFönster.setVisible(true);
+         this.setVisible(false);
+    }//GEN-LAST:event_btnStatistikochKostnadProjektMouseClicked
+
+    private void btnAndraProjektetsPartnersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraProjektetsPartnersMouseClicked
+        // TODO add your handling code here:
+        MenyAndraPartnersProjektledare profilFönster = new MenyAndraPartnersProjektledare (idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
-    }//GEN-LAST:event_btnStatistikochKostnadProjektMouseClicked
+        
+        
+    }//GEN-LAST:event_btnAndraProjektetsPartnersMouseClicked
 
     /**
      * @param args the command line arguments
