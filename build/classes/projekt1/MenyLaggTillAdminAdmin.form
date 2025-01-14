@@ -173,16 +173,12 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnOKMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOKActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdFornamn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Skriv f&#xf6;rnamn h&#xe4;r"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdFornamnActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdAdress">
       <Properties>
@@ -193,17 +189,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ditt nya l&#xf6;senord"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdLosenordActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdEfternamn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Skriv efternamn h&#xe4;r"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdEfternamnActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdEpost">
       <Properties>
@@ -214,9 +204,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Skriv anst&#xe4;llningsdatum h&#xe4;r"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAnstallningsDatActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdTelnr">
       <Properties>
@@ -229,7 +216,6 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSlumpaLosenMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSlumpaLosenActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFornamn">
@@ -286,9 +272,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Skriv avdelning h&#xe4;r"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAvdelningActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

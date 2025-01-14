@@ -51,11 +51,6 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
                 btnLaggTillAdmMouseClicked(evt);
             }
         });
-        btnLaggTillAdm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLaggTillAdmActionPerformed(evt);
-            }
-        });
 
         lblLaggTill.setText("Lägg till anställd:");
 
@@ -118,29 +113,25 @@ public class MenyHanteraAnstalldAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLaggTillAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillAdmActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLaggTillAdmActionPerformed
-
     private void btnLaggTillAdmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillAdmMouseClicked
-        // TODO add your handling code here:
+        // Dirigerar användare till MenyLaggTillAdminAdmin 
        MenyLaggTillAdminAdmin profilFönster = new MenyLaggTillAdminAdmin(idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnLaggTillAdmMouseClicked
 
     private void btnTaBortAnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortAnsMouseClicked
-  // TODO add your handling code here:
-           MenyTaBortAnstalld profilFönster = new MenyTaBortAnstalld(idb, dbAid);
+    //Dirigerar användare till: MenyTaBortAnstalld
+       MenyTaBortAnstalld profilFönster = new MenyTaBortAnstalld(idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
-
     }//GEN-LAST:event_btnTaBortAnsMouseClicked
 
     private void btnLaggTillHandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillHandMouseClicked
+       //Dirigerar användare till: MenyLaggTillHandlaggareAdmin
        MenyLaggTillHandlaggareAdmin profilFönster = new MenyLaggTillHandlaggareAdmin(idb, dbAid);
        profilFönster.setVisible(true);
-       this.setVisible(false);        // TODO add your handling code here:
+       this.setVisible(false);       
     }//GEN-LAST:event_btnLaggTillHandMouseClicked
 
     /**

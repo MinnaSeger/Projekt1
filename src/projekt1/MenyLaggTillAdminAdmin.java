@@ -69,43 +69,18 @@ public class MenyLaggTillAdminAdmin extends javax.swing.JFrame {
                 btnOKMouseClicked(evt);
             }
         });
-        btnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOKActionPerformed(evt);
-            }
-        });
 
         tfdFornamn.setText("Skriv förnamn här");
-        tfdFornamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdFornamnActionPerformed(evt);
-            }
-        });
 
         tfdAdress.setText("Skriv Adress här");
 
         tfdLosenord.setText("Ditt nya lösenord");
-        tfdLosenord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdLosenordActionPerformed(evt);
-            }
-        });
 
         tfdEfternamn.setText("Skriv efternamn här");
-        tfdEfternamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdEfternamnActionPerformed(evt);
-            }
-        });
 
         tfdEpost.setText("Skriv Epost här");
 
         tfdAnstallningsDat.setText("Skriv anställningsdatum här");
-        tfdAnstallningsDat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAnstallningsDatActionPerformed(evt);
-            }
-        });
 
         tfdTelnr.setText("Skriv telefonnummer här");
 
@@ -113,11 +88,6 @@ public class MenyLaggTillAdminAdmin extends javax.swing.JFrame {
         btnSlumpaLosen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSlumpaLosenMouseClicked(evt);
-            }
-        });
-        btnSlumpaLosen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSlumpaLosenActionPerformed(evt);
             }
         });
 
@@ -142,11 +112,6 @@ public class MenyLaggTillAdminAdmin extends javax.swing.JFrame {
         jLabel2.setText("Avdelning:");
 
         tfdAvdelning.setText("Skriv avdelning här");
-        tfdAvdelning.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAvdelningActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,57 +223,25 @@ public class MenyLaggTillAdminAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
- 
-    // TODO add your handling code here:
-    }//GEN-LAST:event_btnOKActionPerformed
-
-    private void tfdFornamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdFornamnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdFornamnActionPerformed
-
-    private void tfdLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdLosenordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdLosenordActionPerformed
-
-    private void btnSlumpaLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSlumpaLosenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSlumpaLosenActionPerformed
-
-    private void tfdEfternamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdEfternamnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdEfternamnActionPerformed
-
-    private void tfdAnstallningsDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAnstallningsDatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAnstallningsDatActionPerformed
-
-    private void tfdAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAvdelningActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAvdelningActionPerformed
-
     private void btnSlumpaLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSlumpaLosenMouseClicked
-  int length = 10;
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@";
-        StringBuilder password = new StringBuilder();
+        //Validering för nytt lösenord
+        int length = 10;
+        String tecken = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@";
+        StringBuilder password = new StringBuilder();    
         Random random = new Random();
-
+        
+        //Tilldelar ett slumpat lösenord
         for (int i = 0; i < length; i++) {
-            int index = random.nextInt(characters.length());
-            password.append(characters.charAt(index));
+            int index = random.nextInt(tecken.length());
+            password.append(tecken.charAt(index));
         }
 
         tfdLosenord.setText(password.toString());
         
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnSlumpaLosenMouseClicked
 
     private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKMouseClicked
-try {
-            this.aid = idb.getAutoIncrement("anstalld", "aid");
-        } catch (InfException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
-        }
+        //Hämtar nya ifyllda värden.
         String nyttFornamn = tfdFornamn.getText();
         String nyttEfternamn = tfdEfternamn.getText();
         String nyttAnstallningsdatum = tfdAnstallningsDat.getText();
@@ -324,22 +257,21 @@ try {
         String nyttAid = idb.getAutoIncrement("anstalld", "aid");
 
         // Lägg till ny anställd i anstalld-tabellen
-        String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, adress, epost, telefon, anstallningsdatum, avdelning, losenord ) " +
+        String laggTillAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, adress, epost, telefon, anstallningsdatum, avdelning, losenord ) " +
                 "VALUES (" + nyttAid + ", '" + nyttFornamn + "', '" + nyttEfternamn + "', '" + nyttAdress + "', '" + nyttEpost + "', '" + 
                 nyttTelefon + "', '" + nyttAnstallningsdatum + "', '" + nyttAvdelning + "', '" + nyttLosenord + "')";
         
-        idb.insert(insertAnstalld);
+        idb.insert(laggTillAnstalld);
 
         // Lägg till behörighetsnivå i admin-tabellen
-        String insertAdmin = "INSERT INTO admin (aid, behorighetsniva) VALUES (" + nyttAid + ", '" + nyttBehorighetsniva + "')";
-        idb.insert(insertAdmin);
+        String laggTillBehorighet = "INSERT INTO admin (aid, behorighetsniva) VALUES (" + nyttAid + ", '" + nyttBehorighetsniva + "')";
+        idb.insert(laggTillBehorighet);
 
-        // Bekräftelse
+        // Bekräftelse och felmeddelande
         JOptionPane.showMessageDialog(this, "Ny administratör har lagts till!");
     } catch (InfException e) {
         JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
     }                       
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnOKMouseClicked
 
     /**

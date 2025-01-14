@@ -100,20 +100,10 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         tfdTelnr.setText("Skriv telefonnummer här");
 
         tfdAnsvarighetsomr.setText("Skriv ansvarsområde här");
-        tfdAnsvarighetsomr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAnsvarighetsomrActionPerformed(evt);
-            }
-        });
 
         tfdLosenord.setText("Ditt slumpade lösenord är ");
 
         tfdMentor.setText("Skriv mentor här");
-        tfdMentor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdMentorActionPerformed(evt);
-            }
-        });
 
         btnSlumpaLosen.setText("Slumpa lösenord");
         btnSlumpaLosen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -242,38 +232,23 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfdAnsvarighetsomrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAnsvarighetsomrActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAnsvarighetsomrActionPerformed
-
-    private void tfdMentorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdMentorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdMentorActionPerformed
-
     private void btnSlumpaLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSlumpaLosenMouseClicked
-                                         
-
+        //Validering lösenord
         int length = 10;
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@";
         StringBuilder password = new StringBuilder();
         Random random = new Random();
-
+        //Sätter slumpar lösenord
         for (int i = 0; i < length; i++) {
             int index = random.nextInt(characters.length());
             password.append(characters.charAt(index));
         }
 
-        tfdLosenord.setText(password.toString());        // TODO add your handling code here:
+        tfdLosenord.setText(password.toString());   
     }//GEN-LAST:event_btnSlumpaLosenMouseClicked
 
     private void btnOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseClicked
-        
-        
-        try {
-            this.aid = idb.getAutoIncrement("anstalld", "aid");
-        } catch (InfException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
-        }
+        //Hämtar nya ifyllda värden. 
         String nyttFornamn = tfdFornamn.getText();
         String nyttEfternamn = tfdEfternamn.getText();
         String nyttAnstallningsdatum = tfdAnstallningsDat.getText();
@@ -285,7 +260,7 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         String nyttAnsvarighetsomrade = tfdAnsvarighetsomr.getText();
         String nyttLosenord = tfdLosenord.getText();
            
-try {
+    try {
     // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
     String nyttAid = idb.getAutoIncrement("anstalld", "aid");
 
@@ -328,7 +303,7 @@ try {
     }
     idb.insert(insertHandlaggare);
 
-    // Bekräftelse
+    // Bekräftelse och felmeddelande
     JOptionPane.showMessageDialog(this, "Ny handläggare har lagts till!");
 } catch (InfException e) {
     JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
