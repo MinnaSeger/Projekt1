@@ -188,7 +188,7 @@ private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
 
         lblStatistiklander.setText("Statistik över länder");
 
-        lblProjektetskostnad.setText("Visa projektets kostnad");
+        lblProjektetskostnad.setText("Statistik över projektens kostnader");
 
         tblStatistikKostnadPerLand.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -276,7 +276,7 @@ private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
 
         lblValjDatum.setText("Välj datum");
 
-        tfdStartdatum.setText("Start datum");
+        tfdStartdatum.setText("Ange start datum");
 
         tfdSlutDatum.setText("Ange slut datum");
 
