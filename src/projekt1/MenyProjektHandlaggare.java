@@ -52,10 +52,11 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
     // 2. Visa alla projekt på användarens avdelning
     private void fyllAvdelningensProjektTabell() {
         try {
-          String query = "SELECT projekt.projektnamn "
-                     + "FROM projekt "
-                     + "INNER JOIN avdelning ON projekt.projektchef = avdelning.chef "
-                     + "WHERE avdelning.chef = " + dbAid;
+            String query = "SELECT projektnamn,beskrivning,startdatum,slutdatum,kostnad,status,prioritet FROM projekt "
+            + "JOIN ans_proj ON projekt.pid = ans_proj.pid "
+            + "JOIN anstalld ON ans_proj.aid = anstalld.aid "  
+            + "WHERE anstalld.avdelning = 3";
+    
 
             ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
 
