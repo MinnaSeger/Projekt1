@@ -54,7 +54,7 @@ String sqlFraga = "SELECT projektnamn "
 private void FyllISamarbetspartners() {
     try {
         // SQL-fråga som hämtar alla partners för projektet där projektchefen är den angivna aid
-        String sqlFraga = "SELECT partner.namn "
+        String sqlFraga = "SELECT DISTINCT partner.namn "
                      + "FROM projekt "
                      + "INNER JOIN projekt_partner ON projekt.pid = projekt_partner.pid "
                      + "INNER JOIN partner ON projekt_partner.partner_pid = partner.pid "
@@ -95,7 +95,7 @@ private void FyllISamarbetspartners() {
 private void FylliAvdelningensProjekt() {
     try {
         // SQL-fråga för att hämta projektnamn från projekt i avdelningen där den inloggade projektchefen är chef
-        String sqlFraga = "SELECT projekt.projektnamn "
+        String sqlFraga = "SELECT DISTINCT projekt.projektnamn "
                      + "FROM projekt "
                      + "INNER JOIN avdelning ON projekt.projektchef = avdelning.chef "
                      + "WHERE avdelning.chef = " + dbAid;
