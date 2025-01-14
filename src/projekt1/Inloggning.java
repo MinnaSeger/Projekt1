@@ -125,10 +125,9 @@ public class Inloggning extends javax.swing.JFrame {
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         //Skapar inloggning och kontrollerar att användaren finns i databasen
-        String ePost = tfeEpost.getText();
-        String lösen=tfLosenord.getText();
-        
-    
+  String ePost = tfeEpost.getText();
+    String lösen = tfLosenord.getText();
+
     try {
         // Hämtar lösenordet från databasen
         String sqlFråga = "SELECT losenord FROM anstalld WHERE epost = '" + ePost + "'";
@@ -140,10 +139,19 @@ public class Inloggning extends javax.swing.JFrame {
             return; // Avbryt inloggningen om lösenordet inte stämmer
         }
 
-        // Om lösenordet är korrekt, fortsätt med att kontrollera användarroll
-        // Kontrollera om användaren är en handläggare
+        // Kontrollera om användaren är projektchef
+        String sqlProjektChef = "SELECT projekt.projektchef FROM projekt JOIN anstalld ON projekt.projektchef = anstalld.aid WHERE epost = '" + ePost + "'";
+        String dbAid = idb.fetchSingle(sqlProjektChef);
+        if (dbAid != null) {
+            MenyProjektLedare meny = new MenyProjektLedare(idb, dbAid);
+            meny.setVisible(true);
+            this.setVisible(false);
+            return;
+        }
+
+        // Kontrollera om användaren är handläggare
         String sqlHandlaggare = "SELECT anstalld.aid FROM anstalld JOIN handlaggare ON anstalld.aid = handlaggare.aid WHERE epost = '" + ePost + "'";
-        String dbAid = idb.fetchSingle(sqlHandlaggare);
+        dbAid = idb.fetchSingle(sqlHandlaggare);
         if (dbAid != null) {
             MenyHandlaggare meny = new MenyHandlaggare(idb, dbAid);
             meny.setVisible(true);
@@ -151,21 +159,11 @@ public class Inloggning extends javax.swing.JFrame {
             return;
         }
 
-        // Kontrollera om användaren är en administratör
+        // Kontrollera om användaren är administratör
         String sqlAdmin = "SELECT anstalld.aid FROM anstalld JOIN admin ON anstalld.aid = admin.aid WHERE epost = '" + ePost + "'";
         dbAid = idb.fetchSingle(sqlAdmin);
         if (dbAid != null) {
             MenyAdministratör meny = new MenyAdministratör(idb, dbAid);
-            meny.setVisible(true);
-            this.setVisible(false);
-            return;
-        }
-
-        // Kontrollera om användaren är en projektledare
-        String sqlProjektChef = "SELECT projekt.projektchef FROM projekt JOIN anstalld ON projekt.projektchef = anstalld.aid WHERE epost = '" + ePost + "'";
-        dbAid = idb.fetchSingle(sqlProjektChef);
-        if (dbAid != null) {
-            MenyProjektLedare meny = new MenyProjektLedare(idb, dbAid);
             meny.setVisible(true);
             this.setVisible(false);
             return;
