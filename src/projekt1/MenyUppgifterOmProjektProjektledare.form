@@ -48,12 +48,11 @@
                   <Component id="btnAndraProjektetsPartners" min="-2" pref="220" max="-2" attributes="0"/>
                   <Component id="btnAndraProjektetsHandlaggare" min="-2" pref="220" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="220" max="-2" attributes="0"/>
+                  <Component id="btnStatistikochKostnadProjekt" min="-2" pref="220" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="516" max="-2" attributes="0"/>
                   </Group>
@@ -96,7 +95,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnStatistikochKostnadProjekt" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="78" max="-2" attributes="0"/>
@@ -303,13 +302,13 @@
         <Property name="text" type="java.lang.String" value="Projektets partners"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnStatistikochKostnadProjekt">
       <Properties>
         <Property name="text" type="java.lang.String" value="Projektets statistik och kostnad"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnStatistikochKostnadProjektMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStatistikochKostnadProjektActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
