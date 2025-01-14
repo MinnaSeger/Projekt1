@@ -22,7 +22,7 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
         }
        
         //Nedan metod används för att kontrollera om ett land finns i databasen 
-        //genom att jämföra landets namn med användarens inmatning
+        //Genom att jämföra landets namn med användarens inmatning
           private void LetaLand (String searchText) {
         try {
             // SQL-fråga för att söka på länder som matchar användarens text
@@ -82,20 +82,20 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
        String sqlFraga = "SELECT sprak, politisk_struktur, ekonomi FROM land WHERE namn = '" + selectedCountry + "'";
 
    
-HashMap <String, String> userData = idb.fetchRow(sqlFraga);
+        HashMap <String, String> userData = idb.fetchRow(sqlFraga);
             
             if (userData != null) {
              tfdSkriv.setText(userData.get("namn"));
 
                         
-    } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
+        } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
 
-            } 
+        } 
             
-    }  catch (InfException e) { 
+        }  catch (InfException e) { 
     JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
     }
-}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -241,13 +241,13 @@ HashMap <String, String> userData = idb.fetchRow(sqlFraga);
     }//GEN-LAST:event_btnOkKnappMouseClicked
 
     private void btnSparaAndringMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringMouseClicked
-  // Kontrollera om landet finns i databasen innan ändringar kan sparas
+    // Kontrollera om landet finns i databasen innan ändringar kan sparas
     if (!landFanns) {
         JOptionPane.showMessageDialog(this, "Landet finns inte i databasen. Ingen ändring kan göras.");
         return; // Avbryt om landet inte finns
     }
     
-// Hämta den valda kolumnen från JComboBox
+    // Hämta den valda kolumnen från JComboBox
     String selectedOption = (String) jComboBox2.getSelectedItem();
     String nyttVarde = tfdSkriv.getText();
 

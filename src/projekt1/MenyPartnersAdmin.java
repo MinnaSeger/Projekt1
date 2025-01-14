@@ -29,7 +29,7 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
     
     private void fyllTextRutor () {
         try {
-            //Hämta data med SQL fråga
+            //Hämta data om partner med SQL fråga samt fyller tillhörande combobox
             
             String sqlFraga = "SELECT namn, kontaktperson, kontaktepost, partner.telefon, partner.adress, branch " +
                "FROM partner " +
@@ -37,9 +37,10 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
                "JOIN anstalld ON projekt.projektchef = anstalld.aid " +
                "WHERE partner.pid = " + dbAid;
            
-
+            
             HashMap <String, String> userData = idb.fetchRow(sqlFraga);
             
+           //Fyller textfields med aktuell information om partner baserat på val från comboboxen
             if (userData != null) {
              tfdNamn.setText(userData.get("namn"));
              tfdKontaktperson.setText(userData.get("kontaktperson"));
@@ -48,7 +49,7 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
              tfdAdress.setText(userData.get("adress"));
              tfdBranch.setText(userData.get("branch"));
                         
-    } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om dig.");
+    } else { JOptionPane.showMessageDialog(this, "Ingen Data hittades om partnern.");
 
             } 
             
@@ -56,12 +57,13 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
     }}
     
-    
+    //Fyller comboboxen med de partners som finns baserat på databasen.
     private void fyllComboBox(){
         try{
             String sqlFraga ="SELECT namn FROM partner";
             ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
             
+            //Rensar comboboxen och lägger till aktuella partners
             if (resultat !=null) {
                 jComboBox1.removeAllItems();
                 for (HashMap <String, String> rad : resultat) {
@@ -220,7 +222,7 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void btnSparaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaMouseClicked
-          //Hämta text från textfältet
+          //Hämta text från textfälten i tabellen partner
         
         String nyttNamn = tfdNamn.getText();
         String nyttKontaktperson = tfdKontaktperson.getText();
@@ -228,10 +230,9 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
         String nyttTelefon = tfdTelefon.getText();
         String nyttAdress = tfdAdress.getText();
         String nyttBranch = tfdBranch.getText();
-        //Uppdetara ändringar i databasen
         
         try {
-            //Byta ändringar
+            //Uppdaterar ändringar baserat på vad användare skriver in
         String updateQuery = "UPDATE partner SET " +  
         "namn = '" + nyttNamn + "', " + 
         "kontaktperson = '" + nyttKontaktperson + "', " +
@@ -247,15 +248,15 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
             //Visa bekräftelse av ändringar
             JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
         } catch (Exception e) {
-            //Hantera fel?
+            //Hanterar fel
             JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
-        }  // TODO add your handling code here:
+        } 
     }//GEN-LAST:event_btnSparaMouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-String valtPartnerNamn = (String) jComboBox1.getSelectedItem();
+        String valtPartnerNamn = (String) jComboBox1.getSelectedItem();
     
-    if (valtPartnerNamn != null) {
+        if (valtPartnerNamn != null) {
         try {
             // SQL-fråga för att hämta data baserat på partnerns namn
             String sqlFraga = "SELECT namn, kontaktperson, kontaktepost, partner.telefon, partner.adress, branch " +
@@ -278,7 +279,7 @@ String valtPartnerNamn = (String) jComboBox1.getSelectedItem();
         } catch (InfException e) {
             JOptionPane.showMessageDialog(this, "Fel vid hämtning av data: " + e.getMessage());
         }
-    }        // TODO add your handling code here:
+    }     
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
