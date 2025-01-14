@@ -145,9 +145,9 @@ private void FylliAvdelningensProjekt() {
         lblMinaSamarbetspartners = new javax.swing.JLabel();
         lblAvdelningensProjekt = new javax.swing.JLabel();
         lblSokStartdatum = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        SpinnerStartDatum = new javax.swing.JSpinner();
         lblSokSlutdatum = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
+        SpinnerSlutDatum = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -156,6 +156,7 @@ private void FylliAvdelningensProjekt() {
         tblAvdelningensProjekt = new javax.swing.JTable();
         ComboBoxFiltreraStatus = new javax.swing.JComboBox<>();
         btnFiltreraPaStatus = new javax.swing.JButton();
+        btnSokProjektPaDatum = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -181,11 +182,11 @@ private void FylliAvdelningensProjekt() {
 
         lblSokStartdatum.setText("Sök Startdatum");
 
-        jSpinner1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1736254860000L), new java.util.Date(1104534000000L), new java.util.Date(1893452400000L), java.util.Calendar.DAY_OF_MONTH));
+        SpinnerStartDatum.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1736254860000L), new java.util.Date(1104534000000L), new java.util.Date(1893452400000L), java.util.Calendar.DAY_OF_MONTH));
 
         lblSokSlutdatum.setText("Sök Slutdatum");
 
-        jSpinner2.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1736254980000L), new java.util.Date(1104534000000L), new java.util.Date(1893452400000L), java.util.Calendar.DAY_OF_MONTH));
+        SpinnerSlutDatum.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1736254980000L), new java.util.Date(1104534000000L), new java.util.Date(1893452400000L), java.util.Calendar.DAY_OF_MONTH));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -260,61 +261,61 @@ private void FylliAvdelningensProjekt() {
             }
         });
 
+        btnSokProjektPaDatum.setText("Sök efter avdelningensprojekt på datum ");
+        btnSokProjektPaDatum.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSokProjektPaDatumMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(lblProjekt)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAvdelningensProjekt)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(lblSokSlutdatum)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblSokStartdatum)
-                                .addGap(128, 128, 128)))
-                        .addGap(211, 211, 211))
+                        .addGap(229, 229, 229)
+                        .addComponent(lblProjekt))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SpinnerStartDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSokStartdatum))))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAnsvarigForProjekt)
                             .addComponent(lblMinaSamarbetspartners)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAvdelningensProjekt)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(286, 286, 286))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63)
+                                .addComponent(btnAndraUppgifterOmProjekt))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(ComboBoxFiltreraStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSokSlutdatum)
+                                    .addComponent(btnFiltreraPaStatus)
+                                    .addComponent(SpinnerSlutDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(ComboBoxFiltreraStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFiltreraPaStatus))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
-                        .addComponent(btnAndraUppgifterOmProjekt)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(152, 152, 152)
+                        .addComponent(btnSokProjektPaDatum)))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblProjekt)
                 .addGap(10, 10, 10)
+                .addComponent(lblProjekt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAnsvarigForProjekt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,22 +327,23 @@ private void FylliAvdelningensProjekt() {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(lblAvdelningensProjekt)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSokSlutdatum)
-                            .addComponent(lblSokStartdatum))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ComboBoxFiltreraStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnFiltreraPaStatus)))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSokStartdatum)
+                    .addComponent(lblSokSlutdatum))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SpinnerSlutDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SpinnerStartDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(btnSokProjektPaDatum)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         pack();
@@ -395,6 +397,51 @@ private void FylliAvdelningensProjekt() {
     }
     }//GEN-LAST:event_btnFiltreraPaStatusMouseClicked
 
+    private void btnSokProjektPaDatumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSokProjektPaDatumMouseClicked
+        // TODO add your handling code here:
+            
+// Hämta start- och slutdatum från spinners
+    java.util.Date startDatum = (java.util.Date) SpinnerStartDatum.getValue();
+    java.util.Date slutDatum = (java.util.Date) SpinnerSlutDatum.getValue();
+    
+    // Kontrollera om slutdatum är före startdatum
+    if (slutDatum.before(startDatum)) {
+        JOptionPane.showMessageDialog(this, "Slutdatum kan inte vara före startdatum.");
+        return;
+    }
+
+    // Konvertera datum till String i SQL-format (yyyy-MM-dd)
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+    String startDatumStr = sdf.format(startDatum);
+    String slutDatumStr = sdf.format(slutDatum);
+    
+    try {
+        // SQL-fråga för att hämta projekt baserat på datumintervall
+        String sqlFraga = "SELECT projektnamn FROM projekt "
+                + "WHERE projektchef = " + dbAid + " "
+                + "AND startdatum >= '" + startDatumStr + "' "
+                + "AND slutdatum <= '" + slutDatumStr + "'";
+
+        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFraga);
+
+        // Fyll tabellen med de filtrerade projekten
+        DefaultTableModel model = (DefaultTableModel) tblAvdelningensProjekt.getModel();
+        model.setRowCount(0); // Rensa tidigare data
+
+        if (projektLista != null && !projektLista.isEmpty()) {
+            for (HashMap<String, String> projekt : projektLista) {
+                String projektnamn = projekt.get("projektnamn");
+                model.addRow(new Object[]{projektnamn});
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Inga projekt hittades inom det valda datumintervallet.");
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av projekt: " + e.getMessage());
+        
+}
+    }//GEN-LAST:event_btnSokProjektPaDatumMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -432,13 +479,14 @@ private void FylliAvdelningensProjekt() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxFiltreraStatus;
+    private javax.swing.JSpinner SpinnerSlutDatum;
+    private javax.swing.JSpinner SpinnerStartDatum;
     private javax.swing.JButton btnAndraUppgifterOmProjekt;
     private javax.swing.JButton btnFiltreraPaStatus;
+    private javax.swing.JButton btnSokProjektPaDatum;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblAnsvarigForProjekt;
