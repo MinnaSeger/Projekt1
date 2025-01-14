@@ -268,7 +268,7 @@ private void FylliAvdelningensProjekt() {
     private void btnUppgifterOmProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUppgifterOmProjektMouseClicked
         // TODO add your handling code here:
         
-       MenyUppgifterOmProjektProjektledare profilFönster = new MenyUppgifterOmProjektProjektledare(idb, dbAid);
+       MenyAndraUppgifterOmProjektProjektledare profilFönster = new MenyAndraUppgifterOmProjektProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnUppgifterOmProjektMouseClicked

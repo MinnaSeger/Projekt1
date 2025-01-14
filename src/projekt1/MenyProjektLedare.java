@@ -154,7 +154,7 @@ public class MenyProjektLedare extends javax.swing.JFrame {
     private void btnMinprofilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinprofilMouseClicked
         // TODO add your handling code here:
 
-       MenyProfilProjektledare1 profilFönster = new MenyProfilProjektledare1(idb, dbAid);
+       MenyProfilProjektledare profilFönster = new MenyProfilProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
     }//GEN-LAST:event_btnMinprofilMouseClicked
 

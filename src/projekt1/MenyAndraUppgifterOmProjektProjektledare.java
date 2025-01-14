@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author elsa
  */
-public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
+public class MenyAndraUppgifterOmProjektProjektledare extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
 
@@ -22,7 +22,7 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
      * Creates new form MenyUppgifterOmProjektProjektledare
      */
     
-public MenyUppgifterOmProjektProjektledare (InfDB idb, String dbAid){
+public MenyAndraUppgifterOmProjektProjektledare (InfDB idb, String dbAid){
     
     this.idb=idb; 
     this.dbAid = dbAid;
@@ -388,14 +388,15 @@ public void fyllProjektetsTabell (){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenyUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenyUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenyUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenyUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

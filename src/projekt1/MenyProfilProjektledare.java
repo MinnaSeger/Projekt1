@@ -14,7 +14,7 @@ import java.util.HashMap;
  *
  * @author elsa
  */
-public class MenyProfilProjektledare1 extends javax.swing.JFrame {
+public class MenyProfilProjektledare extends javax.swing.JFrame {
     
     private InfDB idb;
     private String dbAid;
@@ -22,7 +22,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
     /**
      * Creates new form MenyProfilHandlaggare
      */
-    public MenyProfilProjektledare1(InfDB idb, String dbAid) {
+    public MenyProfilProjektledare(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
@@ -319,14 +319,16 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenyProfilProjektledare1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyProfilProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenyProfilProjektledare1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyProfilProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenyProfilProjektledare1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyProfilProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenyProfilProjektledare1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyProfilProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
