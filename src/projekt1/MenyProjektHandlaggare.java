@@ -142,11 +142,8 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
         } catch (InfException e) {
             JOptionPane.showMessageDialog(this, "Fel vid filtrering av projekt: " + e.getMessage());
         }
-    }
-
-    // GUI-komponenter och main-metod här
-
-
+       
+    }// </editor-fold>                                       
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
