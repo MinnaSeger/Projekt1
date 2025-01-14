@@ -136,9 +136,7 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
         lblStatus = new javax.swing.JLabel();
         tfdKostnad = new javax.swing.JTextField();
         tfdStatus = new javax.swing.JTextField();
-        tfdAndraPartners = new javax.swing.JTextField();
-        tfdAndraHandlaggare = new javax.swing.JTextField();
-        lblUppgifterOmProjekt = new javax.swing.JLabel();
+        lblandraUppgifterOmProjekt = new javax.swing.JLabel();
         lblProjektNamn = new javax.swing.JLabel();
         lblProjektbeskrivning = new javax.swing.JLabel();
         lblStartDatum = new javax.swing.JLabel();
@@ -156,6 +154,10 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPartner = new javax.swing.JTable();
         tfdLand = new javax.swing.JTextField();
+        tfdlaggtillpartner = new javax.swing.JTextField();
+        tfdtabortpartner = new javax.swing.JTextField();
+        tfdlaggtillhandlaggare = new javax.swing.JTextField();
+        tfdtaborthandläggare = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,21 +179,7 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
             }
         });
 
-        tfdAndraPartners.setText("Lägg till eller ta bort Partners");
-        tfdAndraPartners.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAndraPartnersActionPerformed(evt);
-            }
-        });
-
-        tfdAndraHandlaggare.setText("Lägg till eller ta bort Handläggare");
-        tfdAndraHandlaggare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdAndraHandlaggareActionPerformed(evt);
-            }
-        });
-
-        lblUppgifterOmProjekt.setText("Uppgifter om projekt på avdelning");
+        lblandraUppgifterOmProjekt.setText("Ändra uppgifter om projekt på avdelning");
 
         lblProjektNamn.setText("Projekt namn");
 
@@ -271,10 +259,45 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
 
         tfdLand.setText("Land");
 
+        tfdlaggtillpartner.setText("Lägg till partner");
+
+        tfdtabortpartner.setText("Ta bort partner");
+
+        tfdlaggtillhandlaggare.setText("Lägg till handläggare");
+
+        tfdtaborthandläggare.setText("Ta bort handläggare");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(lblLand)
+                .addGap(99, 99, 99)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfdStartDatum, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(tfdSlutDatum)
+                            .addComponent(tfdPrioritet, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfdLand, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(106, 106, 106)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfdlaggtillpartner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnSparaAndringar)
+                                .addComponent(lblandraUppgifterOmProjekt)))
+                        .addGap(100, 100, 100)
+                        .addComponent(tfdtabortpartner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfdKostnad, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 347, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -287,54 +310,36 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tfdStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblProjektNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblProjektNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(tfdProjektNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblProjektbeskrivning)
                         .addGap(59, 59, 59)
                         .addComponent(tfdBeskrivning, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(223, 223, 223)
-                .addComponent(tfdAndraHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118)
+                .addComponent(tfdlaggtillhandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126)
+                .addComponent(tfdtaborthandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblLand)
-                        .addGap(99, 99, 99)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfdStartDatum, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                                    .addComponent(tfdSlutDatum)
-                                    .addComponent(tfdPrioritet, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfdLand, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(106, 106, 106)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tfdProjektNamn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                                    .addComponent(tfdKostnad, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(221, 221, 221)
-                                .addComponent(tfdAndraPartners, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(286, 286, 286)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSparaAndringar)
-                            .addComponent(lblUppgifterOmProjekt))))
-                .addGap(0, 347, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdProjektNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblProjektNamn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblProjektNamn)
+                                .addComponent(tfdlaggtillpartner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfdtabortpartner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblandraUppgifterOmProjekt)
+                                .addGap(87, 87, 87)
+                                .addComponent(tfdProjektNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfdKostnad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblKostnader))
@@ -350,20 +355,17 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfdSlutDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblSlutDatum))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblStatus)
-                            .addComponent(tfdStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblUppgifterOmProjekt)
-                        .addGap(107, 107, 107)
-                        .addComponent(tfdAndraPartners, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfdAndraHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                        .addGap(39, 39, 39)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblStatus)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfdStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfdlaggtillhandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfdtaborthandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -374,21 +376,13 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
                             .addComponent(lblLand)
                             .addComponent(tfdLand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addComponent(btnSparaAndringar)
                 .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfdAndraHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraHandlaggareActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAndraHandlaggareActionPerformed
-
-    private void tfdAndraPartnersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAndraPartnersActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAndraPartnersActionPerformed
 
     private void tfdKostnadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdKostnadActionPerformed
         // TODO add your handling code here:
@@ -492,11 +486,9 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
     private javax.swing.JLabel lblSlutDatum;
     private javax.swing.JLabel lblStartDatum;
     private javax.swing.JLabel lblStatus;
-    private javax.swing.JLabel lblUppgifterOmProjekt;
+    private javax.swing.JLabel lblandraUppgifterOmProjekt;
     private javax.swing.JTable tblPartner;
     private javax.swing.JTable tblhandlaggare;
-    private javax.swing.JTextField tfdAndraHandlaggare;
-    private javax.swing.JTextField tfdAndraPartners;
     private javax.swing.JTextField tfdBeskrivning;
     private javax.swing.JTextField tfdKostnad;
     private javax.swing.JTextField tfdLand;
@@ -505,5 +497,9 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
     private javax.swing.JTextField tfdSlutDatum;
     private javax.swing.JTextField tfdStartDatum;
     private javax.swing.JTextField tfdStatus;
+    private javax.swing.JTextField tfdlaggtillhandlaggare;
+    private javax.swing.JTextField tfdlaggtillpartner;
+    private javax.swing.JTextField tfdtaborthandläggare;
+    private javax.swing.JTextField tfdtabortpartner;
     // End of variables declaration//GEN-END:variables
 }
