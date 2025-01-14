@@ -128,73 +128,57 @@ public class Inloggning extends javax.swing.JFrame {
         String ePost = tfeEpost.getText();
         String lösen=tfLosenord.getText();
         
-        try{
-            String sqlFråga = "SELECT losenord FROM anstalld WHERE epost = '" + ePost + "'";
-            System.out.println(sqlFråga);
-            
-            String dbLosen = idb.fetchSingle(sqlFråga);
-            if(lösen.equals(dbLosen)){
-                new Meny(idb, ePost).setVisible(true);
-                this.setVisible(false);
-            }
-            else{
-                lblFelMeddelande.setVisible(true);
-            }
-        } catch (InfException ex) {
-            System.out.println(ex.getMessage());
+    
+    try {
+        // Hämtar lösenordet från databasen
+        String sqlFråga = "SELECT losenord FROM anstalld WHERE epost = '" + ePost + "'";
+        String dbLosen = idb.fetchSingle(sqlFråga);
+
+        // Kontrollera om lösenordet är korrekt
+        if (dbLosen == null || !lösen.equals(dbLosen)) {
+            lblFelMeddelande.setVisible(true);
+            return; // Avbryt inloggningen om lösenordet inte stämmer
         }
 
-        //Nedan är metod för att dirigera handläggare till dess meny när de skriver in sina uppgifter. 
-      try {
-    String sqlFraga = "SELECT anstalld.aid FROM anstalld JOIN handlaggare ON anstalld.aid = handlaggare.aid WHERE ePost = '" + ePost + "'" ;
-    System.out.println(sqlFraga);
-   
-    String dbAid = idb.fetchSingle(sqlFraga);
-    if (dbAid != null) { // Kontrollera att dbAid inte är null
-        MenyHandlaggare meny = new MenyHandlaggare(idb, dbAid);
-        meny.setVisible(true); // Gör fönstret synligt
-        this.setVisible(false);
-    }  
-    else{
-         lblFelMeddelande.setVisible(true);
+        // Om lösenordet är korrekt, fortsätt med att kontrollera användarroll
+        // Kontrollera om användaren är en handläggare
+        String sqlHandlaggare = "SELECT anstalld.aid FROM anstalld JOIN handlaggare ON anstalld.aid = handlaggare.aid WHERE epost = '" + ePost + "'";
+        String dbAid = idb.fetchSingle(sqlHandlaggare);
+        if (dbAid != null) {
+            MenyHandlaggare meny = new MenyHandlaggare(idb, dbAid);
+            meny.setVisible(true);
+            this.setVisible(false);
+            return;
+        }
+
+        // Kontrollera om användaren är en administratör
+        String sqlAdmin = "SELECT anstalld.aid FROM anstalld JOIN admin ON anstalld.aid = admin.aid WHERE epost = '" + ePost + "'";
+        dbAid = idb.fetchSingle(sqlAdmin);
+        if (dbAid != null) {
+            MenyAdministratör meny = new MenyAdministratör(idb, dbAid);
+            meny.setVisible(true);
+            this.setVisible(false);
+            return;
+        }
+
+        // Kontrollera om användaren är en projektledare
+        String sqlProjektChef = "SELECT projekt.projektchef FROM projekt JOIN anstalld ON projekt.projektchef = anstalld.aid WHERE epost = '" + ePost + "'";
+        dbAid = idb.fetchSingle(sqlProjektChef);
+        if (dbAid != null) {
+            MenyProjektLedare meny = new MenyProjektLedare(idb, dbAid);
+            meny.setVisible(true);
+            this.setVisible(false);
+            return;
+        }
+
+        // Om användaren inte tillhör någon av ovanstående roller
+        lblFelMeddelande.setVisible(true);
+
+    } catch (InfException ex) {
+        System.out.println("Fel vid inloggning: " + ex.getMessage());
     }
-} catch (InfException ex) {
-    System.out.println(ex.getMessage());
-}  
-      //Meto för att dirigera administratörer till deras meny
-      try {
-          String sqlFraga = "SELECT anstalld.aid FROM anstalld JOIN admin ON anstalld.aid = admin.aid WHERE ePost ='" + ePost + "'";
-          System.out.println(sqlFraga);
-          
-          String dbAid = idb.fetchSingle(sqlFraga);
-          if (dbAid != null) { //kontrollera att dbaid inte är null
-          MenyAdministratör meny = new MenyAdministratör (idb, dbAid);
-          meny.setVisible(true); //Gör fönstret synligt
-          this.setVisible(false);
-      }
-          else {
-                  lblFelMeddelande.setVisible(true);
-                  }
-      } catch (InfException ex) {
-          System.out.println(ex.getMessage());
-      }
-      
-      try {
-          String sqlFraga = "SELECT projekt.projektchef FROM projekt JOIN anstalld ON projektchef=aid WHERE ePost ='" + ePost + "'";
-          System.out.println(sqlFraga);
-          
-                    String dbAid = idb.fetchSingle(sqlFraga);
-          if (dbAid != null) { //kontrollera att dbaid inte är null
-          MenyProjektLedare meny = new MenyProjektLedare (idb, dbAid);
-          meny.setVisible(true); //Gör fönstret synligt
-          this.setVisible(false);
-      }
-          else {
-                  lblFelMeddelande.setVisible(true);
-                  }
-      } catch (InfException ex) {
-          System.out.println(ex.getMessage());
-      }
+
+
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

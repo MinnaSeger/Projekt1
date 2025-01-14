@@ -64,8 +64,12 @@ private void fyllComboBoxHallbarhetsmal() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         lblAllaHallbarhetsmal = new javax.swing.JLabel();
         ComboboxHallbarhetsmal = new javax.swing.JComboBox<>();
+
+        jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +141,8 @@ private void fyllComboBoxHallbarhetsmal() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboboxHallbarhetsmal;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAllaHallbarhetsmal;
     // End of variables declaration//GEN-END:variables
 }
