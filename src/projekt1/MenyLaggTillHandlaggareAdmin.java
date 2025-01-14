@@ -282,25 +282,55 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         String nyttMentor = tfdMentor.getText();
         String nyttAnsvarighetsomrade = tfdAnsvarighetsomr.getText();
            
-       try {
-        // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
-        String nyttAid = idb.getAutoIncrement("anstalld", "aid");
+try {
+    // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
+    String nyttAid = idb.getAutoIncrement("anstalld", "aid");
 
-        // Lägg till ny anställd i anstalld-tabellen
-        String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, anstallningsdatum, avdelning, telefon, epost, adress, mentor ) " +
-                "VALUES (" + nyttAid + ", '" + nyttFornamn + "', '" + nyttEfternamn + "', '" + nyttAnstallningsdatum + "', '" + nyttAvdelning + "', '" + 
-                nyttTelefon + "', '" + nyttEpost + "', '" + nyttAdress + "', '" + nyttMentor + "')";
-        idb.insert(insertAnstalld);
+    if (nyttAid == null || nyttAid.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Kunde inte generera ett nytt ID för anställd.");
+        return;
+    }
 
-        // Lägg till mentor och ansvarighetsområde i handläggare-tabellen
-        String insertHandlaggare = "INSERT INTO handlaggare (aid, ansvarighetsomrade) VALUES (" + nyttAid + ", '" + nyttAnsvarighetsomrade + "')";
-        idb.insert(insertHandlaggare);
+    // Validera att mentor-ID är giltigt om ett mentorvärde anges
+    if (nyttMentor != null && !nyttMentor.isEmpty()) {
+        String mentorQuery = "SELECT COUNT(*) FROM handlaggare WHERE aid = " + nyttMentor;
+        String mentorExists = idb.fetchSingle(mentorQuery);
 
-        // Bekräftelse
-        JOptionPane.showMessageDialog(this, "Ny handläggare har lagts till!");
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
-    }  
+        if (mentorExists == null || mentorExists.equals("0")) {
+            JOptionPane.showMessageDialog(this, "Mentor-ID finns inte i handlaggare-tabellen.");
+            return;
+        }
+
+        // Kontrollera att mentor-ID inte är samma som det nya aid
+        if (nyttMentor.equals(nyttAid)) {
+            JOptionPane.showMessageDialog(this, "Mentorn kan inte vara samma som den nya handläggaren.");
+            return;
+        }
+    }
+
+    // Lägg till ny handläggare i anstalld-tabellen
+    String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, anstallningsdatum, avdelning, telefon, epost, adress) " +
+            "VALUES (" + nyttAid + ", '" + nyttFornamn + "', '" + nyttEfternamn + "', '" + nyttAnstallningsdatum + "', '" + nyttAvdelning + "', '" +
+            nyttTelefon + "', '" + nyttEpost + "', '" + nyttAdress + "')";
+    idb.insert(insertAnstalld);
+
+    // Lägg till mentor och ansvarighetsområde i handläggare-tabellen
+    String insertHandlaggare;
+    if (nyttMentor != null && !nyttMentor.isEmpty()) {
+        insertHandlaggare = "INSERT INTO handlaggare (aid, ansvarighetsomrade, mentor) " +
+                            "VALUES (" + nyttAid + ", '" + nyttAnsvarighetsomrade + "', " + nyttMentor + ")";
+    } else {
+        insertHandlaggare = "INSERT INTO handlaggare (aid, ansvarighetsomrade) " +
+                            "VALUES (" + nyttAid + ", '" + nyttAnsvarighetsomrade + "')";
+    }
+    idb.insert(insertHandlaggare);
+
+    // Bekräftelse
+    JOptionPane.showMessageDialog(this, "Ny handläggare har lagts till!");
+} catch (InfException e) {
+    JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
+}
+
 
 
     }//GEN-LAST:event_btnOkMouseClicked

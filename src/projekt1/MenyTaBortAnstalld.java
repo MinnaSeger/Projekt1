@@ -80,18 +80,16 @@ private void fyllComboBox() {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(jLabel1)
-                .addGap(0, 120, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addComponent(jbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBekrafta)
                 .addGap(37, 37, 37))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbxAnstalld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,12 +107,12 @@ private void fyllComboBox() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBekraftaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBekraftaMouseClicked
-      try {
-        // Hämta den valda anställdas namn från JComboBox
-        String valdAnstalld = (String) jbxAnstalld.getSelectedItem();
+                                      
+    try {
+        // Hämta den valda anställdas namn från JComboBox och trimma
+        String valdAnstalld = ((String) jbxAnstalld.getSelectedItem()).trim();
 
         if (valdAnstalld == null || valdAnstalld.isEmpty()) {
-            // Om ingen anställd är vald, visa meddelande
             JOptionPane.showMessageDialog(this, "Vänligen välj en anställd att ta bort.");
             return;
         }
@@ -128,17 +126,17 @@ private void fyllComboBox() {
         );
 
         if (svar == JOptionPane.NO_OPTION) {
-            // Om användaren väljer "Nej", avbryt operationen
             return;
         }
 
-        // Dela upp det valda namnet i förnamn och efternamn
-        String[] namnDelar = valdAnstalld.split(" ");
+        // Dela upp förnamn och efternamn (hantera flera delar i efternamn)
+        String[] namnDelar = valdAnstalld.split(" ", 2); // Dela namnet i högst två delar
         String fornamn = namnDelar[0];
         String efternamn = namnDelar.length > 1 ? namnDelar[1] : "";
 
-        // Hämta aid baserat på namn
-        String selectAid = "SELECT aid FROM anstalld WHERE fornamn = '" + fornamn + "' AND efternamn = '" + efternamn + "'";
+        // Hämta aid baserat på namn (skiftlägesokänslig SQL-sökning)
+        String selectAid = "SELECT aid FROM anstalld WHERE LOWER(fornamn) = LOWER('" + fornamn + "') AND LOWER(efternamn) = LOWER('" + efternamn + "')";
+        System.out.println("SQL-fråga: " + selectAid); // För felsökning
         String aid = idb.fetchSingle(selectAid);
 
         if (aid == null) {
@@ -151,11 +149,9 @@ private void fyllComboBox() {
         String behörighetsnivå = idb.fetchSingle(selectAdmin);
 
         if (behörighetsnivå != null) {
-            // Ta bort från admin och anställd
             String deleteAdmin = "DELETE FROM admin WHERE aid = '" + aid + "'";
             idb.delete(deleteAdmin);
         } else {
-            // Ta bort från handläggare
             String deleteHandlaggare = "DELETE FROM handlaggare WHERE aid = '" + aid + "'";
             idb.delete(deleteHandlaggare);
         }
@@ -165,14 +161,12 @@ private void fyllComboBox() {
         idb.delete(deleteAnstalld);
 
         JOptionPane.showMessageDialog(this, "Anställd " + valdAnstalld + " har tagits bort.");
-        
-        // Uppdatera JComboBox
         fyllComboBox();
 
     } catch (InfException e) {
         JOptionPane.showMessageDialog(this, "Fel vid borttagning av anställd: " + e.getMessage());
-    }                                           
-   // TODO add your handling code here:
+    }
+
     }//GEN-LAST:event_btnBekraftaMouseClicked
 
     /**
