@@ -32,11 +32,11 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
        // Visa alla projekt och partners
     private void visaPartnersITabell() {
      try {
-            String sqlFraga = "SELECT partner.namn " +
-                 "FROM partner " +
-                 "JOIN projekt_partner ON partner_pid = projekt_partner.partner_pid " +
-                 "JOIN projekt ON projekt_partner.pid = projekt.pid " +
-                 "WHERE projektchef = " + dbAid;
+            String sqlFraga = "SELECT DISTINCT namn " +
+            "FROM partner " +
+            "JOIN projekt_partner ON partner_pid = projekt_partner.partner_pid " +
+            "JOIN projekt ON projekt_partner.pid = projekt.pid " +
+            "WHERE projektchef = " + dbAid;
             
             ArrayList<HashMap<String, String>> partners = idb.fetchRows(sqlFraga);
 
@@ -163,84 +163,57 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
     private void btnLaggTillPartnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerMouseClicked
         // TODO add your handling code here:
         
-    // Lägg till partner                                                
+    // Få texten från textfältet
     String partnerNamn = tfdLaggTillPartner.getText().trim();
 
+    // Kontrollera att fältet inte är tomt
     if (partnerNamn.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Fyll i partners namn.", "Fel", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    try {
-        // Hämta PID för projektet som projektchefen ansvarar för
-        String sqlFraga = "SELECT pid FROM projekt WHERE projektchef = " + dbAid;
-        ArrayList<HashMap<String, String>> projektId = idb.fetchRows(sqlFraga);
+    // Lägg till partnern i tabellen
+    DefaultTableModel model = (DefaultTableModel) tblPartners.getModel();
+    model.addRow(new Object[]{partnerNamn});
 
-        if (projektId.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Projekt finns inte för denna projektchef.", "Fel", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-
-
-        String partnerPidSQL = "SELECT partner_pid FROM partner WHERE namn = " + "namn";
-        ArrayList<HashMap<String, String>> partnerIdResult = idb.fetchRows(partnerPidSQL);
-
-        if (partnerIdResult.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Partnern finns inte.", "Fel", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-
-        String insertSQL = "INSERT INTO projekt_partner (partner_pid, pid) VALUES (?, ?)";
-        idb.insert(insertSQL);
-
-        JOptionPane.showMessageDialog(null, "Partner tillagd!");
-        visaPartnersITabell(); // Uppdatera tabellen
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(null, "Fel vid tillägg av partner: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
-    }
+    // Rensa textfältet efter tillägg
+    tfdLaggTillPartner.setText("");
+    
     }//GEN-LAST:event_btnLaggTillPartnerMouseClicked
 
     private void btnTaBortPartnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortPartnerMouseClicked
         // TODO add your handling code here:
      
         //ta bort partner
-        
-        String partnerNamn = tfdTaBortPartner.getText().trim();
+    // Få texten från textfältet
+    String partnerNamn = tfdTaBortPartner.getText().trim();
 
+    // Kontrollera att fältet inte är tomt
     if (partnerNamn.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Fyll i partners namn.", "Fel", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    try {
-        String sqlFraga = "SELECT pid FROM projekt WHERE projektchef = ?";
-        ArrayList<HashMap<String, String>> projektId = idb.fetchRows(sqlFraga);
+    // Ta bort partnern från tabellen
+    DefaultTableModel model = (DefaultTableModel) tblPartners.getModel();
+    boolean found = false;
 
-        if (projektId.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Projekt finns inte för denna projektchef.", "Fel", JOptionPane.ERROR_MESSAGE);
-            return;
+    for (int i = 0; i < model.getRowCount(); i++) {
+        String currentPartner = model.getValueAt(i, 0).toString();
+        if (currentPartner.equalsIgnoreCase(partnerNamn)) {
+            model.removeRow(i);
+            found = true;
+            break;
         }
+    }
 
+    if (!found) {
+        JOptionPane.showMessageDialog(null, "Partnern hittades inte i tabellen.", "Fel", JOptionPane.ERROR_MESSAGE);
+    }
 
-        String sqlFragaPartner = "SELECT partner_pid FROM partner WHERE partner.namn = " + partnerNamn;
-        ArrayList<HashMap<String, String>> partnerPidResult = idb.fetchRows(sqlFragaPartner);
-
-        if (partnerPidResult.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Partnern finns inte.", "Fel", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        String deleteSQL = "DELETE partner.namn FROM projekt_partner WHERE partner.namn = " + partnerNamn;
-        idb.delete(partnerNamn);
-        JOptionPane.showMessageDialog(null, "Partner borttagen!");
-
-        // Uppdatera tabellen
-        visaPartnersITabell();
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(null, "Fel vid borttagning av partner: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
-}
+    // Rensa textfältet efter borttagning
+    tfdTaBortPartner.setText("");
+    
     }//GEN-LAST:event_btnTaBortPartnerMouseClicked
 
     /**
