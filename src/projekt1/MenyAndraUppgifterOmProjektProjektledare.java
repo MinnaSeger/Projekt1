@@ -147,7 +147,7 @@ public void fyllProjektetsTabell (){
 
         lblandraUppgifterOmProjekt = new javax.swing.JLabel();
         btnAndraProjektetsPartners = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnAndraProjektetsData = new javax.swing.JButton();
         btnUppdateratabeller = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -172,7 +172,12 @@ public void fyllProjektetsTabell (){
             }
         });
 
-        jButton1.setText("Ändra projektets data");
+        btnAndraProjektetsData.setText("Ändra projektets data");
+        btnAndraProjektetsData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAndraProjektetsDataMouseClicked(evt);
+            }
+        });
 
         btnUppdateratabeller.setText("Uppdatera data i tabellerna");
         btnUppdateratabeller.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -282,7 +287,7 @@ public void fyllProjektetsTabell (){
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAndraProjektetsPartners, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAndraProjektetsData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAndraProjektetsHandlaggare, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +327,7 @@ public void fyllProjektetsTabell (){
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAndraProjektetsHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(btnAndraProjektetsData))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnStatistikochKostnadProjekt)
@@ -392,6 +397,14 @@ public void fyllProjektetsTabell (){
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAndraProjektetsHandlaggareActionPerformed
 
+    private void btnAndraProjektetsDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraProjektetsDataMouseClicked
+        // TODO add your handling code here:
+       MenyAndraProjektetsDataProjektledare profilFönster = new MenyAndraProjektetsDataProjektledare (idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+        
+    }//GEN-LAST:event_btnAndraProjektetsDataMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -429,11 +442,11 @@ public void fyllProjektetsTabell (){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndraProjektetsData;
     private javax.swing.JButton btnAndraProjektetsHandlaggare;
     private javax.swing.JButton btnAndraProjektetsPartners;
     private javax.swing.JButton btnStatistikochKostnadProjekt;
     private javax.swing.JButton btnUppdateratabeller;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -38,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="tfdAngeNyData" min="-2" pref="133" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="153" max="-2" attributes="0"/>
+              <Component id="btnSparaAndringar" min="-2" pref="153" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
@@ -60,7 +60,7 @@
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tfdAngeNyData" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSparaAndringar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="58" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -144,15 +144,21 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnSparaAndringar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Spara ny data"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSparaAndringarMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSparaBorttagenData">
       <Properties>
         <Property name="text" type="java.lang.String" value="Spara borttagen data"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSparaBorttagenDataMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdAngeNyData">
       <Properties>
