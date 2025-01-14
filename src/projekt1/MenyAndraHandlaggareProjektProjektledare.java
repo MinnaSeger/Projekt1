@@ -3,20 +3,65 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package projekt1;
-
+import oru.inf.InfDB;
+import oru.inf.InfException;
+import java.util.HashMap;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author elsa
  */
 public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame {
+        private InfDB idb;
+        private String dbAid;
 
     /**
      * Creates new form MenyAndraHandlaggareProjektProjektledare
      */
-    public MenyAndraHandlaggareProjektProjektledare() {
-        initComponents();
+    public MenyAndraHandlaggareProjektProjektledare(InfDB idb, String dbAid) {
+            this.idb = idb; 
+            this.dbAid = dbAid;
+            initComponents();
+            
+            
+            fyllProjektetshandlaggare();
+            
     }
-
+    public void fyllProjektetshandlaggare () {
+        
+        try {
+            
+            String sqlFraga = "SELECT anstalld.fornamn, anstalld.efternamn, handlaggare.ansvarighetsomrade " +
+                        "FROM anstalld " +
+                        "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
+                        "JOIN ans_proj ON anstalld.aid = ans_proj.aid " +
+                        "JOIN projekt ON ans_proj.pid = projekt.pid " +
+                        "WHERE projektchef = " + dbAid;
+            
+            ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlFraga);
+            
+            if (resultatx == null || resultatx.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Inga handläggare för projektet hittades." );
+            }
+            
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Handlaggare");
+            model.addColumn("Ansvarighetsomrade");
+            
+            for (HashMap<String, String> rad : resultatx) {
+                model.addRow(new Object[]{rad.get("fornamn"), rad.get("ansvarighetsomrade")});
+                
+            }
+            
+            tblProjektetshandlaggare.setModel(model);
+            
+        } catch (InfException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektets handläggare: " + e.getMessage());
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,7 +95,7 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
             }
         });
 
-        tfdTaBortHandlaggare.setText("AngeHandlaggare");
+        tfdTaBortHandlaggare.setText("Ange Handlaggare");
 
         btnTaBortHandlaggare.setText("Ta bort Handläggare");
         btnTaBortHandlaggare.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,10 +174,56 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
 
     private void btnLaggTillHandlaggareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareMouseClicked
         // TODO add your handling code here:
+            // Hämta text från fältet
+    String handlaggareNamn = tfdAngeHandlaggare.getText().trim();
+
+    // Kontrollera att fältet inte är tomt
+    if (handlaggareNamn.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Fyll i handläggarens namn.", "Fel", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Lägg till handläggaren i tabellen
+    DefaultTableModel model = (DefaultTableModel) tblProjektetshandlaggare.getModel();
+    model.addRow(new Object[]{handlaggareNamn});
+
+    // Rensa textfältet
+    tfdAngeHandlaggare.setText("");
+
     }//GEN-LAST:event_btnLaggTillHandlaggareMouseClicked
 
     private void btnTaBortHandlaggareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortHandlaggareMouseClicked
         // TODO add your handling code here:
+
+    // Hämta text från fältet
+    String handlaggareNamn = tfdTaBortHandlaggare.getText().trim();
+
+    // Kontrollera att fältet inte är tomt
+    if (handlaggareNamn.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Fyll i handläggarens namn.", "Fel", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Ta bort handläggaren från tabellen
+    DefaultTableModel model = (DefaultTableModel) tblProjektetshandlaggare.getModel();
+    boolean found = false;
+
+    for (int i = 0; i < model.getRowCount(); i++) {
+        String currentHandlaggare = model.getValueAt(i, 0).toString();
+        if (currentHandlaggare.equalsIgnoreCase(handlaggareNamn)) {
+            model.removeRow(i);
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        JOptionPane.showMessageDialog(null, "Handläggaren hittades inte i tabellen.", "Fel", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Rensa textfältet
+    tfdTaBortHandlaggare.setText("");
+
     }//GEN-LAST:event_btnTaBortHandlaggareMouseClicked
 
     /**
@@ -165,7 +256,7 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyAndraHandlaggareProjektProjektledare().setVisible(true);
+                //new MenyAndraHandlaggareProjektProjektledare().setVisible(true);
             }
         });
     }
