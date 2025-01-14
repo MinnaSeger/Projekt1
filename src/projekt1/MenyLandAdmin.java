@@ -5,24 +5,20 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author minna
  */
-public class MenyProjektAdmin extends javax.swing.JFrame {
+public class MenyLandAdmin extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
     /**
-     * Creates new form MenyProjektAdmin
+     * Creates new form MenyLandAdmin
      */
-    public MenyProjektAdmin(InfDB idb, String dbAid) {
+    public MenyLandAdmin(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
-
     }
 
     /**
@@ -34,36 +30,28 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnAndra = new javax.swing.JButton();
         btnLaggTill = new javax.swing.JButton();
-        btnTaBort = new javax.swing.JButton();
+        btnAndra = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BtnAndra.setText("Ändra befintligt projekt");
-        BtnAndra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnAndraMouseClicked(evt);
-            }
-        });
-
-        btnLaggTill.setText("Lägg till ett nytt projekt");
+        btnLaggTill.setText("Lägg till land");
         btnLaggTill.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLaggTillMouseClicked(evt);
             }
         });
 
-        btnTaBort.setText("Ta bort befintligt projekt");
-        btnTaBort.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAndra.setText("Ändra befintligt land");
+        btnAndra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTaBortMouseClicked(evt);
+                btnAndraMouseClicked(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Projekt");
+        jLabel1.setText("Hantera land");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,47 +60,39 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnTaBort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnAndra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLaggTill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(111, 111, 111)
+                        .addComponent(btnAndra))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                        .addGap(131, 131, 131)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLaggTill))))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(57, 57, 57)
                 .addComponent(jLabel1)
                 .addGap(45, 45, 45)
                 .addComponent(btnLaggTill)
                 .addGap(18, 18, 18)
-                .addComponent(BtnAndra)
-                .addGap(18, 18, 18)
-                .addComponent(btnTaBort)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addComponent(btnAndra)
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLaggTillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillMouseClicked
-    MenyLaggTillProjektAdmin profilFönster = new MenyLaggTillProjektAdmin(idb, dbAid);
-       profilFönster.setVisible(true);    
+     MenyLaggTillLandAdmin profilFönster = new MenyLaggTillLandAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
     }//GEN-LAST:event_btnLaggTillMouseClicked
 
-    private void BtnAndraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAndraMouseClicked
-    MenyAndraProjektAdmin profilFönster = new MenyAndraProjektAdmin(idb, dbAid);
-       profilFönster.setVisible(true);    
-    }//GEN-LAST:event_BtnAndraMouseClicked
-
-    private void btnTaBortMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortMouseClicked
-    MenyTaBortProjektAdmin profilFönster = new MenyTaBortProjektAdmin(idb, dbAid);
-    profilFönster.setVisible(true);
-    }//GEN-LAST:event_btnTaBortMouseClicked
+    private void btnAndraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraMouseClicked
+        MenyAndraLandAdmin profilFönster = new MenyAndraLandAdmin(idb, dbAid);
+       profilFönster.setVisible(true); 
+    }//GEN-LAST:event_btnAndraMouseClicked
 
     /**
      * @param args the command line arguments
@@ -131,28 +111,27 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenyProjektAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLandAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenyProjektAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLandAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenyProjektAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLandAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenyProjektAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyLandAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new MenyProjektAdmin().setVisible(true);
+                //new MenyLandAdmin().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAndra;
+    private javax.swing.JButton btnAndra;
     private javax.swing.JButton btnLaggTill;
-    private javax.swing.JButton btnTaBort;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

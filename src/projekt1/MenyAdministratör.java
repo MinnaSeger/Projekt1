@@ -150,7 +150,7 @@ public class MenyAdministratör extends javax.swing.JFrame {
 
     private void btnPartnersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPartnersMouseClicked
 
-       MenyPartnersAdmin profilFönster = new MenyPartnersAdmin(idb, dbAid);
+       MenyPartnerAdmin profilFönster = new MenyPartnerAdmin(idb, dbAid);
        profilFönster.setVisible(true);
     }//GEN-LAST:event_btnPartnersMouseClicked
 
@@ -162,7 +162,7 @@ public class MenyAdministratör extends javax.swing.JFrame {
 
     private void btnLänderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLänderMouseClicked
 
-       MenyLanderAdmin profilFönster = new MenyLanderAdmin(idb, dbAid);
+       MenyLandAdmin profilFönster = new MenyLandAdmin(idb, dbAid);
        profilFönster.setVisible(true);
     }//GEN-LAST:event_btnLänderMouseClicked
 

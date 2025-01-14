@@ -10,12 +10,12 @@ import java.util.HashMap;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-public class MenyLanderAdmin extends javax.swing.JFrame {
+public class MenyAndraLandAdmin extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
     private boolean landFanns = false; // Flagga för att hålla reda på om landet finns
     
-        public MenyLanderAdmin(InfDB idb, String dbAid) {
+        public MenyAndraLandAdmin(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
@@ -256,14 +256,15 @@ public class MenyLanderAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenyLanderAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraLandAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenyLanderAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraLandAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }  catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenyLanderAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraLandAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenyLanderAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraLandAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

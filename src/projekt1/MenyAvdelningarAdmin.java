@@ -29,6 +29,8 @@ public class MenyAvdelningarAdmin extends javax.swing.JFrame {
         btnAvd2 = new javax.swing.JButton();
         btnAvd3 = new javax.swing.JButton();
         lblValjAvdelning = new javax.swing.JLabel();
+        btnLaggTill = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,7 +55,18 @@ public class MenyAvdelningarAdmin extends javax.swing.JFrame {
             }
         });
 
-        lblValjAvdelning.setText("Välj avdelning");
+        lblValjAvdelning.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblValjAvdelning.setText("Välj avdelning att ändra:");
+
+        btnLaggTill.setText("Lägg till avdelning");
+        btnLaggTill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLaggTillMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Eller...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,30 +80,42 @@ public class MenyAvdelningarAdmin extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAvd3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnAvd1)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(btnAvd2)
-                                    .addGap(10, 10, 10)))))
+                            .addComponent(btnAvd1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(lblValjAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(92, 92, 92)
+                        .addComponent(btnAvd2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(165, 165, 165)
+                        .addComponent(lblValjAvdelning))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(btnLaggTill, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(lblValjAvdelning)
-                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAvd1)
-                    .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(lblValjAvdelning)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAvd1)))
                 .addGap(18, 18, 18)
                 .addComponent(btnAvd2)
                 .addGap(18, 18, 18)
                 .addComponent(btnAvd3)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLaggTill)
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -116,6 +141,12 @@ public class MenyAvdelningarAdmin extends javax.swing.JFrame {
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnAvd3MouseClicked
+
+    private void btnLaggTillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillMouseClicked
+       MenyLaggTillAvdelningAdmin profilFönster = new MenyLaggTillAvdelningAdmin(idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnLaggTillMouseClicked
 
     /**
      * @param args the command line arguments
@@ -156,6 +187,8 @@ public class MenyAvdelningarAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnAvd1;
     private javax.swing.JButton btnAvd2;
     private javax.swing.JButton btnAvd3;
+    private javax.swing.JButton btnLaggTill;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblValjAvdelning;
     // End of variables declaration//GEN-END:variables
