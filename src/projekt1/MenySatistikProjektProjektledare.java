@@ -26,11 +26,12 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
     this.dbAid = dbAid;
         initComponents();
 
- fyllTabeller();
+         fyllTabeller();
 
     }
     
         private void fyllTabeller() {
+            
         fyllStatistikKostnadPerLand();
         fyllStatistikOverPartners();
         fyllStatistikOverLander();
@@ -39,14 +40,14 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
 
     private void fyllStatistikKostnadPerLand() {
         try {
-            String query = "SELECT Land, SUM(Kostnad) AS TotalKostnad FROM Projekt GROUP BY Land";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
+            String sqlFraga = "SELECT DISTINCT land, SUM(kostnad) AS TotalKostnad FROM projekt GROUP BY land";
+            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
             DefaultTableModel model = (DefaultTableModel) tblStatistikKostnadPerLand.getModel();
             model.setRowCount(0); // Rensa tabellen
 
             for (HashMap<String, String> rad : resultat) {
-                model.addRow(new Object[]{rad.get("Land"), rad.get("TotalKostnad")});
+                model.addRow(new Object[]{rad.get("land"), rad.get("TotalKostnad")});
             }
         } catch (InfException e) {
             System.out.println("Fel vid hämtning av kostnad per land: " + e.getMessage());
@@ -55,46 +56,53 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
 
     private void fyllStatistikOverPartners() {
         try {
-            String query = "SELECT PartnerNamn FROM Partner";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
+            String sqlFraga = "SELECT DISTINCT partner.namn " +
+             "FROM partner " +
+             "JOIN projekt_partner ON partner_pid = projekt_partner.partner_pid " +
+             "JOIN projekt ON projekt_partner.pid = projekt.pid "  +
+             "WHERE projektchef = " + dbAid;
+            
+            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
             DefaultTableModel model = (DefaultTableModel) tblStatistikOverPartners.getModel();
             model.setRowCount(0); // Rensa tabellen
 
             for (HashMap<String, String> rad : resultat) {
-                model.addRow(new Object[]{rad.get("PartnerNamn")});
+                model.addRow(new Object[]{rad.get("namn")});
             }
         } catch (InfException e) {
-            System.out.println("Fel vid hämtning av partners: " + e.getMessage());
+            System.out.println("Fel vid hämtning av projektets partners: " + e.getMessage());
         }
     }
 
     private void fyllStatistikOverLander() {
         try {
-            String query = "SELECT DISTINCT Land FROM Projekt";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
+            String sqlFraga = "SELECT DISTINCT land FROM projekt " +
+                    "WHERE projektchef = " + dbAid;
+            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
             DefaultTableModel model = (DefaultTableModel) tblStatistikOverLander.getModel();
             model.setRowCount(0); // Rensa tabellen
 
             for (HashMap<String, String> rad : resultat) {
-                model.addRow(new Object[]{rad.get("Land")});
+                model.addRow(new Object[]{rad.get("land")});
             }
         } catch (InfException e) {
-            System.out.println("Fel vid hämtning av länder: " + e.getMessage());
+            System.out.println("Fel vid hämtning av projektets länder: " + e.getMessage());
         }
     }
 
     private void fyllProjektetsKostnad() {
         try {
-            String query = "SELECT ProjektNamn, Kostnad FROM Projekt";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
+            String sqlFraga = "SELECT DISTINCT projektnamn, kostnad FROM projekt " +
+                    "WHERE projektchef = " + dbAid;
+            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
             DefaultTableModel model = (DefaultTableModel) tblVisaProjektetsKostnad.getModel();
             model.setRowCount(0); // Rensa tabellen
 
             for (HashMap<String, String> rad : resultat) {
-                model.addRow(new Object[]{rad.get("ProjektNamn"), rad.get("Kostnad")});
+                model.addRow(new Object[]{rad.get("projektnamn"), rad.get("kostnad")});
             }
         } catch (InfException e) {
             System.out.println("Fel vid hämtning av projektets kostnad: " + e.getMessage());
@@ -142,7 +150,7 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Land", "Kostnad"
+                "Land", "Total Kostnad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -223,16 +231,18 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblStatistikpartners)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStatistikKostnadPerLand)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStatistiklander)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProjektetskostnad)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblStatistikpartners)
+                            .addComponent(jScrollPane4)
+                            .addComponent(lblStatistikKostnadPerLand)
+                            .addComponent(lblStatistiklander)
+                            .addComponent(jScrollPane3)
+                            .addComponent(lblProjektetskostnad)
+                            .addComponent(jScrollPane1))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -252,9 +262,9 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(lblProjektetskostnad)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();

@@ -36,12 +36,9 @@ public MenyUppgifterOmProjektProjektledare (InfDB idb, String dbAid){
 
 public void fyllProjektetsTabell (){
     try {
-        String sqlFraga = "SELECT projektnamn, beskrivning, status, prioritet, startdatum, slutdatum, kostnad " +
+        String sqlFraga = "SELECT DISTINCT projektnamn, beskrivning, status, prioritet, startdatum, slutdatum, kostnad " +
                 "FROM projekt " +
-                "WHERE projektchef IN (" +
-                "SELECT aid " +
-                "FROM anstalld " +
-                "WHERE epost = '" + dbAid + "');";
+                "WHERE projektchef = " + dbAid;
         
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
         
@@ -78,17 +75,17 @@ public void fyllProjektetsTabell (){
                         "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
                         "JOIN ans_proj ON anstalld.aid = ans_proj.aid " +
                         "JOIN projekt ON ans_proj.pid = projekt.pid " +
-                        "WHERE projekt.projektchef IN (SELECT aid FROM anstalld WHERE epost = '" + dbAid + "')";
+                        "WHERE projektchef = " + dbAid;
             
             ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlFraga);
             
             if (resultatx == null || resultatx.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Inga handläggare hittades." );
+                javax.swing.JOptionPane.showMessageDialog(this, "Inga handläggare för projektet hittades." );
             }
             
             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("Handläggare");
-            model.addColumn("Ansvarighetsområde");
+            model.addColumn("Handlaggare");
+            model.addColumn("Ansvarighetsomrade");
             
             for (HashMap<String, String> rad : resultatx) {
                 model.addRow(new Object[]{rad.get("fornamn"), rad.get("ansvarighetsomrade")});
@@ -98,7 +95,7 @@ public void fyllProjektetsTabell (){
             tblProjektetshandlaggare.setModel(model);
             
         } catch (InfException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av handläggare: " + e.getMessage());
+                javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektets handläggare: " + e.getMessage());
             
         }
     }
@@ -106,32 +103,26 @@ public void fyllProjektetsTabell (){
         
         try {
             
-            String sqlFraga = "SELECT namn, telefon FROM partner " +
-             "WHERE pid IN ( " +
-             "    SELECT partner_pid FROM projekt_partner " +
-             "    WHERE pid IN ( " +
-             "        SELECT pid FROM projekt " +
-             "        WHERE projektchef IN ( " +
-             "            SELECT aid FROM anstalld " +
-             "            WHERE epost = '" + dbAid + "' " +
-             "        ) " +
-             "    ) " +
-             ");";
+            String sqlFraga = "SELECT DISTINCT namn, telefon " +
+            "FROM partner " +
+            "JOIN projekt_partner ON partner_pid = projekt_partner.partner_pid " +
+            "JOIN projekt ON projekt_partner.pid = projekt.pid " +
+            "WHERE projektchef = " + dbAid;
             
             ArrayList<HashMap<String, String>> resultaten = idb.fetchRows(sqlFraga);
             
             if (resultaten == null || resultaten.isEmpty()) {
                 DefaultTableModel model = new DefaultTableModel();
-                model.addColumn("Partner");
-                model.addColumn("Kontaktinformation");
+                model.addColumn("namn");
+                model.addColumn("telefon");
                 tblProjektetspartners.setModel(model);
-                javax.swing.JOptionPane.showMessageDialog(this, "Inga partners hittades.");
+                javax.swing.JOptionPane.showMessageDialog(this, "Inga partners för projektet hittades.");
                 return;
             }
             
             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn ("Partner");
-            model.addColumn ("Kontaktinformation");
+            model.addColumn ("namn");
+            model.addColumn ("telefon");
             
             
             for (HashMap<String, String> rad : resultaten) {
@@ -140,7 +131,7 @@ public void fyllProjektetsTabell (){
             
             tblProjektetspartners.setModel(model);
         } catch (InfException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av partner: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av partner för projektet: " + e.getMessage());
         }
     }
 
@@ -278,34 +269,28 @@ public void fyllProjektetsTabell (){
                         .addGap(283, 283, 283)
                         .addComponent(lblandraUppgifterOmProjekt))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(423, 423, 423)
-                                .addComponent(lblProjektetspartners))
-                            .addComponent(btnUppdateratabeller, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(429, 429, 429)
+                        .addComponent(lblProjektetspartners)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAndraProjektetsPartners, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAndraProjektetsHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStatistikochKostnadProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(516, 516, 516))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(lblProjektetsHandlaggare))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnStatistikochKostnadProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                            .addComponent(btnAndraProjektetsPartners, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAndraProjektetsHandlaggare, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(139, 139, 139)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblProjektetsHandlaggare)
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(550, 550, 550)
+                        .addComponent(btnUppdateratabeller, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 514, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -313,36 +298,31 @@ public void fyllProjektetsTabell (){
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lblandraUppgifterOmProjekt)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(btnAndraProjektetsHandlaggare))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAndraProjektetsHandlaggare)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(btnAndraProjektetsPartners)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(btnStatistikochKostnadProjekt))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblProjektetsHandlaggare)))
-                .addGap(30, 30, 30)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(lblProjektetsHandlaggare)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblProjektetspartners)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(btnUppdateratabeller))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(391, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btnUppdateratabeller)
+                .addContainerGap(328, Short.MAX_VALUE))
         );
 
         pack();
