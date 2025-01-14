@@ -136,13 +136,13 @@ private void fyllTextRutor () {
         
         try {
             //Genomför ändring av information
-        String updateQuery = "UPDATE partner SET " +  
+        String updateQuery = "UPDATE avdelning SET " +  
         "namn = '" + nyttNamn + "', " + 
         "beskrivning = '" + nyttBeskrivning + "', " +
         "adress = '" + nyttAdress + "', " +
         "epost= '" + nyttEpost + "', " +
         "telefon= '" + nyttTelefon + "' " + 
-        "WHERE pid = " + dbAid;
+        "WHERE avdid = " + dbAid;
             System.out.println(updateQuery);
             // Kör uppdateringen
             idb.update(updateQuery);

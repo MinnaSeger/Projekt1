@@ -134,13 +134,13 @@ public class MenyAvdelningForHallbarEnergiAdmin extends javax.swing.JFrame {
         
         try {
         //Byta information om avdelningen
-        String uppdatering = "UPDATE partner SET " +  
+        String uppdatering = "UPDATE avdelning SET " +  
         "namn = '" + nyttNamn + "', " + 
         "beskrivning = '" + nyttBeskrivning + "', " +
         "adress = '" + nyttAdress + "', " +
         "epost= '" + nyttEpost + "', " +
         "telefon= '" + nyttTelefon + "' " + 
-        "WHERE pid = " + dbAid;
+        "WHERE avdid = " + dbAid;
             System.out.println(uppdatering);
             idb.update(uppdatering);
             
