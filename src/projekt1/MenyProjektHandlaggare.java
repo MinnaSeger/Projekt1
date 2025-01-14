@@ -52,10 +52,11 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
     // 2. Visa alla projekt på användarens avdelning
     private void fyllAvdelningensProjektTabell() {
         try {
-          String query = "SELECT projekt.projektnamn "
-                     + "FROM projekt "
-                     + "INNER JOIN avdelning ON projekt.projektchef = avdelning.chef "
-                     + "WHERE avdelning.chef = " + dbAid;
+            String query = "SELECT projektnamn,beskrivning,startdatum,slutdatum,kostnad,status,prioritet FROM projekt "
+            + "JOIN ans_proj ON projekt.pid = ans_proj.pid "
+            + "JOIN anstalld ON ans_proj.aid = anstalld.aid "  
+            + "WHERE anstalld.avdelning = 3";
+    
 
             ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
 
@@ -79,32 +80,42 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
 
     // 3. Filtrera avdelningens projekt baserat på status
     private void filtreraAvdelningensProjekt() {
-        String valdStatus = (String) cmbStatus.getSelectedItem();
-        try {
-            String query = "SELECT projektnamn, startdatum, slutdatum, status " +
-                           "FROM projekt " +
-                           "WHERE avdid = (SELECT avdelning FROM anstalld WHERE aid = " + dbAid + ") " +
-                           "AND status = '" + valdStatus + "'";
+    String valdStatus = (String) cmbStatus.getSelectedItem();
 
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
-
-            DefaultTableModel model = (DefaultTableModel) tblAvdelningensProjekt.getModel();
-            model.setRowCount(0);
-
-            if (resultat != null) {
-                for (HashMap<String, String> rad : resultat) {
-                    model.addRow(new Object[]{
-                        rad.get("projektnamn"),
-                        rad.get("startdatum"),
-                        rad.get("slutdatum"),
-                        rad.get("status")
-                    });
-                }
-            }
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(this, "Fel vid filtrering av avdelningens projekt: " + e.getMessage());
-        }
+    if (valdStatus == null || valdStatus.equals("Välj status")) {
+        JOptionPane.showMessageDialog(this, "Vänligen välj en giltig status.");
+        return;
     }
+
+    try {
+        String query = "SELECT projekt.projektnamn, projekt.startdatum, projekt.slutdatum, projekt.status " +
+                       "FROM projekt " +
+                       "JOIN ans_proj ON projekt.pid = ans_proj.pid " +
+                       "JOIN anstalld ON ans_proj.aid = anstalld.aid " +
+                       "WHERE anstalld.avdelning = (SELECT avdelning FROM anstalld WHERE aid = " + dbAid + ") " +
+                       "AND projekt.status = '" + valdStatus + "'";
+
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
+
+        DefaultTableModel model = (DefaultTableModel) tblAvdelningensProjekt.getModel();
+        model.setRowCount(0);
+
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{
+                    rad.get("projektnamn"),
+                    rad.get("startdatum"),
+                    rad.get("slutdatum"),
+                    rad.get("status")
+                });
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Inga projekt hittades för vald status.");
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid filtrering av projekt: " + e.getMessage());
+    }
+}
 
     // 4. Visa alla partners som samarbetar i projekten du är tilldelad på
     private void fyllProjektPartnersTabell() {
@@ -136,21 +147,26 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
 
     // 5. Fyll status-väljaren
     private void fyllStatusComboBox() {
-        try {
-            String query = "SELECT DISTINCT status FROM projekt";
-            ArrayList<String> resultat = idb.fetchColumn(query);
+    try {
+        String query = "SELECT DISTINCT status FROM projekt";
+        ArrayList<String> resultat = idb.fetchColumn(query);
 
-            if (resultat != null) {
-                cmbStatus.addItem("Välj status");
-                for (String status : resultat) {
-                    cmbStatus.addItem(status);
-                }
+        cmbStatus.removeAllItems(); // Töm tidigare alternativ
+        cmbStatus.addItem("Välj status"); // Lägg till standardval
+
+        if (resultat != null) {
+            for (String status : resultat) {
+                cmbStatus.addItem(status); // Lägg till statusalternativ
             }
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(this, "Fel vid hämtning av status: " + e.getMessage());
         }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av status: " + e.getMessage());
     }
-                  
+}
+    
+
+
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -245,10 +261,7 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(152, 152, 152)
-                                .addComponent(btnFiltreraStatus))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(274, 274, 274)
                                 .addComponent(lblAvdelningensprojekt)
@@ -271,16 +284,18 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(118, 118, 118)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblTilldeladeProjekt)
+                        .addGap(201, 201, 201))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblTilldeladeProjekt))
-                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(201, 201, 201))))
+                                .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFiltreraStatus)))
+                        .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +304,6 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(btnFiltreraStatus)
                             .addComponent(lblSokStartdatum)
                             .addComponent(lblSlutDatum))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,19 +322,20 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFiltreraStatus))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTilldeladeProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFiltreraStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltreraStatusMouseClicked
-        // TODO add your handling code here:
+     filtreraAvdelningensProjekt(); // Anropar filtreringsmetoden
     }//GEN-LAST:event_btnFiltreraStatusMouseClicked
 
 
