@@ -132,43 +132,18 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         });
 
         tfdProjektnamn.setText("Ändra projektnamn");
-        tfdProjektnamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdProjektnamnActionPerformed(evt);
-            }
-        });
 
         tfdBeskrivning.setText("Ändra beskrivning");
-        tfdBeskrivning.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdBeskrivningActionPerformed(evt);
-            }
-        });
 
         tfdStartdatum.setText("Ändra startdatum");
 
         tfdSlutdatum.setText("Ändra slutdatum");
 
         tfdKostnad.setText("Ändra kostnad");
-        tfdKostnad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdKostnadActionPerformed(evt);
-            }
-        });
 
         tfdStatus.setText("Ändra status");
-        tfdStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdStatusActionPerformed(evt);
-            }
-        });
 
         tfdPrioritet.setText("Ändra prioritet");
-        tfdPrioritet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdPrioritetActionPerformed(evt);
-            }
-        });
 
         tfdProjektchef.setText("Ändra projektchef");
 
@@ -314,58 +289,36 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
     
     if (valtProjektNamn != null) {
         try {
-            // SQL-fråga för att hämta data baserat på partnerns namn
-            String sqlFraga = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, land, projektchef " +
-                               "FROM projekt " +
-                               "WHERE projektnamn = '" + valtProjektNamn + "'";
+        // SQL-fråga för att hämta data baserat på partnerns namn
+        String sqlFraga = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, land, projektchef " +
+        "FROM projekt " + "WHERE projektnamn = '" + valtProjektNamn + "'";
+                               
 
-            HashMap<String, String> userData = idb.fetchRow(sqlFraga);
+        HashMap<String, String> userData = idb.fetchRow(sqlFraga);
             
-            if (userData != null) {
-                // Uppdatera textfälten med hämtad data
-                tfdProjektnamn.setText(userData.get("projektnamn"));
-                tfdBeskrivning.setText(userData.get("beskrivning"));
-                tfdStartdatum.setText(userData.get("startdatum"));
-                tfdSlutdatum.setText(userData.get("slutdatum"));
-                tfdKostnad.setText(userData.get("kostnad"));
-                tfdStatus.setText(userData.get("status"));
-                tfdPrioritet.setText(userData.get("prioritet"));
-                lblLand.setText(userData.get("land"));
-                tfdProjektchef.setText(userData.get("projektchef"));
+        if (userData != null) {
+        // Uppdatera textfälten med hämtad data
+        tfdProjektnamn.setText(userData.get("projektnamn"));
+        tfdBeskrivning.setText(userData.get("beskrivning"));
+        tfdStartdatum.setText(userData.get("startdatum"));
+        tfdSlutdatum.setText(userData.get("slutdatum"));
+        tfdKostnad.setText(userData.get("kostnad"));
+        tfdStatus.setText(userData.get("status"));
+        tfdPrioritet.setText(userData.get("prioritet"));
+        lblLand.setText(userData.get("land"));
+        tfdProjektchef.setText(userData.get("projektchef"));
                 
-            } else {
-                JOptionPane.showMessageDialog(this, "Ingen data hittades för det valda projekter.");
-            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingen data hittades för det valda projekter.");
+        }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(this, "Fel vid hämtning av data: " + e.getMessage());
         }
-    } // TODO add your handling code here:
+    } 
     }//GEN-LAST:event_jbxrullistaActionPerformed
 
-    private void tfdProjektnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdProjektnamnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdProjektnamnActionPerformed
-
-    private void tfdBeskrivningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdBeskrivningActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdBeskrivningActionPerformed
-
-    private void tfdKostnadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdKostnadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdKostnadActionPerformed
-
-    private void tfdStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdStatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdStatusActionPerformed
-
-    private void tfdPrioritetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdPrioritetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdPrioritetActionPerformed
-
     private void btnSparaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaMouseClicked
-        // TODO add your handling code here:
-        
-            //Hämtar text från täxtfältet
+        //Hämtar text från täxtfältet
         
         String nyttProjektnamn = tfdProjektnamn.getText();
         String nyttBeskrivning = tfdBeskrivning.getText();
@@ -378,8 +331,8 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         //Uppdetara ändringar i databasen
         
         try {
-            //Uppdaterar/byter informationen som användare anger i textrutorna.
-        String updateQuery = "UPDATE projekt SET " +  
+        //Uppdaterar/byter informationen som användare anger i textrutorna.
+        String uppdatering = "UPDATE projekt SET " +  
         "Projektnamn = '" + nyttProjektnamn + "', " + 
         "beskrivning = '" + nyttBeskrivning + "', " +
         "Startdatum = '" + nyttStartdatum + "', " + 
@@ -389,9 +342,10 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         "Prioritet = '" + nyttPrioritet + "', " + 
         "Projektchef = '" + nyttProjektchef + "' " + 
         "WHERE pid = " + dbAid;
-            System.out.println(updateQuery);
+            
+        System.out.println(uppdatering);
             // Kör uppdateringen
-            idb.update(updateQuery);
+            idb.update(uppdatering);
             
             //Visa bekräftelse av ändringar
             JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");

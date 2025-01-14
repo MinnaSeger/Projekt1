@@ -233,7 +233,7 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
         
         try {
             //Uppdaterar ändringar baserat på vad användare skriver in
-        String updateQuery = "UPDATE partner SET " +  
+        String uppdatering = "UPDATE partner SET " +  
         "namn = '" + nyttNamn + "', " + 
         "kontaktperson = '" + nyttKontaktperson + "', " +
         "kontaktepost = '" + nyttEpost + "', " + 
@@ -241,9 +241,9 @@ public class MenyPartnersAdmin extends javax.swing.JFrame {
         "adress = '" + nyttAdress + "', " + 
         "branch = '" + nyttBranch + "' " + 
         "WHERE pid = " + dbAid;
-            System.out.println(updateQuery);
+            System.out.println(uppdatering);
             // Kör uppdateringen
-            idb.update(updateQuery);
+            idb.update(uppdatering);
             
             //Visa bekräftelse av ändringar
             JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");

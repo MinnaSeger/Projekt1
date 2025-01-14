@@ -194,17 +194,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra projektnamn"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdProjektnamnActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdBeskrivning">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra beskrivning"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdBeskrivningActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdStartdatum">
       <Properties>
@@ -220,25 +214,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra kostnad"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdKostnadActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdStatus">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra status"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdStatusActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdPrioritet">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra prioritet"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdPrioritetActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdProjektchef">
       <Properties>
