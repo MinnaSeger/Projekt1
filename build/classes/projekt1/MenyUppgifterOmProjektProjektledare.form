@@ -24,6 +24,41 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Component id="lblLand" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="tfdStartDatum" pref="99" max="32767" attributes="0"/>
+                          <Component id="tfdSlutDatum" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfdPrioritet" alignment="1" max="32767" attributes="0"/>
+                          <Component id="tfdLand" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="tfdlaggtillpartner" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblandraUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="tfdtabortpartner" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="tfdKostnad" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="347" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="lblKostnader" min="-2" pref="87" max="-2" attributes="0"/>
@@ -37,56 +72,22 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="tfdStatus" min="-2" pref="99" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="lblProjektNamn" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblProjektNamn" min="-2" pref="87" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="tfdProjektNamn" min="-2" pref="99" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblProjektbeskrivning" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                       <Component id="tfdBeskrivning" min="-2" pref="99" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="223" max="-2" attributes="0"/>
-              <Component id="tfdAndraHandlaggare" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+              <Component id="tfdlaggtillhandlaggare" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+              <Component id="tfdtaborthandläggare" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="lblLand" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfdStartDatum" pref="99" max="32767" attributes="0"/>
-                                  <Component id="tfdSlutDatum" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfdPrioritet" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="tfdLand" alignment="1" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="tfdProjektNamn" alignment="0" pref="99" max="32767" attributes="0"/>
-                                  <Component id="tfdKostnad" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
-                              <Component id="tfdAndraPartners" min="-2" pref="207" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="286" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace min="0" pref="347" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -94,13 +95,21 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfdProjektNamn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblProjektNamn" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="lblProjektNamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfdlaggtillpartner" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfdtabortpartner" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblandraUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                              <Component id="tfdProjektNamn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tfdKostnad" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblKostnader" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -121,23 +130,21 @@
                           <Component id="lblSlutDatum" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdStatus" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                      <Component id="tfdAndraPartners" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="92" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="tfdAndraHandlaggare" min="-2" pref="23" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="tfdStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdlaggtillhandlaggare" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdtaborthandläggare" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -152,7 +159,7 @@
                   </Group>
                   <Component id="jScrollPane1" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="114" max="32767" attributes="0"/>
+              <EmptySpace pref="105" max="32767" attributes="0"/>
               <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
@@ -186,25 +193,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdStatusActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdAndraPartners">
+    <Component class="javax.swing.JLabel" name="lblandraUppgifterOmProjekt">
       <Properties>
-        <Property name="text" type="java.lang.String" value="L&#xe4;gg till eller ta bort Partners"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraPartnersActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdAndraHandlaggare">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="L&#xe4;gg till eller ta bort Handl&#xe4;ggare"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdAndraHandlaggareActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblUppgifterOmProjekt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Uppgifter om projekt p&#xe5; avdelning"/>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra uppgifter om projekt p&#xe5; avdelning"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblProjektNamn">
@@ -364,6 +355,26 @@
     <Component class="javax.swing.JTextField" name="tfdLand">
       <Properties>
         <Property name="text" type="java.lang.String" value="Land"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdlaggtillpartner">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg till partner"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdtabortpartner">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ta bort partner"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdlaggtillhandlaggare">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg till handl&#xe4;ggare"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdtaborthandl&#xe4;ggare">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ta bort handl&#xe4;ggare"/>
       </Properties>
     </Component>
   </SubComponents>
