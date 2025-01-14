@@ -104,7 +104,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblandraUppgifterOmProjekt">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra uppgifter om projekt p&#xe5; avdelning"/>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra uppgifter om projekt jag &#xe4;r projektansvarig f&#xf6;r"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnAndraProjektetsHandlaggare">

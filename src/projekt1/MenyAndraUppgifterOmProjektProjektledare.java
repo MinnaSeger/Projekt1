@@ -163,7 +163,7 @@ public void fyllProjektetsTabell (){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblandraUppgifterOmProjekt.setText("Ändra uppgifter om projekt på avdelning");
+        lblandraUppgifterOmProjekt.setText("Ändra uppgifter om projekt jag är projektansvarig för");
 
         btnAndraProjektetsHandlaggare.setText("Ändra projektets Handläggare");
 
