@@ -47,6 +47,7 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
                 tfdSlutDatum.setText(userData.get("slutdatum"));
                 tfdStatus.setText(userData.get("status"));
                 tfdPrioritet.setText(userData.get("prioritet"));
+                tfdLand.setText(userData.get("land"));
                 
             }else{ JOptionPane.showMessageDialog(this, "Ingen data om projekt på avdelning hittades!");
             
@@ -122,6 +123,68 @@ ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
  }
  }
  
+private void laggTillPartner(String partnerNamn, int projektId) {
+    try {
+        // Kontrollera om partner redan finns
+        String kontrollFraga = "SELECT partner_pid FROM partner WHERE namn = '" + partnerNamn + "'";
+        String partnerPid = idb.fetchSingle(kontrollFraga);
+
+        if (partnerPid == null) {
+            // Om partner inte finns, lägg till ny partner i partner-tabellen
+            String insertPartner = "INSERT INTO partner (namn) VALUES ('" + partnerNamn + "')";
+            idb.insert(insertPartner);
+
+            // Hämta partner_pid för den nya partnern
+            partnerPid = idb.fetchSingle(kontrollFraga);
+        }
+
+        // Lägg till kopplingen mellan partner och projekt i projekt_partner-tabellen
+        String insertProjektPartner = "INSERT INTO projekt_partner (partner_pid, pid) VALUES (" + partnerPid + ", " + projektId + ")";
+        idb.insert(insertProjektPartner);
+
+        // Uppdatera tabellen i GUI
+        fyllPartnerTabell();
+
+        JOptionPane.showMessageDialog(this, "Partner har lagts till i projektet!");
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid tillägg av partner: " + e.getMessage());
+    }
+}
+
+private void taBortPartner(String partnerNamn, int projektId) {
+    try {
+        // Hämta partner_pid för den angivna partnern
+        String kontrollFraga = "SELECT partner_pid FROM partner WHERE namn = '" + partnerNamn + "'";
+        String partnerPid = idb.fetchSingle(kontrollFraga);
+
+        if (partnerPid != null) {
+            // Ta bort kopplingen mellan partner och projekt
+            String deleteProjektPartner = "DELETE FROM projekt_partner WHERE partner_pid = " + partnerPid + " AND pid = " + projektId;
+            idb.delete(deleteProjektPartner);
+
+            // Kontrollera om partnern är kopplad till andra projekt
+            String kontrollOmPartnerAnvands = "SELECT pid FROM projekt_partner WHERE partner_pid = " + partnerPid;
+            String andraProjekt = idb.fetchSingle(kontrollOmPartnerAnvands);
+
+            if (andraProjekt == null) {
+                // Om partner inte är kopplad till andra projekt, ta bort partner från partner-tabellen
+                String deletePartner = "DELETE FROM partner WHERE partner_pid = " + partnerPid;
+                idb.delete(deletePartner);
+            }
+
+            // Uppdatera tabellen i GUI
+            fyllPartnerTabell();
+
+            JOptionPane.showMessageDialog(this, "Partner har tagits bort från projektet!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Partner finns inte i projektet.");
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid borttagning av partner: " + e.getMessage());
+    }
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
