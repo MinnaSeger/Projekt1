@@ -7,6 +7,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.ArrayList;
 /**
  *
  * @author minna
@@ -21,8 +23,31 @@ public class MenyTaBortProjektAdmin extends javax.swing.JFrame {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
+        fyllComboBox();
     }
 
+    
+      //Kod för att kunna välja anställd i rullista
+    private void fyllComboBox() {
+    try {
+        String sqlFraga = "SELECT projektnamn from projekt";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        if (resultat != null && !resultat.isEmpty()) {
+            jbxProjekt.removeAllItems();
+            jbxProjekt.addItem("");
+            for (HashMap<String, String> rad : resultat) {
+                String ProjektNamn = rad.get("projektnamn");
+                jbxProjekt.addItem(ProjektNamn);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Inga projekt hittades i databasen.");
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av projekt: " + e.getMessage());
+    
+}
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +68,11 @@ public class MenyTaBortProjektAdmin extends javax.swing.JFrame {
         jbxProjekt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnBekrafta.setText("Bekräfta");
+        btnBekrafta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBekraftaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,6 +106,54 @@ public class MenyTaBortProjektAdmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBekraftaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBekraftaMouseClicked
+ try {
+        // Hämta den valda partnerns namn från JComboBox och trimma
+        String valtProjekt = ((String) jbxProjekt.getSelectedItem()).trim();
+
+        if (valtProjekt == null || valtProjekt.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vänligen välj ett projekt att ta bort.");
+            return;
+        }
+
+        // Visa bekräftelsedialog
+        int svar = JOptionPane.showConfirmDialog(
+                this,
+                "Är du säker på att du vill ta bort projekt: " + valtProjekt + "?",
+                "Bekräfta borttagning",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (svar == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        // Hämta pid baserat på namn
+        String selectPid = "SELECT pid FROM projekt WHERE LOWER(namn) = LOWER('" + valtProjekt + "')";
+        System.out.println("SQL-fråga: " + selectPid); // För felsökning
+        String pid = idb.fetchSingle(selectPid);
+
+        if (pid == null) {
+            JOptionPane.showMessageDialog(this, "Inget projekt hittades med det namnet.");
+            return;
+        }
+
+        // Ta bort relaterade rader från projekt_partner
+        String deleteProjektPartner = "DELETE FROM projekt_partner WHERE pid = '" + pid + "'";
+        idb.delete(deleteProjektPartner);
+
+        // Ta bort partner från partner-tabellen
+        String deletePartner = "DELETE FROM projekt WHERE pid = '" + pid + "'";
+        idb.delete(deletePartner);
+
+        JOptionPane.showMessageDialog(this, "Projekt " + valtProjekt + " har tagits bort.");
+        fyllComboBox();
+
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid borttagning av Projekt: " + e.getMessage());
+    }
+    }//GEN-LAST:event_btnBekraftaMouseClicked
 
     /**
      * @param args the command line arguments

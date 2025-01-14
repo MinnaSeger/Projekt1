@@ -106,9 +106,9 @@ private void fyllComboBox() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBekraftaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBekraftaMouseClicked
-     
-        try {
-        // Hämta den valda anställdas namn från JComboBox och trimma
+                                        
+    try {
+        // Hämta den valda partnerns namn från JComboBox och trimma
         String valdPartner = ((String) jbxPartner.getSelectedItem()).trim();
 
         if (valdPartner == null || valdPartner.isEmpty()) {
@@ -126,25 +126,24 @@ private void fyllComboBox() {
 
         if (svar == JOptionPane.NO_OPTION) {
             return;
-        }  
-        
-        // Hämta pid baserat på namn (skiftlägesokänslig SQL-sökning)
+        }
+
+        // Hämta pid baserat på namn
         String selectPid = "SELECT pid FROM partner WHERE LOWER(namn) = LOWER('" + valdPartner + "')";
         System.out.println("SQL-fråga: " + selectPid); // För felsökning
-        String aid = idb.fetchSingle(selectPid);
+        String pid = idb.fetchSingle(selectPid);
 
-        if (aid == null) {
+        if (pid == null) {
             JOptionPane.showMessageDialog(this, "Ingen partner hittades med det namnet.");
             return;
         }
-        //Stad är främmande nyckel i partnertabellen, därav nedan.
-        else {
-            String deleteStad = "DELETE FROM stad WHERE sid = '" + valdPartner + "'";
-            idb.delete(deleteStad);
-        }
-        
-          // Ta bort från partner
-        String deletePartner = "DELETE FROM partner WHERE pid = '" + valdPartner + "'";
+
+        // Ta bort relaterade rader från projekt_partner
+        String deleteProjektPartner = "DELETE FROM projekt_partner WHERE partner_pid = '" + pid + "'";
+        idb.delete(deleteProjektPartner);
+
+        // Ta bort partner från partner-tabellen
+        String deletePartner = "DELETE FROM partner WHERE pid = '" + pid + "'";
         idb.delete(deletePartner);
 
         JOptionPane.showMessageDialog(this, "Partner " + valdPartner + " har tagits bort.");

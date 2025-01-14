@@ -82,6 +82,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Bekr&#xe4;fta"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBekraftaMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
