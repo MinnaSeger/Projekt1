@@ -134,15 +134,15 @@ public class MenyAvdelningForHallbarEnergiAdmin extends javax.swing.JFrame {
         
         try {
         //Byta information om avdelningen
-        String sqlFraga = "UPDATE partner SET " +  
+        String uppdatering = "UPDATE partner SET " +  
         "namn = '" + nyttNamn + "', " + 
         "beskrivning = '" + nyttBeskrivning + "', " +
         "adress = '" + nyttAdress + "', " +
         "epost= '" + nyttEpost + "', " +
         "telefon= '" + nyttTelefon + "' " + 
         "WHERE pid = " + dbAid;
-            System.out.println(sqlFraga);
-            idb.update(sqlFraga);
+            System.out.println(uppdatering);
+            idb.update(uppdatering);
             
             //Visa bekräftelse av ändringar
             JOptionPane.showMessageDialog(this, "Dina ändringar är sparade!");
