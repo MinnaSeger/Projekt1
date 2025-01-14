@@ -25,6 +25,7 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         initComponents();
         fyllComboBox();
         fyllTextRutor ();
+        fyllStatus();
 
 
         
@@ -50,7 +51,7 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
              tfdStartdatum.setText(userData.get("startdatum"));
              tfdSlutdatum.setText(userData.get("slutdatum"));
              tfdKostnad.setText(userData.get("kostnad"));
-             tfdStatus.setText(userData.get("status"));
+             jbxStatus.setSelectedItem(userData.get("status"));
              tfdPrioritet.setText(userData.get("prioritet"));
              tfdProjektchef.setText(userData.get("projektchef"));
              lblLand.setText(userData.get("land"));
@@ -84,6 +85,28 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Fel vid hämtning av projekt.");
         } 
     }
+       
+           //Fyller rullistan med data från projekt i DB
+       private void fyllStatus(){
+        try{
+            String sqlFraga ="SELECT status FROM projekt";
+            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+            
+            if (resultat !=null) {
+                jbxStatus.removeAllItems();
+                for (HashMap <String, String> rad : resultat) {
+                 jbxStatus.addItem(rad.get("status"));
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Ingen status hittades för projekt.");
+
+            }               
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(this, "Fel vid hämtning av status.");
+        } 
+    }
+       
+       
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,7 +125,6 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         tfdStartdatum = new javax.swing.JTextField();
         tfdSlutdatum = new javax.swing.JTextField();
         tfdKostnad = new javax.swing.JTextField();
-        tfdStatus = new javax.swing.JTextField();
         tfdPrioritet = new javax.swing.JTextField();
         tfdProjektchef = new javax.swing.JTextField();
         lblProjektnamn = new javax.swing.JLabel();
@@ -116,6 +138,7 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         btnSpara = new javax.swing.JButton();
         lblPIL = new javax.swing.JLabel();
         lblLand = new javax.swing.JLabel();
+        jbxStatus = new javax.swing.JComboBox<>();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -140,8 +163,6 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         tfdSlutdatum.setText("Ändra slutdatum");
 
         tfdKostnad.setText("Ändra kostnad");
-
-        tfdStatus.setText("Ändra status");
 
         tfdPrioritet.setText("Ändra prioritet");
 
@@ -174,6 +195,8 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
 
         lblLand.setText("Land");
 
+        jbxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -199,8 +222,10 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
                                     .addComponent(tfdBeskrivning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfdStartdatum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfdKostnad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdPrioritet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(tfdPrioritet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -262,7 +287,7 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblStatus)
-                    .addComponent(tfdStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrioritet)
@@ -303,7 +328,7 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         tfdStartdatum.setText(userData.get("startdatum"));
         tfdSlutdatum.setText(userData.get("slutdatum"));
         tfdKostnad.setText(userData.get("kostnad"));
-        tfdStatus.setText(userData.get("status"));
+        jbxStatus.setSelectedItem(userData.get("status"));
         tfdPrioritet.setText(userData.get("prioritet"));
         lblLand.setText(userData.get("land"));
         tfdProjektchef.setText(userData.get("projektchef"));
@@ -318,14 +343,14 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jbxrullistaActionPerformed
 
     private void btnSparaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaMouseClicked
-        //Hämtar text från täxtfältet
+       String nyttStatus = (String) jbxStatus.getSelectedItem();
+       //Hämtar text från täxtfältet
         
         String nyttProjektnamn = tfdProjektnamn.getText();
         String nyttBeskrivning = tfdBeskrivning.getText();
         String nyttStartdatum = tfdStartdatum.getText();
         String nyttSlutdatum = tfdSlutdatum.getText();
         String nyttKostnad = tfdKostnad.getText();
-        String nyttStatus = tfdStatus.getText();
         String nyttPrioritet = tfdPrioritet.getText();
         String nyttProjektchef = tfdProjektchef.getText();
         //Uppdetara ändringar i databasen
@@ -393,6 +418,7 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSpara;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JComboBox<String> jbxStatus;
     private javax.swing.JComboBox<String> jbxrullista;
     private javax.swing.JLabel lblBeskrivning;
     private javax.swing.JLabel lblKostnad;
@@ -412,6 +438,5 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField tfdProjektnamn;
     private javax.swing.JTextField tfdSlutdatum;
     private javax.swing.JTextField tfdStartdatum;
-    private javax.swing.JTextField tfdStatus;
     // End of variables declaration//GEN-END:variables
 }
