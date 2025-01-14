@@ -317,15 +317,16 @@ try {
         String nyttEpost = tfdEpost.getText();
         String nyttAdress = tfdAdress.getText();
         String nyttBehorighetsniva = tfdBehorighet.getText();
+        String nyttLosenord = tfdLosenord.getText();
         
         try {
         // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
         String nyttAid = idb.getAutoIncrement("anstalld", "aid");
 
         // Lägg till ny anställd i anstalld-tabellen
-        String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, adress, epost, telefon, anstallningsdatum, avdelning ) " +
+        String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, adress, epost, telefon, anstallningsdatum, avdelning, losenord ) " +
                 "VALUES (" + nyttAid + ", '" + nyttFornamn + "', '" + nyttEfternamn + "', '" + nyttAdress + "', '" + nyttEpost + "', '" + 
-                nyttTelefon + "', '" + nyttAnstallningsdatum + "', '" + nyttAvdelning + "')";
+                nyttTelefon + "', '" + nyttAnstallningsdatum + "', '" + nyttAvdelning + "', '" + nyttLosenord + "')";
         
         idb.insert(insertAnstalld);
 

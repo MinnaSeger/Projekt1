@@ -267,7 +267,9 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSlumpaLosenMouseClicked
 
     private void btnOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseClicked
-  try {
+        
+        
+        try {
             this.aid = idb.getAutoIncrement("anstalld", "aid");
         } catch (InfException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
@@ -281,6 +283,7 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         String nyttAdress = tfdAdress.getText();
         String nyttMentor = tfdMentor.getText();
         String nyttAnsvarighetsomrade = tfdAnsvarighetsomr.getText();
+        String nyttLosenord = tfdLosenord.getText();
            
 try {
     // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
@@ -309,9 +312,9 @@ try {
     }
 
     // Lägg till ny handläggare i anstalld-tabellen
-    String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, anstallningsdatum, avdelning, telefon, epost, adress) " +
+    String insertAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, anstallningsdatum, avdelning, telefon, epost, adress, losenord) " +
             "VALUES (" + nyttAid + ", '" + nyttFornamn + "', '" + nyttEfternamn + "', '" + nyttAnstallningsdatum + "', '" + nyttAvdelning + "', '" +
-            nyttTelefon + "', '" + nyttEpost + "', '" + nyttAdress + "')";
+            nyttTelefon + "', '" + nyttLosenord +"', '"+ nyttEpost + "', '" + nyttAdress + "')";
     idb.insert(insertAnstalld);
 
     // Lägg till mentor och ansvarighetsområde i handläggare-tabellen
