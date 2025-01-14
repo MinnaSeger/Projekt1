@@ -85,7 +85,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfdTaBortHandlaggare">
       <Properties>
-        <Property name="text" type="java.lang.String" value="AngeHandlaggare"/>
+        <Property name="text" type="java.lang.String" value="Ange Handlaggare"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnTaBortHandlaggare">

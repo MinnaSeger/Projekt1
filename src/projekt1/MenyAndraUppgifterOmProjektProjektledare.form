@@ -24,6 +24,27 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnAndraProjektetsPartners" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnAndraProjektetsData" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnAndraProjektetsHandlaggare" alignment="0" pref="270" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="643" max="-2" attributes="0"/>
+                  <Component id="jScrollPane3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblProjektetsHandlaggare" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="377" max="-2" attributes="0"/>
+                      <Component id="btnUppdateratabeller" min="-2" pref="220" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="514" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="283" max="-2" attributes="0"/>
@@ -33,34 +54,12 @@
                       <EmptySpace min="-2" pref="337" max="-2" attributes="0"/>
                       <Component id="lblProjektetspartners" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnStatistikochKostnadProjekt" min="-2" pref="270" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnStatistikochKostnadProjekt" pref="270" max="32767" attributes="0"/>
-                          <Component id="btnAndraProjektetsPartners" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnAndraProjektetsHandlaggare" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="643" max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblProjektetsHandlaggare" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="550" max="-2" attributes="0"/>
-                      <Component id="btnUppdateratabeller" min="-2" pref="220" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="0" pref="514" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,21 +70,20 @@
               <Component id="lblandraUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAndraProjektetsHandlaggare" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAndraProjektetsPartners" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Component id="btnAndraProjektetsPartners" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="btnAndraProjektetsHandlaggare" min="-2" pref="27" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnStatistikochKostnadProjekt" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAndraProjektetsData" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="78" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnStatistikochKostnadProjekt" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Component id="lblProjektetsHandlaggare" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -96,7 +94,7 @@
               <Component id="jScrollPane3" min="-2" pref="88" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="btnUppdateratabeller" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="328" max="32767" attributes="0"/>
+              <EmptySpace pref="302" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -107,11 +105,6 @@
         <Property name="text" type="java.lang.String" value="&#xc4;ndra uppgifter om projekt jag &#xe4;r projektansvarig f&#xf6;r"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAndraProjektetsHandlaggare">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra projektets Handl&#xe4;ggare"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnAndraProjektetsPartners">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra projektets Partners"/>
@@ -120,10 +113,13 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAndraProjektetsPartnersMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnAndraProjektetsData">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra projektets data"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAndraProjektetsDataMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnUppdateratabeller">
       <Properties>
@@ -293,6 +289,15 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnStatistikochKostnadProjektMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStatistikochKostnadProjektActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAndraProjektetsHandlaggare">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra projektetshandl&#xe4;ggare"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAndraProjektetsHandlaggareMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAndraProjektetsHandlaggareActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

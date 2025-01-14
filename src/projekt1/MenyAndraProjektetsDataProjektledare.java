@@ -3,18 +3,62 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package projekt1;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+import java.util.HashMap;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author elsa
  */
 public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
+        private InfDB idb;
+        private String dbAid;
 
     /**
      * Creates new form MenyAndraProjektetsDataProjektledare
      */
-    public MenyAndraProjektetsDataProjektledare() {
-        initComponents();
+    public MenyAndraProjektetsDataProjektledare(InfDB idb, String dbAid) {
+            this.idb = idb; 
+            this.dbAid = dbAid;
+            initComponents();
+            
+                fyllProjektetsTabell();
+    }
+    
+    public void fyllProjektetsTabell (){
+    try {
+        String sqlFraga = "SELECT DISTINCT projektnamn, beskrivning, status, prioritet, startdatum, slutdatum, kostnad " +
+                "FROM projekt " +
+                "WHERE projektchef = " + dbAid;
+        
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+        
+        if (resultat == null || resultat.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingen data om projekt hittades!");
+        }
+        DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Projektnamn");
+            model.addColumn("Beskrivning");
+            model.addColumn("Startdatum");
+            model.addColumn("Slutdatum");
+            model.addColumn("Kostnad");
+            model.addColumn("Status");
+            model.addColumn("Prioritet");
+            
+            
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("projektnamn"), rad.get("beskrivning"), rad.get("startdatum"), rad.get("slutdatum"),
+                rad.get("kostnad"), rad.get("status"), rad.get("prioritet")});
+            }
+            
+            tblProjektetsData.setModel(model);
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektets data: " + e.getMessage());
+        }
     }
 
     /**
@@ -29,7 +73,7 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         lblProjektetsData = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProjektetsData = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnSparaAndringar = new javax.swing.JButton();
         btnSparaBorttagenData = new javax.swing.JButton();
         tfdAngeNyData = new javax.swing.JTextField();
         tfdTaBortData = new javax.swing.JTextField();
@@ -59,9 +103,19 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblProjektetsData);
 
-        jButton1.setText("Spara ny data");
+        btnSparaAndringar.setText("Spara ny data");
+        btnSparaAndringar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSparaAndringarMouseClicked(evt);
+            }
+        });
 
         btnSparaBorttagenData.setText("Spara borttagen data");
+        btnSparaBorttagenData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSparaBorttagenDataMouseClicked(evt);
+            }
+        });
 
         tfdAngeNyData.setText("Ange ny data");
 
@@ -83,7 +137,7 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(tfdAngeNyData, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSparaAndringar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -102,7 +156,7 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdAngeNyData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnSparaAndringar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSparaBorttagenData)
@@ -112,6 +166,64 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSparaAndringarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringarMouseClicked
+        // TODO add your handling code here:
+            // Hämta den nya data som användaren vill lägga till från textfältet
+    String nyData = tfdAngeNyData.getText().trim();
+    
+    // Kontrollera om fältet inte är tomt
+    if (!nyData.isEmpty()) {
+        // Lägg till den nya data i tabellen (exempel: lägga till i första kolumnen)
+        DefaultTableModel model = (DefaultTableModel) tblProjektetsData.getModel();
+        model.addRow(new Object[] { nyData, "", "", "", "", "", "" });
+
+        // Om du använder en databas, lägg till datan i databasen här
+        // Exempel med databas (använd dina egna metoder för att interagera med databasen)
+        // idb.insertData("INSERT INTO projekt_table (projektnamn) VALUES ('" + nyData + "')");
+        
+        // Töm textfältet
+        tfdAngeNyData.setText("");
+    } else {
+        JOptionPane.showMessageDialog(this, "Ange ny data innan du sparar.");
+    }
+    }//GEN-LAST:event_btnSparaAndringarMouseClicked
+
+    private void btnSparaBorttagenDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaBorttagenDataMouseClicked
+        // TODO add your handling code here:
+        
+            // Hämta den data som användaren vill ta bort
+    String borttagenData = tfdTaBortData.getText().trim();
+    
+    // Kontrollera om fältet inte är tomt
+    if (!borttagenData.isEmpty()) {
+        DefaultTableModel model = (DefaultTableModel) tblProjektetsData.getModel();
+        boolean found = false;
+        
+        // Loopa igenom alla rader i tabellen och leta efter den data som ska tas bort
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 0).equals(borttagenData)) {
+                // Ta bort raden från tabellen
+                model.removeRow(i);
+                found = true;
+                break;
+            }
+        }
+        
+        if (found) {
+            // Om du använder en databas, ta bort den data från databasen här
+            // Exempel med databas (använd dina egna metoder för att interagera med databasen)
+            // idb.deleteData("DELETE FROM projekt_table WHERE projektnamn = '" + borttagenData + "'");
+            
+            // Töm textfältet
+            tfdTaBortData.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Data finns inte i tabellen.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Ange data att ta bort.");
+    }
+    }//GEN-LAST:event_btnSparaBorttagenDataMouseClicked
 
     /**
      * @param args the command line arguments
@@ -143,14 +255,14 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenyAndraProjektetsDataProjektledare().setVisible(true);
+                //new MenyAndraProjektetsDataProjektledare().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSparaAndringar;
     private javax.swing.JButton btnSparaBorttagenData;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblProjektetsData;
     private javax.swing.JTable tblProjektetsData;
