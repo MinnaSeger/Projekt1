@@ -73,14 +73,14 @@ public void fyllProjektetsTabell (){
         
         try {
             
-            String sqlHandlaggare = "SELECT anstalld.fornamn, anstalld.efternamn, handlaggare.ansvarighetsomrade " +
+            String sqlFraga = "SELECT anstalld.fornamn, anstalld.efternamn, handlaggare.ansvarighetsomrade " +
                         "FROM anstalld " +
                         "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
                         "JOIN ans_proj ON anstalld.aid = ans_proj.aid " +
                         "JOIN projekt ON ans_proj.pid = projekt.pid " +
                         "WHERE projekt.projektchef IN (SELECT aid FROM anstalld WHERE epost = '" + dbAid + "')";
             
-            ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlHandlaggare);
+            ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlFraga);
             
             if (resultatx == null || resultatx.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Inga handläggare hittades." );
@@ -106,7 +106,7 @@ public void fyllProjektetsTabell (){
         
         try {
             
-            String sqlPartner = "SELECT namn, telefon FROM partner " +
+            String sqlFraga = "SELECT namn, telefon FROM partner " +
              "WHERE pid IN ( " +
              "    SELECT partner_pid FROM projekt_partner " +
              "    WHERE pid IN ( " +
@@ -118,7 +118,7 @@ public void fyllProjektetsTabell (){
              "    ) " +
              ");";
             
-            ArrayList<HashMap<String, String>> resultaten = idb.fetchRows(sqlPartner);
+            ArrayList<HashMap<String, String>> resultaten = idb.fetchRows(sqlFraga);
             
             if (resultaten == null || resultaten.isEmpty()) {
                 DefaultTableModel model = new DefaultTableModel();
