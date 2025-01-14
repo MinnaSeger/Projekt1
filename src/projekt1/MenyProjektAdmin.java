@@ -89,7 +89,9 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
            //Fyller rullistan med data från projekt i DB
        private void fyllStatus(){
         try{
-            String sqlFraga ="SELECT status FROM projekt";
+            String sqlFraga = "SELECT DISTINCT status FROM projekt";
+
+
             ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
             
             if (resultat !=null) {
@@ -373,7 +375,7 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
             idb.update(uppdatering);
             
             //Visa bekräftelse av ändringar
-            JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
+            JOptionPane.showMessageDialog(this, "Dina projektändringar är sparade!");
         } catch (Exception e) {
             //Hanterar fel
             JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
