@@ -21,168 +21,55 @@ public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
     /**
      * Creates new form MenyUppgifterOmProjektProjektledare
      */
-    public MenyUppgifterOmProjektProjektledare(InfDB idb, String dbAid) {
-        this.idb = idb;
-        this.dbAid = dbAid;
-        initComponents();
-        
-        FylliTextfalt();
-        FylliTabeller();
-        
-    }
     
-    private void FylliTextfalt () {
-        try { 
-            String sqlFraga = "SELECT DISTINCT projektnamn, kostnad, beskrivning, startdatum, slutdatum, status, prioritet, projektchef, land " +
-            "FROM projekt " +
-            "WHERE projektchef = " + dbAid;
-            
-            HashMap <String, String> userData = idb.fetchRow(sqlFraga);
-            
-            if(userData !=null) {
-                tfdProjektNamn.setText(userData.get("projektnamn"));
-                tfdKostnad.setText(userData.get("kostnad"));
-                tfdBeskrivning.setText(userData.get("beskrivning"));
-                tfdStartDatum.setText(userData.get("startdatum"));
-                tfdSlutDatum.setText(userData.get("slutdatum"));
-                tfdStatus.setText(userData.get("status"));
-                tfdPrioritet.setText(userData.get("prioritet"));
-                tfdLand.setText(userData.get("land"));
-                
-            }else{ JOptionPane.showMessageDialog(this, "Ingen data om projekt på avdelning hittades!");
-            
-            }
-        }catch (InfException e) {
-            JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!");
-            
-        }
-    }
+public MenyUppgifterOmProjektProjektledare (InfDB idb, String dbAid){
     
-    private void FylliTabeller() {
-        
-        fyllPartnerTabell();
-        fyllHandlaggareTabell();
-  
-    }
+    this.idb=idb; 
+    this.dbAid = dbAid;
+    initComponents();
+    fyllProjektetsTabell();
+    //fyllprojektetspartners();
+    //fyllProjektetshandlaggare();
     
-    private void fyllPartnerTabell() {
-        
-        try{
-            String sqlFraga = "SELECT DISTINCT partner.namn, projekt.projektnamn, projekt.pid " +
-                   "FROM partner " +
-                    "JOIN projekt_partner ON partner_pid = projekt_partner.partner_pid " +
-                    "JOIN projekt ON projekt.pid = projekt_partner.pid " +
-                    "WHERE projektchef = " + dbAid;
-            
-            ArrayList<HashMap<String, String >> partnerData = idb.fetchRows(sqlFraga);
-            
-            DefaultTableModel model = (DefaultTableModel) tblPartner.getModel();
-            model.setRowCount(0); //Rensar partnertabellen
-        
-        if(partnerData !=null) {
-            for (HashMap <String, String> row:partnerData) {
-                model.addRow(new Object [] {
-                    row.get("namn"),
-                    row.get("projektnamn"),
-                    row.get("pid")
-});
-                }
-
-            }
-}catch (InfException e) {
-    JOptionPane.showMessageDialog (this, "Fel vid hämtning av data om partner: " + e.getMessage());
-            
-        }
-    }
     
-private void fyllHandlaggareTabell() {
-try{
-String sqlFraga = "SELECT DISTINCT anstalld.fornamn, anstalld.efternamn, anstalld.aid, projekt.projektnamn " +
-"FROM anstalld " + 
-"JOIN projekt ON anstalld.aid = projekt.projektchef " +
-"WHERE projektchef = " + dbAid;
-
-ArrayList<HashMap<String, String >> handlaggareData = idb.fetchRows (sqlFraga);
-
- DefaultTableModel model = (DefaultTableModel) tblhandlaggare.getModel();
- model.setRowCount(0); //Rensar handlaggareTabellen
-
- if (handlaggareData !=null) {
- for (HashMap<String, String > row:handlaggareData) {
- model.addRow(new Object []{
- row.get("fornamn"),
- row.get("efternamn"),
- row.get("aid"),
- row.get("projektnamn")
-
- });
- }
- }
- } catch (InfException e) {
- JOptionPane.showMessageDialog(this, "Fel vid hämtning av data om handläggare: " + e.getMessage());
- }
- }
- 
-private void laggTillPartner(String partnerNamn, int projektId) {
-    try {
-        // Kontrollera om partner redan finns
-        String kontrollFraga = "SELECT partner_pid FROM partner WHERE namn = '" + partnerNamn + "'";
-        String partnerPid = idb.fetchSingle(kontrollFraga);
-
-        if (partnerPid == null) {
-            // Om partner inte finns, lägg till ny partner i partner-tabellen
-            String insertPartner = "INSERT INTO partner (namn) VALUES ('" + partnerNamn + "')";
-            idb.insert(insertPartner);
-
-            // Hämta partner_pid för den nya partnern
-            partnerPid = idb.fetchSingle(kontrollFraga);
-        }
-
-        // Lägg till kopplingen mellan partner och projekt i projekt_partner-tabellen
-        String insertProjektPartner = "INSERT INTO projekt_partner (partner_pid, pid) VALUES (" + partnerPid + ", " + projektId + ")";
-        idb.insert(insertProjektPartner);
-
-        // Uppdatera tabellen i GUI
-        fyllPartnerTabell();
-
-        JOptionPane.showMessageDialog(this, "Partner har lagts till i projektet!");
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(this, "Fel vid tillägg av partner: " + e.getMessage());
-    }
 }
 
-private void taBortPartner(String partnerNamn, int projektId) {
+public void fyllProjektetsTabell (){
     try {
-        // Hämta partner_pid för den angivna partnern
-        String kontrollFraga = "SELECT partner_pid FROM partner WHERE namn = '" + partnerNamn + "'";
-        String partnerPid = idb.fetchSingle(kontrollFraga);
-
-        if (partnerPid != null) {
-            // Ta bort kopplingen mellan partner och projekt
-            String deleteProjektPartner = "DELETE FROM projekt_partner WHERE partner_pid = " + partnerPid + " AND pid = " + projektId;
-            idb.delete(deleteProjektPartner);
-
-            // Kontrollera om partnern är kopplad till andra projekt
-            String kontrollOmPartnerAnvands = "SELECT pid FROM projekt_partner WHERE partner_pid = " + partnerPid;
-            String andraProjekt = idb.fetchSingle(kontrollOmPartnerAnvands);
-
-            if (andraProjekt == null) {
-                // Om partner inte är kopplad till andra projekt, ta bort partner från partner-tabellen
-                String deletePartner = "DELETE FROM partner WHERE partner_pid = " + partnerPid;
-                idb.delete(deletePartner);
-            }
-
-            // Uppdatera tabellen i GUI
-            fyllPartnerTabell();
-
-            JOptionPane.showMessageDialog(this, "Partner har tagits bort från projektet!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Partner finns inte i projektet.");
+        String sqlFraga = "SELECT projektnamn, beskrivning, status, prioritet, startdatum, slutdatum, kostnad " +
+                "FROM projekt " +
+                "WHERE projektchef IN (" +
+                "SELECT aid " +
+                "FROM anstalld " +
+                "WHERE epost = '" + dbAid + "');";
+        
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+        
+        if (resultat == null || resultat.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingen data om projekt hittades!");
         }
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(this, "Fel vid borttagning av partner: " + e.getMessage());
+        DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Projektnamn");
+            model.addColumn("Beskrivning");
+            model.addColumn("Startdatum");
+            model.addColumn("Slutdatum");
+            model.addColumn("Kostnad");
+            model.addColumn("Status");
+            model.addColumn("Prioritet");
+            
+            
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("projektnamn"), rad.get("beskrivning"), rad.get("startdatum"), rad.get("slutdatum"),
+                rad.get("kostnad"), rad.get("status"), rad.get("prioritet")});
+            }
+            
+            tblProjektetsTabell.setModel(model);
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektets data: " + e.getMessage());
+        }
     }
-}
+    
+
 
 
 
@@ -195,312 +82,205 @@ private void taBortPartner(String partnerNamn, int projektId) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblKostnader = new javax.swing.JLabel();
-        lblStatus = new javax.swing.JLabel();
-        tfdKostnad = new javax.swing.JTextField();
-        tfdStatus = new javax.swing.JTextField();
         lblandraUppgifterOmProjekt = new javax.swing.JLabel();
-        lblProjektNamn = new javax.swing.JLabel();
-        lblProjektbeskrivning = new javax.swing.JLabel();
-        lblStartDatum = new javax.swing.JLabel();
-        lblSlutDatum = new javax.swing.JLabel();
+        btnAndraProjektetsHandlaggare = new javax.swing.JButton();
+        btnAndraProjektetsPartners = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        btnStatistikPartners = new javax.swing.JButton();
+        btnStatistiklander = new javax.swing.JButton();
+        btnVisaProjektetskostnad = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        btnUppdateratabeller = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        lblLand = new javax.swing.JLabel();
-        tfdProjektNamn = new javax.swing.JTextField();
-        tfdBeskrivning = new javax.swing.JTextField();
-        tfdStartDatum = new javax.swing.JTextField();
-        tfdSlutDatum = new javax.swing.JTextField();
-        tfdPrioritet = new javax.swing.JTextField();
-        btnSparaAndringar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblhandlaggare = new javax.swing.JTable();
+        tblProjektetsTabell = new javax.swing.JTable();
+        lblProjektetsHandlaggare = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblPartner = new javax.swing.JTable();
-        tfdLand = new javax.swing.JTextField();
-        tfdlaggtillpartner = new javax.swing.JTextField();
-        tfdtabortpartner = new javax.swing.JTextField();
-        tfdlaggtillhandlaggare = new javax.swing.JTextField();
-        tfdtaborthandläggare = new javax.swing.JTextField();
+        tblProjektetshandlaggare = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblProjektetspartners = new javax.swing.JTable();
+        lblProjektetspartners = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblKostnader.setText("Kostnader");
-
-        lblStatus.setText("Status");
-
-        tfdKostnad.setText("Kostnader");
-        tfdKostnad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdKostnadActionPerformed(evt);
-            }
-        });
-
-        tfdStatus.setText("Status");
-        tfdStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdStatusActionPerformed(evt);
-            }
-        });
-
         lblandraUppgifterOmProjekt.setText("Ändra uppgifter om projekt på avdelning");
 
-        lblProjektNamn.setText("Projekt namn");
+        btnAndraProjektetsHandlaggare.setText("Ändra projektets Handläggare");
 
-        lblProjektbeskrivning.setText("Beskrivning");
+        btnAndraProjektetsPartners.setText("Ändra projektets Partners");
 
-        lblStartDatum.setText("Start datum");
+        jButton1.setText("Ändra projektets data");
 
-        lblSlutDatum.setText("Slut datum");
+        btnStatistikPartners.setText("Statistik över projektets partners");
 
-        jLabel1.setText("Prioritet");
+        btnStatistiklander.setText("Statistik över projektets länder");
 
-        lblLand.setText("Land");
+        btnVisaProjektetskostnad.setText("Visa projektets kostnad");
 
-        tfdProjektNamn.setText("projektnamn");
+        jButton2.setText("Visa Statistik kostnad per land");
 
-        tfdBeskrivning.setText("Beskrivning");
+        btnUppdateratabeller.setText("Uppdatera data i tabellerna");
 
-        tfdStartDatum.setText("Start datum");
+        jLabel1.setText("Projektets data");
 
-        tfdSlutDatum.setText("Slut datum");
-
-        tfdPrioritet.setText("Prioritet");
-
-        btnSparaAndringar.setText("Spara ändringar");
-        btnSparaAndringar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSparaAndringarMouseClicked(evt);
-            }
-        });
-        btnSparaAndringar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSparaAndringarActionPerformed(evt);
-            }
-        });
-
-        tblhandlaggare.setModel(new javax.swing.table.DefaultTableModel(
+        tblProjektetsTabell.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Förnamn", "Efternamn", "Aid", "Projekt"
+                "Projektnamn", "Beskrivning", "Status", "Prioritet", "Start datum", "Slut datum", "Kostnad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblhandlaggare);
+        jScrollPane1.setViewportView(tblProjektetsTabell);
 
-        tblPartner.setModel(new javax.swing.table.DefaultTableModel(
+        lblProjektetsHandlaggare.setText("Projektets Handläggare");
+
+        tblProjektetshandlaggare.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Partnernamn", "Projekt", "Pid"
+                "Handläggare", "Ansvarsområde"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblPartner);
+        jScrollPane2.setViewportView(tblProjektetshandlaggare);
 
-        tfdLand.setText("Land");
+        tblProjektetspartners.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Partner", "Telefonnummer"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        tfdlaggtillpartner.setText("Lägg till partner");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblProjektetspartners);
 
-        tfdtabortpartner.setText("Ta bort partner");
-
-        tfdlaggtillhandlaggare.setText("Lägg till handläggare");
-
-        tfdtaborthandläggare.setText("Ta bort handläggare");
+        lblProjektetspartners.setText("Projektets partners");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(lblLand)
-                .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfdStartDatum, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                            .addComponent(tfdSlutDatum)
-                            .addComponent(tfdPrioritet, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfdLand, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(106, 106, 106)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(283, 283, 283)
+                        .addComponent(lblandraUppgifterOmProjekt))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfdlaggtillpartner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnSparaAndringar)
-                                .addComponent(lblandraUppgifterOmProjekt)))
-                        .addGap(100, 100, 100)
-                        .addComponent(tfdtabortpartner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tfdKostnad, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 347, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblKostnader, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblStartDatum)
-                            .addComponent(lblSlutDatum, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfdStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblProjektNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(tfdProjektNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblProjektbeskrivning)
-                        .addGap(59, 59, 59)
-                        .addComponent(tfdBeskrivning, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(118, 118, 118)
-                .addComponent(tfdlaggtillhandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(126, 126, 126)
-                .addComponent(tfdtaborthandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnVisaProjektetskostnad, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(203, 203, 203)
+                                .addComponent(lblProjektetspartners))
+                            .addComponent(btnUppdateratabeller, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAndraProjektetsPartners, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAndraProjektetsHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStatistikPartners)
+                    .addComponent(btnStatistiklander, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(516, 516, 516))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(lblProjektetsHandlaggare))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 549, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(15, 15, 15)
+                .addComponent(lblandraUppgifterOmProjekt)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblProjektNamn)
-                                .addComponent(tfdlaggtillpartner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfdtabortpartner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblandraUppgifterOmProjekt)
-                                .addGap(87, 87, 87)
-                                .addComponent(tfdProjektNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdKostnad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblKostnader))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdBeskrivning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblProjektbeskrivning))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdStartDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblStartDatum))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdSlutDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSlutDatum))
-                        .addGap(18, 18, 18))
+                        .addGap(44, 44, 44)
+                        .addComponent(btnAndraProjektetsHandlaggare))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblStatus)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tfdStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfdlaggtillhandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfdtaborthandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdPrioritet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                        .addComponent(btnAndraProjektetsPartners)
                         .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnStatistikPartners))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblProjektetsHandlaggare)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(btnStatistiklander))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLand)
-                            .addComponent(tfdLand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                .addComponent(btnSparaAndringar)
-                .addGap(24, 24, 24))
+                            .addComponent(btnVisaProjektetskostnad)
+                            .addComponent(lblProjektetspartners))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(34, 34, 34)
+                                .addComponent(btnUppdateratabeller))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(395, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfdKostnadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdKostnadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdKostnadActionPerformed
-
-    private void tfdStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdStatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdStatusActionPerformed
-
-    private void btnSparaAndringarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringarActionPerformed
-        // TODO add your handling code here
-
-        FylliTextfalt(); // Uppdatera fält
-        FylliTabeller(); // Uppdatera tabeller
-    
-    }//GEN-LAST:event_btnSparaAndringarActionPerformed
-
-    private void btnSparaAndringarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringarMouseClicked
-        // TODO add your handling code here:
-        
-        String nyttProjektnamn = tfdProjektNamn.getText();
-        String nyttKostnad = tfdKostnad.getText();
-        String nyttBeskrivning = tfdBeskrivning.getText();
-        String nyttStartDatum = tfdStartDatum.getText();
-        String nyttSlutDatum = tfdSlutDatum.getText();
-        String nyttStatus = tfdStatus.getText();
-        String nyttPrioritet = tfdPrioritet.getText();
-        String nyttLand = tfdLand.getText();
-        
-        //Uppdetara ändringar i databasen
-        
-        try {
-            //Byta ändringar
-            String updatesqlFraga = "UPDATE projekt SET " +  
-                    "projektnamn = '" + nyttProjektnamn + "', " + 
-                    "kostnad = '" + nyttKostnad + "'," +
-                    "beskrivning = '" + nyttBeskrivning + "', " + 
-                    "startdatum = '" + nyttStartDatum + "', " + 
-                    "slutdatum = '" + nyttSlutDatum + "', " + 
-                    "status ='" + nyttStatus + "'," +
-                    "prioritet = '" + nyttPrioritet + "'," +
-                    "land = '" + nyttLand + "'" +
-                    "WHERE projektchef = " + dbAid;
-           
-            System.out.println(updatesqlFraga);
-            // Kör uppdateringen
-            idb.update(updatesqlFraga);
-            
-            //Visa bekräftelse av ändringar
-            JOptionPane.showMessageDialog(this, "Projektets Ändringar Är Sparade!");
-        } catch (Exception e) {
-            //Hantera fel?
-            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
-        }
-    }//GEN-LAST:event_btnSparaAndringarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -538,31 +318,23 @@ private void taBortPartner(String partnerNamn, int projektId) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSparaAndringar;
+    private javax.swing.JButton btnAndraProjektetsHandlaggare;
+    private javax.swing.JButton btnAndraProjektetsPartners;
+    private javax.swing.JButton btnStatistikPartners;
+    private javax.swing.JButton btnStatistiklander;
+    private javax.swing.JButton btnUppdateratabeller;
+    private javax.swing.JButton btnVisaProjektetskostnad;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblKostnader;
-    private javax.swing.JLabel lblLand;
-    private javax.swing.JLabel lblProjektNamn;
-    private javax.swing.JLabel lblProjektbeskrivning;
-    private javax.swing.JLabel lblSlutDatum;
-    private javax.swing.JLabel lblStartDatum;
-    private javax.swing.JLabel lblStatus;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblProjektetsHandlaggare;
+    private javax.swing.JLabel lblProjektetspartners;
     private javax.swing.JLabel lblandraUppgifterOmProjekt;
-    private javax.swing.JTable tblPartner;
-    private javax.swing.JTable tblhandlaggare;
-    private javax.swing.JTextField tfdBeskrivning;
-    private javax.swing.JTextField tfdKostnad;
-    private javax.swing.JTextField tfdLand;
-    private javax.swing.JTextField tfdPrioritet;
-    private javax.swing.JTextField tfdProjektNamn;
-    private javax.swing.JTextField tfdSlutDatum;
-    private javax.swing.JTextField tfdStartDatum;
-    private javax.swing.JTextField tfdStatus;
-    private javax.swing.JTextField tfdlaggtillhandlaggare;
-    private javax.swing.JTextField tfdlaggtillpartner;
-    private javax.swing.JTextField tfdtaborthandläggare;
-    private javax.swing.JTextField tfdtabortpartner;
+    private javax.swing.JTable tblProjektetsTabell;
+    private javax.swing.JTable tblProjektetshandlaggare;
+    private javax.swing.JTable tblProjektetspartners;
     // End of variables declaration//GEN-END:variables
 }

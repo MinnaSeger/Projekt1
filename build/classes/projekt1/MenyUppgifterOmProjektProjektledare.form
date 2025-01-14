@@ -24,243 +24,169 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Component id="lblLand" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="tfdStartDatum" pref="99" max="32767" attributes="0"/>
-                          <Component id="tfdSlutDatum" alignment="0" max="32767" attributes="0"/>
-                          <Component id="tfdPrioritet" alignment="1" max="32767" attributes="0"/>
-                          <Component id="tfdLand" alignment="1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="283" max="-2" attributes="0"/>
+                      <Component id="lblandraUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="tfdlaggtillpartner" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblandraUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jButton2" min="-2" pref="220" max="-2" attributes="0"/>
+                                  <Component id="btnVisaProjektetskostnad" min="-2" pref="220" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
+                              <Component id="lblProjektetspartners" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="btnUppdateratabeller" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="tfdtabortpartner" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="tfdKostnad" min="-2" pref="99" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="347" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lblKostnader" min="-2" pref="87" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblStartDatum" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSlutDatum" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblStatus" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="tfdStatus" min="-2" pref="99" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblProjektNamn" min="-2" pref="87" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="tfdProjektNamn" min="-2" pref="99" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblProjektbeskrivning" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                      <Component id="tfdBeskrivning" min="-2" pref="99" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-              <Component id="tfdlaggtillhandlaggare" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
-              <Component id="tfdtaborthandläggare" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="btnAndraProjektetsPartners" min="-2" pref="220" max="-2" attributes="0"/>
+                  <Component id="btnAndraProjektetsHandlaggare" min="-2" pref="220" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
+                  <Component id="btnStatistikPartners" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnStatistiklander" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="516" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+                      <Component id="lblProjektetsHandlaggare" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="643" max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="549" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Component id="lblandraUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                              <Component id="lblProjektNamn" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfdlaggtillpartner" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfdtabortpartner" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblandraUppgifterOmProjekt" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                              <Component id="tfdProjektNamn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfdKostnad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblKostnader" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfdBeskrivning" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblProjektbeskrivning" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfdStartDatum" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblStartDatum" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfdSlutDatum" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSlutDatum" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="btnAndraProjektetsHandlaggare" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="92" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="tfdStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfdlaggtillhandlaggare" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfdtaborthandläggare" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfdPrioritet" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnAndraProjektetsPartners" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnStatistikPartners" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="78" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblProjektetsHandlaggare" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="btnStatistiklander" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="73" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblLand" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdLand" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVisaProjektetskostnad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProjektetspartners" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="btnUppdateratabeller" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane3" min="-2" pref="88" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="105" max="32767" attributes="0"/>
-              <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace pref="395" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblKostnader">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Kostnader"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblStatus">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Status"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdKostnad">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Kostnader"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdKostnadActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdStatus">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Status"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdStatusActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblandraUppgifterOmProjekt">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra uppgifter om projekt p&#xe5; avdelning"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblProjektNamn">
+    <Component class="javax.swing.JButton" name="btnAndraProjektetsHandlaggare">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Projekt namn"/>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra projektets Handl&#xe4;ggare"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblProjektbeskrivning">
+    <Component class="javax.swing.JButton" name="btnAndraProjektetsPartners">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Beskrivning"/>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra projektets Partners"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblStartDatum">
+    <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Start datum"/>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra projektets data"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblSlutDatum">
+    <Component class="javax.swing.JButton" name="btnStatistikPartners">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Slut datum"/>
+        <Property name="text" type="java.lang.String" value="Statistik &#xf6;ver projektets partners"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnStatistiklander">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Statistik &#xf6;ver projektets l&#xe4;nder"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnVisaProjektetskostnad">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Visa projektets kostnad"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Visa Statistik kostnad per land"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUppdateratabeller">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Uppdatera data i tabellerna"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Prioritet"/>
+        <Property name="text" type="java.lang.String" value="Projektets data"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblLand">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Land"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdProjektNamn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="projektnamn"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdBeskrivning">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Beskrivning"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdStartDatum">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Start datum"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdSlutDatum">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Slut datum"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdPrioritet">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Prioritet"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnSparaAndringar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Spara &#xe4;ndringar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSparaAndringarMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSparaAndringarActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -269,18 +195,36 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblhandlaggare">
+        <Component class="javax.swing.JTable" name="tblProjektetsTabell">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="false" title="F&#xf6;rnamn" type="java.lang.Object"/>
-                <Column editable="false" title="Efternamn" type="java.lang.Object"/>
-                <Column editable="false" title="Aid" type="java.lang.Object"/>
-                <Column editable="false" title="Projekt" type="java.lang.Object"/>
+              <Table columnCount="7" rowCount="4">
+                <Column editable="false" title="Projektnamn" type="java.lang.Object"/>
+                <Column editable="false" title="Beskrivning" type="java.lang.Object"/>
+                <Column editable="false" title="Status" type="java.lang.Object"/>
+                <Column editable="false" title="Prioritet" type="java.lang.Object"/>
+                <Column editable="false" title="Start datum" type="java.lang.Object"/>
+                <Column editable="false" title="Slut datum" type="java.lang.Object"/>
+                <Column editable="false" title="Kostnad" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -310,6 +254,11 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="lblProjektetsHandlaggare">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Projektets Handl&#xe4;ggare"/>
+      </Properties>
+    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -317,22 +266,16 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblPartner">
+        <Component class="javax.swing.JTable" name="tblProjektetshandlaggare">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="4">
-                <Column editable="false" title="Partnernamn" type="java.lang.Object"/>
-                <Column editable="false" title="Projekt" type="java.lang.Object"/>
-                <Column editable="false" title="Pid" type="java.lang.Object"/>
+              <Table columnCount="2" rowCount="4">
+                <Column editable="false" title="Handl&#xe4;ggare" type="java.lang.Object"/>
+                <Column editable="false" title="Ansvarsomr&#xe5;de" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -352,29 +295,45 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="tfdLand">
+    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tblProjektetspartners">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="2" rowCount="4">
+                <Column editable="false" title="Partner" type="java.lang.Object"/>
+                <Column editable="false" title="Telefonnummer" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblProjektetspartners">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Land"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdlaggtillpartner">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="L&#xe4;gg till partner"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdtabortpartner">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ta bort partner"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdlaggtillhandlaggare">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="L&#xe4;gg till handl&#xe4;ggare"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfdtaborthandl&#xe4;ggare">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ta bort handl&#xe4;ggare"/>
+        <Property name="text" type="java.lang.String" value="Projektets partners"/>
       </Properties>
     </Component>
   </SubComponents>
