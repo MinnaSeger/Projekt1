@@ -119,32 +119,35 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
 
     // 4. Visa alla partners som samarbetar i projekten du är tilldelad på
     private void fyllProjektPartnersTabell() {
-        try {
-            String query = "SELECT DISTINCT projekt.projektnamn, projekt_partner.partner_pid " +
-               "FROM projekt_partner " +
-               "JOIN projekt ON projekt_partner.pid = projekt.pid " +
-               "WHERE projekt_partner.pid IN (" +
-               "  SELECT pid FROM ans_proj WHERE aid = " + dbAid + ")";
+    try {
+        // SQL-fråga för att hämta partners kopplade till projekt
+        String query = "SELECT DISTINCT partner.namn, partner.roll " +
+                       "FROM projekt " +
+                       "JOIN projekt_partner ON projekt.pid = projekt_partner.pid " +
+                       "JOIN partner ON projekt_partner.partner_pid = partner.pid " +
+                       "WHERE projekt.pid IN (" +
+                       "  SELECT pid FROM ans_proj WHERE aid = " + dbAid + ")";
 
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
 
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
+        DefaultTableModel model = (DefaultTableModel) tblProjektPartners.getModel();
+        model.setRowCount(0); // Töm tidigare rader
 
-            DefaultTableModel model = (DefaultTableModel) tblProjektPartners.getModel();
-            model.setRowCount(0);
-
-            if (resultat != null) {
-                for (HashMap<String, String> rad : resultat) {
-                    model.addRow(new Object[]{
-                        rad.get("namn"),
-                        rad.get("roll")
-                    });
-                }
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{
+                    rad.get("namn"),  // Partnerns namn
+                    rad.get("roll")   // Partnerns roll i projektet
+                });
             }
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektpartners: " + e.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(this, "Inga partners hittades för dina projekt.");
         }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektpartners: " + e.getMessage());
     }
-
+}
+         
     // 5. Fyll status-väljaren
     private void fyllStatusComboBox() {
     try {

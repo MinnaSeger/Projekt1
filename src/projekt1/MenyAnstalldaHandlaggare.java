@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package projekt1;
 
 import oru.inf.InfDB;
@@ -22,49 +18,67 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
         fyllAnstalldaLista(); // Fyll listan vid start
     }
 
+    // 1. Visa alla anställda på avdelningen
     private void fyllAnstalldaLista() {
         try {
-            String SQLfraga = "SELECT Fornamn,Efternamn FROM anstallda WHERE avdelning_id = '" + dbAvdelningId + "'";
+            String SQLfraga = "SELECT CONCAT(Fornamn, ' ', Efternamn) AS namn, epost FROM anstalld WHERE avdelning = '" + dbAvdelningId + "'";
             ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
 
             DefaultListModel<String> model = new DefaultListModel<>();
+            LstAvdelningenspersonal.setModel(model); // Rensa listan
             if (resultat != null) {
                 for (HashMap<String, String> rad : resultat) {
-                    model.addElement(rad.get("namn")); // Lägg till varje namn i modellen
+                    String namnOchEpost = rad.get("namn") + " - " + rad.get("epost");
+                    model.addElement(namnOchEpost); // Lägg till namn och e-post
                 }
             } else {
                 model.addElement("Inga anställda hittades.");
             }
-            LstAvdelningenspersonal.setModel(model);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(this, "Fel vid hämtning av anställda: " + e.getMessage());
         }
     }
 
+    // 2. Sök efter en specifik handläggare
     private void sokAnstalld() {
-        try {
-            String sokText = tfdsokAnstalld.getText().trim();
-            if (sokText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Ange ett namn att söka efter.");
-                return;
-            }
-
-            String SQLfraga = "SELECT Fornamn, Efternamn FROM anstallda WHERE avdelning_id = '" + dbAvdelningId + 
-                              "' AND namn LIKE '%" + sokText + "%'";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
-
-            DefaultListModel<String> model = new DefaultListModel<>();
-            if (resultat != null) {
-                for (HashMap<String, String> rad : resultat) {
-                    model.addElement(rad.get("namn")); // Lägg till matchande namn
-                }
-            } else {
-                model.addElement("Ingen anställd matchade sökningen.");
-            }
-            LstAvdelningenspersonal.setModel(model);
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(this, "Fel vid sökning: " + e.getMessage());
+    try {
+        // Hämta söktext från textfältet
+        String sokText = tfdsokAnstalld.getText().trim();
+        if (sokText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ange ett namn eller e-post att söka efter.");
+            return;
         }
+
+        // SQL-fråga som söker i både namn (förnamn och efternamn) och e-post
+        String SQLfraga = "SELECT CONCAT(Fornamn, ' ', Efternamn) AS namn, epost " +
+                          "FROM anstallda " +
+                          "WHERE avdelning = '" + dbAvdelningId + "' " +
+                          "AND (Fornamn LIKE '%" + sokText + "%' " +
+                          "OR Efternamn LIKE '%" + sokText + "%' " +
+                          "OR epost LIKE '%" + sokText + "%')";
+        System.out.println("SQL-fråga: " + SQLfraga); // Logga frågan för felsökning
+
+        // Hämta resultat från databasen
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
+
+        // Skapa en ny modell för listan och rensa befintligt innehåll
+        DefaultListModel<String> model = new DefaultListModel<>();
+        LstAvdelningenspersonal.setModel(model); // Sätt den nya modellen
+
+        if (resultat != null) {
+            // Lägg till varje resultat i listan
+            for (HashMap<String, String> rad : resultat) {
+                String namnOchEpost = rad.get("namn") + " - " + rad.get("epost");
+                model.addElement(namnOchEpost);
+            }
+        } else {
+            // Om inget resultat hittas, visa ett meddelande i listan
+            model.addElement("Ingen anställd matchade sökningen.");
+        }
+    } catch (InfException e) {
+        // Visa ett felmeddelande om något går fel
+        JOptionPane.showMessageDialog(this, "Fel vid sökning: " + e.getMessage());
+    }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -102,6 +116,11 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
         jScrollPane1.setViewportView(LstAvdelningenspersonal);
 
         btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,9 +128,6 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(lblAnstallda, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,22 +140,24 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
                                         .addComponent(tfdsokAnstalld)
                                         .addGap(27, 27, 27)))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblAvdelningenspersonal))))
+                            .addComponent(lblAvdelningenspersonal)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(lblAnstallda, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addComponent(lblAnstallda)
-                .addGap(18, 18, 18)
+                .addGap(33, 33, 33)
                 .addComponent(lblAvdelningenspersonal)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tfdsokAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSok)))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
@@ -154,6 +172,10 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
     private void tfdsokAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdsokAnstalldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdsokAnstalldActionPerformed
+
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSokActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> LstAvdelningenspersonal;
