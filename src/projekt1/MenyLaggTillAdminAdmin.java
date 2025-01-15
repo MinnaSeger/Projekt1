@@ -274,11 +274,11 @@ public class MenyLaggTillAdminAdmin extends javax.swing.JFrame {
             return;
          }
         if (!Validering.isNumerisk(nyttBehorighetsniva)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning för behärighetsnivå! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
             return;
         }
         if (!Validering.isNumerisk(nyttAvdelning)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning för avdelning! får endast bestå av siffror.");
             return;
         }
         if (!Validering.isValidAdress(nyttAdress)) {
