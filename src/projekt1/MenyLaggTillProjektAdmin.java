@@ -56,7 +56,7 @@ public class MenyLaggTillProjektAdmin extends javax.swing.JFrame {
         tfdLand = new javax.swing.JTextField();
         btnOK = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Lägg till projekt:");
@@ -214,6 +214,31 @@ public class MenyLaggTillProjektAdmin extends javax.swing.JFrame {
         String nyttPrioritet = tfdPrioritet.getText();
         String nyttProjektchef = tfdProChe.getText();
         String nyttLand = tfdLand.getText();
+        
+         if (!Validering.isValidNamn(nyttStatus)|| !Validering.isValidNamn(nyttPrioritet)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig Status! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidDatum(nyttStartdatum) || !Validering.isValidDatum(nyttSlutdatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt datum! Kontrollera att månad och dag är korrekta, till exempel 2023-02-29 är endast tillåtet under skottår.!");
+            return;
+         }
+        if (!Validering.isNumerisk(nyttKostnad)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            return;
+        }
+        if (!Validering.isNumerisk(nyttProjektchef)|| !Validering.isNumerisk(nyttLand)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttProjektnamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "projektnamn får inte vara tom, Vänligen fyll i.");
+            return;
+        }
+        if (!Validering.isValidLongText(nyttBeskrivning)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "fältet får ej vara tomt, avsluta med en punkt.");
+            return;
+        }
         
         try {
         // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
