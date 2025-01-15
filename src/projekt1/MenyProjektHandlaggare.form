@@ -44,10 +44,11 @@
                       <Component id="btnFiltreraStatus" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="477" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" pref="80" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -57,15 +58,11 @@
                               <Component id="jScrollPane1" alignment="0" pref="534" max="32767" attributes="0"/>
                               <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="jScrollPane2" min="-2" pref="547" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jLabel1" min="-2" pref="80" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="547" max="-2" attributes="0"/>
-                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="613" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,12 +84,14 @@
                   <Component id="lblSlutDatum" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblAvdelningensprojekt" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSpinner2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmbStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnFiltreraStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblAvdelningensprojekt" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnFiltreraStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="92" max="-2" attributes="0"/>
@@ -165,10 +164,10 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                <Column editable="true" title="Projektnamn" type="java.lang.Object"/>
+                <Column editable="true" title="Startdatum" type="java.lang.Object"/>
+                <Column editable="true" title="Slutdatum" type="java.lang.Object"/>
+                <Column editable="true" title="Status" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -228,10 +227,10 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                <Column editable="true" title="Projektnamn" type="java.lang.Object"/>
+                <Column editable="true" title="Startdatum" type="java.lang.Object"/>
+                <Column editable="true" title="Slutdatum" type="java.lang.Object"/>
+                <Column editable="true" title="Status" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
@@ -249,7 +248,7 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                <Column editable="true" title="Partnernamn" type="java.lang.Object"/>
                 <Column editable="true" title="Title 2" type="java.lang.Object"/>
                 <Column editable="true" title="Title 3" type="java.lang.Object"/>
                 <Column editable="true" title="Title 4" type="java.lang.Object"/>
