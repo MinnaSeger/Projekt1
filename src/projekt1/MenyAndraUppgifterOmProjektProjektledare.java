@@ -88,7 +88,7 @@ public void fyllProjektetsTabell (){
             model.addColumn("Ansvarighetsomrade");
             
             for (HashMap<String, String> rad : resultatx) {
-                model.addRow(new Object[]{rad.get("fornamn"), rad.get("ansvarighetsomrade")});
+                model.addRow(new Object[]{rad.get("fornamn"), rad.get("efternamn"), rad.get("ansvarighetsomrade")});
                 
             }
             
