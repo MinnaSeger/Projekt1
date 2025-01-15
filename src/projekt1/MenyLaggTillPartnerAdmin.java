@@ -185,7 +185,7 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
         //validering
         
         if (!Validering.isValidNamn(nyttNamn) || !Validering.isValidNamn(nyttKontaktPerson)|| !Validering.isValidNamn(nyttBranch)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt namn! Endast bokstäver och minst två tecken långt är tillåtna.");
             return;
         }
         if (!Validering.isValidePost(nyttKontaktEpost)) {
@@ -195,9 +195,9 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
         if (!Validering.isValidTelefonnummer(nyttTelefon)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror, inga tecken är tillåtna.");
             return;
-        }
-        if (!Validering.isNumerisk(nyttStad)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+        } 
+        if (!Validering.isValidAdress(nyttStad)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av stad! Vänligen fyll i minst två tecken.");
             return;
         }
         if (!Validering.isValidAdress(nyttAdress)) {

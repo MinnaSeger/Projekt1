@@ -233,11 +233,11 @@ public class MenyLaggTillProjektAdmin extends javax.swing.JFrame {
             return;
         }
         if (!Validering.isValidAdress(nyttProjektnamn)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "projektnamn får inte vara tom, Vänligen fyll i.");
+            javax.swing.JOptionPane.showMessageDialog(this, "projektnamn får inte vara tom, Vänligen fyll i minst två tecken.");
             return;
         }
         if (!Validering.isValidLongText(nyttBeskrivning)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Beskrivning får ej vara tomt, avsluta med en punkt.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Beskrivning får ej vara tomt, måste bestå av minst två tecken.");
             return;
         }
         
