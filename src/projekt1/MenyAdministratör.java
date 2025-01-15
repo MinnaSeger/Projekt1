@@ -42,7 +42,7 @@ public class MenyAdministratör extends javax.swing.JFrame {
         btnLänder = new javax.swing.JButton();
         lblInloggad = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblVälkommenAdminstratör.setText("Välkommen Adminstratör");
 

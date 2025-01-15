@@ -57,6 +57,13 @@ public class Validering {
     public static boolean isValidTelefonnummer(String telefonnummer) {
     return telefonnummer != null && telefonnummer.trim().matches("^[0-9]{7,15}$");
     }
+    
+    public static boolean isValidAdress(String adress) {
+    // Regex för att matcha adresser med bokstäver, siffror, mellanslag, och vanliga tecken som bindestreck och kommatecken
+    String adressRegex = "^[a-zA-ZåäöÅÄÖ0-9\\s,'-]{2,}$";
+    return adress != null && Pattern.matches(adressRegex, adress);
+}
+
 /**
  * Kontrollerar om en textruta är tom (dvs. innehåller endast mellanslag eller är helt tom).
  * @param input Textinmatningen som ska kontrolleras.

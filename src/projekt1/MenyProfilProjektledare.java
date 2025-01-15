@@ -277,8 +277,8 @@ public class MenyProfilProjektledare extends javax.swing.JFrame {
         String nyttTelefon = tfdTelefon.getText();
         String nyttLosenord = tfdLosenord.getText();
         
-        //Uppdetara ändringar i databasen
                   // Validering
+                  
         if (!Validering.isValidNamn(nyttFornamn) || !Validering.isValidNamn(nyttEfternamn)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
             return;
