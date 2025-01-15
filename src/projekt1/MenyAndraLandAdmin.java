@@ -87,7 +87,7 @@ public class MenyAndraLandAdmin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tfdEkonomi = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblSokEfterLand.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblSokEfterLand.setText("Välj land att ändra i rullistan:");
@@ -131,17 +131,12 @@ public class MenyAndraLandAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblValjAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(lblValjAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAndring)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfdPolStruk, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                             .addComponent(tfdSprak)
@@ -188,6 +183,22 @@ public class MenyAndraLandAdmin extends javax.swing.JFrame {
         String nyttSprak = tfdSprak.getText();
         String nyttPolitiskStruktur = tfdPolStruk.getText();
         String nyttEkonomi = tfdEkonomi.getText();
+        
+          //validering 
+        if (!Validering.isValidAdress(nyttSprak)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av språk, skriv in sprak 2 ex.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttPolitiskStruktur)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning, skriv in politisk struktur 2 ex.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttEkonomi)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Skriv in språk och siffra, ex Ekonomi 1.");
+            return;
+        }
+   
+        
 
         //Uppdetara ändringar i databasen
         

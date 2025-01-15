@@ -103,11 +103,12 @@ public class MenyLaggTillLandAdmin extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(tfdNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,6 +172,39 @@ public class MenyLaggTillLandAdmin extends javax.swing.JFrame {
         String nyttTidszon = tfdTid.getText();
         String nyttPolitiskStruktur = tfdPolStruk.getText();
         String nyttEkonomi = tfdEkonomi.getText();
+        
+            //validering
+    
+        if (!Validering.isValidNamn(nyttNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttTidszon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av tidszon, skriv in tidszon1 ex.");
+            return;
+            
+        }
+        if (!Validering.isValidAdress(nyttSprak)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av språk, skriv in sprak 2 ex.");
+            return;
+        
+        }
+        
+        if (!Validering.isNumerisk(nyttValuta)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av valuta! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            return;
+            
+        
+        }
+        if (!Validering.isValidAdress(nyttEkonomi)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Skriv in språk och siffra, ex Ekonomi 1.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttPolitiskStruktur)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning, skriv in politisk struktur 2 ex.");
+            return;
+        
+        }
         
         try {
         // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
