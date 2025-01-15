@@ -103,7 +103,7 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(tfdAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(tfdNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -181,6 +181,29 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
         String nyttAdress = tfdAdress.getText();
         String nyttBranch = tfdBranch.getText();
         String nyttStad = tfdStad.getText();
+        
+        //validering
+        
+        if (!Validering.isValidNamn(nyttNamn) || !Validering.isValidNamn(nyttKontaktPerson)|| !Validering.isValidNamn(nyttBranch)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidePost(nyttKontaktEpost)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig e-postadress! En Epostadress måste vara formaterad enligt exempel: förnamn.efternamn@domän.");
+            return;
+        }
+        if (!Validering.isValidTelefonnummer(nyttTelefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror, inga tecken är tillåtna.");
+            return;
+        }
+        if (!Validering.isNumerisk(nyttStad)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttAdress)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Adressen får inte vara tom. Vänligen fyll i en giltig adress.");
+            return;
+        }
         
         try {
         // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
