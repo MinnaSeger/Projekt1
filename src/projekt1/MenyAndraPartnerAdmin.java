@@ -106,7 +106,7 @@ public class MenyAndraPartnerAdmin extends javax.swing.JFrame {
         lblBranch = new javax.swing.JLabel();
         btnSpara = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Välj partner:");
 
@@ -163,8 +163,8 @@ public class MenyAndraPartnerAdmin extends javax.swing.JFrame {
                     .addComponent(lblKontaktEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblKontaktperson, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblKontaktperson, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfdKontaktperson)
@@ -230,6 +230,26 @@ public class MenyAndraPartnerAdmin extends javax.swing.JFrame {
         String nyttTelefon = tfdTelefon.getText();
         String nyttAdress = tfdAdress.getText();
         String nyttBranch = tfdBranch.getText();
+        
+        //validering
+        
+        if (!Validering.isValidNamn(nyttNamn) || !Validering.isValidNamn(nyttKontaktperson)|| !Validering.isValidNamn(nyttBranch)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidePost(nyttEpost)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig e-postadress! En Epostadress måste vara formaterad enligt exempel: förnamn.efternamn@domän.");
+            return;
+        }
+        if (!Validering.isValidTelefonnummer(nyttTelefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror, inga tecken är tillåtna.");
+            return;
+   
+        }
+        if (!Validering.isValidAdress(nyttAdress)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Adressen får inte vara tom. Vänligen fyll i en giltig adress.");
+            return;
+        }
         
         try {
             //Uppdaterar ändringar baserat på vad användare skriver in
