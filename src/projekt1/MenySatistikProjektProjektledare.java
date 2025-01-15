@@ -356,6 +356,7 @@ private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
     String startDatum = tfdStartdatum.getText().trim();
     String slutDatum = tfdSlutDatum.getText().trim();
     
+        
     // Kontrollera om datumen är giltiga
     if (valideraDatumInput(startDatum, slutDatum)) {
         // Om datumen är giltiga, hämta och visa filtrerad statistik

@@ -264,6 +264,27 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         String nyttKostnad = tfdAngeNyKostnad.getText();
         //Uppdetara ändringar i databasen
         
+                 if (!Validering.isValidNamn(nyttStatus)|| !Validering.isValidNamn(nyttPrioritet)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig Status! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidDatum(nyttStartdatum) || !Validering.isValidDatum(nyttSlutdatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt datum! Kontrollera att månad och dag är korrekta, till exempel 2023-02-29 är endast tillåtet under skottår.!");
+            return;
+         }
+        if (!Validering.isNumerisk(nyttKostnad)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttProjektnamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "projektnamn får inte vara tom, Vänligen fyll i ex projekt 2.");
+            return;
+        }
+        if (!Validering.isValidLongText(nyttBeskrivning)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Beskrivning får ej vara tomt, avsluta med en punkt.");
+            return;
+        }
+        
         try {
         //Uppdaterar/byter informationen som användare anger i textrutorna.
         String uppdatering = "UPDATE projekt SET " +  
