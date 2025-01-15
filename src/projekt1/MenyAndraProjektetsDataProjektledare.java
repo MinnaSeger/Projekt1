@@ -215,9 +215,9 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(tfdNyttProjektnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ProjektledarensProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfdAngeNyBeskrivning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfdAngeNyBeskrivning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ProjektledarensProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(tfdAngeNyStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -237,7 +237,40 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaAndringarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringarMouseClicked
-        // TODO add your handling code here:
+           
+       //Hämtar text från täxtfältet
+        
+        String nyttProjektnamn = tfdNyttProjektnamn.getText();
+        String nyttBeskrivning = tfdAngeNyBeskrivning.getText();
+        String nyttStartdatum = tfdNyttStartDatum.getText();
+        String nyttSlutdatum = tfdNyttSlutDatum.getText();
+        String nyttKostnad = tfdAngeNyKostnad.getText();
+        String nyttPrioritet = tfdAngeNyPrioritet.getText();
+        String nyttStatus = tfdAngeNyStatus.getText();
+        //Uppdetara ändringar i databasen
+        
+        try {
+        //Uppdaterar/byter informationen som användare anger i textrutorna.
+        String uppdatering = "UPDATE projekt SET " +  
+        "Projektnamn = '" + nyttProjektnamn + "', " + 
+        "beskrivning = '" + nyttBeskrivning + "', " +
+        "Startdatum = '" + nyttStartdatum + "', " + 
+        "Slutdatum = '" + nyttSlutdatum + "', " + 
+        "Kostnad = '" + nyttKostnad + "', " + 
+        "Status = '" + nyttStatus + "', " + 
+        "Prioritet = '" + nyttPrioritet + "' " + 
+        "WHERE pid = " + dbAid;
+            
+        System.out.println(uppdatering);
+            // Kör uppdateringen
+            idb.update(uppdatering);
+            
+            //Visa bekräftelse av ändringar
+            JOptionPane.showMessageDialog(this, "Dina projektändringar är sparade!");
+        } catch (Exception e) {
+            //Hanterar fel
+            JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
+        }   
 
 
     }//GEN-LAST:event_btnSparaAndringarMouseClicked
