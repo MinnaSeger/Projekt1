@@ -40,8 +40,8 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         tfdNamn = new javax.swing.JTextField();
-        btnKontPers = new javax.swing.JTextField();
-        btnKontPersEm = new javax.swing.JTextField();
+        tfdKontPers = new javax.swing.JTextField();
+        tfdKontE = new javax.swing.JTextField();
         tfdAdress = new javax.swing.JTextField();
         tfdBranch = new javax.swing.JTextField();
         tfdStad = new javax.swing.JTextField();
@@ -67,9 +67,9 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
 
         tfdNamn.setText("jTextField1");
 
-        btnKontPers.setText("jTextField2");
+        tfdKontPers.setText("jTextField2");
 
-        btnKontPersEm.setText("jTextField3");
+        tfdKontE.setText("jTextField3");
 
         tfdAdress.setText("jTextField4");
 
@@ -109,11 +109,11 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnKontPers, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfdKontPers, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnKontPersEm, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tfdKontE, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -152,13 +152,13 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel6)
-                    .addComponent(btnKontPers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdKontPers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdStad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel7)
-                    .addComponent(btnKontPersEm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdKontE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -173,7 +173,31 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKMouseClicked
-        // TODO add your handling code here:
+    //Hämtar nya ifyllda värden.
+        String nyttNamn = tfdNamn.getText();
+        String nyttKontaktPerson = tfdKontPers.getText();
+        String nyttKontaktEpost = tfdKontE.getText();
+        String nyttTelefon = tfdTelefon.getText();
+        String nyttAdress = tfdAdress.getText();
+        String nyttBranch = tfdBranch.getText();
+        String nyttStad = tfdStad.getText();
+        
+        try {
+        // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
+        String nyttPid = idb.getAutoIncrement("partner", "pid");
+
+        // Lägg till ny anställd i anstalld-tabellen
+        String laggTillPartner = "INSERT INTO partner (pid, namn, kontaktperson, kontaktepost, telefon, adress, branch, stad ) " +
+                "VALUES (" + nyttPid + ", '" + nyttNamn + "', '" + nyttKontaktPerson + "', '" + nyttKontaktEpost + "', '" + nyttTelefon + "', '" + 
+                nyttAdress + "', '" + nyttBranch + "', '" + nyttStad +"')";
+        
+        idb.insert(laggTillPartner);
+        
+        // Bekräftelse och felmeddelande
+        JOptionPane.showMessageDialog(this, "Ny partner har lagts till!");
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnOKMouseClicked
 
     /**
@@ -212,8 +236,6 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField btnKontPers;
-    private javax.swing.JTextField btnKontPersEm;
     private javax.swing.JButton btnOK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -225,6 +247,8 @@ public class MenyLaggTillPartnerAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField tfdAdress;
     private javax.swing.JTextField tfdBranch;
+    private javax.swing.JTextField tfdKontE;
+    private javax.swing.JTextField tfdKontPers;
     private javax.swing.JTextField tfdNamn;
     private javax.swing.JTextField tfdStad;
     private javax.swing.JTextField tfdTelefon;
