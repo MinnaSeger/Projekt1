@@ -103,11 +103,11 @@ public void fyllProjektetsTabell (){
         
         try {
             
-            String sqlFraga = "SELECT DISTINCT namn, telefon " +
-            "FROM partner " +
-            "JOIN projekt_partner ON partner_pid = projekt_partner.partner_pid " +
-            "JOIN projekt ON projekt_partner.pid = projekt.pid " +
-            "WHERE projektchef = " + dbAid;
+            String sqlFraga =  "SELECT DISTINCT partner.namn "
+                + "FROM projekt "
+                + "INNER JOIN projekt_partner ON projekt.pid = projekt_partner.pid "
+                + "INNER JOIN partner ON projekt_partner.partner_pid = partner.pid "
+                + "WHERE projekt.projektchef = " + dbAid;
             
             ArrayList<HashMap<String, String>> resultaten = idb.fetchRows(sqlFraga);
             
