@@ -145,7 +145,7 @@ public class MenyAndraProjektAdmin extends javax.swing.JFrame {
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblValjProjekt.setText("Välj projekt:");
 
@@ -211,23 +211,24 @@ public class MenyAndraProjektAdmin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbxrullista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdSlutdatum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(205, 205, 205)
-                                        .addComponent(tfdProjektnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(tfdPrioritet, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(214, 214, 214)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdBeskrivning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdStartdatum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdKostnad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdPrioritet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(tfdStartdatum, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfdSlutdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfdBeskrivning, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfdProjektnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfdKostnad, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbxStatus, javax.swing.GroupLayout.Alignment.TRAILING, 0, 117, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -356,6 +357,31 @@ public class MenyAndraProjektAdmin extends javax.swing.JFrame {
         String nyttPrioritet = tfdPrioritet.getText();
         String nyttProjektchef = tfdProjektchef.getText();
         //Uppdetara ändringar i databasen
+        
+        if (!Validering.isValidNamn(nyttPrioritet)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig Status! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidDatum(nyttStartdatum) || !Validering.isValidDatum(nyttSlutdatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt datum! Kontrollera att månad och dag är korrekta, till exempel 2023-02-29 är endast tillåtet under skottår.!");
+            return;
+         }
+        if (!Validering.isNumerisk(nyttKostnad)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            return;
+        }
+        if (!Validering.isNumerisk(nyttProjektchef)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttProjektnamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "projektnamn får inte vara tom, Vänligen fyll i.");
+            return;
+        }
+        if (!Validering.isValidLongText(nyttBeskrivning)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Beskrivning får ej vara tomt, avsluta med en punkt.");
+            return;
+        }
         
         try {
         //Uppdaterar/byter informationen som användare anger i textrutorna.

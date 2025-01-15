@@ -51,7 +51,7 @@ public class MenyLaggTillLandAdmin extends javax.swing.JFrame {
         tfdValuta = new javax.swing.JTextField();
         btnOK = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Lägg till land:");

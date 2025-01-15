@@ -34,7 +34,7 @@ public class MenyLandAdmin extends javax.swing.JFrame {
         btnAndra = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnLaggTill.setText("Lägg till land");
         btnLaggTill.addMouseListener(new java.awt.event.MouseAdapter() {
