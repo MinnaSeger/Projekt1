@@ -186,15 +186,15 @@ public class MenyAndraLandAdmin extends javax.swing.JFrame {
         
           //validering 
         if (!Validering.isValidAdress(nyttSprak)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av språk, skriv in sprak 2 ex.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av språk! Måste innehålla minst två tecken.");
             return;
         }
         if (!Validering.isValidAdress(nyttPolitiskStruktur)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning, skriv in politisk struktur 2 ex.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av politisk struktur! Måste innehålla minst två tecken.");
             return;
         }
         if (!Validering.isValidAdress(nyttEkonomi)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Skriv in språk och siffra, ex Ekonomi 1.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av ekonomi! Måste innehålla minst två tecken.");
             return;
         }
    
@@ -240,6 +240,7 @@ public class MenyAndraLandAdmin extends javax.swing.JFrame {
         tfdPolStruk.setText(userData.get("politisk_struktur"));
         tfdEkonomi.setText(userData.get("ekonomi"));
 
+                
                 
         } else {
             JOptionPane.showMessageDialog(this, "Ingen data hittades för det valda landet.");

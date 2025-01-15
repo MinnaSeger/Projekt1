@@ -225,11 +225,11 @@ public class MenyLaggTillProjektAdmin extends javax.swing.JFrame {
             return;
          }
         if (!Validering.isNumerisk(nyttKostnad)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av kostnad! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
             return;
         }
         if (!Validering.isNumerisk(nyttProjektchef)|| !Validering.isNumerisk(nyttLand)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av land! får endast bestå av siffror.");
             return;
         }
         if (!Validering.isValidAdress(nyttProjektnamn)) {

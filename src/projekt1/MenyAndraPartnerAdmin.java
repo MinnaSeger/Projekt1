@@ -234,7 +234,7 @@ public class MenyAndraPartnerAdmin extends javax.swing.JFrame {
         //validering
         
         if (!Validering.isValidNamn(nyttNamn) || !Validering.isValidNamn(nyttKontaktperson)|| !Validering.isValidNamn(nyttBranch)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtet.");
             return;
         }
         if (!Validering.isValidePost(nyttEpost)) {
