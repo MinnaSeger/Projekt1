@@ -41,15 +41,6 @@ public class Validering {
         return Pattern.matches(datumRegex, datum);
     }
     /**
-     * Validerar ett telefonnummer (exempel: 0701234567 eller +46701234567).
-     * @param telefonnummer Telefonnummer som ska valideras.
-     * @return true om telefonnumret är giltigt, annars false.
-     */
-    public static boolean isValidTelefonnummer(String telefonnummer) {
-        String telefonRegex = "^(\\+46|0)[7-9]\\d{8}$";
-        return Pattern.matches(telefonRegex, telefonnummer);
-    }
-    /**
      * Validerar en numerisk inmatning (t.ex. projektkostnad).
      * @param nummerInString Siffervärdet i textform.
      * @return true om inmatningen är numerisk, annars false.
@@ -58,16 +49,14 @@ public class Validering {
         String numeriskRegex = "^\\d+(\\.\\d+)?$";
         return Pattern.matches(numeriskRegex, nummerInString);
     }
-    /**
- * Validerar ett lösenord. Det ska vara exakt 11 tecken långt och 
- * kan bestå av stora bokstäver, små bokstäver eller siffror.
- * @param losenord Lösenordet som ska valideras.
- * @return true om lösenordet är giltigt, annars false.
- */
-public static boolean isValidLosenord(String losenord) {
-    String losenordRegex = "^[a-zA-Z0-9]{11}$"; // Exakt 11 tecken: stora/små bokstäver och siffror
-    return Pattern.matches(losenordRegex, losenord);
-}
+    public static boolean isValidLosenord(String losenord) {
+    // Regex för exakt 11 tecken, minst en stor bokstav, en liten bokstav och en siffra
+    String losenordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{11}$";
+    return losenord != null && Pattern.matches(losenordRegex, losenord);
+    }
+    public static boolean isValidTelefonnummer(String telefonnummer) {
+    return telefonnummer != null && telefonnummer.trim().matches("^[0-9]{7,15}$");
+    }
 /**
  * Kontrollerar om en textruta är tom (dvs. innehåller endast mellanslag eller är helt tom).
  * @param input Textinmatningen som ska kontrolleras.
