@@ -53,7 +53,7 @@ public class MenyLaggTillAvdelningAdmin extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         btnOk = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Lägg till avdelning");
@@ -113,15 +113,15 @@ public class MenyLaggTillAvdelningAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addComponent(tfdBeskrivning, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tfdNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(46, 46, 46)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfdStad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,7 +180,39 @@ public class MenyLaggTillAvdelningAdmin extends javax.swing.JFrame {
     String nyttTelefon = tfdTelefon.getText();
     String nyttStad = tfdStad.getText();
     String nyttChef = tfdChef.getText();
-
+    
+    //validering
+    
+        if (!Validering.isValidNamn(nyttNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidePost(nyttEpost)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig e-postadress! En Epostadress måste vara formaterad enligt exempel: förnamn.efternamn@domän.");
+            return;
+        }
+        if (!Validering.isValidTelefonnummer(nyttTelefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror, inga tecken är tillåtna.");
+            return;
+        }
+        
+        if (!Validering.isNumerisk(nyttStad)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning stad! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            return;
+        } 
+        if (!Validering.isNumerisk(nyttChef)) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning chef! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+        return;
+        
+        }
+        if (!Validering.isValidAdress(nyttAdress)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Adressen får inte vara tom. Vänligen fyll i en giltig adress.");
+            return;
+        }
+        if (!Validering.isValidLongText(nyttBeskrivning)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "fältet får ej vara tomt i beskrivning");
+            return;
+        }
 
     try {
         // Kontrollera om chefen finns i anstalld-tabellen

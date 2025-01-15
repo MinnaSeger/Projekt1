@@ -39,7 +39,7 @@ public class MenyProjektAdmin extends javax.swing.JFrame {
         btnTaBort = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         BtnAndra.setText("Ändra befintligt projekt");
         BtnAndra.addMouseListener(new java.awt.event.MouseAdapter() {
