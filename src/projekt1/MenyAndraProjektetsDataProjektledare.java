@@ -37,7 +37,7 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
     // Fyller ComboBox med projektnamn för projekt som tillhör projektchefen
     public void fyllProjektledarensProjektComboBox() {
         try {
-            String sqlFraga = "SELECT projektnamn FROM projekt WHERE projektchef = " + dbAid;
+            String sqlFraga = "SELECT projektnamn FROM projekt WHERE pid = " + dbAid;
            
             ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
             
@@ -62,7 +62,7 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
     try {
         // SQL-fråga för att hämta projektdata
         String sqlFraga = "SELECT DISTINCT projektnamn, beskrivning, status, prioritet, startdatum, slutdatum, kostnad " +
-                "FROM projekt WHERE projektchef = " + dbAid;
+                "FROM projekt WHERE pid = " + dbAid;
        
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
