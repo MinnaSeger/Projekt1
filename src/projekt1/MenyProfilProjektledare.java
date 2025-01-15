@@ -106,7 +106,7 @@ public class MenyProfilProjektledare extends javax.swing.JFrame {
         lblEfternamn = new javax.swing.JLabel();
         tfdEfternamn = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblMinProfil.setText("Min profil ");
 
@@ -278,6 +278,23 @@ public class MenyProfilProjektledare extends javax.swing.JFrame {
         String nyttLosenord = tfdLosenord.getText();
         
         //Uppdetara ändringar i databasen
+                  // Validering
+        if (!Validering.isValidNamn(nyttFornamn) || !Validering.isValidNamn(nyttEfternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidePost(nyttEpost)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig e-postadress! En Epostadress måste vara formaterad enligt exempel: förnamn.efternamn@domän.");
+            return;
+        }
+        if (!Validering.isValidTelefonnummer(nyttTelefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror, inga tecken är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidLosenord(nyttLosenord)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Lösenord måste innehålla exakt 11 tecken, minst en stor bokstav, en liten bokstav och minst en siffra. Försök igen!");
+            return;
+        }
         
         try {
             //Byta ändringar
