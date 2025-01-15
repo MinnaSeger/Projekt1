@@ -59,7 +59,7 @@ public class MenyLaggTillAdminAdmin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tfdAvdelning = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblLaggTillAnstalld.setText("Lägg till anställd:");
 
@@ -225,7 +225,7 @@ public class MenyLaggTillAdminAdmin extends javax.swing.JFrame {
 
     private void btnSlumpaLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSlumpaLosenMouseClicked
         //Validering för nytt lösenord
-        int length = 10;
+        int length = 11;
         String tecken = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@";
         StringBuilder password = new StringBuilder();    
         Random random = new Random();
@@ -252,7 +252,41 @@ public class MenyLaggTillAdminAdmin extends javax.swing.JFrame {
         String nyttBehorighetsniva = tfdBehorighet.getText();
         String nyttLosenord = tfdLosenord.getText();
         
-        try {
+        
+                if (!Validering.isValidNamn(nyttFornamn) || !Validering.isValidNamn(nyttEfternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidePost(nyttEpost)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig e-postadress! En Epostadress måste vara formaterad enligt exempel: förnamn.efternamn@domän.");
+            return;
+        }
+        if (!Validering.isValidTelefonnummer(nyttTelefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror, inga tecken är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidLosenord(nyttLosenord)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Lösenord måste innehålla exakt 11 tecken, minst en stor bokstav, en liten bokstav och minst en siffra. Försök igen!");
+            return;
+        }
+        if (!Validering.isValidDatum(nyttAnstallningsdatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt datum! Kontrollera att månad och dag är korrekta, till exempel 2023-02-29 är endast tillåtet under skottår.!");
+            return;
+         }
+        if (!Validering.isNumerisk(nyttBehorighetsniva)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            return;
+        }
+        if (!Validering.isNumerisk(nyttAvdelning)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttAdress)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Adressen får inte vara tom. Vänligen fyll i en giltig adress.");
+            return;
+        }       
+        
+       try {
         // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
         String nyttAid = idb.getAutoIncrement("anstalld", "aid");
 

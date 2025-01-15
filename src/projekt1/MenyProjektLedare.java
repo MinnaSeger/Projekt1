@@ -36,7 +36,7 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         btnAnställda = new javax.swing.JButton();
         btnHållbarhetsmål = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblvalkommenprojektledare.setText("Välkommen Projektledare");
 
@@ -154,7 +154,7 @@ public class MenyProjektLedare extends javax.swing.JFrame {
     private void btnMinprofilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinprofilMouseClicked
         // TODO add your handling code here:
 
-       MenyProfilProjektledare1 profilFönster = new MenyProfilProjektledare1(idb, dbAid);
+       MenyProfilProjektledare profilFönster = new MenyProfilProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
     }//GEN-LAST:event_btnMinprofilMouseClicked
 

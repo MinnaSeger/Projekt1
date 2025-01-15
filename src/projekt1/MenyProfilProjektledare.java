@@ -14,7 +14,7 @@ import java.util.HashMap;
  *
  * @author elsa
  */
-public class MenyProfilProjektledare1 extends javax.swing.JFrame {
+public class MenyProfilProjektledare extends javax.swing.JFrame {
     
     private InfDB idb;
     private String dbAid;
@@ -22,7 +22,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
     /**
      * Creates new form MenyProfilHandlaggare
      */
-    public MenyProfilProjektledare1(InfDB idb, String dbAid) {
+    public MenyProfilProjektledare(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
@@ -106,7 +106,7 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         lblEfternamn = new javax.swing.JLabel();
         tfdEfternamn = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblMinProfil.setText("Min profil ");
 
@@ -277,7 +277,24 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
         String nyttTelefon = tfdTelefon.getText();
         String nyttLosenord = tfdLosenord.getText();
         
-        //Uppdetara ändringar i databasen
+                  // Validering
+                  
+        if (!Validering.isValidNamn(nyttFornamn) || !Validering.isValidNamn(nyttEfternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidePost(nyttEpost)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig e-postadress! En Epostadress måste vara formaterad enligt exempel: förnamn.efternamn@domän.");
+            return;
+        }
+        if (!Validering.isValidTelefonnummer(nyttTelefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror, inga tecken är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidLosenord(nyttLosenord)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Lösenord måste innehålla exakt 11 tecken, minst en stor bokstav, en liten bokstav och minst en siffra. Försök igen!");
+            return;
+        }
         
         try {
             //Byta ändringar
@@ -319,14 +336,16 @@ public class MenyProfilProjektledare1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenyProfilProjektledare1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyProfilProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenyProfilProjektledare1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyProfilProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenyProfilProjektledare1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyProfilProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenyProfilProjektledare1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyProfilProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

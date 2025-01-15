@@ -8,6 +8,7 @@ import oru.inf.InfException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -26,81 +27,132 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
     this.dbAid = dbAid;
         initComponents();
 
- fyllTabeller();
+         fyllTabeller();
 
     }
     
         private void fyllTabeller() {
+         
+        fyllTabellerMedDatumFilter();
         fyllStatistikKostnadPerLand();
         fyllStatistikOverPartners();
         fyllStatistikOverLander();
         fyllProjektetsKostnad();
     }
 
-    private void fyllStatistikKostnadPerLand() {
-        try {
-            String query = "SELECT Land, SUM(Kostnad) AS TotalKostnad FROM Projekt GROUP BY Land";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
+private void fyllTabellerMedDatumFilter() {
+    String startDatum = tfdStartdatum.getText().trim();
+    String slutDatum = tfdSlutDatum.getText().trim();
 
-            DefaultTableModel model = (DefaultTableModel) tblStatistikKostnadPerLand.getModel();
-            model.setRowCount(0); // Rensa tabellen
-
-            for (HashMap<String, String> rad : resultat) {
-                model.addRow(new Object[]{rad.get("Land"), rad.get("TotalKostnad")});
-            }
-        } catch (InfException e) {
-            System.out.println("Fel vid hämtning av kostnad per land: " + e.getMessage());
-        }
+    if (valideraDatumInput(startDatum, slutDatum)) {
+        fyllStatistikKostnadPerLand(startDatum, slutDatum);
+        fyllStatistikOverPartners(startDatum, slutDatum);
+        fyllStatistikOverLander(startDatum, slutDatum);
+        fyllProjektetsKostnad(startDatum, slutDatum);
+    } else {
+        System.out.println("Ogiltiga datum. Kontrollera formatet och försök igen.");
     }
-
-    private void fyllStatistikOverPartners() {
-        try {
-            String query = "SELECT PartnerNamn FROM Partner";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
-
-            DefaultTableModel model = (DefaultTableModel) tblStatistikOverPartners.getModel();
-            model.setRowCount(0); // Rensa tabellen
-
-            for (HashMap<String, String> rad : resultat) {
-                model.addRow(new Object[]{rad.get("PartnerNamn")});
-            }
-        } catch (InfException e) {
-            System.out.println("Fel vid hämtning av partners: " + e.getMessage());
-        }
-    }
-
-    private void fyllStatistikOverLander() {
-        try {
-            String query = "SELECT DISTINCT Land FROM Projekt";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
-
-            DefaultTableModel model = (DefaultTableModel) tblStatistikOverLander.getModel();
-            model.setRowCount(0); // Rensa tabellen
-
-            for (HashMap<String, String> rad : resultat) {
-                model.addRow(new Object[]{rad.get("Land")});
-            }
-        } catch (InfException e) {
-            System.out.println("Fel vid hämtning av länder: " + e.getMessage());
-        }
-    }
-
-    private void fyllProjektetsKostnad() {
-        try {
-            String query = "SELECT ProjektNamn, Kostnad FROM Projekt";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(query);
-
-            DefaultTableModel model = (DefaultTableModel) tblVisaProjektetsKostnad.getModel();
-            model.setRowCount(0); // Rensa tabellen
-
-            for (HashMap<String, String> rad : resultat) {
-                model.addRow(new Object[]{rad.get("ProjektNamn"), rad.get("Kostnad")});
-            }
-        } catch (InfException e) {
-            System.out.println("Fel vid hämtning av projektets kostnad: " + e.getMessage());
-        }
-    
 }
+
+// En enkel metod för att validera datumformatet
+private boolean valideraDatumInput(String startDatum, String slutDatum) {
+    // Enkelt datumvalidering (YYYY-MM-DD)
+    return startDatum.matches("\\d{4}-\\d{2}-\\d{2}") && slutDatum.matches("\\d{4}-\\d{2}-\\d{2}");
+}
+
+// Överlagring av metoder utan datumparametrar
+private void fyllStatistikKostnadPerLand() {
+    fyllStatistikKostnadPerLand("", "");
+}
+
+private void fyllStatistikOverPartners() {
+    fyllStatistikOverPartners("", "");
+}
+
+private void fyllStatistikOverLander() {
+    fyllStatistikOverLander("", "");
+}
+
+private void fyllProjektetsKostnad() {
+    fyllProjektetsKostnad("", "");
+}
+
+// Metod som tar emot start- och slutdatum som parametrar
+private void fyllStatistikKostnadPerLand(String startDatum, String slutDatum) {
+    try {
+        String sqlFraga = "SELECT DISTINCT land, SUM(kostnad) AS TotalKostnad " +
+                          "FROM projekt WHERE startdatum >= '" + startDatum + "' " +
+                          "AND slutdatum <= '" + slutDatum + "' GROUP BY land";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        DefaultTableModel model = (DefaultTableModel) tblStatistikKostnadPerLand.getModel();
+        model.setRowCount(0); // Rensa tabellen
+
+        for (HashMap<String, String> rad : resultat) {
+            model.addRow(new Object[]{rad.get("land"), rad.get("TotalKostnad")});
+        }
+    } catch (InfException e) {
+        System.out.println("Fel vid hämtning av kostnad per land: " + e.getMessage());
+    }
+}
+
+private void fyllStatistikOverPartners(String startDatum, String slutDatum) {
+    try {
+        String sqlFraga = "SELECT DISTINCT partner.namn " +
+                          "FROM partner " +
+                          "JOIN projekt_partner ON partner_pid = projekt_partner.partner_pid " +
+                          "JOIN projekt ON projekt_partner.pid = projekt.pid " +
+                          "WHERE projektchef = " + dbAid + " " +
+                          "AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "'";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        DefaultTableModel model = (DefaultTableModel) tblStatistikOverPartners.getModel();
+        model.setRowCount(0); // Rensa tabellen
+
+        for (HashMap<String, String> rad : resultat) {
+            model.addRow(new Object[]{rad.get("namn")});
+        }
+    } catch (InfException e) {
+        System.out.println("Fel vid hämtning av projektets partners: " + e.getMessage());
+    }
+}
+
+private void fyllStatistikOverLander(String startDatum, String slutDatum) {
+    try {
+        String sqlFraga = "SELECT DISTINCT land FROM projekt " +
+                          "WHERE projektchef = " + dbAid + " " +
+                          "AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "'";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        DefaultTableModel model = (DefaultTableModel) tblStatistikOverLander.getModel();
+        model.setRowCount(0); // Rensa tabellen
+
+        for (HashMap<String, String> rad : resultat) {
+            model.addRow(new Object[]{rad.get("land")});
+        }
+    } catch (InfException e) {
+        System.out.println("Fel vid hämtning av projektets länder: " + e.getMessage());
+    }
+}
+
+private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
+    try {
+        String sqlFraga = "SELECT DISTINCT projektnamn, kostnad FROM projekt " +
+                          "WHERE projektchef = " + dbAid + " " +
+                          "AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "'";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        DefaultTableModel model = (DefaultTableModel) tblVisaProjektetsKostnad.getModel();
+        model.setRowCount(0); // Rensa tabellen
+
+        for (HashMap<String, String> rad : resultat) {
+            model.addRow(new Object[]{rad.get("projektnamn"), rad.get("kostnad")});
+        }
+    } catch (InfException e) {
+        System.out.println("Fel vid hämtning av projektets kostnad: " + e.getMessage());
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,8 +175,12 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
         tblStatistikOverLander = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblStatistikOverPartners = new javax.swing.JTable();
+        lblValjDatum = new javax.swing.JLabel();
+        tfdStartdatum = new javax.swing.JTextField();
+        tfdSlutDatum = new javax.swing.JTextField();
+        btnFiltreraDatum = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblStatistikKostnadPerLand.setText("Statistik Kostand per land ");
 
@@ -132,7 +188,7 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
 
         lblStatistiklander.setText("Statistik över länder");
 
-        lblProjektetskostnad.setText("Visa projektets kostnad");
+        lblProjektetskostnad.setText("Statistik över projektens kostnader");
 
         tblStatistikKostnadPerLand.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,7 +198,7 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Land", "Kostnad"
+                "Land", "Total Kostnad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -218,6 +274,19 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tblStatistikOverPartners);
 
+        lblValjDatum.setText("Välj datum");
+
+        tfdStartdatum.setText("Ange start datum");
+
+        tfdSlutDatum.setText("Ange slut datum");
+
+        btnFiltreraDatum.setText("Filtrera datum");
+        btnFiltreraDatum.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFiltreraDatumMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,40 +294,83 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblStatistikpartners)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStatistikKostnadPerLand)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStatistiklander)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProjektetskostnad)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblStatistikpartners, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblStatistikKostnadPerLand, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblStatistiklander, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblProjektetskostnad, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(tfdStartdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(tfdSlutDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(42, 42, 42)
+                                    .addComponent(btnFiltreraDatum)))
+                            .addGap(0, 0, Short.MAX_VALUE))))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(lblValjDatum)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(20, 20, 20)
+                .addComponent(lblValjDatum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdStartdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdSlutDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFiltreraDatum))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(lblStatistikpartners)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblStatistikKostnadPerLand)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(lblStatistiklander)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblProjektetskostnad)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFiltreraDatumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltreraDatumMouseClicked
+        // TODO add your handling code here:
+            // Hämta datum från textfälten
+    String startDatum = tfdStartdatum.getText().trim();
+    String slutDatum = tfdSlutDatum.getText().trim();
+    
+        
+    // Kontrollera om datumen är giltiga
+    if (valideraDatumInput(startDatum, slutDatum)) {
+        // Om datumen är giltiga, hämta och visa filtrerad statistik
+        fyllStatistikKostnadPerLand(startDatum, slutDatum);
+        fyllStatistikOverPartners(startDatum, slutDatum);
+        fyllStatistikOverLander(startDatum, slutDatum);
+        fyllProjektetsKostnad(startDatum, slutDatum);
+    } else {
+        // Visa ett felmeddelande om datumen inte är giltiga
+        JOptionPane.showMessageDialog(null, "Ogiltiga datum. Kontrollera formatet och försök igen.", "Fel", JOptionPane.ERROR_MESSAGE);
+    }                                           
+
+        
+    }//GEN-LAST:event_btnFiltreraDatumMouseClicked
 
     /**
      * @param args the command line arguments
@@ -296,6 +408,7 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFiltreraDatum;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -304,9 +417,12 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
     private javax.swing.JLabel lblStatistikKostnadPerLand;
     private javax.swing.JLabel lblStatistiklander;
     private javax.swing.JLabel lblStatistikpartners;
+    private javax.swing.JLabel lblValjDatum;
     private javax.swing.JTable tblStatistikKostnadPerLand;
     private javax.swing.JTable tblStatistikOverLander;
     private javax.swing.JTable tblStatistikOverPartners;
     private javax.swing.JTable tblVisaProjektetsKostnad;
+    private javax.swing.JTextField tfdSlutDatum;
+    private javax.swing.JTextField tfdStartdatum;
     // End of variables declaration//GEN-END:variables
 }

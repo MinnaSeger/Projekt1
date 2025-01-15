@@ -61,7 +61,7 @@ private void fyllTextRutor () {
         tfdTelefon = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblAndraUppgifter.setText("Ändra uppgifter");
 
@@ -132,17 +132,40 @@ private void fyllTextRutor () {
         String nyttAdress = tfdAdress.getText();
         String nyttEpost = tfdEpost.getText();
         String nyttTelefon = tfdTelefon.getText();
+        
+        //validering
+        
+        if (!Validering.isValidNamn(nyttNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidePost(nyttEpost)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig e-postadress! En Epostadress måste vara formaterad enligt exempel: förnamn.efternamn@domän.");
+            return;
+        }
+        if (!Validering.isValidTelefonnummer(nyttTelefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror, inga tecken är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttAdress)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Adressen får inte vara tom. Vänligen fyll i en giltig adress.");
+            return;
+        }
+        if (!Validering.isValidLongText(nyttBeskrivning)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "fältet får ej vara tomt, avsluta med punkt.");
+            return;
+        }
 
         
         try {
             //Genomför ändring av information
-        String updateQuery = "UPDATE partner SET " +  
+        String updateQuery = "UPDATE avdelning SET " +  
         "namn = '" + nyttNamn + "', " + 
         "beskrivning = '" + nyttBeskrivning + "', " +
         "adress = '" + nyttAdress + "', " +
         "epost= '" + nyttEpost + "', " +
         "telefon= '" + nyttTelefon + "' " + 
-        "WHERE pid = " + dbAid;
+        "WHERE avdid = " + dbAid;
             System.out.println(updateQuery);
             // Kör uppdateringen
             idb.update(updateQuery);

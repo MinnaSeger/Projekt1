@@ -14,17 +14,17 @@ import javax.swing.JOptionPane;
  *
  * @author elsa
  */
-public class MenyUppgifterOmProjektProjektledare extends javax.swing.JFrame {
-      private InfDB idb;
+public class MenyAndraUppgifterOmProjektProjektledare extends javax.swing.JFrame {
+    private InfDB idb;
     private String dbAid;
 
     /**
      * Creates new form MenyUppgifterOmProjektProjektledare
      */
     
-public MenyUppgifterOmProjektProjektledare (InfDB idb, String dbAid){
+public MenyAndraUppgifterOmProjektProjektledare (InfDB idb, String dbAid){
     
-    this.idb=idb; 
+    this.idb = idb; 
     this.dbAid = dbAid;
     initComponents();
     fyllProjektetsTabell();
@@ -36,12 +36,9 @@ public MenyUppgifterOmProjektProjektledare (InfDB idb, String dbAid){
 
 public void fyllProjektetsTabell (){
     try {
-        String sqlFraga = "SELECT projektnamn, beskrivning, status, prioritet, startdatum, slutdatum, kostnad " +
+        String sqlFraga = "SELECT DISTINCT projektnamn, beskrivning, status, prioritet, startdatum, slutdatum, kostnad " +
                 "FROM projekt " +
-                "WHERE projektchef IN (" +
-                "SELECT aid " +
-                "FROM anstalld " +
-                "WHERE epost = '" + dbAid + "');";
+                "WHERE projektchef = " + dbAid;
         
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
         
@@ -73,32 +70,32 @@ public void fyllProjektetsTabell (){
         
         try {
             
-            String sqlHandlaggare = "SELECT anstalld.fornamn, anstalld.efternamn, handlaggare.ansvarighetsomrade " +
+            String sqlFraga = "SELECT anstalld.fornamn, anstalld.efternamn, handlaggare.ansvarighetsomrade " +
                         "FROM anstalld " +
                         "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
                         "JOIN ans_proj ON anstalld.aid = ans_proj.aid " +
                         "JOIN projekt ON ans_proj.pid = projekt.pid " +
-                        "WHERE projekt.projektchef IN (SELECT aid FROM anstalld WHERE epost = '" + dbAid + "')";
+                        "WHERE projektchef = " + dbAid;
             
-            ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlHandlaggare);
+            ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlFraga);
             
             if (resultatx == null || resultatx.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Inga handläggare hittades." );
+                javax.swing.JOptionPane.showMessageDialog(this, "Inga handläggare för projektet hittades." );
             }
             
             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("Handläggare");
-            model.addColumn("Ansvarighetsområde");
+            model.addColumn("Handlaggare");
+            model.addColumn("Ansvarighetsomrade");
             
             for (HashMap<String, String> rad : resultatx) {
-                model.addRow(new Object[]{rad.get("fornamn"), rad.get("ansvarighetsomrade")});
+                model.addRow(new Object[]{rad.get("fornamn"), rad.get("efternamn"), rad.get("ansvarighetsomrade")});
                 
             }
             
             tblProjektetshandlaggare.setModel(model);
             
         } catch (InfException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av handläggare: " + e.getMessage());
+                javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektets handläggare: " + e.getMessage());
             
         }
     }
@@ -106,32 +103,26 @@ public void fyllProjektetsTabell (){
         
         try {
             
-            String sqlPartner = "SELECT namn, telefon FROM partner " +
-             "WHERE pid IN ( " +
-             "    SELECT partner_pid FROM projekt_partner " +
-             "    WHERE pid IN ( " +
-             "        SELECT pid FROM projekt " +
-             "        WHERE projektchef IN ( " +
-             "            SELECT aid FROM anstalld " +
-             "            WHERE epost = '" + dbAid + "' " +
-             "        ) " +
-             "    ) " +
-             ");";
+            String sqlFraga =  "SELECT DISTINCT partner.namn "
+                + "FROM projekt "
+                + "INNER JOIN projekt_partner ON projekt.pid = projekt_partner.pid "
+                + "INNER JOIN partner ON projekt_partner.partner_pid = partner.pid "
+                + "WHERE projekt.projektchef = " + dbAid;
             
-            ArrayList<HashMap<String, String>> resultaten = idb.fetchRows(sqlPartner);
+            ArrayList<HashMap<String, String>> resultaten = idb.fetchRows(sqlFraga);
             
             if (resultaten == null || resultaten.isEmpty()) {
                 DefaultTableModel model = new DefaultTableModel();
-                model.addColumn("Partner");
-                model.addColumn("Kontaktinformation");
+                model.addColumn("namn");
+                model.addColumn("telefon");
                 tblProjektetspartners.setModel(model);
-                javax.swing.JOptionPane.showMessageDialog(this, "Inga partners hittades.");
+                javax.swing.JOptionPane.showMessageDialog(this, "Inga partners för projektet hittades.");
                 return;
             }
             
             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn ("Partner");
-            model.addColumn ("Kontaktinformation");
+            model.addColumn ("namn");
+            model.addColumn ("telefon");
             
             
             for (HashMap<String, String> rad : resultaten) {
@@ -140,7 +131,7 @@ public void fyllProjektetsTabell (){
             
             tblProjektetspartners.setModel(model);
         } catch (InfException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av partner: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av partner för projektet: " + e.getMessage());
         }
     }
 
@@ -155,9 +146,8 @@ public void fyllProjektetsTabell (){
     private void initComponents() {
 
         lblandraUppgifterOmProjekt = new javax.swing.JLabel();
-        btnAndraProjektetsHandlaggare = new javax.swing.JButton();
         btnAndraProjektetsPartners = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnAndraProjektetsData = new javax.swing.JButton();
         btnUppdateratabeller = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -169,16 +159,25 @@ public void fyllProjektetsTabell (){
         tblProjektetspartners = new javax.swing.JTable();
         lblProjektetspartners = new javax.swing.JLabel();
         btnStatistikochKostnadProjekt = new javax.swing.JButton();
+        btnAndraProjektetsHandlaggare = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lblandraUppgifterOmProjekt.setText("Ändra uppgifter om projekt på avdelning");
-
-        btnAndraProjektetsHandlaggare.setText("Ändra projektets Handläggare");
+        lblandraUppgifterOmProjekt.setText("Ändra uppgifter om projekt jag är projektansvarig för");
 
         btnAndraProjektetsPartners.setText("Ändra projektets Partners");
+        btnAndraProjektetsPartners.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAndraProjektetsPartnersMouseClicked(evt);
+            }
+        });
 
-        jButton1.setText("Ändra projektets data");
+        btnAndraProjektetsData.setText("Ändra projektets data");
+        btnAndraProjektetsData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAndraProjektetsDataMouseClicked(evt);
+            }
+        });
 
         btnUppdateratabeller.setText("Uppdatera data i tabellerna");
         btnUppdateratabeller.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -268,81 +267,81 @@ public void fyllProjektetsTabell (){
             }
         });
 
+        btnAndraProjektetsHandlaggare.setText("Ändra projektetshandläggare");
+        btnAndraProjektetsHandlaggare.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAndraProjektetsHandlaggareMouseClicked(evt);
+            }
+        });
+        btnAndraProjektetsHandlaggare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraProjektetsHandlaggareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAndraProjektetsPartners, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAndraProjektetsData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAndraProjektetsHandlaggare, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProjektetsHandlaggare)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(377, 377, 377)
+                        .addComponent(btnUppdateratabeller, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 514, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(283, 283, 283)
                         .addComponent(lblandraUppgifterOmProjekt))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(337, 337, 337)
+                        .addComponent(lblProjektetspartners))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(423, 423, 423)
-                                .addComponent(lblProjektetspartners))
-                            .addComponent(btnUppdateratabeller, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnStatistikochKostnadProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAndraProjektetsPartners, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAndraProjektetsHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStatistikochKostnadProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(516, 516, 516))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(lblProjektetsHandlaggare))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 514, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lblandraUppgifterOmProjekt)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnAndraProjektetsPartners))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(btnAndraProjektetsHandlaggare))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAndraProjektetsPartners)
+                        .addComponent(btnAndraProjektetsHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnStatistikochKostnadProjekt))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblProjektetsHandlaggare)))
-                .addGap(30, 30, 30)
+                        .addComponent(btnAndraProjektetsData))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnStatistikochKostnadProjekt)
+                .addGap(9, 9, 9)
+                .addComponent(lblProjektetsHandlaggare)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblProjektetspartners)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(btnUppdateratabeller))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(391, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btnUppdateratabeller)
+                .addContainerGap(302, Short.MAX_VALUE))
         );
 
         pack();
@@ -373,9 +372,38 @@ public void fyllProjektetsTabell (){
     private void btnStatistikochKostnadProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStatistikochKostnadProjektMouseClicked
         // TODO add your handling code here:
          MenySatistikProjektProjektledare profilFönster = new MenySatistikProjektProjektledare (idb, dbAid);
+         profilFönster.setVisible(true);
+         this.setVisible(false);
+    }//GEN-LAST:event_btnStatistikochKostnadProjektMouseClicked
+
+    private void btnAndraProjektetsPartnersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraProjektetsPartnersMouseClicked
+        // TODO add your handling code here:;
+       MenyAndraPartnersProjektledare profilFönster = new MenyAndraPartnersProjektledare (idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
-    }//GEN-LAST:event_btnStatistikochKostnadProjektMouseClicked
+        
+        
+    }//GEN-LAST:event_btnAndraProjektetsPartnersMouseClicked
+
+    private void btnAndraProjektetsHandlaggareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraProjektetsHandlaggareMouseClicked
+        // TODO add your handling code here:
+       MenyAndraHandlaggareProjektProjektledare profilFönster = new MenyAndraHandlaggareProjektProjektledare (idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+       
+    }//GEN-LAST:event_btnAndraProjektetsHandlaggareMouseClicked
+
+    private void btnAndraProjektetsHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraProjektetsHandlaggareActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAndraProjektetsHandlaggareActionPerformed
+
+    private void btnAndraProjektetsDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraProjektetsDataMouseClicked
+        // TODO add your handling code here:
+       MenyAndraProjektetsDataProjektledare profilFönster = new MenyAndraProjektetsDataProjektledare (idb, dbAid);
+       profilFönster.setVisible(true);
+       this.setVisible(false);
+        
+    }//GEN-LAST:event_btnAndraProjektetsDataMouseClicked
 
     /**
      * @param args the command line arguments
@@ -394,14 +422,15 @@ public void fyllProjektetsTabell (){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenyUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenyUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenyUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenyUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenyAndraUppgifterOmProjektProjektledare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -413,11 +442,11 @@ public void fyllProjektetsTabell (){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndraProjektetsData;
     private javax.swing.JButton btnAndraProjektetsHandlaggare;
     private javax.swing.JButton btnAndraProjektetsPartners;
     private javax.swing.JButton btnStatistikochKostnadProjekt;
     private javax.swing.JButton btnUppdateratabeller;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

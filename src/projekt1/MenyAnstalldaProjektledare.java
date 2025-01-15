@@ -5,6 +5,10 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,12 +21,44 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
     /**
      * Creates new form MenyAnstalldaProjektledare
      */
+    
     public MenyAnstalldaProjektledare(InfDB idb, String dbAid) {
          this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
+        
+           fyllAnstalldaLista(); // Fyll listan med anställda på avdelning
     }
+    // Visa alla anställda på avdelningen
+    private void fyllAnstalldaLista() {
 
+        try {
+            // SQL-fråga för att hämta alla anställda på projektchefens avdelning
+            String SQLfraga = "SELECT CONCAT(a.Fornamn, ' ', a.Efternamn) AS namn, a.epost "
+                             + "FROM anstalld a "
+                             + "JOIN avdelning v ON a.avdelning = v.avdid "
+                             + "WHERE v.avdid = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "')";
+            
+            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
+
+            DefaultListModel<String> model = new DefaultListModel<>();
+            listaAvdelningensPersonal.setModel(model); // Rensa listan
+
+            if (resultat != null) {
+                // Lägg till varje anställd i listan
+                for (HashMap<String, String> rad : resultat) {
+                    String namnOchEpost = rad.get("namn") + " - " + rad.get("epost");
+                    model.addElement(namnOchEpost); // Lägg till namn och e-post
+                }
+            } else {
+                model.addElement("Inga anställda hittades.");
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Fel vid hämtning av anställda: " + e.getMessage());
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,20 +69,22 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
     private void initComponents() {
 
         lblAnstallda = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblAvdelningensPersonal = new javax.swing.JLabel();
+        tfdSokAnstalld = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaAvdelningensPersonal = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblAnstallda.setText("Anställda");
 
-        jLabel1.setText("Avdelningens Personal:");
+        lblAvdelningensPersonal.setText("Avdelningens Personal:");
 
-        jTextField1.setText("Sök Anställd");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfdSokAnstalld.setText("Sök Anställd");
+        tfdSokAnstalld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfdSokAnstalldActionPerformed(evt);
             }
         });
 
@@ -57,47 +95,97 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
             }
         });
 
+        listaAvdelningensPersonal.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listaAvdelningensPersonal);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAnstallda)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(lblAnstallda)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnSok)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                            .addComponent(btnSok)
+                            .addComponent(tfdSokAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(75, 75, 75)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAvdelningensPersonal)
+                .addGap(71, 71, 71))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(lblAnstallda)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSok))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addComponent(lblAvdelningensPersonal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(tfdSokAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSok))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfdSokAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdSokAnstalldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        
+        // Söka när Enter trycks
+        btnSokActionPerformed(evt);
+        
+    }//GEN-LAST:event_tfdSokAnstalldActionPerformed
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         // TODO add your handling code here:
+        
+        try {
+            String sokText = tfdSokAnstalld.getText().trim();
+            if (sokText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ange ett namn eller en e-postadress att söka efter.");
+                return;
+            }
+
+String sqlFraga = "SELECT CONCAT(a.Fornamn, ' ', a.Efternamn) AS namn, a.epost "
+                 + "FROM anstalld a "
+                 + "JOIN avdelning v ON a.avdelning = v.avdid "
+                 + "WHERE v.avdid = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "') "
+                 + "AND (a.Fornamn LIKE '" + sokText + "' OR a.Efternamn LIKE '" + sokText + "' OR a.epost LIKE '" + sokText + "')";
+
+            System.out.println("SQL-fråga: " + sqlFraga); // För felsökning
+
+            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+            DefaultListModel<String> model = new DefaultListModel<>();
+            listaAvdelningensPersonal.setModel(model);
+
+            if (resultat != null && !resultat.isEmpty()) {
+                for (HashMap<String, String> rad : resultat) {
+                    String namnOchEpost = rad.get("namn") + " - " + rad.get("epost");
+                    model.addElement(namnOchEpost);
+                }
+            } else {
+                model.addElement("Ingen handläggare matchade sökningen.");
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Fel vid sökning: " + e.getMessage());
+        }
+
     }//GEN-LAST:event_btnSokActionPerformed
 
     /**
@@ -137,8 +225,10 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAnstallda;
+    private javax.swing.JLabel lblAvdelningensPersonal;
+    private javax.swing.JList<String> listaAvdelningensPersonal;
+    private javax.swing.JTextField tfdSokAnstalld;
     // End of variables declaration//GEN-END:variables
 }
