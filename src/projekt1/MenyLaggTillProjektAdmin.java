@@ -7,6 +7,9 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Random;
 /**
  *
  * @author minna
@@ -97,6 +100,11 @@ public class MenyLaggTillProjektAdmin extends javax.swing.JFrame {
         });
 
         btnOK.setText("OK");
+        btnOK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOKMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,6 +202,36 @@ public class MenyLaggTillProjektAdmin extends javax.swing.JFrame {
     private void tfdLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdLandActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdLandActionPerformed
+
+    private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKMouseClicked
+ //Hämtar nya ifyllda värden.
+        String nyttProjektnamn = tfdProjektN.getText();
+        String nyttBeskrivning = tfdBeskr.getText();
+        String nyttStartdatum = tfdStartD.getText();
+        String nyttSlutdatum = tfdSlutD.getText();
+        String nyttKostnad = tfdKostnad.getText();
+        String nyttStatus = tfdStatus.getText();
+        String nyttPrioritet = tfdPrioritet.getText();
+        String nyttProjektchef = tfdProChe.getText();
+        String nyttLand = tfdLand.getText();
+        
+        try {
+        // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
+        String nyttPid = idb.getAutoIncrement("projekt", "pid");
+
+        // Lägg till ny anställd i anstalld-tabellen
+        String laggTillProjekt = "INSERT INTO projekt (pid, projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land ) " +
+                "VALUES (" + nyttPid + ", '" + nyttProjektnamn + "', '" + nyttBeskrivning + "', '" + nyttStartdatum + "', '" + nyttSlutdatum + "', '" + 
+                nyttKostnad + "', '" + nyttStatus + "', '" + nyttPrioritet + "', '" + nyttProjektchef + "', '" + nyttLand +"')";
+        
+        idb.insert(laggTillProjekt);
+        
+        // Bekräftelse och felmeddelande
+        JOptionPane.showMessageDialog(this, "Nytt projekt har lagts till!");
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
+    }           // TODO add your handling code here:
+    }//GEN-LAST:event_btnOKMouseClicked
 
     /**
      * @param args the command line arguments
