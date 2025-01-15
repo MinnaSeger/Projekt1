@@ -22,6 +22,7 @@ public class MenyHandlaggare extends javax.swing.JFrame {
         this.dbAid = dbAid; 
         initComponents();
         lblInloggad.setText (dbAid);
+        
     }
 
     /**
@@ -41,7 +42,7 @@ public class MenyHandlaggare extends javax.swing.JFrame {
         btnAnstallda = new javax.swing.JButton();
         lblValkommenHandläggare = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblInloggad.setText("Inloggad");
 

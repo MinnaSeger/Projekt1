@@ -49,7 +49,7 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
         LstAvdelningenspersonal = new javax.swing.JList<>();
         btnSok = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblAnstallda.setText("Anställda");
 
