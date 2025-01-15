@@ -297,6 +297,8 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
 
     private void btnTaBortPartnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortPartnerMouseClicked
         // TODO add your handling code here:
+        
+        //Kod för att ta bort partner från projektet
      
     try {
         String partnerNamn = tfdTaBortPartner.getText().trim();

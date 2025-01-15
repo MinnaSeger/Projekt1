@@ -27,39 +27,65 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
             
             
             fyllProjektetshandlaggare();
+            fyllAllaHandlaggare();
             
     }
-    public void fyllProjektetshandlaggare () {
+    
+    
+    public void fyllProjektetshandlaggare() {
         
         try {
-            
-            String sqlFraga = "SELECT anstalld.fornamn, anstalld.efternamn, handlaggare.ansvarighetsomrade " +
-                        "FROM anstalld " +
-                        "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
-                        "JOIN ans_proj ON anstalld.aid = ans_proj.aid " +
-                        "JOIN projekt ON ans_proj.pid = projekt.pid " +
-                        "WHERE projektchef = " + dbAid;
-            
+            String sqlFraga = "SELECT anstalld.fornamn, anstalld.efternamn " +
+                              "FROM anstalld " +
+                              "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
+                              "JOIN ans_proj ON anstalld.aid = ans_proj.aid " +
+                              "JOIN projekt ON ans_proj.pid = projekt.pid " +
+                              "WHERE projektchef = " + dbAid;
+
             ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlFraga);
-            
+
             if (resultatx == null || resultatx.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Inga handläggare för projektet hittades." );
+                JOptionPane.showMessageDialog(this, "Inga handläggare för projektet hittades.");
+                return;
             }
-            
+
             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("Handlaggare");
-            model.addColumn("Ansvarighetsomrade");
-            
+            model.addColumn("Handläggare");
+
             for (HashMap<String, String> rad : resultatx) {
-                model.addRow(new Object[]{rad.get("fornamn"), rad.get("ansvarighetsomrade")});
-                
+                model.addRow(new Object[]{rad.get("fornamn") + " " + rad.get("efternamn")});
             }
-            
+
             tblProjektetshandlaggare.setModel(model);
-            
+
         } catch (InfException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektets handläggare: " + e.getMessage());
-            
+            JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektets handläggare: " + e.getMessage());
+        }
+    }
+
+    // Fyll tabellen med alla handläggare i databasen
+    public void fyllAllaHandlaggare() {
+        try {
+            String sqlFraga = "SELECT fornamn, efternamn FROM anstalld JOIN handlaggare ON anstalld.aid = handlaggare.aid";
+
+            ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlFraga);
+
+            if (resultatx == null || resultatx.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Inga handläggare hittades i databasen.");
+                return;
+            }
+
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Handläggare");
+
+            for (HashMap<String, String> rad : resultatx) {
+                model.addRow(new Object[]{rad.get("fornamn") + " " + rad.get("efternamn")});
+            }
+
+            tblAllaHandlaggare.setModel(model);
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Fel vid hämtning av alla handläggare: " + e.getMessage());
         }
     }
     /**
@@ -78,6 +104,9 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProjektetshandlaggare = new javax.swing.JTable();
         lblProjektetsHandlaggare = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAllaHandlaggare = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,7 +154,30 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
         });
         jScrollPane1.setViewportView(tblProjektetshandlaggare);
 
-        lblProjektetsHandlaggare.setText("Projektets Handläggare");
+        lblProjektetsHandlaggare.setText("Projektets Handläggare :");
+
+        jLabel1.setText("Alla handläggare : ");
+
+        tblAllaHandlaggare.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Handläggare"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblAllaHandlaggare);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,28 +185,32 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblProjektetsHandlaggare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(tfdAngeHandlaggare, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(tfdTaBortHandlaggare))
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblProjektetsHandlaggare)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfdAngeHandlaggare, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(tfdTaBortHandlaggare))
-                            .addGap(47, 47, 47)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnLaggTillHandlaggare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnTaBortHandlaggare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnTaBortHandlaggare, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLaggTillHandlaggare, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(lblProjektetsHandlaggare)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblProjektetsHandlaggare))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdAngeHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLaggTillHandlaggare))
@@ -162,7 +218,7 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdTaBortHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTaBortHandlaggare))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,21 +230,46 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
 
     private void btnLaggTillHandlaggareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareMouseClicked
         // TODO add your handling code here:
-            // Hämta text från fältet
+    // Hämta text från fältet
     String handlaggareNamn = tfdAngeHandlaggare.getText().trim();
 
-    // Kontrollera att fältet inte är tomt
     if (handlaggareNamn.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Fyll i handläggarens namn.", "Fel", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    // Lägg till handläggaren i tabellen
-    DefaultTableModel model = (DefaultTableModel) tblProjektetshandlaggare.getModel();
-    model.addRow(new Object[]{handlaggareNamn});
+    try {
+        // Hämta AID för den valda handläggaren
+        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + handlaggareNamn + "'";
+        String handlaggareAID = idb.fetchSingle(sqlFraga);
 
-    // Rensa textfältet
-    tfdAngeHandlaggare.setText("");
+        if (handlaggareAID == null) {
+            JOptionPane.showMessageDialog(null, "Handläggaren hittades inte.", "Fel", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Hämta PID för projektet som projektchefen är ansvarig för (säkerställ att det endast finns ett resultat)
+        String sqlProjektFraga = "SELECT pid FROM projekt WHERE projektchef = " + dbAid + " LIMIT 1";
+        String projektId = idb.fetchSingle(sqlProjektFraga);
+
+        if (projektId == null) {
+            JOptionPane.showMessageDialog(null, "Inget projekt hittades för projektchefen.", "Fel", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Lägg till handläggaren till projektet
+        String sqlInsert = "INSERT INTO ans_proj (aid, pid) VALUES (" + handlaggareAID + ", " + projektId + ")";
+        idb.insert(sqlInsert);
+
+        JOptionPane.showMessageDialog(null, "Handläggaren har lagts till projektet.");
+        fyllProjektetshandlaggare();
+
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Fel vid tillägg av handläggare: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+    }
+
+    tfdAngeHandlaggare.setText("");  // Rensa fältet
+
 
     }//GEN-LAST:event_btnLaggTillHandlaggareMouseClicked
 
@@ -198,32 +279,43 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
     // Hämta text från fältet
     String handlaggareNamn = tfdTaBortHandlaggare.getText().trim();
 
-    // Kontrollera att fältet inte är tomt
     if (handlaggareNamn.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Fyll i handläggarens namn.", "Fel", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    // Ta bort handläggaren från tabellen
-    DefaultTableModel model = (DefaultTableModel) tblProjektetshandlaggare.getModel();
-    boolean found = false;
+    try {
+        // Hämta AID för den valda handläggaren
+        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + handlaggareNamn + "'";
+        String handlaggareAID = idb.fetchSingle(sqlFraga);
 
-    for (int i = 0; i < model.getRowCount(); i++) {
-        String currentHandlaggare = model.getValueAt(i, 0).toString();
-        if (currentHandlaggare.equalsIgnoreCase(handlaggareNamn)) {
-            model.removeRow(i);
-            found = true;
-            break;
+        if (handlaggareAID == null) {
+            JOptionPane.showMessageDialog(null, "Handläggaren hittades inte.", "Fel", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        // Hämta PID för projektet som projektchefen är ansvarig för (säkerställ att det endast finns ett resultat)
+        String sqlProjektFraga = "SELECT pid FROM projekt WHERE projektchef = " + dbAid + " LIMIT 1";
+        String projektId = idb.fetchSingle(sqlProjektFraga);
+
+        if (projektId == null) {
+            JOptionPane.showMessageDialog(null, "Inget projekt hittades för projektchefen.", "Fel", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Ta bort handläggaren från projektet
+        String sqlDelete = "DELETE FROM ans_proj WHERE aid = " + handlaggareAID + " AND pid = " + projektId;
+        idb.delete(sqlDelete);  // Här raderas posten utan att försöka få ett returvärde
+
+        JOptionPane.showMessageDialog(null, "Handläggaren har tagits bort från projektet.");
+        fyllProjektetshandlaggare();  // Uppdatera listan med handläggare i projektet
+
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Fel vid borttagning av handläggare: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
     }
 
-    if (!found) {
-        JOptionPane.showMessageDialog(null, "Handläggaren hittades inte i tabellen.", "Fel", JOptionPane.ERROR_MESSAGE);
-    }
-
-    // Rensa textfältet
-    tfdTaBortHandlaggare.setText("");
-
+    tfdTaBortHandlaggare.setText("");  // Rensa fältet
+ 
     }//GEN-LAST:event_btnTaBortHandlaggareMouseClicked
 
     /**
@@ -264,8 +356,11 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaggTillHandlaggare;
     private javax.swing.JButton btnTaBortHandlaggare;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblProjektetsHandlaggare;
+    private javax.swing.JTable tblAllaHandlaggare;
     private javax.swing.JTable tblProjektetshandlaggare;
     private javax.swing.JTextField tfdAngeHandlaggare;
     private javax.swing.JTextField tfdTaBortHandlaggare;
