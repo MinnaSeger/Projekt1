@@ -123,7 +123,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblPartners.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

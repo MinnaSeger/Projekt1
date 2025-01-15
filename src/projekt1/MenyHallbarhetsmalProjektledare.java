@@ -93,7 +93,7 @@ public class MenyHallbarhetsmalProjektledare extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jEditorPane1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblAllaHallbarhetsmal.setText("Alla hållbarhetsmål:");
 
@@ -131,7 +131,7 @@ public class MenyHallbarhetsmalProjektledare extends javax.swing.JFrame {
                     .addComponent(lblMalnummer))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         pack();

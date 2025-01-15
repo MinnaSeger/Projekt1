@@ -116,7 +116,7 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ProjektledarensProjekt = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblProjektetsData.setText("Dina Projekts data:");
 

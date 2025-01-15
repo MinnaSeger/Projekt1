@@ -36,7 +36,7 @@ public class MenyProjektLedare extends javax.swing.JFrame {
         btnAnställda = new javax.swing.JButton();
         btnHållbarhetsmål = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblvalkommenprojektledare.setText("Välkommen Projektledare");
 

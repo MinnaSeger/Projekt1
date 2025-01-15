@@ -180,7 +180,7 @@ private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
         tfdSlutDatum = new javax.swing.JTextField();
         btnFiltreraDatum = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblStatistikKostnadPerLand.setText("Statistik Kostand per land ");
 

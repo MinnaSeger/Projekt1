@@ -75,7 +75,7 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listaAvdelningensPersonal = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblAnstallda.setText("Anställda");
 

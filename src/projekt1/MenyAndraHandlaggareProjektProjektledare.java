@@ -108,7 +108,7 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAllaHandlaggare = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tfdAngeHandlaggare.setText("Ange Handläggare");
 
