@@ -62,7 +62,7 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         btnOk = new javax.swing.JButton();
         tfdAdress = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("Lägg till handläggare:");
@@ -161,17 +161,18 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(btnSlumpaLosen)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdTelnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8)
-                                    .addComponent(tfdEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfdAnsvarighetsomr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(tfdEpost, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tfdTelnr, javax.swing.GroupLayout.Alignment.LEADING))))
                             .addContainerGap()))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfdAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addGap(119, 119, 119))))
+                            .addComponent(jLabel9)
+                            .addComponent(tfdAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(73, 73, 73))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnOk)
@@ -234,7 +235,7 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
 
     private void btnSlumpaLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSlumpaLosenMouseClicked
         //Validering lösenord
-        int length = 10;
+        int length = 11;
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@";
         StringBuilder password = new StringBuilder();
         Random random = new Random();
@@ -259,7 +260,44 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         String nyttMentor = tfdMentor.getText();
         String nyttAnsvarighetsomrade = tfdAnsvarighetsomr.getText();
         String nyttLosenord = tfdLosenord.getText();
-           
+        
+                if (!Validering.isValidNamn(nyttFornamn) || !Validering.isValidNamn(nyttEfternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidePost(nyttEpost)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig e-postadress! En Epostadress måste vara formaterad enligt exempel: förnamn.efternamn@domän.");
+            return;
+        }
+        if (!Validering.isValidTelefonnummer(nyttTelefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror, inga tecken är tillåtna.");
+            return;
+        }
+        if (!Validering.isValidLosenord(nyttLosenord)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Lösenord måste innehålla exakt 11 tecken, minst en stor bokstav, en liten bokstav och minst en siffra. Försök igen!");
+            return;
+        }
+        if (!Validering.isValidDatum(nyttAnstallningsdatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt datum! Kontrollera att månad och dag är korrekta, till exempel 2023-02-29 är endast tillåtet under skottår.!");
+            return;
+         }
+        if (!Validering.isNumerisk(nyttMentor)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            return;
+        }
+        if (!Validering.isNumerisk(nyttAvdelning)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+            return;
+        }
+        if (!Validering.isValidAdress(nyttAdress)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Adressen får inte vara tom. Vänligen fyll i en giltig adress.");
+            return;
+        }
+        if (!Validering.isValidLongText(nyttAnsvarighetsomrade)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt datum! Kontrollera att månad och dag är korrekta, till exempel 2023-02-29 är endast tillåtet under skottår.!");
+            return;
+        }
+        
     try {
     // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
     String nyttAid = idb.getAutoIncrement("anstalld", "aid");

@@ -31,6 +31,12 @@ public class Validering {
         return Pattern.matches(namnRegex, namn);
     }
     
+    public static boolean isValidLongText(String text) {
+    // Regex för att matcha en längre text med bokstäver, siffror, mellanslag och vanliga specialtecken
+    String textRegex = "^[a-zA-ZåäöÅÄÖ0-9\\s.,'\";:!?#@&()-_+/]{10,1000}$";
+    return text != null && text.matches(textRegex);
+    }
+    
     /**
      * Validerar ett datum i formatet YYYY-MM-DD.
      * @param datum Datumet som ska valideras.
