@@ -179,7 +179,7 @@ private void fyllTextRutor () {
         //validering
         
         if (!Validering.isValidNamn(nyttNamn)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt namn! Endast bokstäver och minst två tecken långt är tillåtet.");
             return;
         }
         if (!Validering.isValidePost(nyttEpost)) {
@@ -195,7 +195,7 @@ private void fyllTextRutor () {
             return;
         }
         if (!Validering.isValidLongText(nyttBeskrivning)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "fältet får ej vara tomt, avsluta med punkt.");
+            javax.swing.JOptionPane.showMessageDialog(this, "fältet får ej vara tomt, vänligen fyll i minst tre tecken");
             return;
         }
 
