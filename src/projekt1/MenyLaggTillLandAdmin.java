@@ -184,10 +184,10 @@ public class MenyLaggTillLandAdmin extends javax.swing.JFrame {
         idb.insert(laggTillLand);
         
         // Bekräftelse och felmeddelande
-        JOptionPane.showMessageDialog(this, "Ny administratör har lagts till!");
+        JOptionPane.showMessageDialog(this, "Nytt land har lagts till!");
     } catch (InfException e) {
         JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
-    }     // TODO add your handling code here:
+    }   
     }//GEN-LAST:event_btnOKMouseClicked
 
     private void tfdSprakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdSprakActionPerformed

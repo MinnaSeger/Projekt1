@@ -5,6 +5,11 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -167,7 +172,40 @@ public class MenyLaggTillAvdelningAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseClicked
-        // TODO add your handling code here:
+
+    String nyttNamn = tfdNamn.getText();
+    String nyttBeskrivning = tfdBeskrivning.getText();
+    String nyttAdress = tfdAdress.getText();
+    String nyttEpost = tfdEpost.getText();
+    String nyttTelefon = tfdTelefon.getText();
+    String nyttStad = tfdStad.getText();
+    String nyttChef = tfdChef.getText();
+
+
+    try {
+        // Kontrollera om chefen finns i anstalld-tabellen
+        String chefQuery = "SELECT aid FROM anstalld WHERE aid = '" + nyttChef + "'";
+        String chefExists = idb.fetchSingle(chefQuery);
+
+        if (chefExists == null) {
+            JOptionPane.showMessageDialog(this, "Chef med AID " + nyttChef + " finns inte i anstalld-tabellen!");
+            return;
+        }
+
+        // Hämta nästa lediga avdelnings-ID
+        String nyttAvdid = idb.getAutoIncrement("avdelning", "avdid");
+
+        // Lägg till ny avdelning i avdelning-tabellen
+        String laggTillAvdelning = "INSERT INTO avdelning (avdid, namn, beskrivning, adress, epost, telefon, stad, chef) " +
+                "VALUES (" + nyttAvdid + ", '" + nyttNamn + "', '" + nyttBeskrivning + "', '" + nyttAdress + "', '" + 
+                nyttEpost + "', '" + nyttTelefon + "', '" + nyttStad + "', '" + nyttChef + "')";
+        idb.insert(laggTillAvdelning);
+
+        JOptionPane.showMessageDialog(this, "Ny avdelning har lagts till!");
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
+    }
+    
     }//GEN-LAST:event_btnOkMouseClicked
 
     /**
