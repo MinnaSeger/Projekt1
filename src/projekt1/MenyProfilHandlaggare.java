@@ -287,7 +287,7 @@ public class MenyProfilHandlaggare extends javax.swing.JFrame {
             return;
         }
         if (!Validering.isValidLosenord(nyttLosenord)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Lösenord måste innehålla exakt 11 tecken, minst en stor bokstav, en liten bokstav och en siffra. Försök igen!");
+            javax.swing.JOptionPane.showMessageDialog(this, "Lösenord måste innehålla exakt 11 tecken, minst en stor bokstav, en liten bokstav och minst en siffra. Försök igen!");
             return;
         }
         
