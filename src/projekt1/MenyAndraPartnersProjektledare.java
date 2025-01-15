@@ -96,6 +96,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPartners = new javax.swing.JTable();
         lblProjektetsPartners = new javax.swing.JLabel();
@@ -145,7 +146,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPartners);
 
-        lblProjektetsPartners.setText("Projektets partners");
+        lblProjektetsPartners.setText("Projektets partners: ");
 
         tfdLaggTillPartner.setText("Ange partner");
 
@@ -382,6 +383,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaggTillPartner;
     private javax.swing.JButton btnTaBortPartner;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
