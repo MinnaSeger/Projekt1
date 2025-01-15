@@ -32,31 +32,40 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
     // Visa alla anställda på avdelningen
     private void fyllAnstalldaLista() {
 
-        try {
-            // SQL-fråga för att hämta alla anställda på projektchefens avdelning
-            String SQLfraga = "SELECT CONCAT(a.Fornamn, ' ', a.Efternamn) AS namn, a.epost "
-                             + "FROM anstalld a "
-                             + "JOIN avdelning v ON a.avdelning = v.avdid "
-                             + "WHERE v.avdid = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "')";
-            
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
+    try {
+        // SQL-fråga för att hämta förnamn, efternamn och e-post
+        String SQLfraga = "SELECT fornamn, efternamn, epost "
+                        + "FROM anstalld "
+                        + "WHERE avdelning = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "')";
+        
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
 
-            DefaultListModel<String> model = new DefaultListModel<>();
-            listaAvdelningensPersonal.setModel(model); // Rensa listan
+        DefaultListModel<String> model = new DefaultListModel<>();
+        listaAvdelningensPersonal.setModel(model); // Rensa listan
 
-            if (resultat != null) {
-                // Lägg till varje anställd i listan
-                for (HashMap<String, String> rad : resultat) {
-                    String namnOchEpost = rad.get("namn") + " - " + rad.get("epost");
-                    model.addElement(namnOchEpost); // Lägg till namn och e-post
-                }
-            } else {
-                model.addElement("Inga anställda hittades.");
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                // Hämta värden från varje rad
+                String fornamn = rad.get("fornamn");
+                String efternamn = rad.get("efternamn");
+                String epost = rad.get("epost");
+
+                // Kontrollera att inga fält är null
+                if (fornamn == null) fornamn = "";
+                if (efternamn == null) efternamn = "";
+                if (epost == null) epost = "";
+
+                // Kombinera förnamn, efternamn och e-post
+                String namnOchEpost = fornamn + " " + efternamn + " - " + epost;
+                model.addElement(namnOchEpost); // Lägg till i listan
             }
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(this, "Fel vid hämtning av anställda: " + e.getMessage());
+        } else {
+            model.addElement("Inga anställda hittades.");
         }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av anställda: " + e.getMessage());
     }
+}
     
     
     /**
@@ -70,7 +79,7 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
 
         lblAnstallda = new javax.swing.JLabel();
         lblAvdelningensPersonal = new javax.swing.JLabel();
-        tfdSokAnstalld = new javax.swing.JTextField();
+        tfdSokHandläggare = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaAvdelningensPersonal = new javax.swing.JList<>();
@@ -81,10 +90,10 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
 
         lblAvdelningensPersonal.setText("Avdelningens Personal:");
 
-        tfdSokAnstalld.setText("Sök Anställd");
-        tfdSokAnstalld.addActionListener(new java.awt.event.ActionListener() {
+        tfdSokHandläggare.setText("Sök Handläggare");
+        tfdSokHandläggare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdSokAnstalldActionPerformed(evt);
+                tfdSokHandläggareActionPerformed(evt);
             }
         });
 
@@ -113,9 +122,9 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSok)
-                            .addComponent(tfdSokAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfdSokHandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(75, 75, 75)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -133,7 +142,7 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(tfdSokAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfdSokHandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSok))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -143,48 +152,60 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfdSokAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdSokAnstalldActionPerformed
+    private void tfdSokHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdSokHandläggareActionPerformed
         // TODO add your handling code here:
         
         // Söka när Enter trycks
         btnSokActionPerformed(evt);
         
-    }//GEN-LAST:event_tfdSokAnstalldActionPerformed
+    }//GEN-LAST:event_tfdSokHandläggareActionPerformed
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         // TODO add your handling code here:
         
-        try {
-            String sokText = tfdSokAnstalld.getText().trim();
-            if (sokText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Ange ett namn eller en e-postadress att söka efter.");
-                return;
-            }
-
-String sqlFraga = "SELECT CONCAT(a.Fornamn, ' ', a.Efternamn) AS namn, a.epost "
-                 + "FROM anstalld a "
-                 + "JOIN avdelning v ON a.avdelning = v.avdid "
-                 + "WHERE v.avdid = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "') "
-                 + "AND (a.Fornamn LIKE '" + sokText + "' OR a.Efternamn LIKE '" + sokText + "' OR a.epost LIKE '" + sokText + "')";
-
-            System.out.println("SQL-fråga: " + sqlFraga); // För felsökning
-
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
-
-            DefaultListModel<String> model = new DefaultListModel<>();
-            listaAvdelningensPersonal.setModel(model);
-
-            if (resultat != null && !resultat.isEmpty()) {
-                for (HashMap<String, String> rad : resultat) {
-                    String namnOchEpost = rad.get("namn") + " - " + rad.get("epost");
-                    model.addElement(namnOchEpost);
-                }
-            } else {
-                model.addElement("Ingen handläggare matchade sökningen.");
-            }
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(this, "Fel vid sökning: " + e.getMessage());
+    try {
+        String sokText = tfdSokHandläggare.getText().trim();
+        if (sokText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ange ett namn eller en e-postadress att söka efter.");
+            return;
         }
+
+        // SQL-fråga för att söka efter handläggare baserat på söktext
+        String sqlFraga = "SELECT fornamn, efternamn, epost "
+                        + "FROM anstalld "
+                        + "WHERE avdelning = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "') "
+                        + "AND (fornamn LIKE '%" + sokText + "%' "
+                        + "OR efternamn LIKE '%" + sokText + "%' "
+                        + "OR CONCAT(fornamn, ' ', efternamn) LIKE '%" + sokText + "%' "
+                        + "OR epost LIKE '%" + sokText + "%')";
+
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        DefaultListModel<String> model = new DefaultListModel<>();
+        listaAvdelningensPersonal.setModel(model);
+
+        if (resultat != null && !resultat.isEmpty()) {
+            for (HashMap<String, String> rad : resultat) {
+                // Hämta värden från varje rad
+                String fornamn = rad.get("fornamn");
+                String efternamn = rad.get("efternamn");
+                String epost = rad.get("epost");
+
+                // Kontrollera att inga fält är null
+                if (fornamn == null) fornamn = "";
+                if (efternamn == null) efternamn = "";
+                if (epost == null) epost = "";
+
+                // Kombinera förnamn, efternamn och e-post
+                String namnOchEpost = fornamn + " " + efternamn + " - " + epost;
+                model.addElement(namnOchEpost); // Lägg till i listan
+            }
+        } else {
+            model.addElement("Ingen handläggare matchade sökningen.");
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid sökning: " + e.getMessage());
+    }
 
     }//GEN-LAST:event_btnSokActionPerformed
 
@@ -229,6 +250,6 @@ String sqlFraga = "SELECT CONCAT(a.Fornamn, ' ', a.Efternamn) AS namn, a.epost "
     private javax.swing.JLabel lblAnstallda;
     private javax.swing.JLabel lblAvdelningensPersonal;
     private javax.swing.JList<String> listaAvdelningensPersonal;
-    private javax.swing.JTextField tfdSokAnstalld;
+    private javax.swing.JTextField tfdSokHandläggare;
     // End of variables declaration//GEN-END:variables
 }
