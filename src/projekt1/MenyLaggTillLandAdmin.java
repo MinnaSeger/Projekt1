@@ -5,6 +5,11 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Random;
 /**
  *
  * @author minna
@@ -12,6 +17,7 @@ import oru.inf.InfException;
 public class MenyLaggTillLandAdmin extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
+    private String lid;
     /**
      * Creates new form MenyLaggTillLandAdmin
      */
@@ -158,7 +164,30 @@ public class MenyLaggTillLandAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKMouseClicked
-        // TODO add your handling code here:
+        //Hämtar nya ifyllda värden.
+        String nyttNamn = tfdNamn.getText();
+        String nyttSprak = tfdSprak.getText();
+        String nyttValuta = tfdValuta.getText();
+        String nyttTidszon = tfdTid.getText();
+        String nyttPolitiskStruktur = tfdPolStruk.getText();
+        String nyttEkonomi = tfdEkonomi.getText();
+        
+        try {
+        // Hämta nästa lediga autoinkrement-ID (om databasen stödjer detta)
+        String nyttLid = idb.getAutoIncrement("land", "lid");
+
+        // Lägg till ny anställd i anstalld-tabellen
+        String laggTillLand = "INSERT INTO land (lid, namn, sprak, valuta, tidszon, politisk_struktur, ekonomi ) " +
+                "VALUES (" + nyttLid + ", '" + nyttNamn + "', '" + nyttSprak + "', '" + nyttValuta + "', '" + nyttTidszon + "', '" + 
+                nyttPolitiskStruktur + "', '" + nyttEkonomi + "')";
+        
+        idb.insert(laggTillLand);
+        
+        // Bekräftelse och felmeddelande
+        JOptionPane.showMessageDialog(this, "Ny administratör har lagts till!");
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid inmatning av data: " + e.getMessage());
+    }     // TODO add your handling code here:
     }//GEN-LAST:event_btnOKMouseClicked
 
     private void tfdSprakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdSprakActionPerformed
