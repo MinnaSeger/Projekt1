@@ -9,35 +9,52 @@ import javax.swing.JOptionPane;
 
 public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
     private InfDB idb; 
-    private String dbAvdelningId;
+    private String dbAid;
 
-    public MenyAnstalldaHandlaggare(InfDB idb, String dbAvdelningId) {
+    public MenyAnstalldaHandlaggare(InfDB idb, String dbAid) {
         this.idb = idb; 
-        this.dbAvdelningId = dbAvdelningId;
+        this.dbAid = dbAid;
         initComponents();
-        fyllAnstalldaLista(); // Fyll listan vid start
+        fyllAnstalldaLista1(); // Fyll listan vid start
     }
 
     // 1. Visa alla anställda på avdelningen
-    private void fyllAnstalldaLista() {
-        try {
-            String SQLfraga = "SELECT CONCAT(Fornamn, ' ', Efternamn) AS namn, epost FROM anstalld WHERE avdelning = '" + dbAvdelningId + "'";
-            ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
+    private void fyllAnstalldaLista1() {
 
-            DefaultListModel<String> model = new DefaultListModel<>();
-            LstAvdelningenspersonal.setModel(model); // Rensa listan
-            if (resultat != null) {
-                for (HashMap<String, String> rad : resultat) {
-                    String namnOchEpost = rad.get("namn") + " - " + rad.get("epost");
-                    model.addElement(namnOchEpost); // Lägg till namn och e-post
-                }
-            } else {
-                model.addElement("Inga anställda hittades.");
+    try {
+        // SQL-fråga för att hämta förnamn, efternamn och e-post
+        String SQLfraga = "SELECT fornamn, efternamn, epost "
+                        + "FROM anstalld "
+                        + "WHERE avdelning = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "')";
+        
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
+
+        DefaultListModel<String> model = new DefaultListModel<>();
+        LstAvdelningenspersonal.setModel(model); // Rensa listan
+
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                // Hämta värden från varje rad
+                String fornamn = rad.get("fornamn");
+                String efternamn = rad.get("efternamn");
+                String epost = rad.get("epost");
+
+                // Kontrollera att inga fält är null
+                if (fornamn == null) fornamn = "";
+                if (efternamn == null) efternamn = "";
+                if (epost == null) epost = "";
+
+                // Kombinera förnamn, efternamn och e-post
+                String namnOchEpost = fornamn + " " + efternamn + " - " + epost;
+                model.addElement(namnOchEpost); // Lägg till i listan
             }
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(this, "Fel vid hämtning av anställda: " + e.getMessage());
+        } else {
+            model.addElement("Inga anställda hittades.");
         }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av anställda: " + e.getMessage());
     }
+}
  
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -147,37 +164,43 @@ public class MenyAnstalldaHandlaggare extends javax.swing.JFrame {
             return;
         }
 
-        // Skapa SQL-frågan för att söka efter handläggare
-        String SQLfraga = "SELECT CONCAT(Fornamn, ' ', Efternamn) AS namn, epost " +
-                          "FROM anstalld " +
-                          "WHERE avdelning = '" + dbAvdelningId + "' " +
-                          "AND (Fornamn LIKE '%" + sokText + "%' " +
-                          "OR Efternamn LIKE '%" + sokText + "%' " +
-                          "OR epost LIKE '%" + sokText + "%')";
+        // SQL-fråga för att söka efter handläggare baserat på söktext
+        String sqlFraga = "SELECT fornamn, efternamn, epost "
+                        + "FROM anstalld "
+                        + "WHERE avdelning = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "') "
+                        + "AND (fornamn LIKE '%" + sokText + "%' "
+                        + "OR efternamn LIKE '%" + sokText + "%' "
+                        + "OR CONCAT(fornamn, ' ', efternamn) LIKE '%" + sokText + "%' "
+                        + "OR epost LIKE '%" + sokText + "%')";
 
-        System.out.println("SQL-fråga: " + SQLfraga); // Logga frågan för felsökning
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
-        // Hämta resultat från databasen
-        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
-
-        // Skapa en ny modell för listan och koppla den till JList
         DefaultListModel<String> model = new DefaultListModel<>();
         LstAvdelningenspersonal.setModel(model);
 
         if (resultat != null && !resultat.isEmpty()) {
-            // Lägg till varje resultat i listan
             for (HashMap<String, String> rad : resultat) {
-                String namnOchEpost = rad.get("namn") + " - " + rad.get("epost");
-                model.addElement(namnOchEpost);
+                // Hämta värden från varje rad
+                String fornamn = rad.get("fornamn");
+                String efternamn = rad.get("efternamn");
+                String epost = rad.get("epost");
+
+                // Kontrollera att inga fält är null
+                if (fornamn == null) fornamn = "";
+                if (efternamn == null) efternamn = "";
+                if (epost == null) epost = "";
+
+                // Kombinera förnamn, efternamn och e-post
+                String namnOchEpost = fornamn + " " + efternamn + " - " + epost;
+                model.addElement(namnOchEpost); // Lägg till i listan
             }
         } else {
-            // Om inga resultat hittas
             model.addElement("Ingen handläggare matchade sökningen.");
         }
     } catch (InfException e) {
-        // Visa felmeddelande om något går fel
         JOptionPane.showMessageDialog(this, "Fel vid sökning: " + e.getMessage());
     }
+
     }//GEN-LAST:event_btnSokMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
