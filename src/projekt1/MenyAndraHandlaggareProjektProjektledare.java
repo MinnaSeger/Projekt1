@@ -17,9 +17,7 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
         private InfDB idb;
         private String dbAid;
 
-    /**
-     * Creates new form MenyAndraHandlaggareProjektProjektledare
-     */
+        
     public MenyAndraHandlaggareProjektProjektledare(InfDB idb, String dbAid) {
             this.idb = idb; 
             this.dbAid = dbAid;
@@ -31,6 +29,8 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
             
     }
     
+    
+    //Metod för att fylla tabellen med projektets handläggare
     
     public void fyllProjektetshandlaggare() {
         
@@ -63,10 +63,12 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
         }
     }
 
-    // Fyll tabellen med alla handläggare i databasen
+    // Metod för att fylla tabellen med alla handläggare
+    
     public void fyllAllaHandlaggare() {
         try {
-            String sqlFraga = "SELECT fornamn, efternamn FROM anstalld JOIN handlaggare ON anstalld.aid = handlaggare.aid";
+            String sqlFraga = "SELECT fornamn, efternamn FROM anstalld " +
+                    "JOIN handlaggare ON anstalld.aid = handlaggare.aid ";
 
             ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlFraga);
 
@@ -225,12 +227,15 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLaggTillHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_btnLaggTillHandlaggareActionPerformed
 
+    
+    // Metod för att kunna trycka på knappen och lägga till handläggare
+    
     private void btnLaggTillHandlaggareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareMouseClicked
-        // TODO add your handling code here:
-    // Hämta text från fältet
+     
+        
     String handlaggareNamn = tfdAngeHandlaggare.getText().trim();
 
     if (handlaggareNamn.isEmpty()) {
@@ -239,7 +244,8 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
     }
 
     try {
-        // Hämta AID för den valda handläggaren
+        // SQL fråga för att hämta handläggaren
+   
         String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + handlaggareNamn + "'";
         String handlaggareAID = idb.fetchSingle(sqlFraga);
 
@@ -248,7 +254,7 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
             return;
         }
 
-        // Hämta PID för projektet som projektchefen är ansvarig för (säkerställ att det endast finns ett resultat)
+        //  SQL fråga för att hämta PID för projektet som projektchefen är ansvarig för
         String sqlProjektFraga = "SELECT pid FROM projekt WHERE projektchef = " + dbAid + " LIMIT 1";
         String projektId = idb.fetchSingle(sqlProjektFraga);
 
@@ -257,26 +263,26 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
             return;
         }
 
-        // Lägg till handläggaren till projektet
+        // SQL fråga för att lägga till handläggaren till projektet
         String sqlInsert = "INSERT INTO ans_proj (aid, pid) VALUES (" + handlaggareAID + ", " + projektId + ")";
         idb.insert(sqlInsert);
 
-        JOptionPane.showMessageDialog(null, "Handläggaren har lagts till projektet.");
+        JOptionPane.showMessageDialog(null, "Handläggaren har lagts till i projektet.");
         fyllProjektetshandlaggare();
 
     } catch (InfException e) {
-        JOptionPane.showMessageDialog(null, "Fel vid tillägg av handläggare: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Fel vid tillägg av handläggare i projektet: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
     }
 
-    tfdAngeHandlaggare.setText("");  // Rensa fältet
+    tfdAngeHandlaggare.setText("");
 
 
     }//GEN-LAST:event_btnLaggTillHandlaggareMouseClicked
 
+    //Metod för att ta bort en handläggare från projektet
+    
     private void btnTaBortHandlaggareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortHandlaggareMouseClicked
-        // TODO add your handling code here:
 
-    // Hämta text från fältet
     String handlaggareNamn = tfdTaBortHandlaggare.getText().trim();
 
     if (handlaggareNamn.isEmpty()) {
@@ -285,7 +291,7 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
     }
 
     try {
-        // Hämta AID för den valda handläggaren
+        // SQL fråga för att hämta handläggaren
         String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + handlaggareNamn + "'";
         String handlaggareAID = idb.fetchSingle(sqlFraga);
 
@@ -294,7 +300,7 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
             return;
         }
 
-        // Hämta PID för projektet som projektchefen är ansvarig för (säkerställ att det endast finns ett resultat)
+        // SQL- för att hämta PID för projektet som projektledaren är ansvarig för
         String sqlProjektFraga = "SELECT pid FROM projekt WHERE projektchef = " + dbAid + " LIMIT 1";
         String projektId = idb.fetchSingle(sqlProjektFraga);
 
@@ -303,9 +309,9 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
             return;
         }
 
-        // Ta bort handläggaren från projektet
+        // SQL- som tar bort handläggaren från projektet
         String sqlDelete = "DELETE FROM ans_proj WHERE aid = " + handlaggareAID + " AND pid = " + projektId;
-        idb.delete(sqlDelete);  // Här raderas posten utan att försöka få ett returvärde
+        idb.delete(sqlDelete);
 
         JOptionPane.showMessageDialog(null, "Handläggaren har tagits bort från projektet.");
         fyllProjektetshandlaggare();  // Uppdatera listan med handläggare i projektet
@@ -314,7 +320,7 @@ public class MenyAndraHandlaggareProjektProjektledare extends javax.swing.JFrame
         JOptionPane.showMessageDialog(null, "Fel vid borttagning av handläggare: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
     }
 
-    tfdTaBortHandlaggare.setText("");  // Rensa fältet
+    tfdTaBortHandlaggare.setText(""); 
  
     }//GEN-LAST:event_btnTaBortHandlaggareMouseClicked
 

@@ -33,126 +33,95 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
     
         private void fyllTabeller() {
          
-        fyllTabellerMedDatumFilter();
+        // Visa all statistik direkt
+        
         fyllStatistikKostnadPerLand();
         fyllStatistikOverPartners();
         fyllStatistikOverLander();
         fyllProjektetsKostnad();
+        
     }
 
-private void fyllTabellerMedDatumFilter() {
-    String startDatum = tfdStartdatum.getText().trim();
-    String slutDatum = tfdSlutDatum.getText().trim();
-
-    if (valideraDatumInput(startDatum, slutDatum)) {
-        fyllStatistikKostnadPerLand(startDatum, slutDatum);
-        fyllStatistikOverPartners(startDatum, slutDatum);
-        fyllStatistikOverLander(startDatum, slutDatum);
-        fyllProjektetsKostnad(startDatum, slutDatum);
-    } else {
-        System.out.println("Ogiltiga datum. Kontrollera formatet och försök igen.");
-    }
-}
-
-// En enkel metod för att validera datumformatet
-private boolean valideraDatumInput(String startDatum, String slutDatum) {
-    // Enkelt datumvalidering (YYYY-MM-DD)
-    return startDatum.matches("\\d{4}-\\d{2}-\\d{2}") && slutDatum.matches("\\d{4}-\\d{2}-\\d{2}");
-}
-
-// Överlagring av metoder utan datumparametrar
+// Metod för att fylla statistik per land utan filter
 private void fyllStatistikKostnadPerLand() {
-    fyllStatistikKostnadPerLand("", "");
-}
-
-private void fyllStatistikOverPartners() {
-    fyllStatistikOverPartners("", "");
-}
-
-private void fyllStatistikOverLander() {
-    fyllStatistikOverLander("", "");
-}
-
-private void fyllProjektetsKostnad() {
-    fyllProjektetsKostnad("", "");
-}
-
-// Metod som tar emot start- och slutdatum som parametrar
-private void fyllStatistikKostnadPerLand(String startDatum, String slutDatum) {
     try {
         String sqlFraga = "SELECT DISTINCT land, SUM(kostnad) AS TotalKostnad " +
-                          "FROM projekt WHERE startdatum >= '" + startDatum + "' " +
-                          "AND slutdatum <= '" + slutDatum + "' GROUP BY land";
+                          "FROM projekt WHERE projektchef = " + dbAid + " GROUP BY land";
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblStatistikKostnadPerLand.getModel();
         model.setRowCount(0); // Rensa tabellen
 
-        for (HashMap<String, String> rad : resultat) {
-            model.addRow(new Object[]{rad.get("land"), rad.get("TotalKostnad")});
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("land"), rad.get("TotalKostnad")});
+            }
         }
     } catch (InfException e) {
-        System.out.println("Fel vid hämtning av kostnad per land: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning av kostnad per land: " + e.getMessage());
     }
 }
 
-private void fyllStatistikOverPartners(String startDatum, String slutDatum) {
+// Metod för att fylla statistik över partners utan filter
+private void fyllStatistikOverPartners() {
     try {
         String sqlFraga = "SELECT DISTINCT partner.namn " +
                           "FROM partner " +
                           "JOIN projekt_partner ON partner_pid = projekt_partner.partner_pid " +
                           "JOIN projekt ON projekt_partner.pid = projekt.pid " +
-                          "WHERE projektchef = " + dbAid + " " +
-                          "AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "'";
+                          "WHERE projektchef = " + dbAid;
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblStatistikOverPartners.getModel();
         model.setRowCount(0); // Rensa tabellen
 
-        for (HashMap<String, String> rad : resultat) {
-            model.addRow(new Object[]{rad.get("namn")});
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("namn")});
+            }
         }
     } catch (InfException e) {
-        System.out.println("Fel vid hämtning av projektets partners: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning av projektets partners: " + e.getMessage());
     }
 }
 
-private void fyllStatistikOverLander(String startDatum, String slutDatum) {
+// Metod för att fylla statistik över länder utan filter
+private void fyllStatistikOverLander() {
     try {
-        String sqlFraga = "SELECT DISTINCT land FROM projekt " +
-                          "WHERE projektchef = " + dbAid + " " +
-                          "AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "'";
+        String sqlFraga = "SELECT DISTINCT land FROM projekt WHERE projektchef = " + dbAid;
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblStatistikOverLander.getModel();
         model.setRowCount(0); // Rensa tabellen
 
-        for (HashMap<String, String> rad : resultat) {
-            model.addRow(new Object[]{rad.get("land")});
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("land")});
+            }
         }
     } catch (InfException e) {
-        System.out.println("Fel vid hämtning av projektets länder: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning av projektets länder: " + e.getMessage());
     }
 }
 
-private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
+// Metod för att fylla statistik över projektkostnader utan filter
+private void fyllProjektetsKostnad() {
     try {
-        String sqlFraga = "SELECT DISTINCT projektnamn, kostnad FROM projekt " +
-                          "WHERE projektchef = " + dbAid + " " +
-                          "AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "'";
+        String sqlFraga = "SELECT DISTINCT projektnamn, kostnad FROM projekt WHERE projektchef = " + dbAid;
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblVisaProjektetsKostnad.getModel();
         model.setRowCount(0); // Rensa tabellen
 
-        for (HashMap<String, String> rad : resultat) {
-            model.addRow(new Object[]{rad.get("projektnamn"), rad.get("kostnad")});
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("projektnamn"), rad.get("kostnad")});
+            }
         }
     } catch (InfException e) {
-        System.out.println("Fel vid hämtning av projektets kostnad: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning av projektets kostnader: " + e.getMessage());
     }
 }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -352,24 +321,114 @@ private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
 
     private void btnFiltreraDatumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltreraDatumMouseClicked
         // TODO add your handling code here:
-            // Hämta datum från textfälten
+// En enkel metod för att validera datumformatet
+// Hämta datum från textfälten
+        // Hämta datum från textfälten
     String startDatum = tfdStartdatum.getText().trim();
     String slutDatum = tfdSlutDatum.getText().trim();
-    
-        
-    // Kontrollera om datumen är giltiga
+
+    // Validera om datumen är i rätt format (Du kan justera valideringen om det behövs)
     if (valideraDatumInput(startDatum, slutDatum)) {
-        // Om datumen är giltiga, hämta och visa filtrerad statistik
+        // Uppdatera alla tabeller med det valda datumintervallet
         fyllStatistikKostnadPerLand(startDatum, slutDatum);
         fyllStatistikOverPartners(startDatum, slutDatum);
         fyllStatistikOverLander(startDatum, slutDatum);
         fyllProjektetsKostnad(startDatum, slutDatum);
     } else {
-        // Visa ett felmeddelande om datumen inte är giltiga
         JOptionPane.showMessageDialog(null, "Ogiltiga datum. Kontrollera formatet och försök igen.", "Fel", JOptionPane.ERROR_MESSAGE);
-    }                                           
+    }
+    }
+    // Valideringsmetod för datuminput
+private boolean valideraDatumInput(String startDatum, String slutDatum) {
+    // Här kan du lägga till din egen logik för att validera datumformatet
+    // Exempel: Kontrollera om datumen är i formatet YYYY-MM-DD
+    return startDatum.matches("\\d{4}-\\d{2}-\\d{2}") && slutDatum.matches("\\d{4}-\\d{2}-\\d{2}");
+}
 
-        
+// Uppdaterad metod för att fylla statistik per land med datumfilter
+private void fyllStatistikKostnadPerLand(String startDatum, String slutDatum) {
+    try {
+        String sqlFraga = "SELECT DISTINCT land, SUM(kostnad) AS TotalKostnad " +
+                          "FROM projekt WHERE projektchef = " + dbAid + 
+                          " AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "' " +
+                          "GROUP BY land";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        DefaultTableModel model = (DefaultTableModel) tblStatistikKostnadPerLand.getModel();
+        model.setRowCount(0); // Rensa tabellen
+
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("land"), rad.get("TotalKostnad")});
+            }
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning av kostnad per land: " + e.getMessage());
+    }
+}
+
+// Uppdaterad metod för att fylla statistik över partners med datumfilter
+private void fyllStatistikOverPartners(String startDatum, String slutDatum) {
+    try {
+        String sqlFraga = "SELECT DISTINCT partner.namn " +
+                          "FROM partner " +
+                          "JOIN projekt_partner ON partner_pid = projekt_partner.partner_pid " +
+                          "JOIN projekt ON projekt_partner.pid = projekt.pid " +
+                          "WHERE projektchef = " + dbAid +
+                          " AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "'";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        DefaultTableModel model = (DefaultTableModel) tblStatistikOverPartners.getModel();
+        model.setRowCount(0); // Rensa tabellen
+
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("namn")});
+            }
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning av projektets partners: " + e.getMessage());
+    }
+}
+
+// Uppdaterad metod för att fylla statistik över länder med datumfilter
+private void fyllStatistikOverLander(String startDatum, String slutDatum) {
+    try {
+        String sqlFraga = "SELECT DISTINCT land FROM projekt WHERE projektchef = " + dbAid + 
+                          " AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "'";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        DefaultTableModel model = (DefaultTableModel) tblStatistikOverLander.getModel();
+        model.setRowCount(0); // Rensa tabellen
+
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("land")});
+            }
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning av projektets länder: " + e.getMessage());
+    }
+}
+
+// Uppdaterad metod för att fylla statistik över projektkostnader med datumfilter
+private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
+    try {
+        String sqlFraga = "SELECT projektnamn, kostnad FROM projekt WHERE projektchef = " + dbAid +
+                          " AND startdatum >= '" + startDatum + "' AND slutdatum <= '" + slutDatum + "'";
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
+
+        DefaultTableModel model = (DefaultTableModel) tblVisaProjektetsKostnad.getModel();
+        model.setRowCount(0); // Rensa tabellen
+
+        if (resultat != null) {
+            for (HashMap<String, String> rad : resultat) {
+                model.addRow(new Object[]{rad.get("projektnamn"), rad.get("kostnad")});
+            }
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning av projektets kostnader: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnFiltreraDatumMouseClicked
 
     /**
