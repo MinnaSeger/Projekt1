@@ -18,22 +18,20 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
 
-    /**
-     * Creates new form MenyAnstalldaProjektledare
-     */
     
     public MenyAnstalldaProjektledare(InfDB idb, String dbAid) {
          this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
         
-           fyllAnstalldaLista(); // Fyll listan med anställda på avdelning
+           fyllAnstalldaLista();
     }
-    // Visa alla anställda på avdelningen
+    
+    //Metod som fyller listan med anställda på avdelningen 
     private void fyllAnstalldaLista() {
 
     try {
-        // SQL-fråga för att hämta förnamn, efternamn och e-post
+        // SQL-fråga som hämtar förnamn, efternamn och e-post från de anställda
         String SQLfraga = "SELECT fornamn, efternamn, epost "
                         + "FROM anstalld "
                         + "WHERE avdelning = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "')";
@@ -41,23 +39,23 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(SQLfraga);
 
         DefaultListModel<String> model = new DefaultListModel<>();
-        listaAvdelningensPersonal.setModel(model); // Rensa listan
+        listaAvdelningensPersonal.setModel(model);
 
         if (resultat != null) {
             for (HashMap<String, String> rad : resultat) {
-                // Hämta värden från varje rad
+
                 String fornamn = rad.get("fornamn");
                 String efternamn = rad.get("efternamn");
                 String epost = rad.get("epost");
 
-                // Kontrollera att inga fält är null
+
                 if (fornamn == null) fornamn = "";
                 if (efternamn == null) efternamn = "";
                 if (epost == null) epost = "";
 
-                // Kombinera förnamn, efternamn och e-post
+
                 String namnOchEpost = fornamn + " " + efternamn + " - " + epost;
-                model.addElement(namnOchEpost); // Lägg till i listan
+                model.addElement(namnOchEpost);
             }
         } else {
             model.addElement("Inga anställda hittades.");
@@ -152,16 +150,17 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Metod som säker efter handläggare 
     private void tfdSokHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdSokHandläggareActionPerformed
-        // TODO add your handling code here:
+
         
-        // Söka när Enter trycks
         btnSokActionPerformed(evt);
         
     }//GEN-LAST:event_tfdSokHandläggareActionPerformed
 
+    //Metod som gör att det sker en sökning när man trycker på sök-knappen
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
-        // TODO add your handling code here:
+
         
     try {
         String sokText = tfdSokHandläggare.getText().trim();
@@ -170,7 +169,7 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
             return;
         }
 
-        // SQL-fråga för att söka efter handläggare baserat på söktext
+        // SQL-fråga för att söka efter handläggare
         String sqlFraga = "SELECT fornamn, efternamn, epost "
                         + "FROM anstalld "
                         + "WHERE avdelning = (SELECT avdelning FROM anstalld WHERE aid = '" + dbAid + "') "
@@ -186,19 +185,17 @@ public class MenyAnstalldaProjektledare extends javax.swing.JFrame {
 
         if (resultat != null && !resultat.isEmpty()) {
             for (HashMap<String, String> rad : resultat) {
-                // Hämta värden från varje rad
+
                 String fornamn = rad.get("fornamn");
                 String efternamn = rad.get("efternamn");
                 String epost = rad.get("epost");
 
-                // Kontrollera att inga fält är null
                 if (fornamn == null) fornamn = "";
                 if (efternamn == null) efternamn = "";
                 if (epost == null) epost = "";
 
-                // Kombinera förnamn, efternamn och e-post
                 String namnOchEpost = fornamn + " " + efternamn + " - " + epost;
-                model.addElement(namnOchEpost); // Lägg till i listan
+                model.addElement(namnOchEpost);
             }
         } else {
             model.addElement("Ingen handläggare matchade sökningen.");

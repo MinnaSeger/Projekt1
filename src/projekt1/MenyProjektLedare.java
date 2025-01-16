@@ -10,9 +10,7 @@ import oru.inf.InfException;
 public class MenyProjektLedare extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
-    /**
-     * Creates new form MenyProjektLedare
-     */
+
     public MenyProjektLedare(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
@@ -133,47 +131,47 @@ public class MenyProjektLedare extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnprojektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprojektActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnprojektActionPerformed
 
     private void btnMinprofilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinprofilActionPerformed
-        // TODO add your handling code here: 
-        
 
-      
     }//GEN-LAST:event_btnMinprofilActionPerformed
 
     private void btnHållbarhetsmålActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHållbarhetsmålActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnHållbarhetsmålActionPerformed
 
     private void btnAnställdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnställdaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnställdaActionPerformed
 
+    }//GEN-LAST:event_btnAnställdaActionPerformed
+    
+      //Metod som öppnar det nya fönstret: Projektledarens profil
     private void btnMinprofilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinprofilMouseClicked
-        // TODO add your handling code here:
 
        MenyProfilProjektledare profilFönster = new MenyProfilProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
     }//GEN-LAST:event_btnMinprofilMouseClicked
-
+      
+     //Metod som öppnar det nya fönstret: Anställda
     private void btnAnställdaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnställdaMouseClicked
-        // TODO add your handling code here:
-               MenyAnstalldaProjektledare profilFönster = new MenyAnstalldaProjektledare(idb, dbAid);
+
+       MenyAnstalldaProjektledare profilFönster = new MenyAnstalldaProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
  
     }//GEN-LAST:event_btnAnställdaMouseClicked
 
+     //Metod som öppnar det nya fönstret: projekt
     private void btnprojektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnprojektMouseClicked
-        // TODO add your handling code here:
-                    MenyProjektProjektledare profilFönster = new MenyProjektProjektledare(idb, dbAid);
+
+       MenyProjektProjektledare profilFönster = new MenyProjektProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
     }//GEN-LAST:event_btnprojektMouseClicked
-
+ 
+    //Metod som öppnar den nya menyn : hållbarhetsmål
     private void btnHållbarhetsmålMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHållbarhetsmålMouseClicked
-        // TODO add your handling code here:
-                       MenyHallbarhetsmalProjektledare profilFönster = new MenyHallbarhetsmalProjektledare(idb, dbAid);
+
+       MenyHallbarhetsmalProjektledare profilFönster = new MenyHallbarhetsmalProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
         
     }//GEN-LAST:event_btnHållbarhetsmålMouseClicked

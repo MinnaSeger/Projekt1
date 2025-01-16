@@ -18,9 +18,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
      private InfDB idb;
      private String dbAid;
 
-    /**
-     * Creates new form MenyAndraPartnersProjektledare
-     */
+   
     public MenyAndraPartnersProjektledare(InfDB idb, String dbAid) {
          this.idb=idb; 
          this.dbAid = dbAid;
@@ -31,10 +29,10 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
         
     }
     
-       // Visa alla projekt och partners
+       // Metod som visar projektets partners i tabellen
     private void visaPartnersITabell() {
     try {
-        // Hämta projektets partners
+        // SQL som hämtar projektets partners
         String sqlProjektPartners =  "SELECT DISTINCT partner.namn "
                 + "FROM projekt "
                 + "INNER JOIN projekt_partner ON projekt.pid = projekt_partner.pid "
@@ -43,22 +41,22 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
         
         ArrayList<HashMap<String, String>> projektPartners = idb.fetchRows(sqlProjektPartners);
 
-        // Hämta alla partners
+        // SQL som hämtar alla partners
         String sqlAllaPartners = "SELECT namn FROM partner";
         ArrayList<HashMap<String, String>> allaPartners = idb.fetchRows(sqlAllaPartners);
 
-        // Fyll tabellen tblProjektetsPartners
+        // Fyller tabellen tblProjektetsPartners med partners
         DefaultTableModel modelProjektPartners = (DefaultTableModel) tblPartners.getModel();
-        modelProjektPartners.setRowCount(0); // Töm tabellen
+        modelProjektPartners.setRowCount(0);
         if (projektPartners != null) {
             for (HashMap<String, String> row : projektPartners) {
                 modelProjektPartners.addRow(new Object[]{row.get("namn")});
             }
         }
 
-        // Fyll tabellen tblListaPartner med partners som inte redan är kopplade till projektet
+        // Fyll tabellen tblListaPartner med partners som inte tillhör projektet
         DefaultTableModel modelAllaPartners = (DefaultTableModel) tblPartnerLista.getModel();
-        modelAllaPartners.setRowCount(0); // Töm tabellen
+        modelAllaPartners.setRowCount(0);
         if (allaPartners != null) {
             for (HashMap<String, String> row : allaPartners) {
                 String partnerNamn = row.get("namn");
@@ -239,8 +237,10 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Metod som lägger till partners till projektet
+    
     private void btnLaggTillPartnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerMouseClicked
-        // TODO add your handling code here:
+
     try {
         String partnerNamn = tfdLaggTillPartner.getText().trim();
 
@@ -249,7 +249,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
             return;
         }
 
-        // Kontrollera om partnern finns i databasen
+        // SQL som kontrollera om partnern finns i databasen
         String sqlHittaPartner = "SELECT namn FROM partner WHERE namn = '" + partnerNamn + "'";
         String hittadPartner = idb.fetchSingle(sqlHittaPartner);
 
@@ -258,7 +258,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
             return;
         }
 
-        // Hämta projektets PID
+        // SQL som hämtar projektets PID
         String sqlHittaProjektPID = "SELECT pid FROM projekt WHERE projektchef = " + dbAid;
         String projektPID = idb.fetchSingle(sqlHittaProjektPID);
 
@@ -267,7 +267,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
             return;
         }
 
-        // Kontrollera om partnern redan är kopplad till projektet
+        // SQL som kontrollerar om partnern redan är kopplad till projektet
         String sqlKontrolleraKoppling = "SELECT partner_pid FROM projekt_partner " +
                 "INNER JOIN partner ON projekt_partner.partner_pid = partner.pid " +
                 "WHERE partner.namn = '" + partnerNamn + "' AND projekt_partner.pid = '" + projektPID + "'";
@@ -278,7 +278,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
             return;
         }
 
-        // Lägg till kopplingen
+        // Lägger till partnern i projeketet
         String sqlLaggTillKoppling = "INSERT INTO projekt_partner (partner_pid, pid) " +
                 "SELECT pid, '" + projektPID + "' FROM partner WHERE namn = '" + partnerNamn + "'";
         idb.insert(sqlLaggTillKoppling);
@@ -295,10 +295,9 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnLaggTillPartnerMouseClicked
 
+    //Metod som tar bort en partner från projeketet
     private void btnTaBortPartnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortPartnerMouseClicked
-        // TODO add your handling code here:
-        
-        //Kod för att ta bort partner från projektet
+
      
     try {
         String partnerNamn = tfdTaBortPartner.getText().trim();
@@ -308,7 +307,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
             return;
         }
 
-        // Kontrollera om partnern finns i projektet
+        // SQL som kontrollera om partnern finns i projektet eller inte
         String sqlHittaProjektPID = "SELECT pid FROM projekt WHERE projektchef = " + dbAid;
         String projektPID = idb.fetchSingle(sqlHittaProjektPID);
 
@@ -327,7 +326,7 @@ public class MenyAndraPartnersProjektledare extends javax.swing.JFrame {
             return;
         }
 
-        // Ta bort kopplingen
+        // SQL som tar bort partnern från projektet
         String sqlTaBortKoppling = "DELETE FROM projekt_partner " +
                 "WHERE partner_pid = (SELECT pid FROM partner WHERE namn = '" + partnerNamn + "') " +
                 "AND pid = '" + projektPID + "'";

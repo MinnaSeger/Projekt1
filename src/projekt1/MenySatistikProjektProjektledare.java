@@ -19,9 +19,7 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
 
-    /**
-     * Creates new form MenySatistikProjektProjektledare
-     */
+
     public MenySatistikProjektProjektledare(InfDB idb, String dbAid) {
     this.idb=idb; 
     this.dbAid = dbAid;
@@ -31,9 +29,9 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
 
     }
     
+    //Metod som fyller alla tabeller
         private void fyllTabeller() {
          
-        // Visa all statistik direkt
         
         fyllStatistikKostnadPerLand();
         fyllStatistikOverPartners();
@@ -42,7 +40,7 @@ public class MenySatistikProjektProjektledare extends javax.swing.JFrame {
         
     }
 
-// Metod för att fylla statistik per land utan filter
+//Metod som anger statistik för kostnad per land
 private void fyllStatistikKostnadPerLand() {
     try {
         String sqlFraga = "SELECT DISTINCT land, SUM(kostnad) AS TotalKostnad " +
@@ -50,7 +48,7 @@ private void fyllStatistikKostnadPerLand() {
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblStatistikKostnadPerLand.getModel();
-        model.setRowCount(0); // Rensa tabellen
+        model.setRowCount(0);
 
         if (resultat != null) {
             for (HashMap<String, String> rad : resultat) {
@@ -62,7 +60,7 @@ private void fyllStatistikKostnadPerLand() {
     }
 }
 
-// Metod för att fylla statistik över partners utan filter
+// Metod för att fylla statistik över partners
 private void fyllStatistikOverPartners() {
     try {
         String sqlFraga = "SELECT DISTINCT partner.namn " +
@@ -73,7 +71,7 @@ private void fyllStatistikOverPartners() {
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblStatistikOverPartners.getModel();
-        model.setRowCount(0); // Rensa tabellen
+        model.setRowCount(0);
 
         if (resultat != null) {
             for (HashMap<String, String> rad : resultat) {
@@ -85,14 +83,14 @@ private void fyllStatistikOverPartners() {
     }
 }
 
-// Metod för att fylla statistik över länder utan filter
+// Metod för att fylla statistik över länder
 private void fyllStatistikOverLander() {
     try {
         String sqlFraga = "SELECT DISTINCT land FROM projekt WHERE projektchef = " + dbAid;
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblStatistikOverLander.getModel();
-        model.setRowCount(0); // Rensa tabellen
+        model.setRowCount(0);
 
         if (resultat != null) {
             for (HashMap<String, String> rad : resultat) {
@@ -111,7 +109,7 @@ private void fyllProjektetsKostnad() {
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblVisaProjektetsKostnad.getModel();
-        model.setRowCount(0); // Rensa tabellen
+        model.setRowCount(0);
 
         if (resultat != null) {
             for (HashMap<String, String> rad : resultat) {
@@ -319,17 +317,14 @@ private void fyllProjektetsKostnad() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Metod som filtrerar statistiken baserat på datum
     private void btnFiltreraDatumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltreraDatumMouseClicked
-        // TODO add your handling code here:
-// En enkel metod för att validera datumformatet
-// Hämta datum från textfälten
-        // Hämta datum från textfälten
+
     String startDatum = tfdStartdatum.getText().trim();
     String slutDatum = tfdSlutDatum.getText().trim();
 
-    // Validera om datumen är i rätt format (Du kan justera valideringen om det behövs)
     if (valideraDatumInput(startDatum, slutDatum)) {
-        // Uppdatera alla tabeller med det valda datumintervallet
+        
         fyllStatistikKostnadPerLand(startDatum, slutDatum);
         fyllStatistikOverPartners(startDatum, slutDatum);
         fyllStatistikOverLander(startDatum, slutDatum);
@@ -338,14 +333,13 @@ private void fyllProjektetsKostnad() {
         JOptionPane.showMessageDialog(null, "Ogiltiga datum. Kontrollera formatet och försök igen.", "Fel", JOptionPane.ERROR_MESSAGE);
     }
     }
-    // Valideringsmetod för datuminput
+    // Validering för datumen som man anger att filtrera på
 private boolean valideraDatumInput(String startDatum, String slutDatum) {
-    // Här kan du lägga till din egen logik för att validera datumformatet
-    // Exempel: Kontrollera om datumen är i formatet YYYY-MM-DD
+    
     return startDatum.matches("\\d{4}-\\d{2}-\\d{2}") && slutDatum.matches("\\d{4}-\\d{2}-\\d{2}");
 }
 
-// Uppdaterad metod för att fylla statistik per land med datumfilter
+// Metod som uppdaterar statistik baserat på filtrerat datum
 private void fyllStatistikKostnadPerLand(String startDatum, String slutDatum) {
     try {
         String sqlFraga = "SELECT DISTINCT land, SUM(kostnad) AS TotalKostnad " +
@@ -355,7 +349,7 @@ private void fyllStatistikKostnadPerLand(String startDatum, String slutDatum) {
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblStatistikKostnadPerLand.getModel();
-        model.setRowCount(0); // Rensa tabellen
+        model.setRowCount(0);
 
         if (resultat != null) {
             for (HashMap<String, String> rad : resultat) {
@@ -367,7 +361,7 @@ private void fyllStatistikKostnadPerLand(String startDatum, String slutDatum) {
     }
 }
 
-// Uppdaterad metod för att fylla statistik över partners med datumfilter
+// Metod som uppdaterar statistiken baserat på filtrerat datum
 private void fyllStatistikOverPartners(String startDatum, String slutDatum) {
     try {
         String sqlFraga = "SELECT DISTINCT partner.namn " +
@@ -379,7 +373,7 @@ private void fyllStatistikOverPartners(String startDatum, String slutDatum) {
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblStatistikOverPartners.getModel();
-        model.setRowCount(0); // Rensa tabellen
+        model.setRowCount(0);
 
         if (resultat != null) {
             for (HashMap<String, String> rad : resultat) {
@@ -391,7 +385,7 @@ private void fyllStatistikOverPartners(String startDatum, String slutDatum) {
     }
 }
 
-// Uppdaterad metod för att fylla statistik över länder med datumfilter
+// Metod som uppdaterar statistik baserat på filtrerat datum
 private void fyllStatistikOverLander(String startDatum, String slutDatum) {
     try {
         String sqlFraga = "SELECT DISTINCT land FROM projekt WHERE projektchef = " + dbAid + 
@@ -399,7 +393,7 @@ private void fyllStatistikOverLander(String startDatum, String slutDatum) {
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblStatistikOverLander.getModel();
-        model.setRowCount(0); // Rensa tabellen
+        model.setRowCount(0);
 
         if (resultat != null) {
             for (HashMap<String, String> rad : resultat) {
@@ -411,7 +405,7 @@ private void fyllStatistikOverLander(String startDatum, String slutDatum) {
     }
 }
 
-// Uppdaterad metod för att fylla statistik över projektkostnader med datumfilter
+// Metod som uppdaterar kostnad för projekten baserat på datum
 private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
     try {
         String sqlFraga = "SELECT projektnamn, kostnad FROM projekt WHERE projektchef = " + dbAid +
@@ -419,7 +413,7 @@ private void fyllProjektetsKostnad(String startDatum, String slutDatum) {
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
         DefaultTableModel model = (DefaultTableModel) tblVisaProjektetsKostnad.getModel();
-        model.setRowCount(0); // Rensa tabellen
+        model.setRowCount(0);
 
         if (resultat != null) {
             for (HashMap<String, String> rad : resultat) {

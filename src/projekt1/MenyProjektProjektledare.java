@@ -18,9 +18,7 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
       private InfDB idb;
     private String dbAid;
 
-    /**
-     * Creates new form MenyProjektProjektledare
-     */
+
     public MenyProjektProjektledare(InfDB idb, String dbAid) {
          this.idb = idb;
         this.dbAid = dbAid;
@@ -32,16 +30,15 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
         FyllStatusComboBox();
         
     }
-    
+    //Metod som fyller label med projekt som projektchefen ansvarar för
     private void FyllILabelAnsvarigForProjekt() {
     try {
-        // Hämta alla projekt som tilldelats projektchefen
+        // Hämta alla projekt som projektchefen har tilldelats
         String sqlFraga = "SELECT DISTINCT projektnamn FROM projekt WHERE projektchef = " + dbAid;
         ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFraga);
 
-        // Fyll tabellen med projektnamn
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0); // Rensa tidigare data
+        DefaultTableModel model = (DefaultTableModel) tblProjekt.getModel();
+        model.setRowCount(0);
 
         if (projektLista != null && !projektLista.isEmpty()) {
             for (HashMap<String, String> projekt : projektLista) {
@@ -56,9 +53,9 @@ public class MenyProjektProjektledare extends javax.swing.JFrame {
     }
 }
 
+    //Metod för att fylla label med projektets partners
 private void FyllISamarbetspartners() {
     try {
-        // Hämta alla partners för projekt där projektchefen är ansvarig
         String sqlFraga = "SELECT DISTINCT partner.namn "
                 + "FROM projekt "
                 + "INNER JOIN projekt_partner ON projekt.pid = projekt_partner.pid "
@@ -67,8 +64,7 @@ private void FyllISamarbetspartners() {
 
         ArrayList<HashMap<String, String>> partners = idb.fetchRows(sqlFraga);
 
-        // Fyll tabellen med partnernamn
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblPartner.getModel();
         model.setRowCount(0);
 
         if (partners != null && !partners.isEmpty()) {
@@ -77,16 +73,16 @@ private void FyllISamarbetspartners() {
                 model.addRow(new Object[]{partnerName});
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Inga samarbetspartners hittades.");
+            JOptionPane.showMessageDialog(this, "Inga samarbetspartners för projekten hittades.");
         }
     } catch (InfException e) {
         JOptionPane.showMessageDialog(this, "Fel vid hämtning av data!" + e.getMessage());
     }
 }
 
+//Metod som fyller label med avdelningens projekt
 private void FylliAvdelningensProjekt() {
     try {
-        // Hämta alla projekt från avdelningen
         String sqlFraga = "SELECT DISTINCT projekt.projektnamn "
                 + "FROM projekt "
                 + "INNER JOIN avdelning ON projekt.projektchef = avdelning.chef "
@@ -94,7 +90,6 @@ private void FylliAvdelningensProjekt() {
 
         ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFraga);
 
-        // Fyll tabellen med alla avdelningens projekt
         DefaultTableModel model = (DefaultTableModel) tblAvdelningensProjekt.getModel();
         model.setRowCount(0);
 
@@ -111,17 +106,18 @@ private void FylliAvdelningensProjekt() {
     }
 }
 
+//Metod för att fylla rullistan med olika val för status
     private void FyllStatusComboBox() {
     try {
         String query = "SELECT DISTINCT status FROM projekt";
         ArrayList<String> resultat = idb.fetchColumn(query);
 
-        ComboBoxFiltreraStatus.removeAllItems(); // Töm tidigare alternativ
-        ComboBoxFiltreraStatus.addItem("Välj status"); // Lägg till standardval
+        ComboBoxFiltreraStatus.removeAllItems();
+        ComboBoxFiltreraStatus.addItem("Välj status");
 
         if (resultat != null) {
             for (String status : resultat) {
-                ComboBoxFiltreraStatus.addItem(status); // Lägg till statusalternativ
+                ComboBoxFiltreraStatus.addItem(status);
             }
         }
     } catch (InfException e) {
@@ -149,9 +145,9 @@ private void FylliAvdelningensProjekt() {
         lblSokSlutdatum = new javax.swing.JLabel();
         SpinnerSlutDatum = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProjekt = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblPartner = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblAvdelningensProjekt = new javax.swing.JTable();
         ComboBoxFiltreraStatus = new javax.swing.JComboBox<>();
@@ -188,7 +184,7 @@ private void FylliAvdelningensProjekt() {
 
         SpinnerSlutDatum.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1736254980000L), new java.util.Date(1104534000000L), new java.util.Date(1893452400000L), java.util.Calendar.DAY_OF_MONTH));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProjekt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -208,9 +204,9 @@ private void FylliAvdelningensProjekt() {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProjekt);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblPartner.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -229,7 +225,7 @@ private void FylliAvdelningensProjekt() {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblPartner);
 
         tblAvdelningensProjekt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -350,20 +346,21 @@ private void FylliAvdelningensProjekt() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAndraUppgifterOmProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraUppgifterOmProjektActionPerformed
-        // TODO add your handling code here:
+
         
     }//GEN-LAST:event_btnAndraUppgifterOmProjektActionPerformed
 
+    //Metod som öppnar nya menyn Uppgifter Om Projekt
     private void btnAndraUppgifterOmProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraUppgifterOmProjektMouseClicked
-        // TODO add your handling code here:
-        
+  
        MenyAndraUppgifterOmProjektProjektledare profilFönster = new MenyAndraUppgifterOmProjektProjektledare(idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnAndraUppgifterOmProjektMouseClicked
 
+    //Metod som gör att man kan filtrera avdelningens projekt på status
     private void btnFiltreraPaStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltreraPaStatusMouseClicked
-        // TODO add your handling code here:
+
         
     String selectedStatus = ComboBoxFiltreraStatus.getSelectedItem().toString();
 
@@ -380,7 +377,7 @@ private void FylliAvdelningensProjekt() {
 
         ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFraga);
 
-        // Fyll tabellen med de filtrerade projekten
+        // Fyll tabellen avdelningensprojekt baserat valda status
         DefaultTableModel model = (DefaultTableModel) tblAvdelningensProjekt.getModel();
         model.setRowCount(0); // Rensa tidigare data
 
@@ -397,26 +394,26 @@ private void FylliAvdelningensProjekt() {
     }
     }//GEN-LAST:event_btnFiltreraPaStatusMouseClicked
 
+    //Metod som gör att man kan söka på avdelningens projekt på datum
     private void btnSokProjektPaDatumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSokProjektPaDatumMouseClicked
-        // TODO add your handling code here:
-            
-// Hämta start- och slutdatum från spinners
+    
+// Fyller spinners med start och slut datum
     java.util.Date startDatum = (java.util.Date) SpinnerStartDatum.getValue();
     java.util.Date slutDatum = (java.util.Date) SpinnerSlutDatum.getValue();
     
-    // Kontrollera om slutdatum är före startdatum
+    // Kontroll, att slutdatum kommer efter startdatum
     if (slutDatum.before(startDatum)) {
         JOptionPane.showMessageDialog(this, "Slutdatum kan inte vara före startdatum.");
         return;
     }
 
-    // Konvertera datum till String i SQL-format (yyyy-MM-dd)
+    // Konvertera datum till String i SQL
     java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
     String startDatumStr = sdf.format(startDatum);
     String slutDatumStr = sdf.format(slutDatum);
     
     try {
-        // SQL-fråga för att hämta projekt baserat på datumintervall
+    // SQL-fråga för att hämta avdelningens projekt baserat på de valda datumen
         String sqlFraga = "SELECT projektnamn FROM projekt "
                 + "WHERE projektchef = " + dbAid + " "
                 + "AND startdatum >= '" + startDatumStr + "' "
@@ -424,9 +421,9 @@ private void FylliAvdelningensProjekt() {
 
         ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFraga);
 
-        // Fyll tabellen med de filtrerade projekten
+    // Fyll tabellen med de filtrerade projekten
         DefaultTableModel model = (DefaultTableModel) tblAvdelningensProjekt.getModel();
-        model.setRowCount(0); // Rensa tidigare data
+        model.setRowCount(0);
 
         if (projektLista != null && !projektLista.isEmpty()) {
             for (HashMap<String, String> projekt : projektLista) {
@@ -487,8 +484,6 @@ private void FylliAvdelningensProjekt() {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblAnsvarigForProjekt;
     private javax.swing.JLabel lblAvdelningensProjekt;
     private javax.swing.JLabel lblMinaSamarbetspartners;
@@ -496,5 +491,7 @@ private void FylliAvdelningensProjekt() {
     private javax.swing.JLabel lblSokSlutdatum;
     private javax.swing.JLabel lblSokStartdatum;
     private javax.swing.JTable tblAvdelningensProjekt;
+    private javax.swing.JTable tblPartner;
+    private javax.swing.JTable tblProjekt;
     // End of variables declaration//GEN-END:variables
 }
