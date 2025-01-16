@@ -359,7 +359,7 @@ public class MenyAndraProjektAdmin extends javax.swing.JFrame {
         //Uppdetara ändringar i databasen
         
         if (!Validering.isValidNamn(nyttPrioritet)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig Status! Endast bokstäver och minst två tecken långt är tillåtna.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig Prioritet! Endast bokstäver och minst två tecken långt är tillåtna.");
             return;
         }
         if (!Validering.isValidDatum(nyttStartdatum) || !Validering.isValidDatum(nyttSlutdatum)) {
@@ -367,19 +367,19 @@ public class MenyAndraProjektAdmin extends javax.swing.JFrame {
             return;
          }
         if (!Validering.isNumerisk(nyttKostnad)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av kostnad! Endast siffror och eventuellt en decimalpunkt är tillåtet.");
             return;
         }
         if (!Validering.isNumerisk(nyttProjektchef)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av projektchef! Får endast bestå av siffror.");
             return;
         }
         if (!Validering.isValidAdress(nyttProjektnamn)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "projektnamn får inte vara tom, Vänligen fyll i.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Projektnamn får inte vara tom, Vänligen fyll i bokstäver eller siffror.");
             return;
         }
         if (!Validering.isValidLongText(nyttBeskrivning)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Beskrivning får ej vara tomt, avsluta med en punkt.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Beskrivning får ej vara tomt, vänligen fyll i bokstäver eller siffror.");
             return;
         }
         

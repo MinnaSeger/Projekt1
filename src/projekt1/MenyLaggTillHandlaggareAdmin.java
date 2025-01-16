@@ -261,9 +261,9 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
         String nyttAnsvarighetsomrade = tfdAnsvarighetsomr.getText();
         String nyttLosenord = tfdLosenord.getText();
         
-                if (!Validering.isValidNamn(nyttFornamn) || !Validering.isValidNamn(nyttEfternamn)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
-            return;
+        if (!Validering.isValidNamn(nyttFornamn) || !Validering.isValidNamn(nyttEfternamn)) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn eller efternamn! Endast bokstäver och minst två tecken långt är tillåtet.");
+        return;
         }
         if (!Validering.isValidePost(nyttEpost)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig e-postadress! En Epostadress måste vara formaterad enligt exempel: förnamn.efternamn@domän.");
@@ -278,15 +278,15 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
             return;
         }
         if (!Validering.isValidDatum(nyttAnstallningsdatum)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt datum! Kontrollera att månad och dag är korrekta, till exempel 2023-02-29 är endast tillåtet under skottår.!");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt anställningsdatum! Kontrollera att månad och dag är korrekta, ska vara formatet xxxx-xx-xx. Till exempel 2023-02-29 är endast tillåtet under skottår.!");
             return;
          }
-        if (!Validering.isNumerisk(nyttMentor)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
+        if (!Validering.isNumeriskEllerTom(nyttMentor)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av mentor! Endast siffror och eventuellt en decimalpunkt är tillåtna.");
             return;
         }
         if (!Validering.isNumerisk(nyttAvdelning)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning! får endast bestå av siffror.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av avdelning! får endast bestå av siffror.");
             return;
         }
         if (!Validering.isValidAdress(nyttAdress)) {
@@ -294,7 +294,7 @@ public class MenyLaggTillHandlaggareAdmin extends javax.swing.JFrame {
             return;
         }
         if (!Validering.isValidLongText(nyttAnsvarighetsomrade)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "fältet får ej vara tomt");
+            javax.swing.JOptionPane.showMessageDialog(this, "fältet för ansvarighetsområde måste bestå av minst tre bokstäver och kan ej vara tom.");
             return;
         }
         

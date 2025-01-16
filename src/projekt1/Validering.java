@@ -33,7 +33,7 @@ public class Validering {
     
     public static boolean isValidLongText(String text) {
     // Regex för att matcha en längre text med bokstäver, siffror, mellanslag och vanliga specialtecken
-    String textRegex = "^[a-zA-ZåäöÅÄÖ0-9\\s.,'\";:!?#@&()-_+/]{10,1000}$";
+    String textRegex = "^[a-zA-ZåäöÅÄÖ0-9\\s.,'\";:!?#@&()-_+/]{3,1000}$";
     return text != null && text.matches(textRegex);
     }
     
@@ -77,6 +77,15 @@ public class Validering {
  */
 public static boolean isNotEmpty(String input) {
     return input != null && !input.trim().isEmpty();
+}
+/**
+ * Validerar att inmatningen antingen är ett numeriskt värde eller tomt.
+ * @param nummerInString Inmatningen som en textsträng.
+ * @return true om inmatningen är numerisk eller tom, annars false.
+ */
+public static boolean isNumeriskEllerTom(String nummerInString) {
+    String numeriskEllerTomRegex = "^(\\d+(\\.\\d*)?)?$";
+    return Pattern.matches(numeriskEllerTomRegex, nummerInString);
 }
 }
 

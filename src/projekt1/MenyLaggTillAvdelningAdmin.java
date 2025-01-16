@@ -210,7 +210,7 @@ public class MenyLaggTillAvdelningAdmin extends javax.swing.JFrame {
             return;
         }
         if (!Validering.isValidLongText(nyttBeskrivning)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "fältet får ej vara tomt i beskrivning");
+            javax.swing.JOptionPane.showMessageDialog(this, "Fältet för beskrivning får ej vara tomt, minst tre tecken");
             return;
         }
 

@@ -5,11 +5,11 @@
 package projekt1;
 import oru.inf.InfDB;
 import oru.inf.InfException;
-import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.HashMap;
 import java.util.ArrayList;
+
 
 
 /**
@@ -139,9 +139,13 @@ private void fyllComboBox() {
         System.out.println("SQL-fråga: " + selectAid); // För felsökning
         String aid = idb.fetchSingle(selectAid);
 
-        if (aid == null) {
-            JOptionPane.showMessageDialog(this, "Ingen anställd hittades med det namnet.");
-            return;
+        // Kontrollera om den anställda är mentor
+        String mentorCheckQuery = "SELECT COUNT(*) FROM handlaggare WHERE mentor = '" + aid + "'";
+        String mentorCount = idb.fetchSingle(mentorCheckQuery);
+
+        if (mentorCount != null && !mentorCount.equals("0")) {
+        JOptionPane.showMessageDialog(this, "Denna handläggare är mentor för andra. Uppdatera deras mentor innan du tar bort.");
+        return;
         }
 
         // Kontrollera om anställd är admin

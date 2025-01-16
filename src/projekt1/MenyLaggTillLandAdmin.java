@@ -176,16 +176,16 @@ public class MenyLaggTillLandAdmin extends javax.swing.JFrame {
             //validering
     
         if (!Validering.isValidNamn(nyttNamn)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt namn! Endast bokstäver och minst två tecken långt är tillåtna.");
             return;
         }
         if (!Validering.isValidAdress(nyttTidszon)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av tidszon, skriv in tidszon1 ex.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av tidszon, måste vara minst två tecken långt.");
             return;
             
         }
         if (!Validering.isValidAdress(nyttSprak)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av språk, skriv in sprak 2 ex.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av språk, måste vara minst två tecken långt.");
             return;
         
         }
@@ -197,11 +197,11 @@ public class MenyLaggTillLandAdmin extends javax.swing.JFrame {
         
         }
         if (!Validering.isValidAdress(nyttEkonomi)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Skriv in språk och siffra, ex Ekonomi 1.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatining av ekonomi, måste vara minst två tecken långt.");
             return;
         }
         if (!Validering.isValidAdress(nyttPolitiskStruktur)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning, skriv in politisk struktur 2 ex.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig inmatning av politisk struktur, måste vara minst två tecken långt.");
             return;
         
         }
