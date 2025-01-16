@@ -243,13 +243,13 @@ public class MenyProjektHandlaggare extends javax.swing.JFrame {
 
         tblProjektPartners.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Partnernamn", "Title 2", "Title 3", "Title 4"
+                "Partnernamn"
             }
         ));
         jScrollPane3.setViewportView(tblProjektPartners);
