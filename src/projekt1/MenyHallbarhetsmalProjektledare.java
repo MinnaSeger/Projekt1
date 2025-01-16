@@ -17,9 +17,7 @@ public class MenyHallbarhetsmalProjektledare extends javax.swing.JFrame {
      private InfDB idb;
     private String dbAid;
 
-    /**
-     * Creates new form MenyHallbarhetsmalProjektledare
-     */
+
     public MenyHallbarhetsmalProjektledare(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
@@ -27,16 +25,15 @@ public class MenyHallbarhetsmalProjektledare extends javax.swing.JFrame {
         
         fyllComboBoxHallbarhetsmal ();
         
-        // Hantera val från rullistan
         ComboboxHallbarhetsmal.addActionListener(evt -> {
-            String valtMål = (String) ComboboxHallbarhetsmal.getSelectedItem(); // Hämta valt namn
+            String valtMål = (String) ComboboxHallbarhetsmal.getSelectedItem();
             if (valtMål != null) {
-                uppdateraMalInfo(valtMål); // Uppdatera målinformation
+                uppdateraMalInfo(valtMål);
             }
         });
     }
     
-    //Metod för att fylla rullistan med hållbarhetsmål
+    //Metod för att fylla rullistan med alla hållbarhetsmål
     private void fyllComboBoxHallbarhetsmal() {
         try {
             String sqlFraga = "SELECT namn FROM hallbarhetsmal";
@@ -54,10 +51,10 @@ public class MenyHallbarhetsmalProjektledare extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Fel vid hämtning av hållbarhetsmål.");
         }
     }
-
+     //Metod som uppdaterar med all målinfo
     private void uppdateraMalInfo(String valtMal) {
         try {
-            // Hämta målnummer och beskrivning från databasen baserat på valt namn
+            
             String query = "SELECT malnummer, beskrivning FROM hallbarhetsmal WHERE namn = '" + valtMal + "'";
             HashMap<String, String> resultat = idb.fetchRow(query);
             

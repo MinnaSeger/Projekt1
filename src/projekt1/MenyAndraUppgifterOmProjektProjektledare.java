@@ -18,9 +18,7 @@ public class MenyAndraUppgifterOmProjektProjektledare extends javax.swing.JFrame
     private InfDB idb;
     private String dbAid;
 
-    /**
-     * Creates new form MenyUppgifterOmProjektProjektledare
-     */
+
     
 public MenyAndraUppgifterOmProjektProjektledare (InfDB idb, String dbAid){
     
@@ -34,6 +32,7 @@ public MenyAndraUppgifterOmProjektProjektledare (InfDB idb, String dbAid){
     
 }
 
+//Metod som fyller tabellen med uppgifter om projektet
 public void fyllProjektetsTabell (){
     try {
         String sqlFraga = "SELECT DISTINCT projektnamn, beskrivning, status, prioritet, startdatum, slutdatum, kostnad " +
@@ -65,7 +64,8 @@ public void fyllProjektetsTabell (){
             javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektets data: " + e.getMessage());
         }
     }
-    
+
+    //Metod som fyller tabellen med handläggare för projektet
     public void fyllProjektetshandlaggare () {
         
         try {
@@ -95,10 +95,12 @@ public void fyllProjektetsTabell (){
             tblProjektetshandlaggare.setModel(model);
             
         } catch (InfException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av projektets handläggare: " + e.getMessage());
+                javax.swing.JOptionPane.showMessageDialog(this, "Kunde inte hämta projektets handläggare: " + e.getMessage());
             
         }
     }
+    
+    //Metod som fyller tabellen med projektets partners
  public void fyllprojektetspartners () {
         
         try {
@@ -131,7 +133,7 @@ public void fyllProjektetsTabell (){
             
             tblProjektetspartners.setModel(model);
         } catch (InfException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av partner för projektet: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, "Kunde inte hämta partners för projektet: " + e.getMessage());
         }
     }
 
@@ -347,46 +349,47 @@ public void fyllProjektetsTabell (){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Metod som uppdaterar tabellerna med de nya ändringarna
     private void btnUppdateratabellerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUppdateratabellerMouseClicked
                                                    
-        
         try {
             
             fyllProjektetshandlaggare();
             fyllprojektetspartners();
             fyllProjektetsTabell();
             
-            javax.swing.JOptionPane.showMessageDialog(this, "Tabellerna har uppdaterats");
+            javax.swing.JOptionPane.showMessageDialog(this, "Tabellerna har uppdaterats!");
             
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog (this, "Fel vid uppdatering av tabeller: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog (this, "Kunde inte uppdatera tabellerna: " + e.getMessage());
         }
         
-           // TODO add your handling code here:
+
     }//GEN-LAST:event_btnUppdateratabellerMouseClicked
 
     private void btnStatistikochKostnadProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatistikochKostnadProjektActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnStatistikochKostnadProjektActionPerformed
 
+    //Metod som leder till Menyn för statistik och kostnad
     private void btnStatistikochKostnadProjektMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStatistikochKostnadProjektMouseClicked
-        // TODO add your handling code here:
+
          MenySatistikProjektProjektledare profilFönster = new MenySatistikProjektProjektledare (idb, dbAid);
          profilFönster.setVisible(true);
          this.setVisible(false);
     }//GEN-LAST:event_btnStatistikochKostnadProjektMouseClicked
-
+    //Metod som ledertill menyn för projektetspartnrs
     private void btnAndraProjektetsPartnersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraProjektetsPartnersMouseClicked
-        // TODO add your handling code here:;
+
        MenyAndraPartnersProjektledare profilFönster = new MenyAndraPartnersProjektledare (idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
         
         
     }//GEN-LAST:event_btnAndraProjektetsPartnersMouseClicked
-
+    //Metod som leder till menyn för att ändra handläggare
     private void btnAndraProjektetsHandlaggareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraProjektetsHandlaggareMouseClicked
-        // TODO add your handling code here:
+
        MenyAndraHandlaggareProjektProjektledare profilFönster = new MenyAndraHandlaggareProjektProjektledare (idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);
@@ -394,11 +397,12 @@ public void fyllProjektetsTabell (){
     }//GEN-LAST:event_btnAndraProjektetsHandlaggareMouseClicked
 
     private void btnAndraProjektetsHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraProjektetsHandlaggareActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnAndraProjektetsHandlaggareActionPerformed
 
+     //Metod som leder till menyn för projektets data
     private void btnAndraProjektetsDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAndraProjektetsDataMouseClicked
-        // TODO add your handling code here:
+
        MenyAndraProjektetsDataProjektledare profilFönster = new MenyAndraProjektetsDataProjektledare (idb, dbAid);
        profilFönster.setVisible(true);
        this.setVisible(false);

@@ -19,23 +19,20 @@ public class MenyProfilProjektledare extends javax.swing.JFrame {
     private InfDB idb;
     private String dbAid;
 
-    /**
-     * Creates new form MenyProfilHandlaggare
-     */
+    
     public MenyProfilProjektledare(InfDB idb, String dbAid) {
         this.idb = idb;
         this.dbAid = dbAid;
         initComponents();
         
-        //fyll Textfälten med data från databasen
-        
         fyllTextFalt ();
         FylliLabel ();
     }
     
+    //Metod som fyller textfälten med uppgifter om projektledaren
     private void fyllTextFalt () {
         try {
-            //Hämta data med SQL fråga
+            //Hämtar uppgifter om projektledaren
             
             String sqlFraga = "SELECT fornamn, efternamn, epost, telefon, losenord FROM anstalld where aid =" + dbAid;
             
@@ -58,9 +55,10 @@ public class MenyProfilProjektledare extends javax.swing.JFrame {
         }
     }
     
+    //Metod som fyller label med uppgifter om projektledaren som hen inte ska kunna ändra
     private void FylliLabel () {
         try{ 
-            //Hämta data till label
+            //Hämtar data om projektledaren
             String sqlFraga = "SELECT aid, avdelning, anstallningsdatum FROM anstalld where aid = " + dbAid;
             
             HashMap <String, String> userData = idb.fetchRow(sqlFraga);
@@ -251,33 +249,31 @@ public class MenyProfilProjektledare extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfdFornamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdFornamnActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_tfdFornamnActionPerformed
 
     private void tfdEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdEpostActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_tfdEpostActionPerformed
 
     private void tfdLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdLosenordActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_tfdLosenordActionPerformed
 
     private void tfdTelefonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdTelefonActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_tfdTelefonActionPerformed
 
+    //Metod som gör att sparade ändringar sparas om man trycker på knappen
     private void btnSparaAndringarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringarMouseClicked
-        // TODO add your handling code here:
-        
-        //Hämta text från textfältet
-        
+
         String nyttFornamn = tfdFornamn.getText();
         String nyttEfternamn = tfdEfternamn.getText();
         String nyttEpost = tfdEpost.getText();
         String nyttTelefon = tfdTelefon.getText();
         String nyttLosenord = tfdLosenord.getText();
         
-                  // Validering
+        //Validering, krav för hur man ska fylla i de nya ändringarna
                   
         if (!Validering.isValidNamn(nyttFornamn) || !Validering.isValidNamn(nyttEfternamn)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Ogiltigt förnamn! Endast bokstäver och minst två tecken långt är tillåtna.");
@@ -297,7 +293,7 @@ public class MenyProfilProjektledare extends javax.swing.JFrame {
         }
         
         try {
-            //Byta ändringar
+            //Uppdaterar till de nya ändringarna
             String updatesqlFraga = "UPDATE anstalld SET " +  
                     "fornamn = '" + nyttFornamn + "', " + 
                     "efternamn = '" + nyttEfternamn + "'," +
@@ -310,7 +306,7 @@ public class MenyProfilProjektledare extends javax.swing.JFrame {
             idb.update(updatesqlFraga);
             
             //Visa bekräftelse av ändringar
-            JOptionPane.showMessageDialog(this, "Dina Profil Ändringar Är Sparade!");
+            JOptionPane.showMessageDialog(this, "Dina profil ändringar är sparade!");
         } catch (Exception e) {
             //Hantera fel?
             JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());

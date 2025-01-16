@@ -18,9 +18,7 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         private InfDB idb;
         private String dbAid;
 
-    /**
-     * Creates new form MenyAndraProjektetsDataProjektledare
-     */
+
     public MenyAndraProjektetsDataProjektledare(InfDB idb, String dbAid) {
             this.idb = idb; 
             this.dbAid = dbAid;
@@ -34,17 +32,17 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         
     }
     
-    // Fyller ComboBox med projektnamn för projekt som tillhör projektchefen
+    // Fyller ComboBox med alla projektnamn för projekt som tillhör projektchefen
     public void fyllProjektledarensProjektComboBox() {
         try {
             String sqlFraga = "SELECT projektnamn FROM projekt WHERE pid = " + dbAid;
            
             ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
             
-            // Tömmer gamla värden i ComboBox
+            
             ProjektledarensProjekt.removeAllItems();
             
-            // Lägg till projektnamn i ComboBox
+            // Lägger till projektnamnen i ComboBox
             if (resultat != null && !resultat.isEmpty()) {
                 for (HashMap<String, String> rad : resultat) {
                     ProjektledarensProjekt.addItem(rad.get("projektnamn"));
@@ -57,22 +55,22 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         }
     }
 
-    // Fyller tabellen med projektdata för projektchefen
+    // Fyller tabellen med all data om projektet som projektchefen är chef över
     public void fyllProjektetsTabell() {
     try {
-        // SQL-fråga för att hämta projektdata
+        // SQL-fråga för att hämta all projektdata 
         String sqlFraga = "SELECT DISTINCT projektnamn, beskrivning, status, prioritet, startdatum, slutdatum, kostnad " +
                 "FROM projekt WHERE pid = " + dbAid;
        
         ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sqlFraga);
 
-        // Fyll tabellen tblProjektetsData
+
         DefaultTableModel model = (DefaultTableModel) tblProjektetsData.getModel();
-        model.setRowCount(0); // Töm tabellen
+        model.setRowCount(0);
 
        if (resultat !=null){
            
-        // Lägg till alla projekt till tabellen
+        // Lägger till all data om projekt i tabellen
         for (HashMap<String, String> rad : resultat) {
             model.addRow(new Object[] { 
                 rad.get("projektnamn"), 
@@ -251,9 +249,10 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Metod som sparar ändringar av projektets data
     private void btnSparaAndringarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSparaAndringarMouseClicked
            
-       //Hämtar text från täxtfältet
+
         
         String nyttProjektnamn = tfdNyttProjektnamn.getText();
         String nyttBeskrivning = tfdAngeNyBeskrivning.getText();
@@ -262,7 +261,8 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         String nyttStartdatum = tfdNyttStartDatum.getText();
         String nyttSlutdatum = tfdNyttSlutDatum.getText();
         String nyttKostnad = tfdAngeNyKostnad.getText();
-        //Uppdetara ändringar i databasen
+        
+                  //Uppdetara de sparade ändringar i databasen
         
                  if (!Validering.isValidNamn(nyttStatus)|| !Validering.isValidNamn(nyttPrioritet)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Ogiltig Status! Endast bokstäver och minst två tecken långt är tillåtna.");
@@ -286,7 +286,7 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         }
         
         try {
-        //Uppdaterar/byter informationen som användare anger i textrutorna.
+        //Uppdaterar tabellen med de sparade ändringarna
         String uppdatering = "UPDATE projekt SET " +  
         "projektnamn = '" + nyttProjektnamn + "', " + 
         "beskrivning = '" + nyttBeskrivning + "', " +
@@ -298,16 +298,16 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
         "WHERE pid = " + dbAid;
             
         System.out.println(uppdatering);
-            // Kör uppdateringen
+
             idb.update(uppdatering);
             
-            //Visa bekräftelse av ändringar
+            //Visar meddelande om att projektets ändringar ärsparade
             JOptionPane.showMessageDialog(this, "Dina projektändringar är sparade!");
             
             fyllProjektledarensProjektComboBox();
             fyllProjektetsTabell();
         } catch (Exception e) {
-            //Hanterar fel
+            // Meddelande om att inmatade ändringar är gjorda på fel sätt
             JOptionPane.showMessageDialog (this, "Fel vid inmatning av ändringar!" + e.getMessage());
         }   
 
@@ -315,12 +315,12 @@ public class MenyAndraProjektetsDataProjektledare extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSparaAndringarMouseClicked
 
     private void tfdAngeNyBeskrivningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdAngeNyBeskrivningActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdAngeNyBeskrivningActionPerformed
-    // TODO add your handling code here:
 
+    }//GEN-LAST:event_tfdAngeNyBeskrivningActionPerformed
+
+        //Metod som gör att man kan trycka i tabellen för att kunna ändra datan
     private void tblProjektetsDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProjektetsDataMouseClicked
-        // TODO add your handling code here:
+        
 
         int rad = tblProjektetsData.getSelectedRow();
         if (rad != -1) {
