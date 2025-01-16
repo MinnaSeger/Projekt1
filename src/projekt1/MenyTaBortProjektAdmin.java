@@ -130,7 +130,7 @@ public class MenyTaBortProjektAdmin extends javax.swing.JFrame {
         }
 
         // Hämta pid baserat på namn
-        String selectPid = "SELECT pid FROM projekt WHERE LOWER(namn) = LOWER('" + valtProjekt + "')";
+        String selectPid = "SELECT pid FROM projekt WHERE LOWER(projektnamn) = LOWER('" + valtProjekt + "')";
         System.out.println("SQL-fråga: " + selectPid); // För felsökning
         String pid = idb.fetchSingle(selectPid);
 
@@ -142,10 +142,6 @@ public class MenyTaBortProjektAdmin extends javax.swing.JFrame {
         // Ta bort relaterade rader från projekt_partner
         String deleteProjektPartner = "DELETE FROM projekt_partner WHERE pid = '" + pid + "'";
         idb.delete(deleteProjektPartner);
-
-        // Ta bort partner från partner-tabellen
-        String deletePartner = "DELETE FROM projekt WHERE pid = '" + pid + "'";
-        idb.delete(deletePartner);
 
         JOptionPane.showMessageDialog(this, "Projekt " + valtProjekt + " har tagits bort.");
         fyllComboBox();
